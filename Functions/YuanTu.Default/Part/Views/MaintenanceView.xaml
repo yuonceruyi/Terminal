@@ -1,0 +1,37 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.Part.Views.MaintenanceView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:local="clr-namespace:YuanTu.Default.Part.Views"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         d:DesignHeight="675"
+                         d:DesignWidth="712"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <Border Height="675" 
+            Width="712"
+            Background="#ffffff"
+            CornerRadius="10">
+        <StackPanel Margin="0,60,0,0">
+            <Image Source="{Binding Image}" 
+                   HorizontalAlignment="Center"
+                   Stretch="Uniform" 
+                   Height="450"
+                   />
+            <TextBlock Text="给您造成不便万分抱歉"
+                       FontSize="28" 
+                       Foreground="#636363"
+                       TextAlignment="Center"
+                       Margin="5"/>
+            <TextBlock Text="修复完成就会回来" 
+                       FontSize="20" 
+                       Foreground="#888888"
+                       TextAlignment="Center"
+                       Margin="5"/>
+        </StackPanel>
+    </Border>
+   
+</frameworkBase:ViewsBase>

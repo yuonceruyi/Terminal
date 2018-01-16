@@ -1,0 +1,219 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.ChongQingArea.Component.Auth.Views.PatientInfoView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.ChongQingArea.Component.Auth.ViewModels"
+                         xmlns:chongQingArea="clr-namespace:YuanTu.ChongQingArea"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         d:DataContext="{d:DesignInstance viewModels:PatientInfoViewModel}">
+    <UserControl.Resources>
+        <Style x:Key="InputBorder" TargetType="Border">
+            <Setter Property="Width" Value="300" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="BorderBrush" Value="#717171" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
+        <Style x:Key="InputTextBox" TargetType="TextBox">
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontFamily" Value="微软雅黑" />
+            <Setter Property="FontSize" Value="23" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="MaxLines" Value="1" />
+            <Setter Property="Padding" Value="3" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="40" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Style="{StaticResource 主题文本}" />
+        <ContentControl Grid.Row="1"
+                        MinWidth="684"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource 提示卡片}">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style x:Key="提示项目Ex"
+                           BasedOn="{StaticResource 提示项目}"
+                           TargetType="userControls:TitleTextBlock">
+                        <Setter Property="ValueColumnWidth" Value="2*" />
+                    </Style>
+                </StackPanel.Resources>
+                <ListBox Style="{StaticResource 提示卡片ListBox}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition Height="1" />
+                                            </Grid.RowDefinitions>
+                                            <ContentPresenter Grid.Row="0" />
+                                            <Rectangle Grid.Row="1" Style="{StaticResource 提示卡片Rect}" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <userControls:TitleTextBlock Title="姓名："
+                                                 Height="66"
+                                                 Style="{StaticResource 提示项目Ex}"
+                                                 Value="{Binding Name}" />
+                    <userControls:TitleTextBlock Title="性别："
+                                                 Height="66"
+                                                 Style="{StaticResource 提示项目Ex}"
+                                                 Value="{Binding Sex}" />
+                    <userControls:TitleTextBlock Title="生日："
+                                                 Height="66"
+                                                 Style="{StaticResource 提示项目Ex}"
+                                                 Value="{Binding Birth}" />
+
+                    <userControls:TitleLabel Height="66" ValueColumnWidth="2*">
+                        <userControls:TitleLabel.Title>
+                            <TextBlock Style="{StaticResource 提示卡片Header}" Text="联系电话：" />
+                        </userControls:TitleLabel.Title>
+                        <userControls:TitleLabel.Value>
+                            <Grid>
+                                <TextBlock Style="{StaticResource 提示卡片Content}" Text="{Binding Phone}" />
+
+                                <userControls:SimpleButton Margin="100,0"
+                                                           HorizontalAlignment="Right"
+                                                           VerticalAlignment="Center"
+                                                           Command="{Binding UpdateCommand}"
+                                                           Content="{Binding ButtonContent}"
+                                                           Style="{StaticResource 修改按钮}"
+                                                           TagString="{Binding ButtonContent}"
+                                                           Visibility="{Binding CanUpdatePhone,
+                                                                                Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </Grid>
+                        </userControls:TitleLabel.Value>
+                    </userControls:TitleLabel>
+                    <userControls:TitleTextBlock Title="身份证号："
+                                                 Height="66"
+                                                 Style="{StaticResource 提示项目Ex}"
+                                                 Visibility="{Binding IdNo,
+                                                                      Converter={StaticResource NotNullToVisibilityConverter}}"
+                                                 Value="{Binding IdNo}" />
+                    <userControls:TitleTextBlock Title="监护人身份证号："
+                                                 Height="66"
+                                                 Style="{StaticResource 提示项目Ex}"
+                                                 Visibility="{Binding GuardIdNo,
+                                                                      Converter={StaticResource NotNullToVisibilityConverter}}"
+                                                 Value="{Binding GuardIdNo}" />
+                    <userControls:TitleLabel Height="66" ValueColumnWidth="2*"
+                                             Visibility="{Binding ShowChangeAddress, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <userControls:TitleLabel.Title>
+                            <TextBlock Style="{StaticResource 提示卡片Header}" Text="职业：" />
+                        </userControls:TitleLabel.Title>
+                        <userControls:TitleLabel.Value>
+                            <!--<Border Style="{StaticResource InputBorder}">
+                                <TextBox  Style="{StaticResource InputTextBox}"
+                                          Text="{Binding Occupation}">
+                                    <TextBox.InputBindings>
+                                        <MouseBinding Command="{Binding ModifyOccupationCommand}" MouseAction="LeftClick" />
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                            </Border>-->
+                            <ComboBox VerticalAlignment="Center" HorizontalAlignment="Left" Width="300"
+                                      VerticalContentAlignment="Center" Height="50"
+                                      ItemsSource="{Binding Occupations}"
+                                      SelectedItem="{Binding Occupation, Mode=TwoWay}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="3" Text="{Binding}" FontSize="23" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </userControls:TitleLabel.Value>
+                    </userControls:TitleLabel>
+                    <userControls:TitleLabel Height="66" ValueColumnWidth="2*"
+                                             Visibility="{Binding ShowChangeAddress, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <userControls:TitleLabel.Title>
+                            <TextBlock Style="{StaticResource 提示卡片Header}" Text="住址：" />
+                        </userControls:TitleLabel.Title>
+                        <userControls:TitleLabel.Value>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style x:Key="ComboBox" TargetType="ComboBox">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="MinWidth" Value="60" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        <Setter Property="Height" Value="50" />
+                                        <Setter Property="ItemTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate DataType="chongQingArea:AddressItem">
+                                                    <TextBlock Margin="3" Text="{Binding Name}" FontSize="23" />
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <ComboBox Style="{StaticResource ComboBox}"
+                                          ItemsSource="{Binding Level0s}"
+                                          SelectedItem="{Binding Level0, Mode=TwoWay}">
+                                </ComboBox>
+                                <ComboBox Style="{StaticResource ComboBox}"
+                                          ItemsSource="{Binding Level1s}"
+                                          SelectedItem="{Binding Level1, Mode=TwoWay}">
+                                </ComboBox>
+                                <ComboBox Style="{StaticResource ComboBox}"
+                                          ItemsSource="{Binding Level2s}"
+                                          SelectedItem="{Binding Level2, Mode=TwoWay}">
+                                </ComboBox>
+                                <ComboBox Style="{StaticResource ComboBox}"
+                                          ItemsSource="{Binding Level3s}"
+                                          SelectedItem="{Binding Level3, Mode=TwoWay}">
+                                </ComboBox>
+                            </StackPanel>
+                        </userControls:TitleLabel.Value>
+                    </userControls:TitleLabel>
+                    <userControls:TitleLabel Height="66" ValueColumnWidth="2*"
+                                             Visibility="{Binding ShowChangeAddress, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <userControls:TitleLabel.Title>
+                            <TextBlock Style="{StaticResource 提示卡片Header}" Text="门牌号：" />
+                        </userControls:TitleLabel.Title>
+                        <userControls:TitleLabel.Value>
+                            <Border Style="{StaticResource InputBorder}">
+                                <TextBox  Style="{StaticResource InputTextBox}"
+                                          Text="{Binding Address}">
+                                    <TextBox.InputBindings>
+                                        <MouseBinding Command="{Binding ModifyAddressCommand}" MouseAction="LeftClick" />
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                            </Border>
+                        </userControls:TitleLabel.Value>
+                    </userControls:TitleLabel>
+                </ListBox>
+                <userControls:SimpleButton Margin="20"
+                                           Command="{Binding ConfirmCommand}"
+                                           Content="确定"
+                                           Style="{StaticResource 确定按钮}"
+                                           TagString="确定" />
+            </StackPanel>
+        </ContentControl>
+    </Grid>
+</frameworkBase:ViewsBase>

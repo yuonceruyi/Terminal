@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B5C0A85C-016F-4A3B-B564-1BDF99315862}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YuanTu.QDArea</RootNamespace>
+    <AssemblyName>YuanTu.QDArea</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.2.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Wpf.6.2.0\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CardReader\A6RF2CardReader.cs" />
+    <Compile Include="Card\M1DispenserRW.cs" />
+    <Compile Include="Card\M1ReaderRW.cs" />
+    <Compile Include="Card\M1.cs" />
+    <Compile Include="Base\EnumComm.cs" />
+    <Compile Include="Component\Recharge\ViewModels\CashViewModel.cs" />
+    <Compile Include="ConfigQD.cs" />
+    <Compile Include="Enums\ApptChargeMode.cs" />
+    <Compile Include="Models\TakeNum\IAppoRecordExtendModel.cs" />
+    <Compile Include="Models\TakeNum\ICancelAppoExtendModel.cs" />
+    <Compile Include="Models\TakeNum\ITakeNumExtendModel.cs" />
+    <Compile Include="Models\Register\IRegisterExtendModel.cs" />
+    <Compile Include="Models\Register\IRegLockExtendModel.cs" />
+    <Compile Include="Enums\ApptPayStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QingDaoSiPay\Common\Comm.cs" />
+    <Compile Include="QingDaoSiPay\Common\EnumComm.cs" />
+    <Compile Include="QingDaoSiPay\Common\ExternFun.cs" />
+    <Compile Include="QingDaoSiPay\Common\ReflectionManager.cs" />
+    <Compile Include="QingDaoSiPay\Common\SiSet.cs" />
+    <Compile Include="QingDaoSiPay\Function.cs" />
+    <Compile Include="QingDaoSiPay\Models\BizParam.cs" />
+    <Compile Include="QingDaoSiPay\Models\DownLoad\DiseaseSpPrint.cs" />
+    <Compile Include="QingDaoSiPay\Models\DownLoad\DiseaseSpPrintLoop.cs" />
+    <Compile Include="QingDaoSiPay\Models\DownLoad\DownLoadInterface.cs" />
+    <Compile Include="QingDaoSiPay\Models\DownLoad\ModelInterface.cs" />
+    <Compile Include="QingDaoSiPay\Models\Receive\BasPerInfo.cs" />
+    <Compile Include="QingDaoSiPay\Models\Receive\BillPayCancleReceive.cs" />
+    <Compile Include="QingDaoSiPay\Models\Receive\BillPayReceive.cs" />
+    <Compile Include="QingDaoSiPay\Models\Receive\RemainReceive.cs" />
+    <Compile Include="QingDaoSiPay\Models\Receive\SimPerInfo.cs" />
+    <Compile Include="QingDaoSiPay\Models\Send\BillPayCancelSend.cs" />
+    <Compile Include="QingDaoSiPay\Models\Send\BillPaySend.cs" />
+    <Compile Include="QingDaoSiPay\Models\Send\CardInfo.cs" />
+    <Compile Include="QingDaoSiPay\Models\Send\RemainSend.cs" />
+    <Compile Include="QingDaoSiPay\SiPay.cs" />
+    <Compile Include="QueueSignIn\CommandLine.cs" />
+    <Compile Include="QueueSignIn\DataHandlerQD.cs" />
+    <Compile Include="QueueSignIn\Models.cs" />
+    <Compile Include="QueueSignIn\NetHelper.cs" />
+    <Compile Include="QueueSignIn\SignInService.cs" />
+    <Compile Include="QueueSignIn\Tables.cs" />
+    <Compile Include="Services\PrintService\PrintHelper.cs" />
+    <Compile Include="Services\PrintService\PrintManager.cs" />
+    <Compile Include="Services\Register\DocInfoExtend.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\YuanTu.QDArea\插社保卡.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.QDArea\钞箱插卡口.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ConfigQD.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="CurrentResource\SiSetYLResult.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config" />
+    <None Include="CurrentResource\SiSetbaseSet.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CurrentResource\SiSetMessage.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CurrentResource\SiSetYLState.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\YuanTu.AutoUpdater\YuanTu.AutoUpdater.csproj">
+      <Project>{4ba4719c-c6ab-49ba-9754-848ca24c1fd6}</Project>
+      <Name>YuanTu.AutoUpdater</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YuanTu.Consts\YuanTu.Consts.csproj">
+      <Project>{2d55167c-d5d1-42b3-9e61-4a413fac957a}</Project>
+      <Name>YuanTu.Consts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YuanTu.Core\YuanTu.Core.csproj">
+      <Project>{ab393f77-c15f-43c8-ac02-c9686a79b668}</Project>
+      <Name>YuanTu.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YuanTu.Devices\YuanTu.Devices.csproj">
+      <Project>{650eb36a-029e-43a8-8656-3e6fb8e3f277}</Project>
+      <Name>YuanTu.Devices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuanTu.Default\YuanTu.Default.csproj">
+      <Project>{408be3a7-37d9-445e-98a8-ab5edf597a89}</Project>
+      <Name>YuanTu.Default</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

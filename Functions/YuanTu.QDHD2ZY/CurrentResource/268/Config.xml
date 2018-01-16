@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--Lis打印-->
+  <Lis>    
+    <ConnectString>http://192.168.101.242/csp/lis/LIS.WS.DHCLISService.cls</ConnectString>
+  </Lis>
+</root>

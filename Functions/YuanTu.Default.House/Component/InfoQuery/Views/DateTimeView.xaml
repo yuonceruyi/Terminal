@@ -1,0 +1,67 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Component.InfoQuery.Views.DateTimeView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         Height="800"
+                         Width="825"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+
+
+    <Grid Margin="56,50,58,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Style="{StaticResource 主题文本}">请滑动下方时间轴选择查询时段</Label>
+        <ContentControl Grid.Row="1"
+                        Width="628"
+                        Height="587"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource 提示卡片}">
+
+            <StackPanel>
+                <Border Width="454"
+                        Height="175"
+                        Margin="0,30,0,0"
+                        Background="#ececec"
+                        CornerRadius="5">
+                    <StackPanel>
+                        <TextBlock Margin="10"
+                                   HorizontalAlignment="Center"
+                                   FontSize="20"
+                                   Foreground="#1ba1fd">
+                            开始时间
+                        </TextBlock>
+                        <userControls:DatePicker Height="100" SelectedDate="{Binding DateTimeStart}" />
+                    </StackPanel>
+                </Border>
+                <Border Width="454"
+                        Height="175"
+                        Margin="0,30,0,0"
+                        Background="#ececec"
+                        CornerRadius="5">
+                    <StackPanel>
+                        <TextBlock Margin="10"
+                                   HorizontalAlignment="Center"
+                                   FontSize="20"
+                                   Foreground="#f35b34">
+                            结束时间
+                        </TextBlock>
+                        <userControls:DatePicker Height="100" SelectedDate="{Binding DateTimeEnd}" />
+                    </StackPanel>
+                </Border>
+
+                <userControls:SimpleButton Margin="0,40,0,0"
+                                           Command="{Binding ConfirmCommand}"
+                                           Content="确定"
+                                           Style="{StaticResource 确认按钮}"
+                                           TagString="确定" />
+            </StackPanel>
+        </ContentControl>
+    </Grid>
+</frameworkBase:ViewsBase>

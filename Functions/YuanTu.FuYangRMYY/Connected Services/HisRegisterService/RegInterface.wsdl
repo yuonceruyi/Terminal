@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://tempuri.org" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org">
+      <s:element name="AgainReQueue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgainReQueueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="AgainReQueueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BookMethodData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+            <s:element minOccurs="0" name="XMLRequest2" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BookMethodDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="BookMethodDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BookService">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BookServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="BookServiceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelOPRegistBroker">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelOPRegistBrokerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="CancelOPRegistBrokerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="Input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="CancelOrderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsuRegPara">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInsuRegParaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetInsuRegParaResult" type="s0:GetInsuRegParaRq" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetInsuRegParaRq">
+        <s:sequence>
+          <s:element minOccurs="0" name="ExtUserID" type="s:string" />
+          <s:element minOccurs="0" name="CardType" type="s:string" />
+          <s:element minOccurs="0" name="CardNo" type="s:string" />
+          <s:element minOccurs="0" name="ScheduleItemCode" type="s:string" />
+          <s:element minOccurs="0" name="InsuCardData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPatInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetPatInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRegisterExStr">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRegisterExStrResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetRegisterExStrResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LockOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LockOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="LockOrderResult" type="s0:LockOrderRt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LockOrderRt">
+        <s:sequence>
+          <s:element minOccurs="0" name="TradeCode" type="s:string" />
+          <s:element minOccurs="0" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" name="ResultCode" type="s:string" />
+          <s:element minOccurs="0" name="ErrorMsg" type="s:string" />
+          <s:element minOccurs="0" name="LockQueueNo" type="s:string" />
+          <s:element minOccurs="0" name="ScheduleItemCode" type="s:string" />
+          <s:element minOccurs="0" name="AdmDoc" type="s:string" />
+          <s:element minOccurs="0" name="AdmDate" type="s:string" />
+          <s:element minOccurs="0" name="AdmTime" type="s:string" />
+          <s:element minOccurs="0" name="RegFee" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="NetTest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="RequestStr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NetTestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="NetTestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OPAppArrive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OPAppArriveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="OPAppArriveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OPRegister">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OPRegisterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="OPRegisterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryAdmOPReg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryAdmOPRegResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="QueryAdmOPRegResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryAdmSchedule">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryAdmScheduleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="QueryAdmScheduleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryDepartment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="QueryDepartmentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryDepartmentGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryDepartmentGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="QueryDepartmentGroupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryDoctor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryDoctorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="QueryDoctorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="XMLRequest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="QueryOrderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AgainReQueueSoapIn">
+    <wsdl:part name="parameters" element="s0:AgainReQueue" />
+  </wsdl:message>
+  <wsdl:message name="AgainReQueueSoapOut">
+    <wsdl:part name="parameters" element="s0:AgainReQueueResponse" />
+  </wsdl:message>
+  <wsdl:message name="BookMethodDataSoapIn">
+    <wsdl:part name="parameters" element="s0:BookMethodData" />
+  </wsdl:message>
+  <wsdl:message name="BookMethodDataSoapOut">
+    <wsdl:part name="parameters" element="s0:BookMethodDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="BookServiceSoapIn">
+    <wsdl:part name="parameters" element="s0:BookService" />
+  </wsdl:message>
+  <wsdl:message name="BookServiceSoapOut">
+    <wsdl:part name="parameters" element="s0:BookServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelOPRegistBrokerSoapIn">
+    <wsdl:part name="parameters" element="s0:CancelOPRegistBroker" />
+  </wsdl:message>
+  <wsdl:message name="CancelOPRegistBrokerSoapOut">
+    <wsdl:part name="parameters" element="s0:CancelOPRegistBrokerResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelOrderSoapIn">
+    <wsdl:part name="parameters" element="s0:CancelOrder" />
+  </wsdl:message>
+  <wsdl:message name="CancelOrderSoapOut">
+    <wsdl:part name="parameters" element="s0:CancelOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInsuRegParaSoapIn">
+    <wsdl:part name="parameters" element="s0:GetInsuRegPara" />
+  </wsdl:message>
+  <wsdl:message name="GetInsuRegParaSoapOut">
+    <wsdl:part name="parameters" element="s0:GetInsuRegParaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPatInfoSoapIn">
+    <wsdl:part name="parameters" element="s0:GetPatInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPatInfoSoapOut">
+    <wsdl:part name="parameters" element="s0:GetPatInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRegisterExStrSoapIn">
+    <wsdl:part name="parameters" element="s0:GetRegisterExStr" />
+  </wsdl:message>
+  <wsdl:message name="GetRegisterExStrSoapOut">
+    <wsdl:part name="parameters" element="s0:GetRegisterExStrResponse" />
+  </wsdl:message>
+  <wsdl:message name="LockOrderSoapIn">
+    <wsdl:part name="parameters" element="s0:LockOrder" />
+  </wsdl:message>
+  <wsdl:message name="LockOrderSoapOut">
+    <wsdl:part name="parameters" element="s0:LockOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="NetTestSoapIn">
+    <wsdl:part name="parameters" element="s0:NetTest" />
+  </wsdl:message>
+  <wsdl:message name="NetTestSoapOut">
+    <wsdl:part name="parameters" element="s0:NetTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="OPAppArriveSoapIn">
+    <wsdl:part name="parameters" element="s0:OPAppArrive" />
+  </wsdl:message>
+  <wsdl:message name="OPAppArriveSoapOut">
+    <wsdl:part name="parameters" element="s0:OPAppArriveResponse" />
+  </wsdl:message>
+  <wsdl:message name="OPRegisterSoapIn">
+    <wsdl:part name="parameters" element="s0:OPRegister" />
+  </wsdl:message>
+  <wsdl:message name="OPRegisterSoapOut">
+    <wsdl:part name="parameters" element="s0:OPRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryAdmOPRegSoapIn">
+    <wsdl:part name="parameters" element="s0:QueryAdmOPReg" />
+  </wsdl:message>
+  <wsdl:message name="QueryAdmOPRegSoapOut">
+    <wsdl:part name="parameters" element="s0:QueryAdmOPRegResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryAdmScheduleSoapIn">
+    <wsdl:part name="parameters" element="s0:QueryAdmSchedule" />
+  </wsdl:message>
+  <wsdl:message name="QueryAdmScheduleSoapOut">
+    <wsdl:part name="parameters" element="s0:QueryAdmScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryDepartmentSoapIn">
+    <wsdl:part name="parameters" element="s0:QueryDepartment" />
+  </wsdl:message>
+  <wsdl:message name="QueryDepartmentSoapOut">
+    <wsdl:part name="parameters" element="s0:QueryDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryDepartmentGroupSoapIn">
+    <wsdl:part name="parameters" element="s0:QueryDepartmentGroup" />
+  </wsdl:message>
+  <wsdl:message name="QueryDepartmentGroupSoapOut">
+    <wsdl:part name="parameters" element="s0:QueryDepartmentGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryDoctorSoapIn">
+    <wsdl:part name="parameters" element="s0:QueryDoctor" />
+  </wsdl:message>
+  <wsdl:message name="QueryDoctorSoapOut">
+    <wsdl:part name="parameters" element="s0:QueryDoctorResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOrderSoapIn">
+    <wsdl:part name="parameters" element="s0:QueryOrder" />
+  </wsdl:message>
+  <wsdl:message name="QueryOrderSoapOut">
+    <wsdl:part name="parameters" element="s0:QueryOrderResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SelfRegServiceSoap">
+    <wsdl:operation name="AgainReQueue">
+      <wsdl:input message="s0:AgainReQueueSoapIn" />
+      <wsdl:output message="s0:AgainReQueueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BookMethodData">
+      <wsdl:input message="s0:BookMethodDataSoapIn" />
+      <wsdl:output message="s0:BookMethodDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BookService">
+      <wsdl:input message="s0:BookServiceSoapIn" />
+      <wsdl:output message="s0:BookServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelOPRegistBroker">
+      <wsdl:input message="s0:CancelOPRegistBrokerSoapIn" />
+      <wsdl:output message="s0:CancelOPRegistBrokerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelOrder">
+      <wsdl:input message="s0:CancelOrderSoapIn" />
+      <wsdl:output message="s0:CancelOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuRegPara">
+      <wsdl:input message="s0:GetInsuRegParaSoapIn" />
+      <wsdl:output message="s0:GetInsuRegParaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatInfo">
+      <wsdl:input message="s0:GetPatInfoSoapIn" />
+      <wsdl:output message="s0:GetPatInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegisterExStr">
+      <wsdl:input message="s0:GetRegisterExStrSoapIn" />
+      <wsdl:output message="s0:GetRegisterExStrSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LockOrder">
+      <wsdl:input message="s0:LockOrderSoapIn" />
+      <wsdl:output message="s0:LockOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NetTest">
+      <wsdl:input message="s0:NetTestSoapIn" />
+      <wsdl:output message="s0:NetTestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OPAppArrive">
+      <wsdl:input message="s0:OPAppArriveSoapIn" />
+      <wsdl:output message="s0:OPAppArriveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OPRegister">
+      <wsdl:input message="s0:OPRegisterSoapIn" />
+      <wsdl:output message="s0:OPRegisterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAdmOPReg">
+      <wsdl:input message="s0:QueryAdmOPRegSoapIn" />
+      <wsdl:output message="s0:QueryAdmOPRegSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAdmSchedule">
+      <wsdl:input message="s0:QueryAdmScheduleSoapIn" />
+      <wsdl:output message="s0:QueryAdmScheduleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDepartment">
+      <wsdl:input message="s0:QueryDepartmentSoapIn" />
+      <wsdl:output message="s0:QueryDepartmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDepartmentGroup">
+      <wsdl:input message="s0:QueryDepartmentGroupSoapIn" />
+      <wsdl:output message="s0:QueryDepartmentGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDoctor">
+      <wsdl:input message="s0:QueryDoctorSoapIn" />
+      <wsdl:output message="s0:QueryDoctorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryOrder">
+      <wsdl:input message="s0:QueryOrderSoapIn" />
+      <wsdl:output message="s0:QueryOrderSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SelfRegServiceSoap" type="s0:SelfRegServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AgainReQueue">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.AgainReQueue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BookMethodData">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.BookMethodData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BookService">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.BookService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelOPRegistBroker">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.CancelOPRegistBroker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelOrder">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.CancelOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsuRegPara">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.GetInsuRegPara" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatInfo">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.GetPatInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegisterExStr">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.GetRegisterExStr" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LockOrder">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.LockOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetTest">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.NetTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OPAppArrive">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.OPAppArrive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OPRegister">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.OPRegister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAdmOPReg">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.QueryAdmOPReg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAdmSchedule">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.QueryAdmSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDepartment">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.QueryDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDepartmentGroup">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.QueryDepartmentGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDoctor">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.QueryDoctor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryOrder">
+      <soap:operation soapAction="http://tempuri.org/RegInterface.Service.SelfRegService.QueryOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SelfRegService">
+    <wsdl:port name="SelfRegServiceSoap" binding="s0:SelfRegServiceSoap">
+      <soap:address location="http://172.100.100.188/DTHealth/web/RegInterface.Service.SelfRegService.cls" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

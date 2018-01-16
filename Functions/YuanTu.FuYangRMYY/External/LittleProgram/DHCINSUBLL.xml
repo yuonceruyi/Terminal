@@ -1,0 +1,1367 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+DHCINSUBLL
+</name>
+</assembly>
+<members>
+<member name="M:DHCINSUBLL.INSU_AH_FYC.#ctor">
+	<summary>
+ 实例化时从medtrak.ini、INSU_DICDATA表中取配置信息等
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuASInit">
+	<summary>
+ 多方数据库初始化、登陆操作(改为只初始化医保接口)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuASReadCard(System.Int32,System.String,System.String,System.String,System.String)">
+	<summary>
+ 读医保卡操作
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="InsuNo">医保卡号，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="CardType">读卡类型，默认空</param>
+	<returns>读卡返回串，详细信息参考《医保读卡返回固定参数列表.xls》</returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院登记
+ </summary>
+	<param name="dHandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数， “医疗类别^医保入院疾病编码^医保入院疾病名称^医保号”详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPRegDestroy(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院登记冲销
+ </summary>
+	<param name="dHandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPDivide(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPMXUpload(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院明细上传
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuEPROeordUL(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院医嘱上传
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPOutReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 出院登记
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuInpatDiagnosisUpdate(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 单病种信息上传
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPDividePre(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费预结算
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPDivideStrike(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费冲销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPMXCancel(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院明细撤销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPJSDPrint(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院病人结算单打印  没有结算答应预结算结果
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPRegDestroyForInsu(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 医保登记冲销(医保中心登记成功，但His保存失败)
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPDivideStrikeForInsu(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费单独冲销医保
+ </summary>
+	<param name="dhandle">句柄，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="djlsh0">结算流水号</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuIPDivideStrikeForHIS(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费单独冲销HIS(医保中心冲销成功，但His保存失败)
+ </summary>
+	<param name="dhandle">句柄，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuBasDivDL(System.String,System.String@)">
+	<summary>
+ 医保结算信息下载
+ </summary>
+	<param name="input">StartDate^EndDate^UserId</param>
+	<param name="FileName">保存文件路径名称</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarConUL(System.String)">
+	<summary>
+ 对照信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarConDelete(System.String,System.String)">
+	<summary>
+ 对照信息撤销
+ </summary>
+	<param name="HisCode"></param>
+	<param name="HisDesc"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarConDL">
+	<summary>
+ 对照信息下载
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarConCheck">
+	<summary>
+ 对照信息核对
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarItmUL(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr">扩展参数，申报目录的类别</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarItmDL(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报下载
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr">扩展参数，申报目录的类别</param>
+	<returns></returns>
+	<remarks></remarks>
+     Public Function InsuTaritemsDownLoad(ByVal dHandle As Integer, ByVal UserId As String, ByVal tmpStr As String) As String
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarItmCheck(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报核对
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuDicCTCareprovUL">
+	<summary>
+ 医护人员信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuDicCTLocUL">
+	<summary>
+ 科室信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+ todo 改为TarCate
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuDicJXUL">
+	<summary>
+ 剂型信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+ todo 改为TarCate一致的
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuDicTarCateUL">
+	<summary>
+ 收费类别信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuDicCalTypeDown(System.Int32,System.String)">
+	<summary>
+ 下载结算类型
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuDownTreat(System.Int32,System.String)">
+	<summary>
+ 下载结算类型
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuEPRInfoULBackup(System.String,System.String)">
+	<summary>
+电子病历信息上传
+ </summary>
+	<param name="AdmDr"></param>
+	<param name="UserId"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuTarItmULDataSet(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报(DataSet版)
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuApplyItems(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 医院审批上报
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuApplyItemsDestroy(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 医院审批上报撤销
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuApplyItemsQuery(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 审批详细信息查询
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuApplyPerson(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 特殊病审批
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="ApproveInfo">审批信息串</param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYC.InsuApplyPersonDestory(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 特殊病审批冲销
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="ApproveInfo"></param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:DHCINSUBLL.INSU_AH_FYC">
+	<summary>
+ 河南省郑州市，市医保业务处理公共方法
+ 接口公司：沈阳东软软件股份有限公司（东软）
+ 接口版本：第三版接口（BUSINESS_HANDLE）
+ 版本：  V 1.0.0
+ 开发人：Write by Liusf 2011 09
+ 修改记录：刘书凤  2013 09 05
+           张东亮  2014-04-22
+ 整理对外公布函数
+ InsuApply   申报项目   申报生育、工伤、特病、单病种
+ InsuAS      门诊住院公用辅助业务
+ InsuBas     医保字典  目录  诊断等下载函数，对账汇总  明细下载函数
+ InsuDic     His字典上报业务 
+ InsuEPR     电子病历相关信息
+ InsuOP      门诊相关函数
+ InsuIP      住院相关函数
+ InsuPE      体检相关函数
+ InsuTarCon  医保目录对照相关函数
+ InsuTarItm  医保目录相关函数
+ 已启用函数：
+ 所有
+ 
+ </summary>
+	<remarks>
+ 适用医院：郑州人民医院   郑州颐和医院   郑大五附院
+ 名词缩写：AS    Auxiliary service   辅助业务 
+           DL    DownLoad     下载
+           UL    UpLoad       上传
+ 
+</remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.#ctor">
+	<summary>
+ 实例化时从medtrak.ini、INSU_DICDATA表中取配置信息等
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuASSignIn(System.String)">
+	<summary>
+ 操作员签入操作
+ </summary>
+	<param name="UserRowid">操作员rowid，默认为空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuASSignOut(System.String)">
+	<summary>
+ 操作员签出操作
+ </summary>
+	<param name="UserRowid">操作员rowid，默认为空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuASInit">
+	<summary>
+ 多方数据库初始化、登陆操作(改为只初始化医保接口)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuASReadCard(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 读医保卡操作
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="InsuNo">医保卡号，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="CardType">读卡类型，默认空</param>
+	<returns>读卡返回串，详细信息参考《医保读卡返回固定参数列表.xls》</returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuASReadCardFrm(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 读卡弹窗操作
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="InsuNo">医保卡号，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="CardType">读卡类型，默认空</param>
+	<returns>读卡返回串，详细信息参考《医保读卡返回固定参数列表.xls》</returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuASCardChange(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 医保换卡
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="PaadmRowid"></param>
+	<param name="AdmReasonNationCode"></param>
+	<param name="AdmReasonId"></param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks>病人已经在医院登记完成后，更换了医保卡，有的地方医保结算时需要his传参中包含医保卡号，医保组医保卡号来自I尿素AdminInfo表，导致和医保卡目前卡号对不上</remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuOPRegAuto(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊结算时自动补挂号
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，^YLLB^CardType^DiagCode^DiagDesc</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuOPReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊挂号
+ 例子模式是明细函数接收挂号医嘱，收费函数报销挂号费。
+ 不报销挂号费时，使用其他项目中的InsuOPReg
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">默认空</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuOPRegDestroy(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊挂号冲销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="InsuAdminfoDr">insu_adminfo表rowid</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuOPDivide(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊收费
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="StrInvDr">InvPrtDr串</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<param name="CPPFlag">集中打印发票标志，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuPEDivide(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+函数名：InsuPEDivide
+功能描述：体检收费
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="StrInvDr">InvPrtDr串</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<param name="CPPFlag">集中打印发票标志，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院登记
+ </summary>
+	<param name="dHandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数， “医疗类别^医保入院疾病编码^医保入院疾病名称^医保号”详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPRegDestroy(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院登记冲销
+ </summary>
+	<param name="dHandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPDivide(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPMXUpload(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院明细上传
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuEPROeordUL(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院医嘱上传
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPOutReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 出院登记
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPDividePre(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费预结算
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPDivideStrike(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费冲销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPMXCancel(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院明细撤销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPJSDPrint(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院病人结算单打印  没有结算答应预结算结果
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPRegDestroyForInsu(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 医保登记冲销(医保中心登记成功，但His保存失败)
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPDivideStrikeForInsu(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费单独冲销医保
+ </summary>
+	<param name="dhandle">句柄，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="djlsh0">结算流水号</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuIPDivideStrikeForHIS(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费单独冲销HIS(医保中心冲销成功，但His保存失败)
+ </summary>
+	<param name="dhandle">句柄，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuBasDivDL(System.String,System.String@)">
+	<summary>
+ 医保结算信息下载
+ </summary>
+	<param name="input">StartDate^EndDate^UserId</param>
+	<param name="FileName">保存文件路径名称</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarConUL">
+	<summary>
+ 对照信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarConDelete(System.String,System.String)">
+	<summary>
+ 对照信息撤销
+ </summary>
+	<param name="HisCode"></param>
+	<param name="HisDesc"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarConDL">
+	<summary>
+ 对照信息下载
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarConCheck">
+	<summary>
+ 对照信息核对
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarItmUL(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr">扩展参数，申报目录的类别</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarItmDL(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报下载
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr">扩展参数，申报目录的类别</param>
+	<returns></returns>
+	<remarks></remarks>
+     Public Function InsuTaritemsDownLoad(ByVal dHandle As Integer, ByVal UserId As String, ByVal tmpStr As String) As String
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarItmCheck(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报核对
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuDicCTCareprovUL">
+	<summary>
+ 医护人员信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuDicCTLocUL">
+	<summary>
+ 科室信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+ todo 改为TarCate
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuDicJXUL">
+	<summary>
+ 剂型信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+ todo 改为TarCate一致的
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuDicTarCateUL">
+	<summary>
+ 收费类别信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuEPRInfoULBackup(System.String,System.String)">
+	<summary>
+电子病历信息上传
+ </summary>
+	<param name="AdmDr"></param>
+	<param name="UserId"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuTarItmULDataSet(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报(DataSet版)
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuApplyItems(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 医院审批上报
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuApplyItemsDestroy(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 医院审批上报撤销
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuApplyItemsQuery(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 审批详细信息查询
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuApplyPerson(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 特殊病审批
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="ApproveInfo">审批信息串</param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYB.InsuApplyPersonDestory(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 特殊病审批冲销
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="ApproveInfo"></param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:DHCINSUBLL.INSU_AH_FYB">
+	<summary>
+ 河南省郑州市，市医保业务处理公共方法
+ 接口公司：沈阳东软软件股份有限公司（东软）
+ 接口版本：第三版接口（BUSINESS_HANDLE）
+ 版本：  V 1.0.0
+ 开发人：Write by Liusf 2011 09
+ 修改记录：刘书凤  2013 09 05
+           张东亮  2014-04-22
+ 整理对外公布函数
+ InsuApply   申报项目   申报生育、工伤、特病、单病种
+ InsuAS      门诊住院公用辅助业务
+ InsuBas     医保字典  目录  诊断等下载函数，对账汇总  明细下载函数
+ InsuDic     His字典上报业务 
+ InsuEPR     电子病历相关信息
+ InsuOP      门诊相关函数
+ InsuIP      住院相关函数
+ InsuPE      体检相关函数
+ InsuTarCon  医保目录对照相关函数
+ InsuTarItm  医保目录相关函数
+ 已启用函数：
+ 所有
+ 
+ </summary>
+	<remarks>
+ 适用医院：郑州人民医院   郑州颐和医院   郑大五附院
+ 名词缩写：AS    Auxiliary service   辅助业务 
+           DL    DownLoad     下载
+           UL    UpLoad       上传
+ 
+</remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.#ctor">
+	<summary>
+ 实例化时从medtrak.ini、INSU_DICDATA表中取配置信息等
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuASSignIn(System.String)">
+	<summary>
+ 操作员签入操作
+ </summary>
+	<param name="UserRowid">操作员rowid，默认为空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuASSignOut(System.String)">
+	<summary>
+ 操作员签出操作
+ </summary>
+	<param name="UserRowid">操作员rowid，默认为空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuASInit">
+	<summary>
+ 多方数据库初始化、登陆操作(改为只初始化医保接口)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuASReadCard(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 读医保卡操作
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="InsuNo">医保卡号，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="CardType">读卡类型，默认空</param>
+	<returns>读卡返回串，详细信息参考《医保读卡返回固定参数列表.xls》</returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuASReadCardFrm(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 读卡弹窗操作
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="InsuNo">医保卡号，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="CardType">读卡类型，默认空</param>
+	<returns>读卡返回串，详细信息参考《医保读卡返回固定参数列表.xls》</returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuASCardChange(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 医保换卡
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="PaadmRowid"></param>
+	<param name="AdmReasonNationCode"></param>
+	<param name="AdmReasonId"></param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks>病人已经在医院登记完成后，更换了医保卡，有的地方医保结算时需要his传参中包含医保卡号，医保组医保卡号来自I尿素AdminInfo表，导致和医保卡目前卡号对不上</remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuOPRegAuto(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊结算时自动补挂号
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，^YLLB^CardType^DiagCode^DiagDesc</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuOPReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊挂号
+ 例子模式是明细函数接收挂号医嘱，收费函数报销挂号费。
+ 不报销挂号费时，使用其他项目中的InsuOPReg
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">默认空</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuOPRegDestroy(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊挂号冲销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="InsuAdminfoDr">insu_adminfo表rowid</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuOPDivide(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 门诊收费
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="StrInvDr">InvPrtDr串</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<param name="CPPFlag">集中打印发票标志，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuPEDivide(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+函数名：InsuPEDivide
+功能描述：体检收费
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="StrInvDr">InvPrtDr串</param>
+	<param name="AdmSource">pac_admreason表rea_source</param>
+	<param name="AdmReasonId">pac_admreason表rowid</param>
+	<param name="ExpStr">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<param name="CPPFlag">集中打印发票标志，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院登记
+ </summary>
+	<param name="dHandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数， “医疗类别^医保入院疾病编码^医保入院疾病名称^医保号”详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPRegDestroy(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院登记冲销
+ </summary>
+	<param name="dHandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">Paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPDivide(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPMXUpload(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院明细上传
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuEPROeordUL(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院医嘱上传
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPOutReg(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 出院登记
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPDividePre(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费预结算
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPDivideStrike(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费冲销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPMXCancel(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院明细撤销
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPJSDPrint(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院病人结算单打印  没有结算答应预结算结果
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，详见《医保接口概述(DHCInsuPort.JS).doc》</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPRegDestroyForInsu(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 医保登记冲销(医保中心登记成功，但His保存失败)
+ </summary>
+	<param name="dhandle">句柄，默认0</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="PaadmRowid">paadm表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPDivideStrikeForInsu(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费单独冲销医保
+ </summary>
+	<param name="dhandle">句柄，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="djlsh0">结算流水号</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuIPDivideStrikeForHIS(System.Int32,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 住院收费单独冲销HIS(医保中心冲销成功，但His保存失败)
+ </summary>
+	<param name="dhandle">句柄，默认空</param>
+	<param name="UserId">操作员rowid</param>
+	<param name="DHCBillID">dhc_patientbill表rowid</param>
+	<param name="AdmReasonNationCode">PAC_admreason表rea_nationnalcode</param>
+	<param name="AdmReasonId">PAC_admreason表rowid</param>
+	<param name="ExpString">扩展参数，默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuBasDivDL(System.String,System.String@)">
+	<summary>
+ 医保结算信息下载
+ </summary>
+	<param name="input">StartDate^EndDate^UserId</param>
+	<param name="FileName">保存文件路径名称</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarConUL">
+	<summary>
+ 对照信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarConDelete(System.String,System.String)">
+	<summary>
+ 对照信息撤销
+ </summary>
+	<param name="HisCode"></param>
+	<param name="HisDesc"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarConDL">
+	<summary>
+ 对照信息下载
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarConCheck">
+	<summary>
+ 对照信息核对
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarItmUL(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr">扩展参数，申报目录的类别</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarItmDL(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报下载
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr">扩展参数，申报目录的类别</param>
+	<returns></returns>
+	<remarks></remarks>
+     Public Function InsuTaritemsDownLoad(ByVal dHandle As Integer, ByVal UserId As String, ByVal tmpStr As String) As String
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarItmCheck(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报核对
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuDicCTCareprovUL">
+	<summary>
+ 医护人员信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuDicCTLocUL">
+	<summary>
+ 科室信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+ todo 改为TarCate
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuDicJXUL">
+	<summary>
+ 剂型信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+ todo 改为TarCate一致的
+
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuDicTarCateUL">
+	<summary>
+ 收费类别信息上传
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuEPRInfoULBackup(System.String,System.String)">
+	<summary>
+电子病历信息上传
+ </summary>
+	<param name="AdmDr"></param>
+	<param name="UserId"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuTarItmULDataSet(System.Int32,System.String,System.String)">
+	<summary>
+ 三大目录申报(DataSet版)
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="tmpStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuApplyItems(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 医院审批上报
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuApplyItemsDestroy(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 医院审批上报撤销
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuApplyItemsQuery(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 审批详细信息查询
+ </summary>
+	<param name="dhandle"></param>
+	<param name="Indata">拼号的入参串</param>
+	<param name="UserId"></param>
+	<param name="ExpString">默认空</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuApplyPerson(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 特殊病审批
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="ApproveInfo">审批信息串</param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.INSU_AH_FYA.InsuApplyPersonDestory(System.Int32,System.String,System.String,System.String)">
+	<summary>
+ 特殊病审批冲销
+ </summary>
+	<param name="dHandle"></param>
+	<param name="UserId"></param>
+	<param name="ApproveInfo"></param>
+	<param name="ExpString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:DHCINSUBLL.INSU_AH_FYA">
+	<summary>
+ 河南省郑州市，市医保业务处理公共方法
+ 接口公司：沈阳东软软件股份有限公司（东软）
+ 接口版本：第三版接口（BUSINESS_HANDLE）
+ 版本：  V 1.0.0
+ 开发人：Write by Liusf 2011 09
+ 修改记录：刘书凤  2013 09 05
+           张东亮  2014-04-22
+ 整理对外公布函数
+ InsuApply   申报项目   申报生育、工伤、特病、单病种
+ InsuAS      门诊住院公用辅助业务
+ InsuBas     医保字典  目录  诊断等下载函数，对账汇总  明细下载函数
+ InsuDic     His字典上报业务 
+ InsuEPR     电子病历相关信息
+ InsuOP      门诊相关函数
+ InsuIP      住院相关函数
+ InsuPE      体检相关函数
+ InsuTarCon  医保目录对照相关函数
+ InsuTarItm  医保目录相关函数
+ 已启用函数：
+ 所有
+ 
+ </summary>
+	<remarks>
+ 适用医院：郑州人民医院   郑州颐和医院   郑大五附院
+ 名词缩写：AS    Auxiliary service   辅助业务 
+           DL    DownLoad     下载
+           UL    UpLoad       上传
+ 
+</remarks>
+</member><member name="M:DHCINSUBLL.clsBasDateStream.GetXMLStream(System.String,System.String@,System.String[])">
+	<summary>
+ 取XML数据，复杂的业务由调用此函数的上一级函数处理，不放在这里。
+ </summary>
+	<param name="FunctionName">调用emsenble中函数的名字</param>
+	<param name="RtnStr">返回组织好的XML串</param>
+	<param name="values">可变参数，供灵活使用</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.BaseInsuSignIn.getYWZQH(System.String,System.String,System.String)">
+	<summary>
+ 获取业务周期号
+ </summary>
+	<param name="userId"></param>
+	<param name="hospitalNo"></param>
+	<param name="ydFlag"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.BaseInsuSignIn.SaveInsuSignIn(System.String)">
+	<summary>
+ 保存签到信息
+ </summary>
+	<param name="InString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DHCINSUBLL.BaseInsuSignIn.SaveInsuSignOut(System.String,System.String)">
+	<summary>
+ 保存签退信息
+ </summary>
+	<param name="InString"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

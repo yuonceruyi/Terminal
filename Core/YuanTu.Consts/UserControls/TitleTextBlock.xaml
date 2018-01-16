@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="YuanTu.Consts.UserControls.TitleTextBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="TitleColumnDefinition" />
+            <ColumnDefinition x:Name="ValueColumnDefinition" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" x:Name="TitleBlock"/>
+        <TextBlock Grid.Column="1" x:Name="ValueBlock"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,196 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#  
+var lists = new List<Tuple<string,string,List<string>,string>>()
+{
+//字段名称^字段释义
+//[字段名称] 表示该字段已经被禁用
+//基本信息
+    new Tuple<string, string, List<string>, string>(
+        "查询是否已建档",
+        "/restapi/common/health/queryUser",
+        new List<string>()
+        {
+            "name","idNo",
+			"cardNo","cardType",
+			"sex","age","birthday","nation",
+            "addr","expire","photo","phone"
+        },
+        "是否建档信息|data"),
+
+	 new Tuple<string, string, List<string>, string>(
+    "修改手机号",
+    "/restapi/common/health/upateUser",
+    new List<string>()
+    {
+        "healthUserId","phone","idNo",
+    },
+    "bool|data"),
+
+	new Tuple<string, string, List<string>, string>(
+    "上传体检报告",
+    "/restapi/common/health/commitReport",
+    new List<string>()
+    {
+        "healthUserId","idNo","icpcode","测量组:groupList"
+    },
+    "string|data"),
+
+	new Tuple<string, string, List<string>, string>(
+    "查询体检报告单",
+    "/restapi/common/health/queryReport",
+    new List<string>()
+    {
+        "healthUserId","idNo","beginTime","endTime",
+    },
+    "查询体检报告单分页数据|data"),
+
+	new Tuple<string, string, List<string>, string>(
+    "获取服务器当前时间",
+    "/restapi/common/selfDevice/getSystemTime",
+    new List<string>()
+    {
+	 "idNo"
+    },
+    "long|data"),
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using YuanTu.Default.House.HealthManager.Base;
+
+namespace YuanTu.Default.House.HealthManager
+{
+   
+    public partial class HealthDataHandlerEx
+    {
+       
+<#  foreach (var t in lists) {
+        var name = t.Item1; 
+#>
+        public static res<#=name #> <#=name #>(req<#=name #> req)
+        {
+            return DataHandler.Query<res<#=name #>, req<#=name #>>(req);
+        }
+
+<#  } #>
+    }
+
+<#  foreach (var t in lists) {
+        string name = t.Item1;
+        string service = t.Item2;
+        var list = t.Item3;
+#>
+    
+    public partial class req<#=name #> : RequestBase
+    {
+        /// <summary>
+        /// <#= name #>
+        /// </summary>
+        public req<#=name #>()
+        {
+            service = "<#=service #>";
+            serviceName = "<#=name #>";
+        }
+<#      foreach (var s in list) {
+            var val = s.Split('^'); 
+            var obs = val[0].StartsWith("[")&&val[0].EndsWith("]");
+            if (val.Length > 1)
+            {
+#>
+        /// <summary>
+        /// <#= val[1] #>
+        /// </summary>
+<#          } #>
+<#if (obs){ #>
+        [Obsolete]
+<# val[0] = val[0].Trim(new[] {'[', ']'});} #>
+
+<#     if(val[0].Contains(':')) { 
+            int n = s.IndexOf(':');
+#>
+        public List<<#=val[0].Substring(0, n) #>> <#=val[0].Substring(n + 1) #> { get; set; }
+<#      } else if(val[0].Contains('|')) { 
+            int n = val[0].IndexOf('|');
+#>
+        public <#=val[0].Substring(0, n) #> <#=val[0].Substring(n + 1) #> { get; set; }
+<#      } else { #>
+        public string <#=val[0] #> { get; set; }
+<#      }#>
+
+
+<#      } #>
+<#          if(list.Count > 0) { #>
+        
+        public override Dictionary<string, string> GetParams()
+        {
+            var dic = base.GetParams();
+<#              foreach (var s in list)
+{
+    var k = s.Split('^')[0].Trim(new[] {'[', ']'}); #>
+	<# if(k.Contains((':'))){continue;
+        ;
+    }#>
+            dic[nameof(<#=k #>)] = <#=k #>;
+<#              } #>
+<#  if (name == "上传体检报告")
+            { #>
+            if (groupList != null)
+            {
+				int num = 0;
+                for (int i = 0; i < groupList.Count; i++)
+                {
+                    var groupName = groupList[i].groupName;
+                    var childList= groupList[i].childList;
+                    if (childList != null)
+                    {
+                        for (int j = 0; j < childList.Count; j++)
+                        {
+                            dic[$"childList[{num}].groupName"] = groupName;
+                            dic[$"childList[{num}].childName"] = childList[j].childName;
+                            dic[$"childList[{num}].dataStr"] = childList[j].dataStr;
+							dic[$"childList[{num}].unit"] = childList[j].unit;
+							num++;
+                        }
+                    }
+                }
+            }
+          <#  }        #>
+
+            return dic;
+        }
+
+<#          } #>
+    }
+<#  } #>
+
+<#  foreach (var t in lists) {
+        var name = t.Item1;
+        var value = t.Item4;
+#>
+
+    public class res<#= name #> : ResponseBase
+    {
+<#      var s = value;
+        if(s.Contains(':')) { 
+            int n = s.IndexOf(':');
+#>
+        public List<<#=s.Substring(0, n) #>> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else if(s.Contains('|')) { 
+            int n = s.IndexOf('|');
+#>
+        public <#=s.Substring(0, n) #> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else { #>
+        public string <#=s #> { get; set; }
+<#      }#>
+    }
+<#  } #>
+#pragma warning restore 612
+}

@@ -1,0 +1,131 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                    xmlns:models="clr-namespace:YuanTu.Consts.Models;assembly=YuanTu.Consts">
+
+    <Style x:Key="医生卡片" TargetType="{x:Type userControls:SimpleButton}">
+        <Setter Property="Width" Value="440" />
+        <Setter Property="Height" Value="180" />
+        <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+        <Setter Property="TagString" Value="{Binding Title}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Style="{StaticResource 卡片边框}">
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"
+                                      Width="90"
+                                      Height="90"
+                                      Margin="5">
+                                    <Grid.OpacityMask>
+                                        <RadialGradientBrush>
+                                            <GradientStop Offset="0" Color="#FF000000" />
+                                            <GradientStop Offset="0.99" Color="#FF000000" />
+                                            <GradientStop Offset="1" Color="#00000000" />
+                                        </RadialGradientBrush>
+                                    </Grid.OpacityMask>
+                                    <Ellipse Fill="Transparent" />
+                                    <Image Width="90"
+                                           Height="90"
+                                           Stretch="UniformToFill"
+                                           Source="{Binding IconUri}" />
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Style="{StaticResource 卡片标题}">
+                                        <Run Foreground="#707070" Text="{Binding Title}" />
+                                        <Run FontWeight="Light" Text="|" />
+                                        <Run Foreground="#A7A7A7" Text="{Binding Rank}" />
+                                    </TextBlock>
+                                    <Grid Grid.Row="1"
+                                          Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                   Margin="10,0"
+                                                   VerticalAlignment="Center"
+                                                   Style="{StaticResource 卡片内容}">
+                                            <Run Foreground="#919191" Text="诊室名称:" />
+                                            <Run Foreground="#4876FF"
+                                                 Text="{Binding Description}" FontSize="25" /> 
+                                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="2"
+                                          Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                   Margin="10,0"
+                                                   VerticalAlignment="Center"
+                                                   Style="{StaticResource 卡片内容}">
+                                            <Run Foreground="#919191" Text="挂号费:" />
+                                            <Run Foreground="#F5A251"
+                                                 Text="{Binding Amount}" />
+                                            <Run Foreground="#F5A251" Text="元" />
+                                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Row="3"
+                                          Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                   Margin="10,0"
+                                                   VerticalAlignment="Center"
+                                                   Style="{StaticResource 卡片内容}">
+                                            <Run Foreground="#919191" Text="候诊人数:" />
+                                            <Run Foreground="#F5A251"
+                                                 Text="{Binding Remain}" />
+                                        </TextBlock>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <DataTemplate x:Key="InfoItemDoc" DataType="models:InfoAppt">
+        <userControls:SimpleButton Command="{Binding ConfirmCommand}"
+                                   CommandParameter="{Binding}"
+                                   Style="{StaticResource 医生卡片}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="Register.Schedule">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Style="{StaticResource 主题文本}">请您根据以下时间选择您所需要的就诊时间</Label>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="4" ColumnCount="4"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

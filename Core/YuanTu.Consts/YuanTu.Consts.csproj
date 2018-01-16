@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2D55167C-D5D1-42B3-9E61-4A413FAC957A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YuanTu.Consts</RootNamespace>
+    <AssemblyName>YuanTu.Consts</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.2.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Wpf.6.2.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Vlc.DotNet.Core, Version=2.1.134.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86">
+      <HintPath>..\..\packages\Vlc.DotNet.Core.2.1.134\lib\net45\x86\Vlc.DotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Core.Interops, Version=2.1.134.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86">
+      <HintPath>..\..\packages\Vlc.DotNet.Core.Interops.2.1.134\lib\net45\x86\Vlc.DotNet.Core.Interops.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Forms, Version=2.1.134.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86">
+      <HintPath>..\..\packages\Vlc.DotNet.Forms.2.1.134\lib\net45\x86\Vlc.DotNet.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="A.cs" />
+    <Compile Include="CommandLineSwitches.cs" />
+    <Compile Include="DateTimeCore.cs" />
+    <Compile Include="DeviceType.cs" />
+    <Compile Include="Dtos\PayMethodDto.cs" />
+    <Compile Include="Dtos\Register\RegTypeDto.cs" />
+    <Compile Include="Dtos\UnionPos\TransResDto.cs" />
+    <Compile Include="Enums\AdminType.cs" />
+    <Compile Include="Enums\AmPmSession.cs" />
+    <Compile Include="Enums\BanCardMediaType.cs" />
+    <Compile Include="Enums\Business.cs" />
+    <Compile Include="Enums\CreateType.cs" />
+    <Compile Include="Enums\PrintAgainTypeEnum.cs" />
+    <Compile Include="Enums\PayMethod.cs" />
+    <Compile Include="Enums\InfoQueryTypeEnum.cs" />
+    <Compile Include="Enums\RegType.cs" />
+    <Compile Include="Enums\Sex.cs" />
+    <Compile Include="Enums\Theme.cs" />
+    <Compile Include="Enums\TradeType.cs" />
+    <Compile Include="Enums\UserCenter\CardType.cs" />
+    <Compile Include="EventModels\ModulesChangeEvent.cs" />
+    <Compile Include="EventModels\SystemInfoEvent.cs" />
+    <Compile Include="EventModels\TimeOutChangeEvent.cs" />
+    <Compile Include="EventModels\ViewChangeEvent.cs" />
+    <Compile Include="Enums\DeviceStatus.cs" />
+    <Compile Include="EventModels\ViewChangingEvent.cs" />
+    <Compile Include="FrameworkBase\ComparisonHelper.cs" />
+    <Compile Include="FrameworkBase\EqualityHelper.cs" />
+    <Compile Include="FrameworkBase\IDependency.cs" />
+    <Compile Include="FrameworkBase\IDevice.cs" />
+    <Compile Include="FrameworkBase\Result.cs" />
+    <Compile Include="FrameworkConst.cs" />
+    <Compile Include="FrameworkBase\IModel.cs" />
+    <Compile Include="FrameworkBase\IService.cs" />
+    <Compile Include="FrameworkBase\IShell.cs" />
+    <Compile Include="Gateway\Base\GatewayDataBase.cs" />
+    <Compile Include="Gateway\Base\GatewayRequest.cs" />
+    <Compile Include="Gateway\Base\GatewayResponse.cs" />
+    <Compile Include="Gateway\Base\RSA.cs" />
+    <Compile Include="Gateway\Base\Wrapper.cs" />
+    <Compile Include="Gateway\DataHandlerEx.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataHandlerEx.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gateway\Base\IDataHandler.cs" />
+    <Compile Include="Gateway\Tables.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tables.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\CardType.cs" />
+    <Compile Include="Models\Auth\ICardModel.cs" />
+    <Compile Include="Models\Auth\IIDCardModel.cs" />
+    <Compile Include="Models\Auth\IPatientModel.cs" />
+    <Compile Include="Models\Auth\IQrCodeModel.cs" />
+    <Compile Include="Models\Auth\IReSendModel.cs" />
+    <Compile Include="Models\BillPay\IBillPrePayModel.cs" />
+    <Compile Include="Models\BillPay\IBillPayModel.cs" />
+    <Compile Include="Models\BillPay\IBillRecordModel.cs" />
+    <Compile Include="Models\ChoiceButtonInfo.cs" />
+    <Compile Include="Models\Configs\Section.cs" />
+    <Compile Include="Models\Create\ICreateModel.cs" />
+    <Compile Include="Models\DischargeSettlement\IDischargeSettlementModel.cs" />
+    <Compile Include="Models\GateWayStatus\IGateWayStatusModel.cs" />
+    <Compile Include="Models\IChoiceModel.cs" />
+    <Compile Include="Models\Info.cs" />
+    <Compile Include="Models\InfoItemDataTemplateSelector.cs" />
+    <Compile Include="Models\InfoQuery\IPacsReportModel.cs" />
+    <Compile Include="Models\InfoQuery\IInBedInfoModel.cs" />
+    <Compile Include="Models\InfoQuery\IInDailyDetailModel.cs" />
+    <Compile Include="Models\InfoQuery\IDiagReportModel.cs" />
+    <Compile Include="Models\InfoQuery\IChargeItemsModel.cs" />
+    <Compile Include="Models\InfoQuery\IMedicineModel.cs" />
+    <Compile Include="Models\InfoQuery\InfoQueryButtonInfo.cs" />
+    <Compile Include="Models\InfoQuery\IInPrePayRecordModel.cs" />
+    <Compile Include="Models\InfoQuery\IQueryChoiceModel.cs" />
+    <Compile Include="Models\InfoQuery\IRechargeRecord.cs" />
+    <Compile Include="Models\Payment\IPaymentModel.cs" />
+    <Compile Include="Models\Payment\IScanQRCodeModel.cs" />
+    <Compile Include="Models\Payment\PayInfoItem.cs" />
+    <Compile Include="Models\PrintAgain\PrintAgainButtonInfo.cs" />
+    <Compile Include="Models\PrintAgain\IPrintAgainChoiceModel.cs" />
+    <Compile Include="Models\Print\IPrintable.cs" />
+    <Compile Include="Models\Print\IPrintModel.cs" />
+    <Compile Include="Models\Print\PrintConfig.cs" />
+    <Compile Include="Models\Print\ZBRPrintCodeItem.cs" />
+    <Compile Include="Models\Print\ZBRPrintTextItem.cs" />
+    <Compile Include="Models\InfoQuery\IPayCostRecordModel.cs" />
+    <Compile Include="Models\Recharge\IIpRechargeModel.cs" />
+    <Compile Include="Models\Recharge\IOpRechargeModel.cs" />
+    <Compile Include="Models\Register\IDeptartmentModel.cs" />
+    <Compile Include="Models\Register\IDoctorModel.cs" />
+    <Compile Include="Models\Register\IRegDateModel.cs" />
+    <Compile Include="Models\Register\IRegisterModel.cs" />
+    <Compile Include="Models\Register\IRegTypesModel.cs" />
+    <Compile Include="Models\Register\IScheduleModel.cs" />
+    <Compile Include="Models\Register\ITriageModel.cs" />
+    <Compile Include="Models\Register\ISourceModel.cs" />
+    <Compile Include="Models\System\AlertModel.cs" />
+    <Compile Include="Models\System\BusyModel.cs" />
+    <Compile Include="Models\System\ConfirmModel.cs" />
+    <Compile Include="Models\System\MaskModel.cs" />
+    <Compile Include="Models\TakeNum\IAppoRecordModel.cs" />
+    <Compile Include="Models\TakeNum\ICancelAppoModel.cs" />
+    <Compile Include="Models\TakeNum\ITakeNumModel.cs" />
+    <Compile Include="Models\UserCenter\Auth\IAuthtModel.cs" />
+    <Compile Include="Models\UserCenter\Register\IRegisterModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionNames.cs" />
+    <Compile Include="Enums\BarQrcodeFormat.cs" />
+    <Compile Include="Services\IAudioService.cs" />
+    <Compile Include="Services\IAutoUpdateHost.cs" />
+    <Compile Include="Services\IBarQrCodeGenerator.cs" />
+    <Compile Include="Services\IBusinessConfigManager.cs" />
+    <Compile Include="Services\ICameraService.cs" />
+    <Compile Include="Services\IConfigurationManager.cs" />
+    <Compile Include="Services\IPrintManager.cs" />
+    <Compile Include="Services\IRecognitionService.cs" />
+    <Compile Include="Services\IResourceEngine.cs" />
+    <Compile Include="Sounds\SoundMapping.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SoundMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Triage\DataHandlerEx.cs">
+      <DependentUpon>DataHandlerEx.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Triage\Tables.cs">
+      <DependentUpon>Tables.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UserCenter\DataHandlerEx.cs">
+      <DependentUpon>DataHandlerEx.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UserCenter\Entities\AppointRegLogDO.cs" />
+    <Compile Include="UserCenter\Entities\AppointRegLogVO.cs" />
+    <Compile Include="UserCenter\Entities\BaseDO.cs" />
+    <Compile Include="UserCenter\Entities\BenefitInfo.cs" />
+    <Compile Include="UserCenter\Entities\CorpDO.cs" />
+    <Compile Include="UserCenter\Entities\CorpNewsDO.cs" />
+    <Compile Include="UserCenter\Entities\CorpVO.cs" />
+    <Compile Include="UserCenter\Entities\Dept.cs" />
+    <Compile Include="UserCenter\Entities\DeptOutParams.cs" />
+    <Compile Include="UserCenter\Entities\DeptSchdulesVO.cs" />
+    <Compile Include="UserCenter\Entities\Doct.cs" />
+    <Compile Include="UserCenter\Entities\DoctorVO.cs" />
+    <Compile Include="UserCenter\Entities\DoctSchdulesVO.cs" />
+    <Compile Include="UserCenter\Entities\MultiDeptOutParams.cs" />
+    <Compile Include="UserCenter\Entities\PatientVO.cs" />
+    <Compile Include="UserCenter\Entities\PayInfo.cs" />
+    <Compile Include="UserCenter\Entities\PayInfoAccount.cs" />
+    <Compile Include="UserCenter\Entities\PayInfoItem.cs" />
+    <Compile Include="UserCenter\Entities\PaymentItemDO.cs" />
+    <Compile Include="UserCenter\Entities\PayProperties.cs" />
+    <Compile Include="UserCenter\Entities\PayType.cs" />
+    <Compile Include="UserCenter\Entities\PayTypesDO.cs" />
+    <Compile Include="UserCenter\Entities\PlatfomFeeLogDO.cs" />
+    <Compile Include="UserCenter\Entities\RefundLogDO.cs" />
+    <Compile Include="UserCenter\Entities\RegTypeOutParams.cs" />
+    <Compile Include="UserCenter\Entities\ResPrePayVO.cs" />
+    <Compile Include="UserCenter\Entities\ResScheduleDeptList.cs" />
+    <Compile Include="UserCenter\Entities\ScanDataVO.cs" />
+    <Compile Include="UserCenter\Entities\ScheduleAmPmVO.cs" />
+    <Compile Include="UserCenter\Entities\ScheduleMedAmPmDO.cs" />
+    <Compile Include="UserCenter\Entities\ScheduleTypeVO.cs" />
+    <Compile Include="UserCenter\Entities\ScheduleVO.cs" />
+    <Compile Include="UserCenter\Entities\SourceDO.cs" />
+    <Compile Include="UserCenter\Entities\SourceVO.cs" />
+    <Compile Include="UserCenter\IDataHandler.cs" />
+    <Compile Include="UserCenter\UserCenterRequest.cs" />
+    <Compile Include="UserCenter\UserCenterResponse.cs" />
+    <Compile Include="UserControls\DatePicker.xaml.cs">
+      <DependentUpon>DatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\GifImage.cs" />
+    <Compile Include="UserControls\ListDataGrid.xaml.cs">
+      <DependentUpon>ListDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FullKeyboard.xaml.cs">
+      <DependentUpon>FullKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\InfoMatrix.xaml.cs">
+      <DependentUpon>InfoMatrix.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\KeyPanel.xaml.cs">
+      <DependentUpon>KeyPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LoadCircle.xaml.cs">
+      <DependentUpon>LoadCircle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PageDataFree.xaml.cs">
+      <DependentUpon>PageDataFree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PageDataGrid.xaml.cs">
+      <DependentUpon>PageDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ScrollPicker.xaml.cs">
+      <DependentUpon>ScrollPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SimpleButton.cs" />
+    <Compile Include="UserControls\TilePanel.cs" />
+    <Compile Include="UserControls\TitleLabel.xaml.cs">
+      <DependentUpon>TitleLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TitleTextBlock.xaml.cs">
+      <DependentUpon>TitleTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Transitions\DoorTransition.cs" />
+    <Compile Include="UserControls\Transitions\FadeTransition.cs" />
+    <Compile Include="UserControls\Transitions\FlipTransition.cs" />
+    <Compile Include="UserControls\Transitions\RotateTransition.cs" />
+    <Compile Include="UserControls\Transitions\StoryboardTransition.cs" />
+    <Compile Include="UserControls\Transitions\Transition.cs" />
+    <Compile Include="UserControls\Transitions\Transition3D.cs" />
+    <Compile Include="UserControls\Transitions\TransitionPresenter.cs" />
+    <Compile Include="UserControls\Transitions\TransitionSelector.cs" />
+    <Compile Include="UserControls\Transitions\TranslateTransition.cs" />
+    <Compile Include="UserControls\Transitions\TwoWayTransitionSelector.cs" />
+    <Compile Include="UserControls\VerticalKeyboard.xaml.cs">
+      <DependentUpon>VerticalKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\VideoPlayer.cs" />
+    <Compile Include="UserControls\PictureBoxUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Properties\DesignTimeResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
+    <Page Include="UserControls\DatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ListDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\FullKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\InfoMatrix.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\KeyPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LoadCircle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\PageDataFree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PageDataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ScrollPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\TitleLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\TitleTextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\VerticalKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gateway\DataHandlerEx.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataHandlerEx.cs</LastGenOutput>
+    </Content>
+    <Content Include="Gateway\Tables.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tables.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sounds\SoundMapping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SoundMapping.cs</LastGenOutput>
+    </Content>
+    <Content Include="Triage\DataHandlerEx.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataHandlerEx.cs</LastGenOutput>
+    </Content>
+    <Content Include="Triage\Tables.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tables.cs</LastGenOutput>
+    </Content>
+    <Content Include="UserCenter\DataHandlerEx.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataHandlerEx.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

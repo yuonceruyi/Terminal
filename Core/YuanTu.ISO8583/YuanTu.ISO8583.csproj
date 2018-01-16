@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AAC837B7-165E-4FF4-A2C4-9BC47A5B292C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YuanTu.ISO8583</RootNamespace>
+    <AssemblyName>YuanTu.ISO8583</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\YuanTu.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.5.0\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContainerWrapper.cs" />
+    <Compile Include="CPUCard\AIP.cs" />
+    <Compile Include="CPUCard\AUC.cs" />
+    <Compile Include="CPUCard\DevCap.cs" />
+    <Compile Include="CPUCard\ICPOS.cs" />
+    <Compile Include="CPUCard\IICPOS.cs" />
+    <Compile Include="CPUCard\TLVStorage.cs" />
+    <Compile Include="CPUCard\TSI.cs" />
+    <Compile Include="CPUCard\TVR.cs" />
+    <Compile Include="Interfaces\IBuildConfig.cs" />
+    <Compile Include="Interfaces\IContainerWrapper.cs" />
+    <Compile Include="Interfaces\IConfig.cs" />
+    <Compile Include="Interfaces\IManager.cs" />
+    <Compile Include="Interfaces\IDecoder.cs" />
+    <Compile Include="Interfaces\IEncoder.cs" />
+    <Compile Include="Interfaces\IPOS.cs" />
+    <Compile Include="Interfaces\IConnection.cs" />
+    <Compile Include="Util\Logger.cs" />
+    <Compile Include="Manager.cs" />
+    <Compile Include="广州\Loader.cs" />
+    <Compile Include="Interfaces\ILoader.cs" />
+    <Compile Include="浙江\Loader.cs" />
+    <Compile Include="浙江\POS.cs" />
+    <Compile Include="深圳\Loader.cs" />
+    <Compile Include="深圳\Manager.cs" />
+    <Compile Include="深圳\POS.cs" />
+    <Compile Include="Util\RSA.cs" />
+    <Compile Include="Util\StatusCode.cs" />
+    <Compile Include="BuildConfig.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="IO\Connection.cs" />
+    <Compile Include="CPUCard\Command.cs" />
+    <Compile Include="CPUCard\CPUDecoder.cs" />
+    <Compile Include="CPUCard\CPUEncoder.cs" />
+    <Compile Include="CPUCard\CPUTlv.cs" />
+    <Compile Include="Util\Cryptography.cs" />
+    <Compile Include="IO\Decoder.cs" />
+    <Compile Include="IO\Encoder.cs" />
+    <Compile Include="Enums\Format.cs" />
+    <Compile Include="ICCard.cs" />
+    <Compile Include="IO\Input.cs" />
+    <Compile Include="Peripherals\KeyCard.cs" />
+    <Compile Include="IO\Output.cs" />
+    <Compile Include="POS.cs" />
+    <Compile Include="Enums\VarFormat.cs" />
+    <Compile Include="Enums\VarType.cs" />
+    <Compile Include="Util\Extentions.cs" />
+    <Compile Include="Data\Field.cs" />
+    <Compile Include="Data\FieldData.cs" />
+    <Compile Include="Data\Message.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\TlvPackage.cs" />
+    <Compile Include="Data\TlvPackageData.cs" />
+    <Compile Include="深圳\Decoder.cs" />
+    <Compile Include="广州\Decoder.cs" />
+    <Compile Include="广州\Encoder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YuanTu.Consts\YuanTu.Consts.csproj">
+      <Project>{2d55167c-d5d1-42b3-9e61-4a413fac957a}</Project>
+      <Name>YuanTu.Consts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuanTu.Core\YuanTu.Core.csproj">
+      <Project>{ab393f77-c15f-43c8-ac02-c9686a79b668}</Project>
+      <Name>YuanTu.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuanTu.Devices\YuanTu.Devices.csproj">
+      <Project>{650eb36a-029e-43a8-8656-3e6fb8e3f277}</Project>
+      <Name>YuanTu.Devices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

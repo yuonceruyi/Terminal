@@ -1,0 +1,24 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.ShangHai9thHospital.Clinic.Component.Register.Views.RegAmPmView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d"
+                         d:DesignHeight="750" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Style="{StaticResource 主题文本}">请触摸下方卡片选择场次</Label>
+        <userControls:InfoMatrix Grid.Row="1"
+                                 RowCount="4"
+                                 ColumnCount="3"
+                                 ItemsSource="{Binding Data}"
+                                 ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+    </Grid>
+</frameworkBase:ViewsBase>

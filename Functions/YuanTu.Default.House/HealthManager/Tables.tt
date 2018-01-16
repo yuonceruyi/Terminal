@@ -1,0 +1,56 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+var dictionary = new Dictionary<string,List<string>>()
+{
+{"是否建档信息",new List<string>(){"gmtModify","gmtCreate","id","name","idNo","cardNo","cardType","sex","age","birthday","nation","addr","expire","photo","phone","usesurvey"}},
+{"测量组子集",new List<string>(){"childName","dataStr","unit"}},
+{"测量组",new List<string>(){"groupName","测量组子集:childList"}},
+{"查询体检报告单",new List<string>(){"gmtModify","gmtCreate","id","healthUserId","sourceCode","name","age","sex","cardNo","phone","date","测量组:groupList"}},
+{"查询体检报告单分页数据",new List<string>(){"pageSize","currentPage","totalPageNum","totalRecrodNum","查询体检报告单:records"}},//records返回的是全部的报告单。分页是为了提供给其他人
+};
+
+#>
+using System.Collections.Generic;
+using YuanTu.Default.House.HealthManager.Base;
+namespace YuanTu.Default.House.HealthManager
+{
+	
+<# foreach (var kvp in dictionary) { #>
+    public partial class <#= kvp.Key #> : ResponseBase
+    {
+<#      foreach (var m in kvp.Value) {
+            var tmp = m.Split('^');
+			var obs = tmp[0].StartsWith("[")&&tmp[0].EndsWith("]");
+			tmp[0] = tmp[0].Trim(new[] {'[', ']'});
+            var s = tmp[0];
+#>
+<#          if (tmp.Length > 1) { #>
+        /// <summary>
+        /// <#= tmp[1] #>
+        /// </summary>
+<#          } #>
+<#if (obs){ #>
+        [Obsolete]
+<# } #>
+<#          if(s.Contains(':')){ 
+                int n = s.IndexOf(':');
+#>
+        public List<<#= s.Substring(0, n) #>> <#= s.Substring(n + 1) #> { get; set; }
+<#          }else if(s.Contains('|')) { 
+                int n = s.IndexOf('|');
+#>
+        public <#= s.Substring(0, n) #> <#= s.Substring(n + 1) #> { get; set; }
+<#          } else { #>
+        public string <#= s #> { get; set; }
+<#          } #>
+<#      } #>
+    }
+
+<#  } #>
+
+}

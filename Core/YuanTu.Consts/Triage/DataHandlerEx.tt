@@ -1,0 +1,177 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#  
+var lists = new List<Tuple<string,string,List<string>,string>>()
+{
+//字段名称^字段释义
+//*字段名称 表示该字段不在日志中输出
+//[字段名称] 表示该字段已经被禁用
+//英文: 表示数组 |表示对象
+
+//预检分诊
+    new Tuple<string, string, List<string>, string>(
+        "需预检科室信息查询",
+        "yuantu.wap.query.triage.dept.info.list",
+        new List<string>()
+        {
+        },
+        "预检科室信息:data"),
+
+    new Tuple<string, string, List<string>, string>(
+        "需预检挂号类别信息查询",
+        "yuantu.wap.query.triage.regtype.info.list",
+        new List<string>()
+        {
+        },
+        "预检挂号类别信息:data"),
+
+	new Tuple<string, string, List<string>, string>(
+        "患者预检记录信息查询",
+        "yuantu.wap.query.triage.record.info.list",
+        new List<string>()
+        {
+			"patientId^门诊号/病历号,患者医院唯一ID"
+        },
+        "预检记录信息:data"),
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using YuanTu.Consts.Gateway.Base;
+
+namespace YuanTu.Consts.Triage
+{
+    #pragma warning disable 612
+    public partial class DataHandlerEx
+    {
+        public static IDataHandler Handler{get;set;}
+<#  foreach (var t in lists) {
+        var name = t.Item1; 
+#>
+        public static res<#=name #> <#=name #>(req<#=name #> req)
+        {
+            return Handler.Query<res<#=name #>, req<#=name #>>(req);
+        }
+
+<#  } #>
+    }
+
+<#  foreach (var t in lists) {
+        string name = t.Item1;
+        string service = t.Item2;
+        var list = t.Item3;
+#>
+    
+    public class req<#=name #> : GatewayRequest
+    {
+        /// <summary>
+        /// <#= name #>
+        /// </summary>
+        public req<#=name #>()
+        {
+            service = "<#=service #>";
+            _serviceName = "<#=name #>";
+        }
+<#      foreach (var s in list) {
+            var val = s.Split('^');
+            var pName = val[0];
+            var jsonIgnore = pName.StartsWith("*");
+            if(jsonIgnore)
+                pName = pName.Trim('*');
+            var obs = pName.StartsWith("[") && pName.EndsWith("]");
+            if(obs)
+                pName = pName.Trim('[', ']');
+            if (val.Length > 1)
+            {
+#>
+        /// <summary>
+        /// <#= val[1] #>
+        /// </summary>
+<#          } #>
+<#      if (obs){ #>
+        [Obsolete]
+<#      } #>
+<#      if (jsonIgnore){ #>
+        [JsonIgnore]
+<#      } #>
+<#
+    var islst = pName.Contains(':');
+    var tpvs = pName.Split(':', '|');
+    var variable = tpvs.Length > 1 ? tpvs[1] : tpvs[0];
+    var tp = tpvs.Length > 1 ? tpvs[0] : "string";
+    var fulltp = islst ? ("List<" + tp + ">") : tp;
+
+#>
+        public <#=fulltp#> <#=variable #> { get; set; }
+<#      } #>
+<#          if(list.Count > 0) { #>
+        
+        public override Dictionary<string, string> GetParams()
+        {
+            var dic = base.GetParams();
+<#  foreach (var s in list) {
+    var k = s.Split('^')[0].Trim('[', ']','*'); 
+    var islst = k.Contains(':');
+    var tpvs = k.Split(':', '|');
+    var variable = tpvs.Length > 1 ? tpvs[1] : tpvs[0];
+    var tp = tpvs.Length > 1 ? tpvs[0] : "string";
+#>
+<#  if (tp == "string") { #>
+            dic[nameof(<#=k #>)] = <#=k #>;
+<# }
+else if (islst)
+{ #>
+            for(int i=0;i<<#=variable #>.Count;i++){
+                var ikv=Build(nameof(<#=variable #>)+$"[{i}]",<#=variable #>[i]);
+                foreach(var kv in ikv){
+                    dic[kv.Key]=kv.Value;
+                }
+            }
+<# }
+else
+{ #>
+            var ikv=Build(nameof(<#=variable #>),<#=variable #>);
+                foreach(var kv in ikv){
+                    dic[kv.Key]=kv.Value;
+                }
+<# } #>
+<# 
+} #>
+            return dic;
+        }
+
+<#          } #>
+    }
+<#  } #>
+
+<#  foreach (var t in lists) {
+        var name = t.Item1;
+        var value = t.Item4;
+#>
+
+    public class res<#= name #> : GatewayResponse
+    {
+<#      var s = value;
+        if(s.Contains(':')) { 
+            int n = s.IndexOf(':');
+#>
+        public List<<#=s.Substring(0, n) #>> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else if(s.Contains('|')) { 
+            int n = s.IndexOf('|');
+#>
+        public <#=s.Substring(0, n) #> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else { #>
+        public object <#=s #> { get; set; }
+<#      }#>
+    }
+<#  } #>
+#pragma warning restore 612
+}

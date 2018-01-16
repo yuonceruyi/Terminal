@@ -1,0 +1,1141 @@
+﻿<UserControl x:Class="YuanTu.Default.Component.InfoQuery.ViewModels.SubViews.出院清单"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.Default.Component.InfoQuery.ViewModels.SubViews"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             d:DesignHeight="800"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <!--<Button Click="ButtonBase_OnClick" Content="Print" />-->
+                <RichTextBox>
+                    <FlowDocument x:Name="doc"
+                                  PageHeight="29.7cm"
+                                  PageWidth="21.4cm">
+                        <FlowDocument.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="FontSize" Value="8pt" />
+                                <Setter Property="FontFamily" Value="宋体" />
+                                <Setter Property="Margin" Value="0" />
+                            </Style>
+                            <Style TargetType="{x:Type TableCell}">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="LineHeight" Value="10" />
+                                <Setter Property="Padding" Value="2,2" />
+                            </Style>
+                            <Style TargetType="{x:Type Table}">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="Margin" Value="0" />
+                                <Setter Property="CellSpacing" Value="0" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Style>
+
+                            <system:String x:Key="打印时间">打印时间</system:String>
+                            <system:String x:Key="医保住院登记号">住院登记号</system:String>
+
+                            <system:String x:Key="姓名">李某某</system:String>
+                            <system:String x:Key="性别">男</system:String>
+                            <system:String x:Key="出生日期">1947-09-13</system:String>
+                            <system:String x:Key="个人电脑号">1111111</system:String>
+                            <system:String x:Key="人员类别">退休</system:String>
+                            <system:String x:Key="单位名称">中共青海省委办公厅(10000116)</system:String>
+                            <system:String x:Key="公务员级别">正厅级</system:String>
+                            <system:String x:Key="联系电话">13188888888</system:String>
+                            <system:String x:Key="身份证号">63232194708234567</system:String>
+                            <system:String x:Key="住院号">00957657</system:String>
+                            <system:String x:Key="科别">肾内科</system:String>
+                            <system:String x:Key="床号">012</system:String>
+                            <system:String x:Key="住院时间">2016-07-15</system:String>
+                            <system:String x:Key="出院时间">2016-07-27</system:String>
+                            <system:String x:Key="住院天数">12</system:String>
+                            <system:String x:Key="入院第一诊断">血液渗透</system:String>
+                            <system:String x:Key="出院第一诊断">慢性肾炎</system:String>
+                            <system:String x:Key="待遇类型">普通住院</system:String>
+                            <system:String x:Key="账户余额">0</system:String>
+                            <system:String x:Key="结算时间">2016-07-30 09:33:20</system:String>
+                            <system:String x:Key="主管医师">李某某</system:String>
+
+                            <system:String x:Key="本年住院次数">6</system:String>
+                            <system:String x:Key="本年度分段计算费用累计">70093.74</system:String>
+                            <system:String x:Key="医疗费合计">70093.74</system:String>
+                            <system:String x:Key="已付起付线">70093.74</system:String>
+                            <system:String x:Key="统筹支付">70093.74</system:String>
+                            <system:String x:Key="完全政策自付">70093.74</system:String>
+                            <system:String x:Key="部分政策自付">70093.74</system:String>
+                            <system:String x:Key="分段比例自付">70093.74</system:String>
+                            <system:String x:Key="大病支付">70093.74</system:String>
+                            <system:String x:Key="公务员补助费">70093.74</system:String>
+
+                            <system:String x:Key="总费用合计">70093.74</system:String>
+                            <system:String x:Key="完全自付合计">70093.74</system:String>
+                            <system:String x:Key="部分自付合计">70093.74</system:String>
+
+                            <system:String x:Key="现金支付总计">70093.74</system:String>
+                            <system:String x:Key="个人账户支付总计">70093.74</system:String>
+                            <system:String x:Key="统筹基金支付总计">70093.74</system:String>
+                            <system:String x:Key="公务员补助总计">70093.74</system:String>
+                            <system:String x:Key="医院支付总计">70093.74</system:String>
+                            <system:String x:Key="合计总计">70093.74</system:String>
+
+                            <system:String x:Key="本次医疗总费用">100.00</system:String>
+                            <system:String x:Key="本次医疗总费用大写">零元整</system:String>
+                            <system:String x:Key="现金支付金额">100.00</system:String>
+                            <system:String x:Key="现金支付金额大写">零元整</system:String>
+                            <system:String x:Key="个人账户支付金额">100.00</system:String>
+                            <system:String x:Key="个人账户支付金额大写">零元整</system:String>
+                            <system:String x:Key="其中差别化支付">100.00</system:String>
+                            <system:String x:Key="其中差别化支付大写">零元整</system:String>
+                            <system:String x:Key="基本统筹基金支付">100.00</system:String>
+                            <system:String x:Key="基本统筹基金支付大写">零元整</system:String>
+                            <system:String x:Key="大病互助基金支付">100.00</system:String>
+                            <system:String x:Key="大病互助基金支付大写">零元整</system:String>
+                            <system:String x:Key="公务员补助支付">100.00</system:String>
+                            <system:String x:Key="公务员补助支付大写">零元整</system:String>
+                            <system:String x:Key="公务员特殊补贴">100.00</system:String>
+                            <system:String x:Key="公务员特殊补贴大写">零元整</system:String>
+                            <system:String x:Key="大病补助基金支付">100.00</system:String>
+                            <system:String x:Key="大病补助基金支付大写">零元整</system:String>
+                            <system:String x:Key="医院支付">100.00</system:String>
+                            <system:String x:Key="医院支付大写">零元整</system:String>
+                            <system:String x:Key="二次补助基金">100.00</system:String>
+                            <system:String x:Key="二次补助基金大写">零元整</system:String>
+
+                            <system:String x:Key="已交的预缴款">100.00</system:String>
+                            <system:String x:Key="已交的预缴款大写">零元整</system:String>
+
+                            <system:String x:Key="应交金额">100.00</system:String>
+                            <system:String x:Key="应交金额大写">零元整</system:String>
+
+                            <system:String x:Key="结算员">ZXZZJ</system:String>
+                        </FlowDocument.Resources>
+                        <Table x:Name="Caption">
+                            <TableRowGroup>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph Margin="0"
+                                                   FontSize="15pt"
+                                                   FontWeight="Bold"
+                                                   TextAlignment="Center">
+                                            职工医疗保险管理局城镇职工住院结算单
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph Margin="0"
+                                                   FontSize="10pt"
+                                                   TextAlignment="Center">
+                                            打印日期:
+                                            <Run Text="{DynamicResource 打印时间}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+                        <Table x:Name="Header" TextAlignment="Center">
+                            <Table.Columns>
+                                <TableColumn Width="5*" />
+                                <TableColumn Width="5*" />
+                                <TableColumn Width="5*" />
+                                <TableColumn Width="3*" />
+                            </Table.Columns>
+                            <TableRowGroup>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>
+                                            医疗机构名称：远图智慧医院
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            医院等级：无
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            医保住院登记号:
+                                            <Run Text="{DynamicResource 医保住院登记号}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            金额单位：元
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+                        <Table x:Name="PersonInfo">
+                            <Table.Resources>
+                                <Style TargetType="{x:Type TableCell}">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                    <Setter Property="TextAlignment" Value="Center" />
+                                    <Setter Property="Padding" Value="2,2" />
+                                </Style>
+                            </Table.Resources>
+                            <Table.Columns>
+                                <TableColumn Width="0.6*" />
+                                <TableColumn Width="1.6*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="2*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="2*" />
+                                <TableColumn Width="1.5*" />
+                                <TableColumn Width="1.5*" />
+                            </Table.Columns>
+                            <TableRowGroup>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            姓名
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 姓名}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            性别
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 性别}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            出生日期
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="3">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 出生日期}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="3">
+                                        <Paragraph>
+                                            个人电脑号
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 个人电脑号}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            人员类别
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 人员类别}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            单位名称
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="4">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 单位名称}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            公务员级别
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 公务员级别}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            联系电话
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 联系电话}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            身份证号
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 身份证号}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            住院号
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 住院号}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            科别
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 科别}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            床号
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 床号}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            住院时间
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 住院时间}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            出院时间
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 出院时间}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            住院天数
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 住院天数}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            入院第一诊断
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="4">
+                                        <Paragraph Margin="0 5 0 0">
+                                            <Run Text="{DynamicResource 入院第一诊断}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            出院第一诊断
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="8">
+                                        <Paragraph Margin="0 5 0 0" TextAlignment="Left">
+                                            <Run Text="{DynamicResource 出院第一诊断}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            待遇类型
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="3">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 待遇类型}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            账户余额
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 账户余额}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            结算时间
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="3">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 结算时间}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            主管医师
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 主管医师}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell RowSpan="3">
+                                        <Paragraph>
+                                            既往费用
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell RowSpan="2">
+                                        <Paragraph>
+                                            本年住院次数
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell RowSpan="2">
+                                        <Paragraph>
+                                            本年度分段计算费用累计
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="13">
+                                        <Paragraph>
+                                            本年已发生的住院医疗费用支出
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            医疗费合计
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            已付起付线
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            统筹
+                                            <LineBreak />
+                                            支付
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            完全政策自付
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            部分政策自付
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            分段比例自付
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            大病支付
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            公务员补助费
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 本年住院次数}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 本年度分段计算费用累计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 医疗费合计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 已付起付线}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 统筹支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 完全政策自付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 部分政策自付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 分段比例自付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 大病支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 公务员补助费}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+
+                        <Table x:Name="ContentFees" BorderThickness="0,1">
+                            <Table.Resources>
+                                <Style TargetType="{x:Type TableCell}">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0.5" />
+                                    <Setter Property="TextAlignment" Value="Center" />
+                                    <Setter Property="Padding" Value="2,2" />
+                                </Style>
+                            </Table.Resources>
+                            <Table.Columns>
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                            </Table.Columns>
+                            <TableRowGroup x:Name="ContentRows">
+                                <TableRow x:Name="Summary">
+                                    <TableCell>
+                                        <Paragraph>费用类别</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>总费用</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>完全自付</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>部分自付</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>费用类别</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>总费用</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>完全自付</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>部分自付</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>费用类别</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>总费用</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>完全自付</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>部分自付</Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                            <TableRowGroup x:Name="ContentTotal">
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>合计</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 总费用合计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 完全自付合计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 部分自付合计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+                        <Table x:Name="ContentInsur" BorderThickness="0,1">
+                            <Table.Resources>
+                                <Style TargetType="{x:Type TableCell}">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0.5" />
+                                    <Setter Property="TextAlignment" Value="Center" />
+                                    <Setter Property="Padding" Value="2,2" />
+                                </Style>
+                            </Table.Resources>
+                            <Table.Columns>
+                                <TableColumn Width="6*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                                <TableColumn Width="3*" />
+                            </Table.Columns>
+                            <TableRowGroup x:Name="ContentInsurRows">
+                                <TableRow>
+                                    <TableCell RowSpan="2">
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>现金支付</Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>个人账户支付</Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>统筹基金支付</Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>公务员补助</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>医院支付</Paragraph>
+                                    </TableCell>
+                                    <TableCell RowSpan="2">
+                                        <Paragraph Margin="0 11 0 0">合计</Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>金额</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>比例</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>金额</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>比例</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>金额</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>比例</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>金额</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>比例</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>金额</Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                            <TableRowGroup>
+
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph />
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>合计</Paragraph>
+                                    </TableCell>
+
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 现金支付总计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 个人账户支付总计}" />
+                                        </Paragraph>
+                                    </TableCell>
+
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 统筹基金支付总计}" />
+                                        </Paragraph>
+                                    </TableCell>
+
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 公务员补助总计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 医院支付总计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 合计总计}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+                        <Table x:Name="ContentSms" BorderThickness="0,1">
+                            <Table.Resources>
+                                <Style TargetType="{x:Type TableCell}">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0.5" />
+                                    <Setter Property="TextAlignment" Value="Center" />
+                                    <Setter Property="Padding" Value="2,2" />
+                                </Style>
+                            </Table.Resources>
+                            <Table.Columns>
+                                <TableColumn Width="1*" />
+                                <TableColumn Width="5*" />
+                                <TableColumn Width="5*" />
+                                <TableColumn Width="2*" />
+                                <TableColumn Width="15*" />
+                            </Table.Columns>
+                            <TableRowGroup>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>本次医疗总费用：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 本次医疗总费用}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 本次医疗总费用大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>现金支付金额：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 现金支付金额}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 现金支付金额大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>个人账户支付金额：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 个人账户支付金额}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 个人账户支付金额大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>其中差别化支付：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 其中差别化支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 其中差别化支付大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>基本统筹基金支付：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 基本统筹基金支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 基本统筹基金支付大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>大病互助基金支付：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 大病互助基金支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 大病互助基金支付大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>公务员补助支付：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 公务员补助支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 公务员补助支付大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>公务员特殊补贴：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 公务员特殊补贴}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 公务员特殊补贴大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>大病补助基金支付：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 大病补助基金支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 大病补助基金支付大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>医院支付：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 医院支付}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 医院支付大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell ColumnSpan="2">
+                                        <Paragraph>二次补助基金：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 二次补助基金}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 二次补助基金大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                            <TableRowGroup>
+                                <TableRow>
+                                    <TableCell RowSpan="3">
+                                        <Paragraph>预交款</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>已交的预缴款：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 已交的预缴款}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 已交的预缴款大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>应交金额：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 应交金额}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>
+                                            <Run Text="{DynamicResource 应交金额大写}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>应退金额：</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>0.00</Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>大写：</Paragraph>
+                                    </TableCell>
+                                    <TableCell TextAlignment="Left">
+                                        <Paragraph>零元整</Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+
+                        <Table x:Name="Remark">
+                            <TableRowGroup>
+                                <TableRow>
+                                    <TableCell>
+                                        <Paragraph>
+                                            结算员:
+                                            <Run Text="{DynamicResource 结算员}" />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            财务审核:
+                                            <Run />
+                                        </Paragraph>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Paragraph>
+                                            病人（家属）签字：
+                                            <Run />
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+                    </FlowDocument>
+                </RichTextBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

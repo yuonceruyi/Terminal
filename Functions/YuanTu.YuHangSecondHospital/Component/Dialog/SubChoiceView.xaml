@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="YuanTu.YuHangSecondHospital.Component.Dialog.SubChoiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+             d:DesignHeight="1024"
+             d:DesignWidth="1280"
+             mc:Ignorable="d">
+    <Grid Visibility="{Binding ShowSubChoice, Converter={StaticResource BooleanToVisibilityConverter}}"
+          Height="1024"
+          Width="1280"
+          >
+        <Border Background="Black" Opacity="0.4" />
+        <StackPanel
+            Height="800"
+            Width="1280">
+            <ItemsControl
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0"
+                ItemsSource="{Binding DataSub}"
+                Padding="0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <userControls:TilePanel LayoutRule="{Binding LayoutRule}" Gap="80,40" Margin="40,0"
+                                          ItemVerticalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <userControls:SimpleButton
+                            Command="{Binding Path=DataContext.SubCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                            CommandParameter="{Binding}"
+                            Content="{Binding Name}"
+                            Style="{StaticResource 主页卡片}"
+                            TagString="{Binding Name}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+      
+    </Grid>
+</UserControl>

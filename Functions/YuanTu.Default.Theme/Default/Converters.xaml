@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:YuanTu.Core.Converters;assembly=YuanTu.Core">
+    <converters:AmountConverter x:Key="AmountConverter" />
+    <converters:ImageConverter x:Key="ImageConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:StringFormatConverter x:Key="StringFormatConverter" />
+    <converters:NotNullConverter x:Key="NotNullConverter" />
+    <converters:NotNullToVisibilityConverter x:Key="NotNullToVisibilityConverter" />
+    <converters:UnitFormatConverter x:Key="UnitFormatConverter" />
+    <converters:SameContextConverter x:Key="SameContextConverter" />
+    <converters:UpperLowerConverter x:Key="UpperLowerConverter" />
+    <converters:PasswordConverter x:Key="PasswordConverter"/>
+
+
+</ResourceDictionary>

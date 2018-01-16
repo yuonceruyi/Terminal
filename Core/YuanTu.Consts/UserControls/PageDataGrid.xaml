@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="YuanTu.Consts.UserControls.PageDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.Consts.UserControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="840"
+             Loaded="PageDataGrid_OnLoaded"
+             mc:Ignorable="d">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <local:SimpleButton x:Name="ButtonSummaryPreview"
+                                Grid.Column="0"
+                                Click="ButtonSummaryPreview_Click"
+                                Content="前一组"
+                                TagString="前一组"
+                                Style="{StaticResource 分组上一页按钮}" />
+            <ItemsControl x:Name="CatalogList" Grid.Column="1">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:SimpleButton Click="ButtonCatalog_OnClick"
+                                            Content="{Binding CatalogContent}"
+                                            Style="{StaticResource 分组按钮}"
+                                            TagString="{Binding CatalogContent}"
+                                            Visibility="{Binding CatalogContent, Converter={StaticResource NotNullToVisibilityConverter}}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <local:SimpleButton x:Name="ButtonSummaryNext"
+                                Grid.Column="2"
+                                Click="ButtonSummaryNext_Click"
+                                Content="后一组"
+                                TagString="后一组"
+                                Style="{StaticResource 分组下一页按钮}" />
+        </Grid>
+        <DataGrid x:Name="DetailGrid" Style="{StaticResource 分组内容}" />
+        <ContentControl x:Name="SummaryDetail" />
+        <StackPanel Margin="0 16 0 0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <local:SimpleButton x:Name="ButtonDetailPreview"
+                                Click="ButtonDetailPreview_Click"
+                                Style="{StaticResource 上一页按钮}"
+                                TagString="上一页" />
+            <TextBlock x:Name="LblPage" Style="{StaticResource 分组内容页码}" Text="1/4" />
+            <local:SimpleButton x:Name="ButtonDetailNext"
+                                Click="ButtonDetailNext_Click"
+                                Style="{StaticResource 下一页按钮}"
+                                TagString="下一页" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,30 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.ShenZhen.BaoAnCenterHospital.Component.InfoQuery.Views.DiagReportView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <StackPanel Width="896">
+        <Label Style="{DynamicResource 主题文本}">速度较慢；请耐心等待</Label>
+        <Border Background="#ffffff" CornerRadius="5" Height="482">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <userControls:SimpleButton Grid.Row="1"
+                                           Margin="200"
+                                           Command="{Binding ConfirmCommand}"
+                                           Content="确定"
+                                           Style="{DynamicResource 确定按钮}"
+                                           TagString="确定" />
+            </Grid>
+        </Border>
+    </StackPanel>
+</frameworkBase:ViewsBase>

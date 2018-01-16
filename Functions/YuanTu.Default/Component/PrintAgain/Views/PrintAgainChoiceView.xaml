@@ -1,0 +1,41 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.Component.PrintAgain.Views.PrintAgainChoiceView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:local="clr-namespace:YuanTu.Default.Component.InfoQuery.Views"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         d:DesignHeight="300"
+                         d:DesignWidth="300"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <Grid>
+        <ItemsControl
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Background="Transparent"
+            BorderThickness="0"
+            ItemsSource="{Binding Data}"
+            Padding="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <userControls:TilePanel LayoutRule="[C,1,1,1 C,1,1,1]" Gap="40,40" Margin="40,0"
+                                      ItemVerticalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <userControls:SimpleButton Height="240" Width="205"
+                                               Command="{Binding Path=DataContext.Command,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type frameworkBase:ViewsBase}}}"
+                                               CommandParameter="{Binding}"
+                                               Content="{Binding Name}"
+                                               Style="{StaticResource 主页卡片}"
+                                               TagString="{Binding Name}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</frameworkBase:ViewsBase>

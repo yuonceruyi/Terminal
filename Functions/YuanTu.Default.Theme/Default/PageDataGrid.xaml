@@ -1,0 +1,159 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts">
+
+    <userControls:SamePageConverter x:Key="SamePageConverter" />
+    <Style x:Key="分组内容页码" TargetType="TextBlock">
+        <Setter Property="Width" Value="75" />
+        <Setter Property="Foreground" Value="#717171" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="分组内容背景" TargetType="Border">
+
+    </Style>
+    <Color x:Key="分组翻页1">#dadbdd</Color>
+    <Color x:Key="分组翻页2">#e4e4e4</Color>
+    <SolidColorBrush x:Key="分组翻页按钮文本颜色">#717171</SolidColorBrush>
+    <Style x:Key="分组翻页按钮文本" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Foreground" Value="{StaticResource 分组翻页按钮文本颜色}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+    <LinearGradientBrush x:Key="分组翻页颜色" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Offset="0" Color="{StaticResource 分组翻页1}" />
+            <GradientStop Offset="0.4" Color="{StaticResource 分组翻页2}" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <Style x:Key="分组翻页按钮边框" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="{StaticResource 分组翻页颜色}" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].Color">
+                        <ColorAnimation Duration="0:0:0.2" To="{StaticResource 分组翻页2}" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].Color">
+                        <ColorAnimation Duration="0:0:0.2" To="{StaticResource 分组翻页1}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].Color">
+                        <ColorAnimation Duration="0:0:0.2" To="{StaticResource 分组翻页1}" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].Color">
+                        <ColorAnimation Duration="0:0:0.2" To="{StaticResource 分组翻页2}" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="分组翻页按钮" TargetType="Button">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="Height" Value="42" />
+        <Setter Property="Width" Value="90" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Style="{StaticResource 分组翻页按钮边框}">
+                        <TextBlock Margin="8"
+                                   Style="{StaticResource 分组翻页按钮文本}"
+                                   Text="{Binding Content, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="分组上一页按钮" TargetType="Button" BasedOn="{StaticResource 分组翻页按钮}" />
+    <Style x:Key="分组下一页按钮" TargetType="Button" BasedOn="{StaticResource 分组翻页按钮}" />
+
+    <SolidColorBrush x:Key="分组选中" Color="#7ab6ea" />
+    <SolidColorBrush x:Key="分组选中前景" Color="#ffffff" />
+    <SolidColorBrush x:Key="分组未选中前景" Color="#717171" />
+    <SolidColorBrush x:Key="分组未选中" Color="#ffffff" />
+    <SolidColorBrush x:Key="分组边框" Color="#c5c6c8" />
+
+    <Style x:Key="分组按钮" TargetType="Button">
+        <Setter Property="Width" Value="190" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="Margin" Value="7 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="Border" Background="{StaticResource 分组未选中}" BorderBrush="{StaticResource 分组边框}"
+                            BorderThickness="1">
+                        <TextBlock x:Name="TextBlock" Margin="5" Foreground="{StaticResource 分组未选中前景}"
+                                   TextWrapping="Wrap" FontSize="18"
+                                   Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Content}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource SamePageConverter}">
+                                    <Binding Path="CurrentData"
+                                             RelativeSource="{RelativeSource FindAncestor, AncestorType=userControls:PageDataGrid}" />
+                                    <Binding />
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource 分组选中}" />
+                            <Setter TargetName="Border" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="TextBlock" Property="Foreground" Value="{StaticResource 分组选中前景}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="分组内容" TargetType="{x:Type DataGrid}">
+        <Setter Property="Height" Value="355" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RowHeaderWidth" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="GridLinesVisibility" Value="None" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserDeleteRows" Value="False" />
+        <Setter Property="CanUserReorderColumns" Value="False" />
+        <Setter Property="CanUserResizeColumns" Value="False" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="CanUserSortColumns" Value="False" />
+    </Style>
+    <Style TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Foreground" Value="#717171" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="#dadbdc" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+    <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="Height" Value="60" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="#717171" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="BorderBrush" Value="#d6d7d9" />
+    </Style>
+</ResourceDictionary>

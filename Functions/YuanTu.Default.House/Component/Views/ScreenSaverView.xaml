@@ -1,0 +1,110 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Component.Views.ScreenSaverView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:consts="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:prism="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         d:DesignHeight="768"
+                         d:DesignWidth="1280"
+                         prism:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+
+    <Grid Margin="0,-110,0,-150">
+        <Grid.InputBindings>
+            <MouseBinding Command="{Binding ClickCommand}" MouseAction="LeftClick" />
+        </Grid.InputBindings>
+        <Border Grid.Column="0"
+                Background="#ffffff"
+                Opacity="0.01" />
+        <StackPanel Grid.Column="0">
+            <Grid Width="1177" Margin="60,183,45,80">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width=".7*" />
+                    <ColumnDefinition Width=".7*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0"
+                        Grid.RowSpan="3"
+                        Style="{StaticResource 屏保手机框}">
+                    <Image
+                        Source="{Binding 屏保手机Uri}" />
+                </Border>
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           FontSize="47.3"
+                           Foreground="#ffffff"
+                           HorizontalAlignment="Center"
+                           Text="{Binding 屏保文本1}" />
+                <Border Grid.Row="1" Grid.Column="1"
+                        Style="{StaticResource 屏保二维码框}">
+                    <Image
+                        Source="{Binding 屏保二维码1Uri}" />
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2"
+                        Style="{StaticResource 屏保二维码框}">
+                    <Image
+                        Source="{Binding 屏保二维码2Uri}" />
+                </Border>
+
+                <TextBlock Grid.Row="2" Grid.Column="1"
+                           FontSize="24"
+                           HorizontalAlignment="Center"
+                           Text="{Binding 屏保文本2}"
+                           Foreground="#ffffff" />
+                <TextBlock Grid.Row="2" Grid.Column="2"
+                           FontSize="24"
+                           HorizontalAlignment="Center"
+                           Text="{Binding 屏保文本3}"
+                           Foreground="#ffffff" />
+            </Grid>
+            <TextBlock Name="Text"
+                       FontSize="60"
+                       Foreground="#ffffff"
+                       Text=">> 点击屏幕，进入系统主页 &lt;&lt;"
+                       HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform x:Name="RT" ScaleX="1" ScaleY="1" />
+                </TextBlock.RenderTransform>
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <!--<DoubleAnimation
+                                        Storyboard.TargetName="RT"
+                                        Storyboard.TargetProperty="ScaleY"
+                                        From="1" To="1.1" Duration="0:0:1"
+                                        AutoReverse="True">
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                        Storyboard.TargetName="RT"
+                                        Storyboard.TargetProperty="ScaleX"
+                                        From="1" To="1.1" Duration="0:0:1"
+                                        AutoReverse="True">
+                                </DoubleAnimation>-->
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Text"
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="1" To="0" Duration="0:0:1"
+                                    AccelerationRatio="1"
+                                    AutoReverse="True" />
+                                <!--<ColorAnimation
+                                        Storyboard.TargetProperty="(TextBlock.Foreground).Color"
+                                        From="#ffffff" To="#00d159" Duration="0:0:1"
+                                        AutoReverse="True">
+                                </ColorAnimation>-->
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</frameworkBase:ViewsBase>

@@ -1,0 +1,40 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.Tablet.Component.Auth.Views.CardView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"                         
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <Grid>
+        <ContentControl Width="684"
+                        Height="542"
+                        Margin="0"
+                        Style="{StaticResource 提示卡片}">
+            <StackPanel Margin="0" Orientation="Vertical">
+                <Viewbox Width="684"
+                         Height="365"
+                         Margin="0">
+                
+                    <MediaElement Source="{Binding BackUri}" MediaEnded="MediaElement_MediaEnded"
+                                  />
+                </Viewbox>
+                <Label Margin="10"
+                       HorizontalAlignment="Center"
+                       FontSize="28"
+                       Foreground="#717171">
+                    请将卡放置于感应区
+                </Label>
+                <Label HorizontalAlignment="Center"
+                       FontSize="20"
+                       Foreground="#888888">
+                    读卡完成后会自动进行跳转
+                </Label>
+            </StackPanel>
+        </ContentControl>
+    </Grid>
+</frameworkBase:ViewsBase>
+

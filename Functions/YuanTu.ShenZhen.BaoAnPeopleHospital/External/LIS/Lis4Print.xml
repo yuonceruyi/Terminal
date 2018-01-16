@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SystemConfig>
+  <!--LIS4应该服务器地址 如:http://127.0.0.1/Lis4App/-->
+  <ServerAddress>http://ngrok.yuantutech.com:37011/lis4app/</ServerAddress>
+  <!--打印机名称,默认打印机为空-->
+  <PrinterName>Foxit Reader Plus Printer Driver</PrinterName>
+  <!--报告打印是否启用批量打印功能(默认:否:0)-->
+  <BatchPrintMode>0</BatchPrintMode>
+  <!--报告打印是否启用合并打印功能(默认:否:0)-->
+  <MergePrintMode>0</MergePrintMode>
+  <!--强制指定打印机输出纸张(默认:无)-->
+  <ForcePaperSize></ForcePaperSize>
+  <!--强制指定打印机输出方向(默认:是:1)-->
+  <ForcePaperOrientation>1</ForcePaperOrientation>
+  <!--病人类型-->
+  <PatientTypeID></PatientTypeID>
+  <!--回写打印报告标志(默认:是(1))-->
+  <ReportPrintFlag>0</ReportPrintFlag>
+  <!--Lis系统打印方案(默认:是(1))-->
+  <PrintSchemeID>2</PrintSchemeID>
+</SystemConfig> 

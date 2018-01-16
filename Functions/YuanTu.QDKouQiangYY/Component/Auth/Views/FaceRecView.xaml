@@ -1,0 +1,44 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.QDKouQiangYY.Component.Auth.Views.FaceRecView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls1="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.QDKouQiangYY.Component.Auth.ViewModels"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         d:DataContext="{d:DesignInstance viewModels:FaceRecViewModel}"
+                         mc:Ignorable="d">
+    <ContentControl Style="{StaticResource 提示卡片}">
+        <StackPanel>
+            <Grid Margin="30 10" Width="800" Height="500">
+                <Image x:Name="Image" RenderTransformOrigin="0.5 0.5" Stretch="Uniform">
+                    <Image.RenderTransform>
+                        <ScaleTransform ScaleX="-1" />
+                    </Image.RenderTransform>
+                </Image>
+                <Image Source="{Binding MaskUri}" Stretch="Uniform"/>
+            </Grid>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <userControls1:SimpleButton Command="{Binding ConfirmCommand}"
+                                            Style="{StaticResource 确定按钮}"
+                                            Content="立即拍照"
+                                            TagString="立即拍照" />
+                <userControls1:SimpleButton Grid.Column="1"
+                                            Command="{Binding DelayCommand}"
+                                            Style="{StaticResource 取消按钮}"
+                                            Content="延迟拍照"
+                                            TagString="延迟拍照" />
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                           FontSize="32" Foreground="Red" Text="{Binding SnapShotTimeOut}"></TextBlock>
+            </Grid>
+        </StackPanel>
+    </ContentControl>
+</frameworkBase:ViewsBase>

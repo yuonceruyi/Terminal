@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E037195-3A87-4640-ADF3-074AF7C3BF33}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YuanTu.ChongQingArea</RootNamespace>
+    <AssemblyName>YuanTu.ChongQingArea</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.2.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Unity.6.2.0\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Wpf.6.2.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressInfo.cs" />
+    <Compile Include="B.cs" />
+    <Compile Include="Clinic\Component\Auth\ViewModels\ZjSiCardViewModel.cs" />
+    <Compile Include="Clinic\Component\Auth\Views\ZjSiCardView.xaml.cs">
+      <DependentUpon>ZjSiCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Models\SiModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\CardViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\ChoiceViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\FingerPrintViewModelBase.cs" />
+    <Compile Include="Component\Auth\ViewModels\IDCardViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\InIDCardViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\FingerPrintValidationViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\InPatientInfoViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\InPatientNoViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\InputChildrenNameViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\InSiCardViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\PatientInfoExViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\PatientInfoViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\SiCardViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\SiPasswordViewModel.cs" />
+    <Compile Include="Component\Auth\Views\CardView.xaml.cs">
+      <DependentUpon>CardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\FingerPrintValidationView.xaml.cs">
+      <DependentUpon>FingerPrintValidationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\FingerPrintView.xaml.cs">
+      <DependentUpon>FingerPrintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\InSiCardView.xaml.cs">
+      <DependentUpon>InSiCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\InputChildrenNameView.xaml.cs">
+      <DependentUpon>InputChildrenNameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\PatientInfoView.xaml.cs">
+      <DependentUpon>PatientInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\SiCardView.xaml.cs">
+      <DependentUpon>SiCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\SiPasswordView.xaml.cs">
+      <DependentUpon>SiPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Auth\Views\InPatientNoView.xaml.cs">
+      <DependentUpon>InPatientNoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\BillPay\ViewModels\BillRecordViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\DateTimeViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\DiagReportViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\MedicineItemsViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\NewMedicineItemsViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\NewMedicineProjectViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\InDailyDateViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\InPrePayRecordViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\InputViewModel.cs" />
+    <Compile Include="Component\InfoQuery\ViewModels\QueryChoiceViewModel.cs" />
+    <Compile Include="Component\InfoQuery\Views\InPrePayRecordView.xaml.cs">
+      <DependentUpon>InPrePayRecordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\InfoQuery\Views\InputView.xaml.cs">
+      <DependentUpon>InputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\InfoQuery\Views\MedicineItemsView.xaml.cs">
+      <DependentUpon>MedicineItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\InfoQuery\Views\NewMedicineItemsView.xaml.cs">
+      <DependentUpon>NewMedicineItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\InfoQuery\Views\NewMedicineProjectView.xaml.cs">
+      <DependentUpon>NewMedicineProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\InfoQuery\Views\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Recharge\ViewModels\CashViewModel.cs" />
+    <Compile Include="Component\Recharge\ViewModels\RechargeMethodViewModel.cs" />
+    <Compile Include="Component\Recharge\Views\CashView.xaml.cs">
+      <DependentUpon>CashView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Register\ViewModels\DeptsViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\DoctorViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\RegTypesViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\ScheduleViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\SourceViewModel.cs" />
+    <Compile Include="Component\TakeNum\ViewModels\ApptRecordViewModel.cs" />
+    <Compile Include="Component\TakeNum\ViewModels\TakeNumViewModel.cs" />
+    <Compile Include="Component\Tools\ViewModels\PosViewModel.cs" />
+    <Compile Include="Component\Tools\ViewModels\ScanQrCodeViewModel.cs" />
+    <Compile Include="Component\Tools\Views\PosView.xaml.cs">
+      <DependentUpon>PosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\Tools\Views\ScanQrCodeView.xaml.cs">
+      <DependentUpon>ScanQrCodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\ViewModels\ChoiceViewModel.cs" />
+    <Compile Include="Component\ViewModels\SelectSiView.xaml.cs">
+      <DependentUpon>SelectSiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Component\ViewModels\ConfirmViewModel.cs" />
+    <Compile Include="Component\ViewModels\SelectSiViewModel.cs" />
+    <Compile Include="Component\ZYRecharge\ViewModels\MethodViewModel.cs" />
+    <Compile Include="Component\ZYRecharge\Views\MethodView.xaml.cs">
+      <DependentUpon>MethodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InnerConsts.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Models\Payment\IPaymentModels.cs" />
+    <Compile Include="Models\TopBottomModel.cs" />
+    <Compile Include="NamedPipeCameraService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PrintManager.cs" />
+    <Compile Include="SiHandler\Messages.cs" />
+    <Compile Include="SiHandler\SiContext.cs" />
+    <Compile Include="SiHandler\SiExtentions.cs" />
+    <Compile Include="SiHandler\SiInterface.cs" />
+    <Compile Include="SiHandler\Transactions\01_获取人员基本信息.cs" />
+    <Compile Include="SiHandler\Transactions\02_就诊登记.cs" />
+    <Compile Include="SiHandler\Transactions\03_更新就诊信息.cs" />
+    <Compile Include="SiHandler\Transactions\04_添加处方明细.cs" />
+    <Compile Include="SiHandler\Transactions\05_结算.cs" />
+    <Compile Include="SiHandler\Transactions\06_预结算.cs" />
+    <Compile Include="SiHandler\Transactions\07_获取医保特殊病审批信息.cs" />
+    <Compile Include="SiHandler\Transactions\13_获取人员账户基础信息.cs" />
+    <Compile Include="SiHandler\Transactions\26_获取新老卡卡号.cs" />
+    <Compile Include="SiHandler\Transactions\31_读卡交易.cs" />
+    <Compile Include="SiHandler\Transactions\99_冲正交易.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\YuanTu.Consts\YuanTu.Consts.csproj">
+      <Project>{2d55167c-d5d1-42b3-9e61-4a413fac957a}</Project>
+      <Name>YuanTu.Consts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YuanTu.Core\YuanTu.Core.csproj">
+      <Project>{ab393f77-c15f-43c8-ac02-c9686a79b668}</Project>
+      <Name>YuanTu.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YuanTu.Devices\YuanTu.Devices.csproj">
+      <Project>{650EB36A-029E-43A8-8656-3E6FB8E3F277}</Project>
+      <Name>YuanTu.Devices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuanTu.Default.Clinic\YuanTu.Default.Clinic.csproj">
+      <Project>{8ebc7c0b-9916-4e2e-bce7-3abb171c84b1}</Project>
+      <Name>YuanTu.Default.Clinic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuanTu.Default\YuanTu.Default.csproj">
+      <Project>{408be3a7-37d9-445e-98a8-ab5edf597a89}</Project>
+      <Name>YuanTu.Default</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Clinic\Component\Auth\Views\ZjSiCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\CardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\FingerPrintValidationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\FingerPrintView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\InSiCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\InputChildrenNameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\PatientInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\SiCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\SiPasswordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Auth\Views\InPatientNoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\InfoQuery\Views\InPrePayRecordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\InfoQuery\Views\InputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\InfoQuery\Views\MedicineItemsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\InfoQuery\Views\NewMedicineItemsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\InfoQuery\Views\NewMedicineProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\InfoQuery\Views\Report.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\Recharge\Views\CashView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\Tools\Views\PosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\Tools\Views\ScanQrCodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Component\ViewModels\SelectSiView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Component\ZYRecharge\Views\MethodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Theme\default.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="CurrentResource\YuanTu.ChongQingArea\区域信息.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="重庆人民.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
+    <Folder Include="External\SiInterface\" />
+    <Folder Include="Resource\YuanTu.ChongQingArea\Sounds\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\YuanTu.ChongQingArea\1103.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CurrentResource\YuanTu.ChongQingArea\重庆.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\YuanTu.ChongQingArea\1103s.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\YuanTu.ChongQingArea\医院广告图.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.ChongQingArea\医院广告图_ax.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CurrentResource\YuanTu.ChongQingArea\化验单提示.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\MainLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\卡_指纹识别.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\卡_诊疗卡.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\图标_医改自费信息.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\图标_医改药品信息.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\图标_医改项目信息.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\提示_社保卡.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\提示_诊疗卡.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\提示_诊间社保卡.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\轮播图\规范建设图.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\轮播图\规范建设图_yy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\轮播图\诊间宣传图1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\轮播图\诊间宣传图2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\轮播图\诊间宣传图3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\轮播图\诊间宣传图4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\YuanTu.ChongQingArea\轮播图\诊间宣传图5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

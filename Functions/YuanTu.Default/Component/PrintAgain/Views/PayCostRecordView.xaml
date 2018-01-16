@@ -1,0 +1,23 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.Component.PrintAgain.Views.PayCostRecordView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <StackPanel>
+        <ContentControl ContentTemplate="{StaticResource InfoQuery.PayCostRecord}" Content="{Binding}"></ContentControl>
+        <userControls:SimpleButton Grid.Row="1"
+                                           Margin="20"
+                                           Command="{Binding ConfirmCommand}"
+                                           Content="我要打印"
+                                           Style="{DynamicResource 确定按钮}"
+                                           TagString="我要打印" />
+    </StackPanel>
+
+</frameworkBase:ViewsBase>

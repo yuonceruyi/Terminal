@@ -1,0 +1,67 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>  
+<#@ import namespace="System.Collections.Generic" #>  
+<# 
+Dictionary<string, List<string>> tables= new Dictionary<string, List<string>>
+{
+	{"BASEINFO",new List<string>{"CAOZUOYDM","CAOZUOYXM","CAOZUORQ","XITONGBS","FENYUANDM","JIGOUDM","JESHOUJGDM","ZHONGDUANJBH","ZHONGDUANLSH","MessageID",}},
+	{"OUTMSG",new List<string>{"ERRNO","ERRMSG","ZHONGDUANJBH","ZHONGDUANLSH",}},
+	{"PAIBANMX",new List<string>{"KESHIDM","KESHIMC","JIUZHENDD","KESHIJS","YISHENGDM","YISHENGXM","YISHENGZC","YISHENGTC","YISHENGJS","SHANGWUHYZS","SHANGWUHYSYS","XIAWUHYZS","XIAWUHYSYS","ZHENLIAOJSF","ZHENLIAOF","PAIBANRQ","GUAHAOBC","GUAHAOLB"}},
+	{"YISHENGXX",new List<string>{"YISHENGDM","YISHENGXM","KESHIDM","KESHIMC","YISHENGZC","YISHENGTC","YISHENGJS"}},
+	{"JIBINGXX",new List<string>{"JIBINGDM","JIBINGICD","JIBINGMC","JIBINGMS"}},
+	{"FEIYONGXX",new List<string>{"CHUFANGLX","CHUFANGXH","MINGXIXH","FEIYONGLX","XIANGMUXH","XIANGMUCDDM","XIANGMUMC","XIANGMUGL","XIANGMUGLMC","XIANGMUGG","XIANGMUJX","XIANGMUDW","XIANGMUCDMC","ZHONGCAOYTS","DANJIA","SHULIANG","JINE","KAIDANKSDM","KAIDANKSMC","KAIDANYSDM","KAIDANYSXM"}},
+    {"HAOYUANXX",new List<string>{"RIQI","GUAHAOBC","GUAHAOLB","KESHIDM","YISHENGDM","GUAHAOXH","JIUZHENSJ","YIZHOUPBID","DANGTIANPBID"}},
+	{"MENZHENFYXX",new List<string>{"CHUFANGLX","CHUFANGXH","MINGXIXH","FEIYONGLX","XIANGMUXH","XIANGMUCDDM","XIANGMUMC","XIANGMUGL","XIANGMUGLMC","XIANGMUGG","XIANGMUJX","XIANGMUDW","XIANGMUCDMC","ZHONGCAOYTS","BAOZHUANGDW","ZUIXIAOJLDW","DANCIYL","YONGLIANGDW","MEITIANCS","YONGYAOTS","DANFUFBZ","DANJIA","SHULIANG","JINE","KAIDANKSDM","KAIDANKSMC","KAIDANYSDM","KAIDANYSXM"}},
+};
+#>
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Serialization;
+
+namespace YuanTu.XiaoShanArea.CYHIS.DLL
+{
+ <# foreach (KeyValuePair<string, List<string>> kvp in tables){
+#>  
+	[XmlType("<#=kvp.Key #>")]
+	public class <#=kvp.Key #>
+	{
+		private string myName =  "<#=kvp.Key #>";
+
+<#		foreach (string fname in kvp.Value){
+		if(fname.Contains(":")){ 
+			int n=fname.IndexOf(":");
+#>
+		public List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>;
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+		public <#=fname.Substring(0,n) #> <#=fname.Substring(n+1)#>;
+<#      }else{#>
+		public string <#= fname #>;
+<#      }}#>
+
+		public string GetMyName()
+		{
+			return myName;
+		}
+		public override string ToString()
+		{
+			return "NAME:" + myName + "\n"
+<#      foreach (string fname in kvp.Value){
+			if(fname.Contains(":")){ 
+				int n=fname.IndexOf(":");
+#>
+				+ "List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>"+"\n"
+				+ <#=fname.Substring(n+1)#>.Aggregate("",(s,one)=>s+=one.ToString())
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+				+ "<#=fname.Substring(0,n) #>" + <#=fname.Substring(n+1)#>.ToString()+"\n"
+<#      }else{#>
+				+ "<#=fname #>:" + <#=fname #> + "\n"
+<#      }}#>            ;
+		}
+	}
+<#}#>}

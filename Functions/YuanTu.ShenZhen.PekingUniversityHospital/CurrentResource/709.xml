@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--社保配置-->
+  <SheBao>
+    <!--是否开启社保密码输入-->
+    <OpenSheBaoPassword>0</OpenSheBaoPassword>
+    <yljgbm>医疗机构编码</yljgbm>
+    <mm></mm>
+    <czybm>操作员编码</czybm>
+    <czyxm>操作员姓名</czyxm>
+    <url>http://ngrok.yuantutech.com:29219/frontgatewayyb/gateway.do</url>
+  </SheBao>
+
+  <AccountingAddress>
+    <!--交易记账地址-->
+    <jyjz>http://ngrok.yuantutech.com:29219/frontgatewayserial/trade/infoInsert.do</jyjz>
+    <!--<jyjz>http://172.16.202.180:8080/frontgatewayserial/trade/infoInsert.do</jyjz>-->
+    <!--医保记账地址-->
+    <ybjz>http://ngrok.yuantutech.com:29219/frontgatewayserial/trade/ybInfoInsert.do</ybjz>
+    <!--<ybjz>http://172.16.202.180:8080/frontgatewayserial/trade/ybInfoInsert.do</ybjz>-->
+  </AccountingAddress>
+
+  <!-- 打印机设置 -->
+  <Print>
+    <!--是否关闭打印机的缺纸检测-->
+    <CloseChecked>0</CloseChecked>
+  </Print>
+
+  <!--银联相关的设置-->
+  <Pos>
+    <IP>168.33.48.35</IP>
+    <Port>7788</Port>
+    <TPDU>6000040000</TPDU>
+    <Head>603102000000</Head>
+    <TerminalId>sd000014</TerminalId>
+    <MerchantId>302440380627004</MerchantId>
+  </Pos>
+</root>

@@ -1,0 +1,620 @@
+﻿<UserControl x:Class="YuanTu.Default.Component.Auth.Dialog.Views.FullInputBoard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.Default.Component.Auth.Dialog.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+             xmlns:converters="clr-namespace:YuanTu.Core.Converters;assembly=YuanTu.Core"
+             VerticalAlignment="Bottom"
+             d:DesignWidth="1280"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Color x:Key="数字按钮颜色2">#f9f8f8</Color>
+        <Color x:Key="数字按钮颜色1">#ececec</Color>
+        <SolidColorBrush x:Key="数字按钮文本颜色">#717171</SolidColorBrush>
+        <SolidColorBrush x:Key="数字按钮背景颜色" Color="#ececec" />
+        <Style x:Key="数字按钮边框" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{StaticResource 数字按钮背景颜色}" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Style.Triggers>
+
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                            <ColorAnimation Duration="0:0:0.2"
+                                            From="{StaticResource 数字按钮颜色1}"
+                                            To="{StaticResource 数字按钮颜色2}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard x:Name="gl">
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+
+                            <ColorAnimation Duration="0:0:0.2"
+                                            From="{StaticResource 数字按钮颜色2}"
+                                            To="{StaticResource 数字按钮颜色1}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <!--<Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource 主页返回按钮失效颜色}" />
+                </Trigger>-->
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="数字按钮文本" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Foreground" Value="{StaticResource 数字按钮文本颜色}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="23" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="数字按钮" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="74" />
+            <Setter Property="Height" Value="74" />
+            <Setter Property="Margin" Value="6" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Style="{StaticResource 数字按钮边框}">
+                            <TextBlock Margin="2" Style="{StaticResource 数字按钮文本}">
+                                <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="候选词按钮"
+               BasedOn="{StaticResource 数字按钮}"
+               TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Style="{StaticResource 数字按钮边框}">
+                            <TextBlock Margin="2"
+                                       Foreground="#469AE4"
+                                       Style="{StaticResource 数字按钮文本}">
+                                <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="候选词翻页"
+               BasedOn="{StaticResource 数字按钮}"
+               TargetType="Button">
+            <Setter Property="Margin" Value="6 0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Style="{StaticResource 数字按钮边框}">
+                            <TextBlock Margin="2"
+                                       Foreground="#469AE4"
+                                       Style="{StaticResource 数字按钮文本}">
+                                <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="关闭按钮边框" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#e67671" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="#e67671" />
+
+        </Style>
+        <Style x:Key="关闭按钮文本" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="#ffffff" />
+        </Style>
+        <Style x:Key="关闭按钮" TargetType="Button">
+            <Setter Property="Width" Value="79" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Style="{StaticResource 关闭按钮边框}">
+                            <TextBlock Style="{StaticResource 关闭按钮文本}">
+                                <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Name="FrameGrid">
+        <Border Background="Black" Opacity="0.5" />
+        <Grid Margin="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <userControls:SimpleButton x:Name="ButtonChangeInput"
+                            Grid.Row="0"
+                            Margin="6,6,6,6"
+                            HorizontalAlignment="Left"
+                            Click="ChangeInput_Click"
+                            TagString="输入法切换"
+                            Style="{StaticResource 数字按钮}">
+                <Grid>
+                    <Grid x:Name="HandInputIcon">
+                        <Path Width="35"
+                                      Height="35"
+                                      Margin="0,0,0,0"
+                                      Data="M0,3.2089886L19.168737,3.2089886 15.147798,7.2280041 4.0189863,7.2280041 4.0189863,27.465017 24.254725,27.465017 24.254725,17.367994 28.273588,13.349011 28.273588,31.484003 0,31.484003z M24.836626,2.3110081L29.688608,7.1619941 15.496791,21.354998 9.8268881,22.000994 10.64487,16.501997z M28.395659,2.096187E-06C29.287613,-0.0010051574 30.209597,0.36099463 30.923576,1.0749843 32.268528,2.4189795 32.364597,4.5019885 31.140614,5.7269956L26.271664,0.85898079C26.845631,0.2850058,27.608681,0.00097848657,28.395659,2.096187E-06z"
+                                      Fill="{StaticResource 数字按钮文本颜色}"
+                                      RenderTransformOrigin="0.5,0.5"
+                                      Stretch="Uniform">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <TransformGroup.Children>
+                                        <RotateTransform Angle="0" />
+                                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                                    </TransformGroup.Children>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                    <Grid x:Name="PinInputIcon">
+
+                        <Path Width="35"
+                                      Height="35"
+                                      Margin="0,0,0,0"
+                                      Data="M27.5,17C27.200012,17,27,17.200012,27,17.400024L27,18.900024C27,19.100006,27.200012,19.300018,27.5,19.300018L29.400024,19.300018C29.700012,19.300018,29.900024,19.100006,29.900024,18.900024L29.900024,17.400024C29.900024,17.200012,29.700012,17,29.400024,17z M8.3000488,17C8,17,7.8000488,17.200012,7.8000488,17.400024L7.8000488,18.900024C7.8000488,19.100006,8,19.300018,8.3000488,19.300018L13.100037,19.300018 15,19.300018 17.900024,19.300018 19.800049,19.300018 22.700012,19.300018 24.300049,19.300018 24.5,19.300018C24.800049,19.300018,25,19.100006,25,18.900024L25,17.400024C25,17.200012,24.800049,17,24.5,17L24.300049,17 22.700012,17 19.800049,17 17.900024,17 15,17 13.100037,17z M3.5,17C3.2000122,17,3,17.200012,3,17.400024L3,18.900024C3,19.100006,3.2000122,19.300018,3.5,19.300018L5.4000244,19.300018C5.7000122,19.300018,5.9000244,19.100006,5.9000244,18.900024L5.9000244,17.400024C5.9000244,17.200012,5.7000122,17,5.4000244,17z M27.5,13C27.200012,13,27,13.200012,27,13.400024L27,14.900024C27,15.100006,27.200012,15.300018,27.5,15.300018L29.400024,15.300018C29.700012,15.300018,29.900024,15.100006,29.900024,14.900024L29.900024,13.400024C29.900024,13.200012,29.700012,13,29.400024,13z M22.700012,13C22.400024,13,22.200012,13.200012,22.200012,13.400024L22.200012,14.900024C22.200012,15.100006,22.400024,15.300018,22.700012,15.300018L24.600037,15.300018C24.900024,15.300018,25.100037,15.100006,25.100037,14.900024L25.100037,13.400024C25.100037,13.200012,24.900024,13,24.600037,13z M17.900024,13C17.600037,13,17.400024,13.200012,17.400024,13.400024L17.400024,14.900024C17.400024,15.100006,17.600037,15.300018,17.900024,15.300018L19.800049,15.300018C20.100037,15.300018,20.300049,15.100006,20.300049,14.900024L20.300049,13.400024C20.300049,13.200012,20.100037,13,19.800049,13z M13.100037,13C12.800049,13,12.600037,13.200012,12.600037,13.400024L12.600037,14.900024C12.600037,15.100006,12.800049,15.300018,13.100037,15.300018L15,15.300018C15.300049,15.300018,15.5,15.100006,15.5,14.900024L15.5,13.400024C15.5,13.200012,15.300049,13,15,13z M8.3000488,13C8,13,7.8000488,13.200012,7.8000488,13.400024L7.8000488,14.900024C7.8000488,15.100006,8,15.300018,8.3000488,15.300018L10.200012,15.300018C10.5,15.300018,10.700012,15.100006,10.700012,14.900024L10.700012,13.400024C10.700012,13.200012,10.5,13,10.200012,13z M3.5,13C3.2000122,13,3,13.200012,3,13.400024L3,14.900024C3,15.100006,3.2000122,15.300018,3.5,15.300018L5.4000244,15.300018C5.7000122,15.300018,5.9000244,15.100006,5.9000244,14.900024L5.9000244,13.400024C5.9000244,13.200012,5.7000122,13,5.4000244,13z M22.700012,9C22.400024,9,22.200012,9.2000122,22.200012,9.4000244L22.200012,11C22.200012,11.200012,22.400024,11.400024,22.700012,11.400024L24.600037,11.400024C24.900024,11.400024,25.100037,11.200012,25.100037,11L25.100037,9.5C25.100037,9.3000183,24.900024,9.1000061,24.600037,9.1000061L22.700012,9.1000061z M17.900024,9C17.600037,9,17.400024,9.2000122,17.400024,9.4000244L17.400024,11C17.400024,11.200012,17.600037,11.400024,17.900024,11.400024L19.800049,11.400024C20.100037,11.400024,20.300049,11.200012,20.300049,11L20.300049,9.5C20.300049,9.3000183,20.100037,9.1000061,19.800049,9.1000061L17.900024,9.1000061z M13.100037,9C12.800049,9,12.600037,9.2000122,12.600037,9.4000244L12.600037,11C12.600037,11.200012,12.800049,11.400024,13.100037,11.400024L15,11.400024C15.300049,11.400024,15.5,11.200012,15.5,11L15.5,9.5C15.5,9.2000122,15.300049,9,15,9z M8.3000488,9C8,9,7.8000488,9.2000122,7.8000488,9.5L7.8000488,11C7.8000488,11.200012,8,11.400024,8.3000488,11.400024L10.200012,11.400024C10.5,11.400024,10.700012,11.200012,10.700012,11L10.700012,9.5C10.700012,9.3000183,10.5,9.1000061,10.200012,9.1000061L8.3000488,9.1000061z M3.5,9C3.2000122,9,3,9.2000122,3,9.5L3,11C3,11.200012,3.2000122,11.400024,3.5,11.400024L5.4000244,11.400024C5.7000122,11.400024,5.9000244,11.200012,5.9000244,11L5.9000244,9.5C5.9000244,9.2000122,5.7000122,9,5.4000244,9z M22,0C22.600037,0 23.100037,0.20001221 22.600037,0.70001221 21.400024,1.9000244 19.400024,2.4000244 17.800049,3.2000122 17.300049,3.4000244 16.400024,3.7000122 16.700012,4.3000183 17.100037,5.2000122 18.5,5.7000122 19.400024,6.1000061 19.700012,6.3000183 19.700012,6.5 19.5,6.7000122L29,6.7000122C30.600037,6.7000122,32,7.8000183,32,9.1000061L32,19.100006C32,20.400024,30.700012,21.5,29,21.5L2.9000244,21.5C1.3000488,21.5,0,20.400024,0,19.100006L0,9C0,7.7000122,1.3000488,6.6000061,2.9000244,6.6000061L16.800049,6.6000061C15.200012,5.8000183 13.300049,4.5 15.200012,3.1000061 16.900024,1.9000244 19.300049,1.7000122 20.700012,0.30001831 21,0.1000061 21.600037,0 22,0z"
+                                      Fill="{StaticResource 数字按钮文本颜色}"
+                                      RenderTransformOrigin="0.5,0.5"
+                                      Stretch="Uniform">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <TransformGroup.Children>
+                                        <RotateTransform Angle="0" />
+                                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                                    </TransformGroup.Children>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                </Grid>
+            </userControls:SimpleButton>
+            <TextBlock Grid.Row="0"
+                       Margin="80,15,15,15"
+                       Foreground="White"
+                       TextAlignment="Center">
+                <TextBlock x:Name="hz"
+                           FontSize="23"
+                           Foreground="#ffffff" />
+                <TextBlock x:Name="py"
+                           FontSize="23"
+                           Foreground="#ffffff"
+                           TextDecorations="Underline" />
+            </TextBlock>
+
+
+            <userControls:SimpleButton Grid.Row="0"
+                                       Margin="0,14,14,0"
+                                       Click="Close_Click"
+                                       Content="关闭"
+                                       Style="{StaticResource 关闭按钮}"
+                                       TagString="键盘关闭" />
+
+            <Grid Grid.Row="1">
+                <Grid Name="Grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Name="StackPanel0"
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                        <Button x:Name="ButtonSummaryPreview"
+                                Click="TempWordsLast_Click"
+                                Style="{StaticResource 候选词翻页}">
+                            <Polygon Margin="20"
+                                     Points="0,50 100,0 100,100"
+                                     Stretch="Fill"
+                                     Stroke="White"
+                                     StrokeThickness="2">
+                                <Polygon.Fill>
+                                    <SolidColorBrush Opacity="0.8" Color="Black" />
+                                </Polygon.Fill>
+                            </Polygon>
+                        </Button>
+                        <ItemsControl x:Name="CatalogList"
+                                      Width="688"
+                                      Margin="0"
+                                      Background="Transparent">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Margin="0"
+                                                HorizontalAlignment="Center"
+                                                Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Click="TempWords_Click"
+                                            Content="{Binding Key}"
+                                            Style="{StaticResource 候选词按钮}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button x:Name="ButtonSummaryNext"
+                                Click="TempWordsNext_Click"
+                                Style="{StaticResource 候选词翻页}">
+                            <Polygon Margin="20"
+                                     Points="0,0 100,50 0,100"
+                                     Stretch="Fill"
+                                     Stroke="White"
+                                     StrokeThickness="2">
+                                <Polygon.Fill>
+                                    <SolidColorBrush Opacity="0.8" Color="Black" />
+                                </Polygon.Fill>
+                            </Polygon>
+                        </Button>
+
+                    </StackPanel>
+
+                    <Grid Name="HandInputGrid" Height="360"   Grid.Row="1"  Visibility="{Binding IsPinInput,Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=test}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsExpanded}" Value="true">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard  >
+                                                    <DoubleAnimation From="320"
+                                                                     To="600"
+                                                                     Duration="0:0:1" 
+                                                                     Storyboard.TargetProperty="Height"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation From="600"
+                                                                     To="320"
+                                                                     Duration="0:0:1" 
+                                                                     Storyboard.TargetProperty="Height"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Border x:Name="WritingBorder"
+                                Grid.Column="1"
+                            Background="#ffffff"
+                            CornerRadius="5">
+
+                            <InkCanvas x:Name="WritingCanvas"
+                                   Focusable="False"
+                                   StrokeCollected="WritingCanvasOnStrokeCollected">
+
+                                <InkCanvas.Background>
+                                    <VisualBrush Stretch="None">
+                                        <VisualBrush.Visual>
+
+                                            <TextBlock x:Name="HandInputTips"
+                                                   FontSize="40"
+                                                   Foreground="#d8d8d8">
+                                            请在此处 手写区域 进行书写
+                                            </TextBlock>
+
+
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </InkCanvas.Background>
+                                <InkCanvas.DefaultDrawingAttributes>
+                                    <DrawingAttributes Width="5" Height="5" />
+                                </InkCanvas.DefaultDrawingAttributes>
+                            </InkCanvas>
+                        </Border>
+                        <StackPanel x:Name="OperationPanel"
+                            Grid.Column="2"
+                                VerticalAlignment="Center">
+                            <Button x:Name="StretchButton"
+                            Margin="0,5,80,5"
+                            HorizontalAlignment="Right"
+                            Click="StretchButton_Click"
+                           Style="{StaticResource 数字按钮}" Content="扩大">
+                            </Button>
+                            <Button x:Name="ClearButton"
+                            Margin="0,5,80,5"
+                            HorizontalAlignment="Right"
+                            Click="ClearButton_Click"
+                            Style="{StaticResource 数字按钮}">
+                                <Grid>
+                                    <Polygon Points="0,10 10,0 27,0 29,1 30,3 30,17 29,19 27,20  10,20 0,10"
+                                     Stroke="{StaticResource 数字按钮文本颜色}"
+                                     StrokeThickness="2" />
+
+                                    <Line Stroke="{StaticResource 数字按钮文本颜色}"
+                                  StrokeThickness="2"
+                                  X1="15"
+                                  X2="21"
+                                  Y1="7"
+                                  Y2="13" />
+                                    <Line Stroke="{StaticResource 数字按钮文本颜色}"
+                                  StrokeThickness="2"
+                                  X1="21"
+                                  X2="15"
+                                  Y1="7"
+                                  Y2="13" />
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Visibility="{Binding IsPinInput,Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Name="StackPanel4"
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="1">
+                                1
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="2">
+                                2
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="3">
+                                3
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="4">
+                                4
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="5">
+                                5
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="6">
+                                6
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="7">
+                                7
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="8">
+                                8
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="9">
+                                9
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="0">
+                                0
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Name="StackPanel1"
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="q">
+                                Q
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="w">
+                                W
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="e">
+                                E
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="r">
+                                R
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="t">
+                                T
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="y">
+                                Y
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="u">
+                                U
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="i">
+                                I
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="o">
+                                O
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="p">
+                                P
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Name="StackPanel2"
+                                Grid.Row="2"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="a">
+                                A
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="s">
+                                S
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="d">
+                                D
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="f">
+                                F
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="g">
+                                G
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="h">
+                                H
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="j">
+                                J
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="k">
+                                k
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="l">
+                                L
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Name="StackPanel3"
+                                Grid.Row="3"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+                            <!--<Button Margin="6,6,26,6"
+                                Click="ButtonClick"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="shift">
+                            A/a
+                        </Button>-->
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="z">
+                                Z
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="x">
+                                X
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="c">
+                                C
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="v">
+                                V
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="b">
+                                B
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="n">
+                                N
+                            </Button>
+                            <Button Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="m">
+                                M
+                            </Button>
+                            <Button Margin="26,6,6,6"
+                                Click="CharKey_Click"
+                                Style="{StaticResource 数字按钮}"
+                                Tag="delete">
+
+                                <Grid>
+                                    <Polygon Points="0,10 10,0 27,0 29,1 30,3 30,17 29,19 27,20  10,20 0,10"
+                                         Stroke="{StaticResource 数字按钮文本颜色}"
+                                         StrokeThickness="2" />
+
+                                    <Line Stroke="{StaticResource 数字按钮文本颜色}"
+                                      StrokeThickness="2"
+                                      X1="15"
+                                      X2="21"
+                                      Y1="7"
+                                      Y2="13" />
+                                    <Line Stroke="{StaticResource 数字按钮文本颜色}"
+                                      StrokeThickness="2"
+                                      X1="21"
+                                      X2="15"
+                                      Y1="7"
+                                      Y2="13" />
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

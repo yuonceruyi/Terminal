@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!-- 办卡时录入指纹 -->
+  <Biometric>1</Biometric>
+  <PayCostRecordDay>30</PayCostRecordDay>
+    <SendCardBySiCard>1</SendCardBySiCard>
+    <PrintSpaceLine>4</PrintSpaceLine>
+    <AdExeName>AD2.exe</AdExeName>
+    <AdExeArgs>AD</AdExeArgs>
+    <ReSendCost>5</ReSendCost>
+
+  <Functions>
+    <补卡>
+      <Name>自助补卡</Name>
+      <Order>9</Order>
+      <Visabled>1</Visabled>
+      <IsEnabled>1</IsEnabled>
+      <ImageName>图标_建档发卡</ImageName>
+    </补卡>
+  </Functions>
+</root>

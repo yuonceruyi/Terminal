@@ -1,0 +1,82 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.YanTaiYDYY.Component.Auth.Views.InputIDView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:Converters="clr-namespace:YuanTu.Core.Converters;assembly=YuanTu.Core"
+                         xmlns:UserControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <frameworkBase:ViewsBase.Resources>
+        <Converters:IDNoFormatConverter x:Key="IDNoFormatConverter" />
+
+
+    </frameworkBase:ViewsBase.Resources>
+
+
+    <Grid>
+        <ContentControl Width="684"
+                        Height="620"
+                        Margin="0 70 0 0"
+                        VerticalAlignment="Top"
+                        Style="{DynamicResource 提示卡片}">
+            <StackPanel Margin="0" Orientation="Vertical">
+                <UserControls:TitleLabel Width="500"
+                                         Margin="10"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         TitleColumnWidth ="2*"
+                                         ValueColumnWidth="3*">
+                    <UserControls:TitleLabel.Title>
+                        <TextBlock Style="{StaticResource 提示卡片Header}" Text="{Binding IDNoTip}" />
+                    </UserControls:TitleLabel.Title>
+                    <UserControls:TitleLabel.Value>
+                        <Border Width="300"
+                                HorizontalAlignment="Left"
+                                BorderBrush="#717171"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                            <TextBlock Width="300"
+                                       Height="50"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontFamily="微软雅黑"
+                                       FontSize="23"
+                                       Padding="4"
+                                       Text="{Binding IDNo,
+                                                      Converter={StaticResource IDNoFormatConverter}}" />
+                        </Border>
+                    </UserControls:TitleLabel.Value>
+                </UserControls:TitleLabel>
+                <UserControls:KeyPanel x:Name="keyPanel"
+                                       Margin="10"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       IDMode="IdX"
+                                       MaxLength="18"
+                                       Text="{Binding IDNo,
+                                                      Mode=TwoWay}" />
+                <UserControls:SimpleButton Margin="10"
+                                           HorizontalAlignment="Center"
+                                           Command="{Binding ConfirmCommand}"
+                                           Content="确定"
+                                           Style="{StaticResource 确定按钮}"
+                                           TagString="确定" />
+            </StackPanel>
+        </ContentControl>
+        <UserControls:SimpleButton Margin="0,0,10,10"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Bottom"
+                                   Command="{Binding ReadIDCommand}"
+                                   Content="刷身份证"
+                                   Style="{DynamicResource 图文卡片}"
+                                   TagString="刷身份证"
+                                   Visibility="Visible" />
+
+    </Grid>
+</frameworkBase:ViewsBase>
+

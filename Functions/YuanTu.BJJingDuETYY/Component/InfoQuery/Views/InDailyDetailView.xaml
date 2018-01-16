@@ -1,0 +1,211 @@
+﻿<frameworkBase:ViewsBase
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"             
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+             xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="YuanTu.BJJingDuETYY.Component.InfoQuery.Views.InDailyDetailView"
+             d:DesignHeight="800"
+             d:DesignWidth="950"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+    <Grid>
+        <ContentControl Width="950"
+                        Height="800"
+                        Margin="0">
+            <FlowDocumentScrollViewer>
+                <FlowDocument x:Name="doc" 
+                              PageHeight="800" 
+                              PageWidth="950"
+                              Background="White">
+                    <FlowDocument.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="FontSize" Value="8pt" />
+                            <Setter Property="FontFamily" Value="楷体" />
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                        <Style TargetType="{x:Type TableCell}">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="LineHeight" Value="8" />
+                            <Setter Property="BorderThickness" Value="0.5" />
+                            <!--<Setter Property="Padding" Value="4,4" />-->
+                        </Style>
+                        <Style TargetType="{x:Type Table}">
+                            <!--<Setter Property="BorderBrush" Value="Black" />-->
+                            <Setter Property="Margin" Value="40,0" />
+                            <Setter Property="CellSpacing" Value="0" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Style>
+                        <System:String x:Key="医院名称">医院名称</System:String>
+                        <System:String x:Key="首行">首行</System:String>
+                        <System:String x:Key="友情提示2">友情提示2</System:String>
+                        <System:String x:Key="日清单费用合计">日清单费用合计</System:String>
+                        <System:String x:Key="截止到目前总费用">截止到目前总费用</System:String>
+                    </FlowDocument.Resources>
+                    <Table x:Name="Caption">
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph FontWeight="Bold" FontSize="24" FontFamily="楷体" TextAlignment="Center">
+                                        <Run Text="{DynamicResource 医院名称}"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Table x:Name="Header">
+                        <Table.Resources>
+                            <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                                <Setter Property="FontSize" Value="10.6666666666667"/>
+                                <Setter Property="TextAlignment" Value="Left"/>
+                                <Setter Property="FontFamily" Value="楷体" />
+                                <Setter Property="Margin" Value="1"/>
+                            </Style>
+                        </Table.Resources>
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="{DynamicResource 首行}"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Table x:Name="Body" BorderThickness="0,0,0,0">
+                        <Table.Resources>
+                            <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                                <Setter Property="FontSize" Value="10.6666666666667"/>
+                                <Setter Property="FontFamily" Value="楷体" />
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="1"/>
+                            </Style>
+                        </Table.Resources>
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell ColumnSpan="4">
+                                    <Paragraph>
+                                        <Run Text="项目名称"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="2">
+                                    <Paragraph>
+                                        <Run Text="规格"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="单位"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="数量"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="单价"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="金额"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Table x:Name="detail" BorderThickness="0,0,0,0">
+                        <Table.Resources>
+                            <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                                <Setter Property="FontSize" Value="10.6666666666667"/>
+                                <Setter Property="FontFamily" Value="楷体" />
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="1"/>
+                            </Style>
+                        </Table.Resources>
+                        <TableRowGroup x:Name="details">
+                            <TableRow>
+                                <TableCell ColumnSpan="4">
+                                    <Paragraph>
+                                        <Run Text="项目名称"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="2">
+                                    <Paragraph>
+                                        <Run Text="规格"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="单位"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="数量"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="单价"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="1">
+                                    <Paragraph>
+                                        <Run Text="金额"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Table x:Name="Footer" BorderThickness="0,0,0,0" TextAlignment="Center">
+                        <Table.Resources>
+                            <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                                <Setter Property="FontSize" Value="10.6666666666667"/>
+                                <Setter Property="FontFamily" Value="楷体" />
+                                <Setter Property="TextAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="1"/>
+                            </Style>
+                        </Table.Resources>
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell ColumnSpan="4">
+                                    <Paragraph>
+                                        <Run Text="日清单费用合计: "/>
+                                        <Run Text=" "/>
+                                        <Run Text="{DynamicResource 日清单费用合计}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell ColumnSpan="4">
+                                    <Paragraph>
+                                        <Run Text="截止到目前总费用: "/>
+                                        <Run Text=" "/>
+                                        <Run Text="{DynamicResource 截止到目前总费用}"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell ColumnSpan="8">
+                                    <Paragraph>
+                                        <Run Text="友情提示：1、本清单仅供参考，具体以出院结算为准"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell ColumnSpan="8">
+                                    <Paragraph>
+                                        <Run Text="{DynamicResource 友情提示2}"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                </FlowDocument>
+            </FlowDocumentScrollViewer >
+        </ContentControl>
+    </Grid>
+</frameworkBase:ViewsBase>

@@ -1,0 +1,59 @@
+﻿ <#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+var dictionary = new Dictionary<string,List<string>>()
+{
+{"获取参保人信息结果",new List<string>(){"个人基本信息","医疗身份验证结果","工伤身份验证结果","生育身份验证结果","预留位"}},
+{"交易确认结果",new List<string>(){"交易流水号"}},
+{"交易结果查询结果",new List<string>(){"用户交易是否成功","交易时间","交易结算流水号","交易处于阶段","该用户交易出口参数","基金分段信息结构体","费用汇总信息结构体"}},
+{"医保预结算结果",new List<string>(){"超限提示标记","规定病种标志","结算时间","计算结果信息","基金分段信息结构体","超限明细列表","自负比例不对列表"}},
+{"医保结算结果",new List<string>(){"超限提示标记","规定病种标志","结算时间","结算流水号","计算结果信息","基金分段信息结构体","超限明细列表","自负比例不对列表"}}
+
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Text;
+namespace YuanTu.TaiZhouCentralHospital.HealthInsurance.Response
+{
+
+<# foreach (var kvp in dictionary) { #>
+    public class Res<#= kvp.Key #>:ResBase
+    {
+<#      foreach (var m in kvp.Value) {
+            var tmp = m.Split('^');
+			var obs = tmp[0].StartsWith("[")&&tmp[0].EndsWith("]");
+			tmp[0] = tmp[0].Trim(new[] {'[', ']'});
+            var s = tmp[0];
+#>
+<#          if (tmp.Length > 1) { #>
+        /// <summary>
+        /// <#= tmp[1] #>
+        /// </summary>
+<#          } #>
+<#if (obs){ #>
+        [Obsolete]
+<# } #>
+<#          if(s.Contains(':')){ 
+                int n = s.IndexOf(':');
+#>
+        public List<<#= s.Substring(0, n) #>> <#= s.Substring(n + 1) #> { get; set; }
+<#          }else if(s.Contains('|')) { 
+                int n = s.IndexOf('|');
+#>
+        public <#= s.Substring(0, n) #> <#= s.Substring(n + 1) #> { get; set; }
+<#          } else { #>
+        public string <#= s #> { get; set; }
+<#          } #>
+<#      } #>
+       
+
+    }
+
+<#  } #>
+
+}

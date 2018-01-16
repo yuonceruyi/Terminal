@@ -1,0 +1,173 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Part.Views.NavigateBarView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:prism="http://prismlibrary.com/"
+                         xmlns:converters="clr-namespace:YuanTu.Core.Converters;assembly=YuanTu.Core"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.Default.Part.ViewModels;assembly=YuanTu.Default"
+                         xmlns:local="clr-namespace:YuanTu.Default.House.Part.Views"
+                         xmlns:viewModelsHouse="clr-namespace:YuanTu.Default.House.Part.ViewModels"
+                         xmlns:converters1="clr-namespace:YuanTu.Default.House.Converters"
+                         d:DesignHeight="600"
+                         d:DesignWidth="360"
+                         d:DataContext="{d:DesignInstance viewModelsHouse:NavigateBarViewModel}"
+                         prism:ViewModelLocator.AutoWireViewModel="True"
+                         Background="Transparent"
+                         mc:Ignorable="d">
+    <frameworkBase:ViewsBase.Resources>
+        <ResourceDictionary>
+            <converters:SameContextConverter x:Key="SameContextConverter" />
+            <converters:NotNullConverter x:Key="NotNullConverter" />
+            <converters1:GenderToIconConverter x:Key="GenderToIconConverter" />
+            <converters1:ObjectToVisibleConverter x:Key="ObjectToVisibleConverter"/>
+            <Style x:Key="MainHeader" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="MainTitle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="30" />
+            </Style>
+        </ResourceDictionary>
+    </frameworkBase:ViewsBase.Resources>
+    <Grid>
+        <Grid Margin="60 0 0 0">
+            <ItemsControl ItemsSource="{Binding Items}">
+                <ItemsControl.Template>
+                    <ControlTemplate>
+                        <Border x:Name="Item"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="0">
+                            <Border.Background>
+                                <SolidColorBrush />
+                            </Border.Background>
+                            <DockPanel>
+                                <Grid DockPanel.Dock="Top" Height="80" Margin="0,5"
+                                      Visibility="{Binding Info, Converter={StaticResource ObjectToVisibleConverter}}">
+                                    <Border Background="White"
+                                            CornerRadius="5"
+                                            Opacity="0.2" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="50" Height="50"
+                                               Source="{Binding Info.Sex, Converter={StaticResource GenderToIconConverter}}"
+                                               Margin="16,0" />
+                                        <TextBlock VerticalAlignment="Center"
+                                                   Foreground="White"
+                                                   Style="{StaticResource MainHeader}"
+                                                   xml:space="preserve"><Run Text="{Binding Info.Name}" />  <Run FontSize="20" Text="{Binding Info.Sex}" />  <Run FontSize="20" Text="{Binding Info.Age}" /><TextBlock FontSize="20" Text="岁" Visibility="{Binding Info.Age,Converter={StaticResource NotNullToVisibilityConverter}}"/></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid>
+                                    <Border Background="#FFFFFF" Opacity="0.2" CornerRadius="5" />
+                                    <ItemsPresenter />
+                                </Grid>
+                            </DockPanel>
+                        </Border>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Margin="0" Columns="1" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <userControls:SimpleButton
+                            TagString="{Binding Title, Mode=OneWay}"
+                            Background="Transparent"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor ,AncestorType=ItemsControl},Path=DataContext.NavClickCommand}"
+                            CommandParameter="{Binding}">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <!-- 高亮背景 -->
+                                        <Grid>
+                                            <Grid.Style>
+                                                <Style TargetType="Grid">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Value="true">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <DataTrigger.Binding>
+                                                                <MultiBinding
+                                                                    Converter="{StaticResource SameContextConverter}">
+                                                                    <Binding Mode="OneWay"
+                                                                             Path="DataContext.CurrentItem"
+                                                                             RelativeSource="{RelativeSource FindAncestor,
+                                                                                                 AncestorType=local:NavigateBarView}" />
+                                                                    <Binding />
+                                                                </MultiBinding>
+                                                            </DataTrigger.Binding>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Grid.Style>
+                                            <Border Background="#FFFFFF" CornerRadius="5" />
+                                            <Rectangle Fill="#FFFFFF" Width="20" Height="20"
+                                                       Margin="-10,0"
+                                                       HorizontalAlignment="Right"
+                                                       RenderTransformOrigin="0.5 0.5">
+                                                <Rectangle.RenderTransform>
+                                                    <RotateTransform Angle="45" />
+                                                </Rectangle.RenderTransform>
+                                            </Rectangle>
+                                        </Grid>
+                                        <Grid>
+                                            <Border Background="#FFFFFF" CornerRadius="5" Opacity="0.01" />
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <Image Width="50" Height="50" Source="{Binding Tag}" Margin="20,0" />
+                                                <TextBlock Text="{Binding Title}" VerticalAlignment="Center">
+                                                    <TextBlock.Style>
+                                                        <Style BasedOn="{StaticResource MainTitle}"
+                                                               TargetType="TextBlock">
+                                                            <Setter Property="Foreground" Value="#FFFFFF" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Value="true">
+                                                                    <Setter Property="Foreground" Value="#333333" />
+                                                                    <DataTrigger.Binding>
+                                                                        <MultiBinding
+                                                                            Converter="{StaticResource SameContextConverter}">
+                                                                            <Binding Mode="OneWay"
+                                                                                     Path="DataContext.CurrentItem"
+                                                                                     RelativeSource="{RelativeSource FindAncestor,
+                                                                                                     AncestorType=local:NavigateBarView}" />
+                                                                            <Binding />
+                                                                        </MultiBinding>
+                                                                    </DataTrigger.Binding>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <Image
+                                                Source="{Binding DataContext.DoneUri, RelativeSource={RelativeSource FindAncestor, AncestorType=local:NavigateBarView}}"
+                                                VerticalAlignment="Top" HorizontalAlignment="Right" Width="35"
+                                                Height="35">
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding Content, Converter={StaticResource NotNullConverter}}"
+                                                                Value="false">
+                                                                <Setter Property="Visibility" Value="Hidden" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </userControls:SimpleButton>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</frameworkBase:ViewsBase>

@@ -1,0 +1,91 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>  
+<#@ import namespace="System.Collections.Generic" #>
+<# 
+Dictionary<string, List<string>> tables= new Dictionary<string, List<string>>
+{
+   //{"HIS1:查询建档",new List<string>{"结算结果","病人姓名","就诊卡号","病人性别","身份证号","出生日期","病人类别","当年账户余额","历年账户余额","市民卡余额","手机号"}},
+	{"HIS1:查询建档",new List<string>{"结算结果","病人姓名","就诊卡号","病人性别","身份证号","出生日期","病人类别","当年账户余额","历年账户余额","市民卡余额"}},
+	{"HIS1:挂号取号",new List<string>{"结算结果","病人姓名","就诊卡号","挂号日期","诊疗费加收","诊疗费","医保支付","市民卡账户支付","惠民减免金额","记账金额","科室名称","科室位置","医生名称","挂号序号","就诊号码","候诊时间"}},
+	{"HIS1:缴费预结算",new List<string>{"结算结果","病人姓名","单据总金额","医保报销金额","应付金额"}},
+	{"HIS1:缴费结算",new List<string>{"结算结果","病人姓名","成功提示信息","电脑号","单据总金额","医保报销金额","应付金额","医保本年账户余额","医保历年账户余额","智慧医疗账户余额","结算日期","打印发票","取药窗口"}},
+	{"HIS1:签退",new List<string>{"签退结果","错误类型","错误信息"}},
+
+};
+#>
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace YuanTu.XiaoShanArea.CYHIS.DLL
+{ 
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){
+		var list=kvp.Key.Split(':');
+		string code=list[0];
+		string name=list[1];
+
+#>  
+	[XmlType("<#=name #>_OUT")]
+	public class <#=name #>_OUT:IResBase
+	{
+
+//		public string TradeCode = "<#=code #>";
+		public OUTMSG OUTMSG;
+<#  foreach (string fname in kvp.Value){
+		if(fname.Contains(":")){ 
+			int n=fname.IndexOf(":");
+#>
+		public List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>;
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+		public <#=fname.Substring(0,n) #> <#=fname.Substring(n+1)#>;
+<#      }else{#>
+		public string <#= fname #>;
+<#      }}#>
+
+
+     
+		  public string Serilize()
+		{
+			return Utility.Serilize(typeof(<#=name #>_OUT));
+		 }
+		public override string ToString()
+		{
+			string text="";
+			text+= "NAME:" +" <#=name #>"+ "\n";
+<#      foreach (string fname in kvp.Value){
+			if(fname.Contains(":")){ 
+				int n=fname.IndexOf(":");
+#>
+				text+= "List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>"+"\n"
+				+ <#=fname.Substring(n+1)#>.Aggregate("",(s,one)=>s+=one.ToString());
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+				if(<#=fname.Substring(n+1) #> != null)
+				text+= "<#=fname.Substring(0,n) #>" + <#=fname.Substring(n+1)#>.ToString()+"\n";
+<#      }else{#>
+				text+= "<#=fname #>:" + <#=fname #> + "\n";
+<#      }}#>            return text;
+		}
+
+		public static <#=name #>_OUT Deserilize(string text)
+		{
+			var list = text.Split('|');
+			return new <#=name #>_OUT
+			{
+<#
+			 int i=0;
+		     foreach (string fname in kvp.Value){#>
+				<#= fname #> = list[<#=i #>],
+<#			i++;}#>
+			};
+	     }
+	}
+   
+<#}#>}
+
+

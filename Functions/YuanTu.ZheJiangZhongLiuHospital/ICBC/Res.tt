@@ -1,0 +1,45 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>  
+<#@ import namespace="System.Collections.Generic" #>
+<# 
+Dictionary<string, List<string>> tables= new Dictionary<string, List<string>>
+{
+	{"20100:Res充值",new List<string>{"BankSerial","Cash","BankWorkDT","Remain",}},
+	{"30100:Res查询虚拟账户余额",new List<string>{"Remain","ComLimit",}},
+	{"30101:Res查询充值退款交易明细",new List<string>{"FileName","Count",}},
+	{"50101:Res轧账停机申请",new List<string>{"BankSerial","BankWorkDate",}},
+	{"50102:Res轧账开机申请",new List<string>{"BankSerial","BankWorkDate",}},
+	{"50103:Res轧账对账申请",new List<string>{"BankSerial","CashCount","CashTotal","TransCount","TransTotal","RefundCount","RefundTotal","BankMemo",}},
+	{"10100:Res开户",new List<string>{"BankSerial","AccountNo",}},
+};
+#>
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+namespace YuanTu.ZheJiangZhongLiuHospital.ICBC
+{ 
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){
+		var list=kvp.Key.Split(':');
+		string code=list[0];
+		string name=list[1];
+#>  
+	[XmlType("TransInfo")]
+	public class <#=name #> : IRes
+	{
+		public string ClassName => "<#=name #>";
+
+//		public string TradeCode { get; set; } = "<#=code #>";
+		public string ResultFlag { get; set; }
+		public string ResultMark { get; set; }
+<#  foreach (string fname in kvp.Value){
+#>
+		public string <#= fname #> { get; set; }
+<#	}#>
+	}
+<#}#>}
+
+<#    foreach (KeyValuePair<string, List<string>> kvp in tables){  #>
+// <#=kvp.Value.Count #>	<#=kvp.Key #>
+<#    }#>

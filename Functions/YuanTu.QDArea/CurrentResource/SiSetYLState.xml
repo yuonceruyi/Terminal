@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ROWDATA>
+
+<ROW>
+  <ERRCODE>0001</ERRCODE>
+  <ERRMESSINFO>交易成功</ERRMESSINFO>
+</ROW>
+
+<ROW>
+  <ERRCODE>0002</ERRCODE>
+  <ERRMESSINFO>交易失败</ERRMESSINFO>
+</ROW>
+
+<ROW>
+  <ERRCODE>0003</ERRCODE>
+  <ERRMESSINFO>银联服务器不可用</ERRMESSINFO>
+</ROW>
+
+<ROW>
+  <ERRCODE>0004</ERRCODE>
+  <ERRMESSINFO>医院就诊流水号已支付</ERRMESSINFO>
+</ROW>
+
+</ROWDATA>
+
+	
+	
+	
+	

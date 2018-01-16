@@ -1,0 +1,58 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<# 
+var list = new List<string>
+{
+	"HIS1:YIYUANPBXX:医院排班信息查询",
+	"HIS1:GUAHAOYSXX:挂号医生信息查询",
+	"HIS1:GUAHAOHYXX:挂号号源信息查询",
+	"HIS1:MENZHENFYMX:获取费用明细",
+	"HIS1:CLINICORDERD:预约挂号处理",
+	"HIS1:GUAHAOYYTH:预约退号处理",
+
+   "HIS1:CashInfo:现金投币",
+   "HIS1:ZXPOSInfo:银联交易",
+   "HIS1:RechargeInfo:充值交易",
+};
+
+
+#>
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text;
+
+
+namespace YuanTu.YuHangArea.CYHIS.WebService
+{
+	public static class DataHandler
+	{
+<#	foreach (string s in list){  
+		var l = s.Split(':');
+		string type = l[0];
+		string name = l[1];
+#>
+		public static bool <#=name #>(<#=name #>_IN req, out <#=name #>_OUT res)
+		{
+		     res = HisConnection.Handle<<#=name #>_OUT>(req);
+			 /*
+		    if (res == null)
+				return false;
+			if (res.OUTMSG.ERRNO != "0")
+			 {
+			  Logger.log.Error("调用<#=name #>错误\n" + res.OUTMSG.ERRMSG);
+			  throw new Exception(res.OUTMSG.ERRMSG);
+			 }*/
+			return res!=null;
+		}
+<#	}#>
+	}
+}
+
+	

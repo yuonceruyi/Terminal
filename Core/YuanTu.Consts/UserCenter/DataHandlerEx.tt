@@ -1,0 +1,316 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#  
+var lists = new List<Tuple<string,string,List<string>,string>>()
+{
+//字段名称^字段释义
+//[字段名称] 表示该字段已经被禁用
+//英文 :表示数组 |表示对象
+new Tuple<string, string, List<string>, string>(
+    "医院列表",
+    "/restapi/common/corp/allList",
+    new List<string>()
+    {
+        "unionId^医联体id",
+    },
+    "CorpVO:data"),
+new Tuple<string, string, List<string>, string>(
+    "医生主页",
+    "/restapi/common/doctor/getDoctAccountInfo",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码","doctCode^医生编码",
+    },
+    "Doct|data"),
+new Tuple<string, string, List<string>, string>(
+    "医生排班主页",
+    "/ws/query/doct/schedule",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码","doctCode^医生编码",
+    },
+    "DoctSchdulesVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "按医生排班列表",
+    "/restapi/common/reservation/listScheduleinfoByDoct",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码","parentDeptCode^父科室编码",
+        "regMode^1：预约 2：挂号","regType^1:普通 2:专家",
+    },
+    "ScheduleVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "按日期排班列表",
+    "/restapi/common/reservation/listScheduleinfoByDate",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码",
+        "regMode^1：预约 2：挂号",
+    },
+    "ScheduleVO:data"),
+new Tuple<string, string, List<string>, string>(
+    "查询排班号量",
+    "/restapi/common/reservation/numbersource",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码","doctCode^医生编码",
+        "medAmPm^上下午标志 1：上午 2：下午","medDate^就诊日期",
+        "regMode^1：预约 2：挂号","regType^挂号类别1普通，2专家，3名医，4急诊，5便民，6视频问诊",
+        "scheduleId^排班id",
+    },
+    "SourceVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "查询就诊人",
+    "/restapi/common/selfDevice/queryPatient",
+    new List<string>()
+    {
+        "cardNo^卡号",
+        "cardType^卡类型",
+        "unionId^",
+    },
+    "PatientVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "确认挂号",
+    "/restapi/common/selfDevice/regCreateOrder",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码", "doctCode^医生编码",
+        "medAmPm^上下午标志 1：上午 2：下午","medDate^就诊日期",
+        "regMode^1：预约 2：挂号","regType^挂号类别1普通，2专家，3名医，4急诊，5便民，6视频问诊",
+        "scheduleId^排班id",
+        "patientId^就诊人id",
+    },
+    "AppointRegLogVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "确认预约",
+    "/restapi/common/selfDevice/appointCreateOrder",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码", "doctCode^医生编码",
+        "medAmPm^上下午标志 1：上午 2：下午","medDate^就诊日期",
+        "medBegTime^", "medEndTime^",
+        "appoNo^挂号序号 int 号源",
+        "regMode^1：预约 2：挂号","regType^挂号类别1普通，2专家，3名医，4急诊，5便民，6视频问诊",
+        "scheduleId^排班id",
+        "patientId^就诊人id",
+        "feeChannel^付费通道：1、支付宝 2、微信 3、预缴金(余额)4、到院支付",
+        "optType^3：挂号 6：预约",
+    },
+    "AppointRegLogVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "挂号支付",
+    "/restapi/common/selfDevice/account/preCharge",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "feeChannel^付费通道：1、支付宝 2、微信 3、预缴金(余额)4、到院支付",
+        "optType^3：挂号 6：预约",
+        "outId^挂号记录的主键id",
+        "patientId^就诊人id",
+    },
+    "ResPrePayVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "科室列表",
+    "/restapi/common/reservation/multiDeptsList2",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "regMode^1：预约 2：挂号","regType^挂号类别1普通，2专家，3名医，4急诊，5便民，6视频问诊",
+    },
+    "ResScheduleDeptList|data"),
+new Tuple<string, string, List<string>, string>(
+    "获取挂号应付金额",
+    "/restapi/common/selfDevice/getAppointRegBenefit",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "deptCode^科室编码","doctCode^医生编码",
+        "medAmPm^上下午标志 1：上午 2：下午","medDate^就诊日期",
+        "regMode^1：预约 2：挂号","regType^挂号类别1普通，2专家，3名医，4急诊，5便民，6视频问诊",
+        "scheduleId^排班id",
+        "patientId^就诊人id",
+        "regAmount^挂号金额",
+    },
+    "BenefitInfo|data"),
+new Tuple<string, string, List<string>, string>(
+    "获取支付方式列表",
+    "/restapi/common/selfDevice/pay/type",
+    new List<string>()
+    {
+        "corpId^医院id",
+        "optType^1充值 2缴费 3挂号 6预约",
+        "patientId^就诊人id",
+    },
+    "PayInfo|data"),
+
+
+new Tuple<string, string, List<string>, string>(
+    "生成登录二维码",
+    "/restapi/common/ytPatient/getQRCode",
+    new List<string>()
+    {
+        "corpId", "deviceMac"
+    },
+    "ScanDataVO|data"),
+new Tuple<string, string, List<string>, string>(
+    "根据uuid获取绑定就诊人信息",
+    "/restapi/common/ytPatient/getPatientListByUUID",
+    new List<string>()
+    {
+        "uuid",
+    },
+    "PatientVO:data"),
+new Tuple<string, string, List<string>, string>(
+    "取消扫码",
+    "/restapi/common/ytPatient/cancelScan",
+    new List<string>()
+    {
+        "uuid",
+    },
+    "object:data"),
+    new Tuple<string,string,List<string>,string>(
+    "获取token",
+    "/api/device/getAccessToken",
+    new List<string>()
+    {
+        "deviceSecret",
+    },
+    "string|data"),
+	new Tuple<string,string,List<string>,string>(
+	"获取deviceSecret",
+    "/api/device/getSecret",
+    new List<string>()
+    {
+        "deviceMac",
+    },
+    "string|data"),
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using YuanTu.Consts.UserCenter.Entities;
+
+namespace YuanTu.Consts.UserCenter
+{
+    public partial class DataHandlerEx
+    {
+        public static IDataHandler Handler { get; set; }
+
+<#  foreach (var t in lists) {
+        var name = t.Item1; 
+#>
+        public static res<#=name #> <#=name #>(req<#=name #> req,string url=null)
+        {
+            return Handler.Query<res<#=name #>, req<#=name #>>(req,url);
+        }
+
+<#  } #>
+    }
+
+<#  foreach (var t in lists) {
+        string name = t.Item1;
+        string service = t.Item2;
+        var list = t.Item3;
+#>
+    
+    public class req<#=name #> : UserCenterRequest
+    {
+        public override string UrlPath => "<#=service #>";
+
+        public override string ServiceName => "<#=name #>";
+
+<#      foreach (var s in list) {
+            var val = s.Split('^'); 
+            var obs = val[0].StartsWith("[")&&val[0].EndsWith("]");
+            if (val.Length > 1)
+            {
+#>
+        /// <summary>
+        /// <#= val[1] #>
+        /// </summary>
+<#          } #>
+<#  if (obs){ #>
+        [Obsolete]
+<#  val[0] = val[0].Trim(new[] {'[', ']'});} #>
+<#
+
+    var islst = val[0].Contains(':');
+    var tpvs = val[0].Split(new[] {':', '|'});
+    var variable = tpvs.Length > 1 ? tpvs[1] : tpvs[0];
+    var tp = tpvs.Length > 1 ? tpvs[0] : "string";
+    var fulltp = islst ? ("List<" + tp + ">") : tp;
+
+#>
+        public <#=fulltp#> <#=variable #> { get; set; }
+<#      } #>
+<#          if(list.Count > 0) { #>
+        
+        public override Dictionary<string, string> GetParams()
+        {
+            var dic = base.GetParams();
+<#  foreach (var s in list)
+{
+    var k = s.Split('^')[0].Trim(new[] {'[', ']'}); 
+    var islst = k.Contains(':');
+    var tpvs = k.Split(new[] {':', '|'});
+    var variable = tpvs.Length > 1 ? tpvs[1] : tpvs[0];
+    var tp = tpvs.Length > 1 ? tpvs[0] : "string";
+    if (tp == "string") { #>
+            dic[nameof(<#=k #>)] = <#=k #>;
+<#  } else if (islst) { #>
+            for(int i=0;i<<#=variable #>.Count;i++){
+                var ikv=Build(nameof(<#=variable #>)+$"[{i}]",<#=variable #>[i]);
+                foreach(var kv in ikv){
+                    dic[kv.Key]=kv.Value;
+                }
+            }
+<#  } else { #>
+            var ikv=Build(nameof(<#=variable #>),<#=variable #>);
+                foreach(var kv in ikv){
+                    dic[kv.Key]=kv.Value;
+                }
+<#  } #>
+<#  } #>
+            return dic;
+        }
+
+<#  } #>
+    }
+<#  } #>
+
+<#  foreach (var t in lists) {
+        var name = t.Item1;
+        var value = t.Item4;
+#>
+
+    public class res<#= name #> : UserCenterResponse
+    {
+<#      var s = value;
+        if(s.Contains(':')) { 
+            int n = s.IndexOf(':');
+#>
+        public List<<#=s.Substring(0, n) #>> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else if(s.Contains('|')) { 
+            int n = s.IndexOf('|');
+#>
+        public <#=s.Substring(0, n) #> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else { #>
+        public object <#=s #> { get; set; }
+<#      }#>
+    }
+<#  } #>
+}

@@ -1,0 +1,70 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.ChongQingArea.Component.Auth.Views.InputChildrenNameView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.ChongQingArea.Component.Auth.ViewModels"
+                         d:DesignHeight="530"
+                         d:DesignWidth="700"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d"
+                         d:DataContext="{d:DesignInstance viewModels:InputChildrenNameViewModel}">
+    <ContentControl Width="684"
+                    Height="542"
+                    Style="{StaticResource 提示卡片}">
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Resources>
+                <SolidColorBrush x:Key="BoyBrush" Color="#7DBBF1" />
+                <SolidColorBrush x:Key="GirlBrush" Color="#FFA6ED" />
+                <SolidColorBrush x:Key="PlainBrush" Color="#FFFFFF" />
+                <Style x:Key="TextStyle" TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="FontFamily" Value="微软雅黑" />
+                    <Setter Property="FontSize" Value="23" />
+                </Style>
+            </StackPanel.Resources>
+            <ListBox Style="{StaticResource 提示卡片ListBox}">
+                <userControls:TitleLabel Height="60"
+                                         Margin="0,20"
+                                         ValueColumnWidth="2*">
+                    <userControls:TitleLabel.Title>
+                        <TextBlock Style="{StaticResource 提示卡片Header}" Text="{Binding InputName}" />
+                    </userControls:TitleLabel.Title>
+                    <userControls:TitleLabel.Value>
+                        <Border Width="300"
+                                HorizontalAlignment="Left"
+                                BorderBrush="#717171"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                            <TextBox Width="300"
+                                     Height="50"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     BorderThickness="0"
+                                     FontFamily="微软雅黑"
+                                     FontSize="23"
+                                     IsReadOnly="True"
+                                     MaxLines="1"
+                                     Padding="4"
+                                     Text="{Binding Name}">
+                                <TextBox.InputBindings>
+                                    <MouseBinding Command="{Binding ModifyNameCommand}" MouseAction="LeftClick" />
+                                </TextBox.InputBindings>
+                            </TextBox>
+                        </Border>
+                    </userControls:TitleLabel.Value>
+                </userControls:TitleLabel>
+            </ListBox>
+            <userControls:SimpleButton Margin="18"
+                                       Command="{Binding ConfirmCommand}"
+                                       Content="确定"
+                                       Style="{StaticResource 确定按钮}"
+                                       TagString="确定" />
+        </StackPanel>
+    </ContentControl>
+</frameworkBase:ViewsBase>

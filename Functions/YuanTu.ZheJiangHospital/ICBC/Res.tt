@@ -1,0 +1,42 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System.Collections.Generic" #>
+<# 
+Dictionary<string, List<string>> tables= new Dictionary<string, List<string>>
+{
+{"20100:充值",new List<string>{"BankSerial","Cash","BankWorkDT","Remain",}},
+{"30100:查询虚拟账户余额",new List<string>{"Remain","ComLimit",}},
+{"30101:查询充值退款交易明细",new List<string>{"FileName","Count",}},
+{"50101:轧账停机申请",new List<string>{"BankSerial","BankWorkDate",}},
+{"50102:轧账开机申请",new List<string>{"BankSerial","BankWorkDate",}},
+{"50103:轧账对账申请",new List<string>{"BankSerial","CashCount","CashTotal","TransCount","TransTotal","RefundCount","RefundTotal","BankMemo",}},
+};
+#>
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace YuanTu.ZheJiangHospital.ICBC
+{ 
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){
+        var list=kvp.Key.Split(':');
+        string code=list[0];
+        string name=list[1];
+#>  
+    [XmlType("TransInfo")]
+    public class Res<#=name #> : IRes
+    {
+        public string ClassName => "<#=name #>";
+
+        //public string TradeCode { get; set; } = "<#=code #>";
+        public string ResultFlag { get; set; }
+        public string ResultMark { get; set; }
+<#  foreach (string fname in kvp.Value){ #>
+        public string <#= fname #> { get; set; }
+<#  } #>
+    }
+<#  } #>}
+
+<#    foreach (KeyValuePair<string, List<string>> kvp in tables){ #>
+// <#=kvp.Value.Count #>	<#=kvp.Key #>
+<#    }#>

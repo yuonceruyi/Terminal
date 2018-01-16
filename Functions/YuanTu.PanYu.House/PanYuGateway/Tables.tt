@@ -1,0 +1,135 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+    var dictionary = new Dictionary<string,List<string>>()
+    {
+        {"病人信息",new List<string>(){"patientId","platformId","name","sex","birthday","idNo","cardNo","guardianNo","address","phone","patientType","accountNo","accBalance",}},
+        {"建档信息",new List<string>(){"cardNo","patientId"}},
+        
+        {"就诊情况记录",new List<string>(){"tradeTime","deptName","doctName","info","billNo",}},
+        {"病人基本信息修改结果",new List<string>(){}},
+        {"缴费概要信息",new List<string>(){"billNo","billDate","billType","billFee","deptCode","deptName","doctCode","doctName","regId","appoNo","regNo","billGroupNo","extendBalanceInfo","diseaseCode","diseaseName","diseaseType","receiptType","receiptTypeName","缴费明细信息:billItem",}},
+        {"缴费明细信息",new List<string>(){"billNo","billDate","billType","billFee","deptCode","deptName","doctCode","doctName","itemNo","productCode","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice","hosFeeNo","diseaseCode","stapleFlag","matchType"}},
+        {"预结算结果",new List<string>(){"selfFee","insurFee","insurFeeInfo","payAccount","billFee","otherFee","extend"}},
+        {"结算结果",new List<string>(){"selfFee","insurFeeInfo","insurFee","payAccount","takeMedWin","hasMoreFee","transNo","receiptNo","oppatNo","结算明细信息:itemDetail"}},
+        {"结算明细信息",new List<string>(){"billDate","itemNo","productCode","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice","cost",}},
+        {"结算记录",new List<string>(){"tradeTime","receiptNo","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice","cost",}},
+
+        {"充值结果",new List<string>(){"receiptNo","cash",}},
+        {"充值记录",new List<string>(){"tradeMode","accountNo","cash","receiptNo","tradeTime","operId",}},
+        {"账户余额",new List<string>(){"receiptNo","cash",}},
+
+        {"排班科室信息",new List<string>(){"deptCode","deptName","parentDeptCode","parentDeptName","simplePy","fullPy"}},
+		{"排班医生信息",new List<string>(){"deptCode","deptName","parentDeptCode","parentDeptName","medDate","doctCode","doctName","doctTech","medAmPm","regFee","treatFee","regAmount","scheduleId","restNum","hosRegType"}},
+        {"排班信息",new List<string>(){"medDate","deptCode","deptName","parentDeptCode","parentDeptName","doctCode","doctName","doctTech","medAmPm","regfee","treatfee","regAmount","scheduleId","restNum","hosRegType"}},
+        {"号源明细",new List<string>(){"appoNo","restNum","medBegTime","medEndTime",}},
+	    {"锁号结果",new List<string>(){"seqno","lockid"}},
+		{"当天挂号结果",new List<string>(){"orderNo","patientId","deptName","parentDeptName","doctName","regFee","treatFee","regAmount","medDate","address","appoNo","selfFee","insurFee","insurFeeInfo","visitNo","transNo","receiptNo","oppatNo"}},
+        {"预约挂号结果",new List<string>(){"orderNo","patientId","deptName","parentDeptName","doctName","regFee","treatFee","regAmount","medDate","address","appoNo","selfFee","insurFee","insurFeeInfo",}},
+        {"取号结果",new List<string>(){"orderNo","patientId","deptName","parentDeptName","doctName","regFee","treatFee","regAmount","medDate","address","appoNo","selfFee","insurFee","insurFeeInfo",}},
+        {"挂号预约记录",new List<string>(){"regNo","tradeTime","medDate","medTime","hospCode","hospName","deptCode","deptName","doctCode","doctName","appoNo","scheduleId","medAmPm","address","appoFrom","regFee","treatFee","regAmount","flowId"}},
+	    {"取号预结算结果",new List<string>(){"orderNo","patientId","deptName","doctName","balanceNo","hospName","billNo","queueNo","regDate","address","regNo","typeName","amPm","regFee","treatFee","regAmount"}},
+	    {"取号结算结果",new List<string>(){"orderNo","address","medAmPm","regNo","medDate","queueNo","billNo","balanceNo","doctName","deptName","regId","regFee","treatFee","visitNo","regAmount","transNo","receiptNo","oppatNo"}},
+        {"住院患者信息",new List<string>(){"status","createDate","outDate","hosNo","patientHosNo","patientHosId","deptName","name","sex","nation","birthday","idNo","cardNo","guardianNo","address","phone","patientType","accountNo","area","bedNo","visitId","patientAccBalance","accBalance","balance","patientId","cost","securityBalance"}},
+	   
+        {"住院患者费用明细",new List<string>(){"tradeTime","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice","cost","visited",}},
+        {"住院充值结果",new List<string>(){"receiptNo","cash","visitId",}},
+        {"住院充值记录",new List<string>(){"receiptNo","tradeMode","tradeTime","cash","visitId","operId",}},
+
+        {"虚拟账户开通结果",new List<string>(){"accountNo","accountId",}},
+
+        {"检验基本信息",new List<string>(){"reportId","patientId","cardNo","inhospId","examType","checkPart","checkDoc","sendTime","resultTime","patientName","age","sex","inspectDoctor","bedNo","remark","type","auditDoc","auditTime","printTimes","sendDoct","receiveTime","receiveDoct","examResult","sampleType","checkCode","检验项目:examItem",}},
+        {"检验项目",new List<string>(){"itemName","itemRefRange","itemRealValue","itemUnits","itemAbbr","itemMark","quaResult","reportId","showIndex","extend","checkPart","checkDoc","checkTime","auditDoc","auditTime","checkMethod"}},
+
+
+        {"检验结果明细结果",new List<string>(){"totalCount","检验结果明细:examDetail",}},
+        {"检验结果明细",new List<string>(){"hospCode","examId","testNo","testName","testResult","unit","referRanges","testValue","showIndex","testMethod","sampleType","sampleName","remark",}},
+
+        {"检查结果",new List<string>(){"cardNo","inspecDoctCode","inspecDoctName","inspecTime","checkDate","auditDoctCode","auditDoctName","checkStatus","checkDesc","checkResult","auditDate","checkNo","patientNo","wardName","wardBed","sex","age","inspecDeptName"}},
+
+        {"医生信息",new List<string>(){"doctCode","doctName","doctProfe","doctIntro","doctSpec",}},
+        {"科室信息",new List<string>(){"deptCode","deptName","deptIntro",}},
+		{"民生卡开卡结果",new List<string>(){"CertType","CertNum","CustName","Sex","DocNum","M1key","FormalCard"}},
+		{"民生卡终端签到结果",new List<string>(){"RspCode","RspMsg","MacKey","PinKey","MacChk","PinChk"}},
+		{"民生卡余额查询结果",new List<string>(){"AccountBal"}},
+		{"民生卡交易明细查询结果",new List<string>(){"tradeMode","accountNo","cash","receiptNo","tradeTime","operId"}},
+       
+	    {"民生卡充值结果",new List<string>(){"AccountBal"}},
+	    {"民生卡充值冲正结果",new List<string>(){}},
+		{"民生卡消费结果",new List<string>(){}},
+		{"民生卡消费冲正结果",new List<string>(){}},
+		{"银联卡消费登记结果",new List<string>(){}},
+		{"民生卡退费结果",new List<string>(){}},
+		{"民生卡工本费",new List<string>(){"Amt","RspMsg"}},
+		{"民生卡客户信息更新",new List<string>(){"CertType","CertNum","CustName","Sex","DocNum","M1key"}},
+	    {"民生卡重置密码",new List<string>(){}},
+		{"民生卡卡片信息查询",new List<string>(){"CardNo","CardStat","OpenDate","CertType","CertNum","CustName","ParentName","Sex","Nation","PhoneNum","Adrr","BirthDay"}},
+		{"挂号退号结果",new List<string>(){}},
+		{"医保信息查询",new List<string>(){"stapleFlag","matchType"}},
+		{"取消预约或挂号结果",new List<string>(){"success"}},
+	    {"民生卡密码修改结果",new List<string>(){}},
+		  {"民生卡CPU卡密码设置结果",new List<string>(){}},
+		  {"医生信息快速查询",new List<string>(){"doctCode","doctName","deptCode","deptName","doctTech","doctSpec","doctIntro"}},
+		  {"订单扫码",new List<string>{"outTradeNo^用户平台支付流水","qrCode^二维码串"}},
+		{"取消订单",new List<string>{"outTradeNo^用户平台支付流水","outRefundNo^用户平台退款单号","fee^退款金额"}},
+		{"订单状态",new List<string>{"outTradeNo^用户平台支付流水","fee^退款金额","status^101:处理中 200:支付成功 201:支付失败 400:失效订单 500:退款成功 501:退款失败","outPayNo","outRefundNo","paymentTime","statusDes"}},
+		
+		{"支付宝支付成功上报结果",new List<string>{"result"}},
+
+		{"系统签到结果",new List<string>{"currentTime","currentDate"}},
+
+		{"信息上报结果",new List<string>{"currentTime","currentDate"}},
+
+		{"接种针次结果",new List<string>{"接种人信息|childInfo","接种针次列表:scheduleList"}},
+		{"接种人信息",new List<string>{"name","birthday","sex","institutionName"}},
+		{"接种针次列表",new List<string>{"vaccineName","stepIndex","estimateDate"}},
+
+    	{"接种清单结果",new List<string>{"接种人信息|childInfo","接种清单列表:scheduleList"}},
+		{"接种清单列表",new List<string>{"vaccineName","stepIndex","estimateDate","isInoc"}},
+		{"公费人员信息结果",new List<string>{"gfCardNo","doctorValid","veinValid"}},
+		{"公费人员指静脉验证结果",new List<string>{"flag","sign","description"}},
+
+		{"停车计费查询结果",new List<string>{"cash","totalFee","allParkTime","currFavMoney","carNo","entryTime"}},
+		{"停车订单生成结果",new List<string>{"cash","flowId","transNo","carNo","entryTime","totalFee"}},
+		{"停车订单支付结果",new List<string>{"cash","totalFee","allParkTime","currFavMoney","carNo","entryTime"}},
+
+		
+        {"病人卡片信息",new List<string>(){"Rec","CardNo","CardProdId","sBank","CardStat"}},
+		{"病人绑卡结果",new List<string>{"patientId","cardNo","patientType","insurNo","name","sex","birthday","address","phone","mobile","recordNo","idType","idNo","gfCardNo"}},
+    };
+#>
+using System.Collections.Generic;
+namespace YuanTu.PanYu.House.PanYuGateway
+{
+<# foreach (var kvp in dictionary) { #>
+    public partial class <#= kvp.Key #>
+    {
+<#      foreach (var m in kvp.Value) {
+		    var tmp = m.Split('^');
+		    var s = tmp[0];
+#>
+<#          if (tmp.Length > 1) { #>
+        /// <summary>
+        /// <#= tmp[1] #>
+        /// </summary>
+<#          } #>
+<#          if(s.Contains(':')){ 
+			    int n = s.IndexOf(':');
+#>
+		public List<<#= s.Substring(0, n) #>> <#= s.Substring(n + 1) #> { get; set; }
+<#          }else if(s.Contains('|')) { 
+			    int n = s.IndexOf('|');
+#>
+		public <#= s.Substring(0, n) #> <#= s.Substring(n + 1) #> { get; set; }
+<#          } else { #>
+		public string <#= s #> { get; set; }
+<#          } #>
+<#      } #>
+    }
+
+<#  } #>
+}

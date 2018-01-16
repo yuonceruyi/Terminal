@@ -1,0 +1,61 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	var dictionary=new Dictionary<string,Tuple<string, string,string[]>>()
+	{
+	    {"读卡",new Tuple<string, string, string[]>("^","|",
+			new []
+			{
+				"个人编号","卡号","社保序列号","姓名","性别","民族","生日","身份证号","公司名称","住址","联系电话","人员类别","参保类别","账户余额",
+				"IPTimes","CardStatus","Spesic","IPStatus","Transflag","DQ",
+				//"InsuCard2","InsuCard8","InsuCard9","InsuCard13","InsuCard14","InsuCard15","InsuCard16","InsuCard17","InsuCard19",
+				//"InsuCard20","InsuCard21","InsuCard22","InsuCard23","InsuCard24","InsuCard125","InsuCard26","InsuCard27","InsuCard28",
+				//"InsuCard29","InsuCard30","InsuCard31","InsuCard32","InsuCard33","InsuCard34","GWYFlag",
+			}
+		)},
+		{"挂号结算",new Tuple<string, string, string[]>("\\u0002","!",new []
+		{
+		    //1^0  代表的是自费支付0元，6^0 代表的是医保基金支付0元, 31^8 代表的是医保账户支付8元
+			"自费金额","医保基金","医保账户"			
+		})},
+	    {"挂号冲销",new Tuple<string, string, string[]>("^","|",new string[0])},
+	    {"缴费结算",new Tuple<string, string, string[]>("^","|",new string[]
+	    {
+	        //0^医保结算表rowid^(个人支付+起付标准)^发票rowid+Chr(2)+支付方式1^基金支付+Chr(2)+支付方式2^医保账户支付
+	        //0^326714^0^2239368 6^0 31^10
+			"医保结算表RowId","个人支付_起付标准","发票rowId"	,"基金支付","医保账户支付"		
+	    })},
+	};
+#>
+using YuanTu.Consts.FrameworkBase;
+using YuanTu.FuYangRMYY.HisNative.Models.Base;
+namespace YuanTu.FuYangRMYY.HisNative.Models{
+<# foreach (var kv in dictionary){
+
+#>
+		public class 社保<#=kv.Key#>:InsuranceResponseBase<社保<#=kv.Key#>>{
+			public override char  DataSplit=>'<#=kv.Value.Item1#>';
+			 public override char OriginSplit=>'<#=kv.Value.Item2#>';
+<#foreach (var item in kv.Value.Item3){#>
+			public string <#=item#>{get;set;}
+<#} #>
+			public override Result Format(string msg){
+<#if (kv.Value.Item3.Length == 0){#>
+				return Result.Success();
+<#}#>
+				var arr=msg.Split(DataSplit);
+				if(arr.Length<<#=kv.Value.Item3.Length#>){
+					return Result.Fail(-1,"返回的社保信息不正确");
+				}
+<#for (var i = 0; i < kv.Value.Item3.Length; i++){#>
+				<#=kv.Value.Item3[i]#>=arr[<#=i#>];
+<#}#>
+				return Result.Success();
+			}
+		}
+   <#  } #>
+}

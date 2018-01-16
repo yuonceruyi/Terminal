@@ -1,0 +1,53 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#
+	var dict=new Dictionary<string,List<string>>{
+		["A6^A6读卡器"]=new List<string>{"A6_CommonError","A6_ConfigError","A6_CardError"},
+		["F6^F6发卡器"]=new List<string>{"F6_CommonError","F6_ConfigError","F6_CardError"},
+		["Xzx^新中新身份证读卡器"]=new List<string>{"Xzx_CommonError","Xzx_ConfigError","Xzx_CardError"},
+		["CashCode^CashCode钱箱"]=new List<string>{"CashCode_CommonError","CashCode_ConfigError","CashCode_CardError"},
+		["ZbrPrinter^斑马打印机"]=new List<string>{"ZbrPrinter_CommonError","ZbrPrinter_ConfigError","ZbrPrinter_CardError"},
+		["Icm522"]=new List<string>{"Icm522_CommonError","Icm522_ConfigError","Icm522_CardError"},
+		["MisPos"]=new List<string>{"MisPos_CommonError","MisPos_ConfigError","MisPos_CardError"},
+		["HuaDa^HuaDa读卡器"]=new List<string>{"HuaDa_CommonError","HuaDa_ConfigError","HuaDa_CardError"},
+		["F3^F3读卡器"]=new List<string>{"F3_CommonError","F3_ConfigError","F3_CardError"},
+	}; 
+ #>
+  
+namespace YuanTu.Devices
+{
+    public static class DeviceErrorCode{
+	<#
+	var first=0;
+	var index=0;
+	#>
+	<# foreach (var kv in dict) {
+		index=0;
+		first++;
+		var ks=kv.Key.Split('^');
+	#>   
+		/// <summary>
+        /// <#= ks.LastOrDefault() #>
+        /// </summary>
+        public static class <#= ks[0] #>
+		{
+		<# foreach (var val in kv.Value) {
+			var head=first.ToString("X6");
+			var foot=(++index).ToString("X4");
+			var vs=val.Split('^');
+		#>	
+			/// <summary>
+			/// <#= vs.LastOrDefault() #>
+			/// </summary>		
+			public static string <#= vs[0] #> = "0x<#= head#><#= foot#>";
+<#}#>
+		}       
+    <# }#>
+	
+	}
+}

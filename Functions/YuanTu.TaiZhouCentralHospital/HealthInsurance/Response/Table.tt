@@ -1,0 +1,75 @@
+﻿ <#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+var dictionary = new Dictionary<string,List<string>>()
+{
+//查询接口
+{"个人基本信息",new List<string>(){"卡号","个人社保编号","姓名","性别","民族","出生日期","公民身份号","单位性质","单位名称","地区编码","地区名称","医保待遇类别","荣誉类别","低保类别","优抚级别","特殊病标志","特殊病编码","当年帐户余额","历年帐户余额","当年住院医保累计","当年门诊医保累计","当年规定病医保累计","当年累计列入统筹基数","当年统筹支付医保费用累计","当年统筹基金支付累计","当年补充保险支付累计","当年公务员补助支付累计","当年专项基金支付累计","当年住院次数","当年规定病次数","工伤认定部位","医疗小险种",}},
+
+//预结算结果
+{"计算结果信息",new List<string>(){"费用总额","自费总额_丙类","自理总额_乙类","医保费用","转院自费","起付线","个人自费现金支付","个人自负现金支付","合计现金支付","合计报销金额","历年帐户支付","当年帐户支付","统筹基金支付","大病补助支付","公务员补助支付","离休基金支付"," 二乙基金支付","劳模医疗补助支付","大额自付补助","个人自负","工伤基金支付","生育基金支付","结算后当年个帐余额","结算后历年个帐余额","门诊统筹基金支付","门诊统筹医保费用","门诊统筹起付线","民政补助","优抚救助",}},
+
+{"基金分段结构体参数",new List<string>(){"分段编码","分段名称","进入额度","分段基金支付金额","报销比例","分段自负金额","分段自费金额",}},
+
+{"超限列表结构体参数",new List<string>(){"药品诊疗类型","医院项目编码","超限数量","超限自费金额","合计自费金额 ","超限原因代码","超限原因说明",}},
+
+{"自负比例不对列表",new List<string>(){"单据号码","项目医院编号","医院自负比例","中心自负比例",}},
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Text;
+namespace YuanTu.TaiZhouCentralHospital.HealthInsurance.Response
+{
+
+<# foreach (var kvp in dictionary) { #>
+    public class <#= kvp.Key #>
+    {
+<#      foreach (var m in kvp.Value) {
+            var tmp = m.Split('^');
+			var obs = tmp[0].StartsWith("[")&&tmp[0].EndsWith("]");
+			tmp[0] = tmp[0].Trim(new[] {'[', ']'});
+            var s = tmp[0];
+#>
+<#          if (tmp.Length > 1) { #>
+        /// <summary>
+        /// <#= tmp[1] #>
+        /// </summary>
+<#          } #>
+<#if (obs){ #>
+        [Obsolete]
+<# } #>
+<#          if(s.Contains(':')){ 
+                int n = s.IndexOf(':');
+#>
+        public List<<#= s.Substring(0, n) #>> <#= s.Substring(n + 1) #> { get; set; }
+<#          }else if(s.Contains('|')) { 
+                int n = s.IndexOf('|');
+#>
+        public <#= s.Substring(0, n) #> <#= s.Substring(n + 1) #> { get; set; }
+<#          } else { #>
+        public string <#= s #> { get; set; }
+<#          } #>
+<#      } #>
+        public override string ToString()
+	    {
+	      var sb=new StringBuilder();
+<#        foreach(var m in kvp.Value){
+           var tmp = m.Split('^');
+			var obs = tmp[0].StartsWith("[")&&tmp[0].EndsWith("]");
+			tmp[0] = tmp[0].Trim(new[] {'[', ']'});
+            var s = tmp[0];#>
+		  sb.Append($"<#= s#>:{<#= s#>}\n");
+<#        } #>
+          return sb.ToString();
+        }
+
+    }
+
+<#  } #>
+
+}

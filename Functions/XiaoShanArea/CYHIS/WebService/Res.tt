@@ -1,0 +1,82 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>  
+<#@ import namespace="System.Collections.Generic" #>
+<# 
+Dictionary<string, List<string>> tables= new Dictionary<string, List<string>>
+{
+    {"HIS1.Biz.:YIYUANPBXX",new List<string>{"PAIBANMX:PAIBANLB"}},
+	{"HIS1.Biz.:GUAHAOYSXX",new List<string>{"YISHENGXX:YISHENGMX"}},
+	{"HIS1.Biz.:GUAHAOHYXX",new List<string>{"HAOYUANXX:HAOYUANMX"}},
+	{"HIS1.Biz.:MENZHENFYMX",new List<string>{"YILIAOLB","JIBINGXX:JIBINGMX","FEIYONGMXTS","MENZHENFYXX:FEIYONGMX"}},
+	{"HIS1.Biz.:CLINICORDERD",new List<string>{"ORDERNUM","CLINICTTIME","SEQUENCENUM"}},
+	{"HIS1.Biz.:GUAHAOYYTH",new List<string>{}},
+
+	{"HIS1.Biz.:CashInfo",new List<string>{}},
+	{"HIS1.Biz.:ZXPOSInfo",new List<string>{}},
+	{"HIS1.Biz.:RechargeInfo",new List<string>{}},
+
+
+};
+#>
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace YuanTu.YuHangArea.CYHIS.WebService
+{ 
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){
+		var list=kvp.Key.Split(':');
+		string code=list[0];
+		string name=list[1];
+
+#>  
+	[XmlType("<#=name #>_OUT")]
+	public class <#=name #>_OUT:IResBase
+	{
+
+//		public string TradeCode = "<#=code #>";
+		public OUTMSG OUTMSG;
+<#  foreach (string fname in kvp.Value){
+		if(fname.Contains(":")){ 
+			int n=fname.IndexOf(":");
+#>
+		public List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>;
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+		public <#=fname.Substring(0,n) #> <#=fname.Substring(n+1)#>;
+<#      }else{#>
+		public string <#= fname #>;
+<#      }}#>
+
+		  public string Serilize()
+		{
+			return Utility.Serilize(typeof(<#=name #>_OUT));
+		 }
+		public override string ToString()
+		{
+			string text="";
+			text+= "NAME:" +" <#=name #>"+ "\n";
+<#      foreach (string fname in kvp.Value){
+			if(fname.Contains(":")){ 
+				int n=fname.IndexOf(":");
+#>
+				text+= "List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>"+"\n"
+				+ <#=fname.Substring(n+1)#>.Aggregate("",(s,one)=>s+=one.ToString());
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+				if(<#=fname.Substring(n+1) #> != null)
+				text+= "<#=fname.Substring(0,n) #>" + <#=fname.Substring(n+1)#>.ToString()+"\n";
+<#      }else{#>
+				text+= "<#=fname #>:" + <#=fname #> + "\n";
+<#      }}#>            return text;
+		}
+	}
+<#}#>}
+
+<#    foreach (KeyValuePair<string, List<string>> kvp in tables){  #>
+// <#=kvp.Value.Count #>	<#=kvp.Key #>
+<#    }#>

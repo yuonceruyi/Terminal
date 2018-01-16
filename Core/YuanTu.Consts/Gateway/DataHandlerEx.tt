@@ -1,0 +1,1008 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#  
+var lists = new List<Tuple<string,string,List<string>,string>>()
+{
+//字段名称^字段释义
+//*字段名称 表示该字段不在日志中输出
+//[字段名称] 表示该字段已经被禁用
+//英文: 表示数组 |表示对象
+//基本信息
+    new Tuple<string, string, List<string>, string>(
+        "病人信息查询",
+        "yuantu.wap.query.patient.info",
+        new List<string>()
+        {
+            "cardType","cardNo",
+            "searchType","[secrityNo]","patientName",
+        },
+        "病人信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "病人建档发卡",
+        "yuantu.wap.set.patient.info",
+        new List<string>()
+        {
+            "cardType","cardNo",
+            "idNo","idType","name","sex","birthday","address","phone","nation",
+            "patientType","[guardianName]","guardianNo","pwd","[school]",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo",
+            "setupType","platformId","transNo^第三方的交易流水号","payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号","licensePlateNo"
+        },
+        "建档信息|data"),
+	new Tuple<string, string, List<string>, string>(
+        "指纹信息上传",
+        "yuantu.wap.upload.patient.fingerprint.info",
+        new List<string>()
+        {
+            "idNo","name",  "cardNo","cardType","sex",
+			"address","phone","leftFinger","rightFinger","guardianName","guardianNo",
+        },
+        "病人信息|data"),
+    new Tuple<string, string, List<string>, string>(
+        "病人基本信息修改",
+        "yuantu.wap.modify.patient.info",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "idNo","name","sex","birthday","phone","address",
+            "patientType","guardianNo","platformId",
+            "*biologicData","biologicType^生物信息的类型 22:人脸 23：指纹","licensePlateNo"
+        },
+        "病人基本信息修改信息|data"),
+
+        new Tuple<string, string, List<string>, string>(
+        "病人类别",
+        "yuantu.wap.query.patient.type",
+        new List<string>(){},
+        "病人类别信息:data"),
+		
+    new Tuple<string, string, List<string>, string>(
+        "补卡查询",
+        "yuantu.wap.query.patient.lost.card",
+        new List<string>(){
+		"idNo","name","guarderId"
+		},
+        "补卡信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "补卡",
+        "yuantu.wap.renew.patient.card",
+        new List<string>(){
+		"cardNo",
+		"tradeMode","tradeModeList","accountNo","cash",
+		"posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo","transNo^第三方的交易流水号",
+        "payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号",
+		"newSeqNo","platformId"
+		},
+        "补卡结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "医保科室",
+        "yuantu.wap.query.si.compare.dept",
+        new List<string>(){},
+        "医保科室信息:data"),
+
+    
+//病人领卡查询
+    new Tuple<string, string, List<string>, string>(
+        "病人领卡查询",
+        "yuantu.wap.query.patient.card",
+        new List<string>()
+        {
+            "idNo","idType",
+        },
+        "领卡信息:data"),
+
+//密码
+    new Tuple<string, string, List<string>, string>(
+        "诊疗卡账户修改密码",
+        "yuantu.wap.modify.card.pwd",
+        new List<string>()
+        {
+            "patientId",
+            "oldPassword","newPassword",
+        },
+        "data"),
+    new Tuple<string, string, List<string>, string>(
+        "诊疗卡密码校验",
+        "yuantu.wap.validate.card.pwd",
+        new List<string>(){"patientId","password",},
+        "data"),
+//对账
+
+    new Tuple<string, string, List<string>, string>(
+        "对账",
+        "yuantu.wap.dui.zhang",
+        new List<string>()
+        {
+            "startDate"
+        },
+        "data"),
+//绑定
+    new Tuple<string, string, List<string>, string>(
+        "自助绑定银行卡",
+        "yuantu.wap.binging.bank.card",
+        new List<string>()
+        {
+            "patientId",
+            "bankCardNo","name","idNo",
+        },
+        "data"),
+    new Tuple<string, string, List<string>, string>(
+        "自助绑定银行卡解绑",
+        "yuantu.wap.un.binging.bank.card",
+        new List<string>()
+        {
+            "patientId",
+            "bankCardNo","idNo","name",
+        },
+        "data"),
+
+//挂号
+    new Tuple<string, string, List<string>, string>(
+        "排班科室信息查询",
+        "yuantu.wap.query.registration.dep.list",
+        new List<string>()
+        {
+            "regMode","regType","startDate","endDate",
+        },
+        "排班科室信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "排班信息查询",
+        "yuantu.wap.query.registration.schedule.info.list",
+        new List<string>()
+        {
+            "regMode","regType","medAmPm","deptCode","parentDeptCode","doctCode",
+            "startDate","endDate",
+        },
+        "排班信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "号源明细查询",
+        "yuantu.wap.query.registration.sources",
+        new List<string>()
+        {
+            "regMode","medDate","medAmPm","regType","deptCode","secondDeptCode","doctCode","scheduleId",
+        },
+        "号源明细:data"),
+    new Tuple<string, string, List<string>, string>(
+        "预约挂号预处理",
+        "yuantu.wap.reg.pre.process",
+        new List<string>{"cardType","cardNo","regDate","regType","medAmPm","deptCode","doctCode","appoNo","patientId"}, 
+        "预约挂号预处理结果|data"		
+    ),
+
+   new Tuple<string, string, List<string>, string>(
+        "挂号锁号",
+        "yuantu.wap.lock.registration.source",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "regType","medDate","scheduleId","deptCode","doctCode","medAmPm","[regMode]^挂号类型1预约 2挂号"
+        },
+        "挂号锁号结果|data"),
+
+   new Tuple<string, string, List<string>, string>(
+        "挂号解锁",
+        "yuantu.wap.un.lock.registration.source",
+        new List<string>()
+        {
+		    "medDate","scheduleId",
+            "lockId"
+        },
+        "挂号解锁结果|data"),
+
+    new Tuple<string, string, List<string>, string>(
+        "预约挂号",
+        "yuantu.wap.appointment.or.registration",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "[idNo]","[phone]",
+            "regMode","regType","medDate","medTime","scheduleId","deptCode","deptName","doctCode","doctName","medAmPm","appoNo",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo","transNo^第三方的交易流水号",
+            "lockId^锁号Id",	"[invoice]","[clinicres]","[patientName]","[guarderId]"	,"ybInfo^医保信息","payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号",
+        },
+        "挂号结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "预约取号",
+        "yuantu.wap.take.registration.no",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "appoNo^序号",
+            "[medDate]","[scheduleId]","[medAmPm]",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo","searchType","transNo^第三方的交易流水号",
+            "[invoice]","[clinicres]","orderNo^取号密码","ybInfo^医保信息","payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号",
+        },
+        "取号结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "取消预约",
+        "yuantu.wap.cancel.appointment.or.registration",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "appoNo^序号",
+            "[scheduleId]","[medDate]","[medAmPm]","regMode","[regNo]","orderNo^取号密码"
+        },
+        "取消预约结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "挂号预约记录查询",
+        "yuantu.wap.query.appointment.and.registration.record",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo","patientName",
+            "startDate","endDate","searchType","status","appoNo","regMode"
+        },
+        "挂号预约记录:data"),
+
+//缴费
+    new Tuple<string, string, List<string>, string>(
+        "获取缴费概要信息",
+        "yuantu.wap.query.wait.balance.bill.list",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "billType",
+            "[secrityNo]","[patientName]","[idNo]"
+        },
+        "缴费概要信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "获取缴费明细信息",
+        "yuantu.wap.query.wait.balance.bill.item.list",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "billType","billNo",
+        },
+        "缴费明细信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "缴费预结算",
+        "yuantu.wap.pre.balance.bill",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "billNo","billItems^所有缴费明细(医保使用)",
+            "tradeMode^支付方式(只传MIC)","ybCardNo^医保卡号码","patientTypeId","cash","ybTradeType","isZj","cardHardInfo","siPatientInfo"
+        },
+        "预结算结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "缴费结算",
+        "yuantu.wap.balance.and.pay.bill",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "billNo","allSelf",
+            "[secrityNo]","[extendBalanceInfo]","[invoice]","[clinicres]","[patientName]",
+            "patientTypeId^病人医保类型，可空","ybCardNo^医保卡号码","preYbinfo^缴费预结算中医保支付信息",
+            "billItems^所有缴费明细(医保使用)","balBillNo^预结算时返回的单据号",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo","transNo^第三方的交易流水号",
+            "payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号",
+        },
+        "结算结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "获取已结算记录",
+        "yuantu.wap.query.bill.balance.and.pay.summary.record",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "startDate","endDate",
+            "[beginDate]",
+        },
+        "已缴费概要信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "获取已结算明细记录",
+        "yuantu.wap.query.bill.balance.and.pay.record",
+        new List<string>()
+        {
+            "cardNo","billNo",
+            "startDate","endDate",
+        },
+        "结算记录:data"),
+//虚拟账户
+    new Tuple<string, string, List<string>, string>(
+        "虚拟账户开通",
+        "yuantu.wap.register.virtual.settlement",
+        new List<string>()
+        {
+            "cardNo","cardType",
+            "idNo","idType","patientName","sex","birthday","phone","address","nation",
+            "patientType","guarderId",
+        },
+        "虚拟账户开通结果|data"),
+//预缴金
+    new Tuple<string, string, List<string>, string>(
+        "预缴金充值",
+        "yuantu.wap.recharge.virtual.settlement",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo","platformId",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo",
+            "inHos^1门诊2住院","name","transNo^交易流水号（交易方式为CA OC ZFB WX增加参数）","payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号"
+        },
+        "充值结果|data"),
+//预缴金充值数据同步到his系统
+    new Tuple<string, string, List<string>, string>(
+        "充值数据同步到his系统",
+        "yuantu.wap.upload.recharge.record",
+        new List<string>()
+        {
+            "[patientId]","cardType","cardNo",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo","transNo^交易流水号",
+            "inHos^1门诊2住院","name"
+        },
+        "充值同步his结果|data"),
+//预约挂号记录同步到his系统
+    new Tuple<string, string, List<string>, string>(
+        "预约挂号记录同步到his系统",
+        "yuantu.wap.upload.reg.record",
+        new List<string>()
+        {
+            "regMode","cardNo","cardType",
+            "idNo","patientName","phone",
+            "sex","age","guardianName","guardianNo",
+            "medAmPm","medDate",
+            "medTime","regType","deptCode",
+            "deptName","doctCode","doctName",
+            "appoNo","address","status","tradeMode","tradeModeList","cash",
+            "costItemName","costItemId","orderNo","medBegtime","medEndtime",
+            "scheduleId","thirdPartyRegId","patientId",
+            "posTransNo","bankTransNo","bankCardNo","bankDate","bankTime","bankSettlementTime","posIndexNo","sellerAccountNo",
+            "transNo","tradeModeExtend","payAccountNo"
+
+        },
+        "预约挂号同步his结果|data"),
+//交易记录同步到his系统
+    new Tuple<string, string, List<string>, string>(
+        "交易记录同步到his系统",
+        "yuantu.wap.upload.consume.record",
+        new List<string>()
+        {
+            "platformId","hisPatientId ","cardNo",
+            "cardType","idNo","patientName",
+            "guarderId","tradeMode","tradeModeList","tradeType","cash","inHos","remarks",
+            "posTransNo","bankTransNo","bankCardNo","bankDate","bankTime","bankSettlementTime","posIndexNo","sellerAccountNo",
+            "transNo","tradeModeExtend","payAccountNo","settleId"
+        },
+        "交易记录同步his结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "查询预缴金充值记录",
+        "yuantu.wap.query.patient.vs.record",
+        new List<string>()
+        {
+            "[patientId]","cardType","cardNo",
+            "idNo","patientName","guarderId",
+            "startDate","endDate"
+        },
+        "充值记录:data"),
+    new Tuple<string, string, List<string>, string>(
+        "查询预缴金账户余额",
+        "yuantu.wap.query.virtual.settlement",
+        new List<string>()
+        {
+            "[patientId]","cardType","cardNo",
+            "idNo","patientName","guarderId",
+        },
+        "账户余额|data"),
+//预缴金消费
+    new Tuple<string,string,List<string>,string>(
+    "预缴金消费",
+    "yuantu.wap.consume.vs.cash",
+    new List<string>{
+        "cardNo^卡内号码",
+        "cardType^卡类型",
+        "patientName^病人类型",
+        "cash^消费金额",
+        "inHos^住院或门诊(1:门诊 2:住院)",		
+    },"预缴金消费结果|data"),
+//预缴金消费冲正
+    new Tuple<string,string,List<string>,string>(
+    "预缴金消费冲正",
+    "yuantu.wap.consume.flushes.vs.cash",
+    new List<string>{
+        "sFlowId^消费流水号",
+        "cash^金额",
+        "orderId^订单Id"		
+    },"预缴金消费冲正结果|data"),
+
+
+//住院
+    new Tuple<string, string, List<string>, string>(
+        "住院患者信息查询",
+        "yuantu.wap.query.inhos.patient.info",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "patientName",
+        },
+        "住院患者信息|data"),
+    new Tuple<string, string, List<string>, string>(
+        "住院押金充值确认",
+        "yuantu.wap.inhos.back.fee.ack",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "patientName",
+			"sFlowId","transNo"			
+        },
+        "data"),
+    new Tuple<string, string, List<string>, string>(
+        "住院患者费用明细查询",
+        "yuantu.wap.query.inhos.bill.item.list",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "[patientHosId]",
+            "startDate","endDate","birthday^出生日期",
+        },
+        "住院患者费用明细:data"),
+    new Tuple<string, string, List<string>, string>(
+        "住院患者费用明细打印",
+        "yuantu.wap.query.inhos.print.bill.item.list",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "[patientHosId]",
+            "date",
+        },
+        "data"),
+    new Tuple<string, string, List<string>, string>(
+        "住院预缴金充值",
+        "yuantu.wap.recharge.inhos.virtual.settlement",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo","patientName",
+            "patientHosId","patientHosNo",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo",
+            "payerName","payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号","transNo^第三方的交易流水号",
+        },
+        "住院充值结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "住院预缴金充值记录查询",
+        "yuantu.wap.query.inhos.vs.record",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo","startDate","endDate"
+        },
+        "住院充值记录:data"),
+    new Tuple<string, string, List<string>, string>(
+        "检查病人是否能自助机结算",
+        "yuantu.wap.query.check.inhos.status",
+        new List<string>()
+        {
+            "patientId^病人Id","cardType^卡片类型","cardNo^卡号",
+        },
+        "检查病人是否能自助机结算结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "出院记录查询",
+        "yuantu.wap.query.zy.out.hos.self.record",
+        new List<string>()
+        {
+            "patientId^病人Id","cardType^卡片类型","cardNo^卡号"
+        },
+        "病人出院记录|data"),
+    new Tuple<string, string, List<string>, string>(
+        "自助出院预结算",
+        "yuantu.wap.query.zy.pre.out.hos.self",
+        new List<string>()
+        {
+            "patientId^病人Id","cardType^卡片类型","cardNo^卡号",
+            "patientTypeId^病人医保类型ID",
+        },
+        "自助出院预结算结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "自助出院结算",
+        "yuantu.wap.query.zy.out.hos.self",
+        new List<string>()
+        {
+            "patientId^病人Id","cardType^卡片类型","cardNo^卡号",
+            "patientTypeId^病人医保类型ID",
+            "tradeMode^充值方式(CA,DB,ZFB,WX)","accountNo^交易账户",
+			"preYbinfo^医保信息","tradeModeList^结算信息",
+        },
+        "自助出院结算结果|data"),
+
+    new Tuple<string, string, List<string>, string>(
+        "住院床位信息查询",
+        "yuantu.wap.query.inhos.ward.beds",
+        new List<string>()
+        {
+        },
+        "床位信息:data"),
+
+    new Tuple<string, string, List<string>, string>(
+        "出院结算明细次数",
+        "yuantu.wap.query.patient.out.hos.balance.count",
+        new List<string>()
+        {
+			"patientHosId^住院号",
+			"cardNo^卡号",
+			"cardType^卡类型",
+        },
+        "出院结算次数:data"),
+    new Tuple<string, string, List<string>, string>(
+        "出院结算明细查询",
+        "yuantu.wap.query.patient.out.hos.detail",
+        new List<string>()
+        {
+			"patientHosId^住院号",
+			"receiptNo^结算发票号",
+			"cardNo^卡号",
+			"cardType^卡类型",
+        },
+        "出院结算明细:data"),
+    new Tuple<string, string, List<string>, string>(
+        "出院结算明细打印",
+        "yuantu.wap.print.patient.out.hos.detail",
+        new List<string>()
+        {
+			"patientHosId^住院号",
+			"receiptNo^结算发票号",
+			"cardNo^卡号",
+			"cardType^卡类型",
+        },
+        "出院结算打印结果|data"),
+
+//检验
+    new Tuple<string, string, List<string>, string>(
+        "检验基本信息查询",
+        "yuantu.wap.query.lis.report",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "[patientHosNo]","[startTime]","[endTime]",
+            "startDate","endDate",
+            "type^1门诊号2住院号","patientName^患者姓名",
+        },
+        "检验基本信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "打印检验结果",
+        "yuantu.wap.query.lis.print.report",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "reportId",
+        },
+        "打印检验结果:data"),
+	 new Tuple<string, string, List<string>, string>(
+        "上传打印检验结果",
+        "yuantu.wap.print.patient.lis.report",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "reportId",
+        },
+        "打印检验结果:data"),
+
+//检查
+    new Tuple<string, string, List<string>, string>(
+        "检查结果查询",
+        "yuantu.wap.query.pacs.check.result",
+        new List<string>()
+        {
+            "patientId","cardNo","cardType",
+            "startDate","endDate",
+            "platformId",
+            "type^1门诊号2住院号","visitFrom^1门诊2住院不传就全部",
+        },
+        "检查结果:data"),
+    new Tuple<string, string, List<string>, string>(
+        "影像诊断结果查询",
+        "yuantu.wap.query.pacs.check.result",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "startDate","endDate",
+            "type","visitFrom","platformId",
+        },
+        "影像诊断结果:data"),
+
+//查询
+    new Tuple<string, string, List<string>, string>(
+        "医生信息查询",
+        "yuantu.wap.query.hospital.doc",
+        new List<string>(){"doctCode","deptCode","doctName",},
+        "医生信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "科室信息查询",
+        "yuantu.wap.query.hospital.dep",
+        new List<string>(){"deptType^0或空全部科室1特色科室","deptCode"},
+        "科室信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "药品项目查询",
+        "yuantu.wap.query.medicines.info",
+        new List<string>(){"pinyinCode",},
+        "药品项目信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "收费项目查询",
+        "yuantu.wap.query.cost.info",
+        new List<string>(){"pinyinCode",},
+        "收费项目信息:data"),
+    new Tuple<string, string, List<string>, string>(
+        "查询所有医生信息",
+        "yuantu.wap.query.hospital.all.doc",
+        new List<string>(){"doctCode","deptCode",},
+        "医生介绍:data"),
+
+//满意度
+    new Tuple<string, string, List<string>, string>(
+        "就诊情况记录查询",
+        "yuantu.wap.query.medical.record",
+        new List<string>()
+        {
+            "patientId","cardType","cardNo",
+            "startDate","endDate",
+        },
+        "就诊情况记录:data"),
+    new Tuple<string, string, List<string>, string>(
+        "就诊满意度",
+        "yuantu.wap.query.medical.record",
+        new List<string>(){"doctCode","deptCode","level^满意 非常满意 不满意",},
+        "data"),
+        
+//签到
+    new Tuple<string, string, List<string>, string>(
+        "系统签到",
+        "yuantu.wap.monitor.service",
+        new List<string>()
+        {
+            "method^调用方法名", "deviceNo^设备编号",
+            "deviceType^设备型号",
+        },
+        "签到结果|data"),
+    
+//上报
+    new Tuple<string, string, List<string>, string>(
+        "信息上报",
+        "yuantu.wap.monitor.service",
+        new List<string>()
+        {
+            "method^调用方法名", "deviceNo^设备编号",
+            "errorCode^异常编码","errorMsg^异常内容","errorLevel^异常级别","errorDetail^异常详情","errorSolution^异常解决方案"
+        },
+        "信息上报结果|data"),
+
+//清钱箱上报
+    new Tuple<string, string, List<string>, string>(
+        "清钱箱上报",
+        "yuantu.wap.save.clean.money.log",
+        new List<string>()
+        {
+           "cash^总计金额"
+        },
+        "清钱箱上报结果|data"),
+
+//获取二维码
+    new Tuple<string, string, List<string>, string>(
+        "创建扫码订单",
+        "yuantu.wap.sao.ma.create.order",
+        new List<string>()
+        {
+            "idNo^身份号","idType^证件类型","patientName^病人姓名","guarderId^监护人身份证号","patientId^医院用户门诊Id",
+            "outId^外键业务关联Id(去重选项)","billNo^缴费单编号(可空)","fee^金额(单位：分)","optType^1:充值 2:缴费 3:挂号","subject^业务描述",
+            "feeChannel^支付渠道，1:支付宝 2:微信","source^来源","extendBalanceInfo^扩展信息，存放额外可选数据"
+        },
+        "订单扫码|data"),
+ 
+    new Tuple<string, string, List<string>, string>(
+        "取消扫码订单",
+        "yuantu.wap.sao.ma.cancel.order",
+        new List<string>(){"outTradeNo^用户平台订单号"},
+        "取消订单|data"),
+
+    new Tuple<string, string, List<string>, string>(
+        "查询订单状态",
+        "yuantu.wap.sao.ma.query.order",
+        new List<string>(){"outTradeNo^用户平台订单号"},
+        "订单状态|data"),
+
+    new Tuple<string, string, List<string>, string>(
+        "操作成功状态上传",
+        "yuantu.wap.sao.ma.success.order",
+        new List<string>(){"outTradeNo^用户平台订单号","status^业务处理状态200处理成功101处理失败"},
+        "状态上传结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "扫码退费",
+        "yuantu.wap.back.fee.user.cash",
+        new List<string>(){"outTradeNo^用户平台订单号","outRefundNo^退款单号，部分退费必传(由调用方生成，确保唯一)","fee^退费金额（分）部分退费必传","reason^退费原因，部分退费必传"},
+        "订单状态|data"),
+    //查询网关状态
+    new Tuple<string, string, List<string>, string>(
+        "查询网关状态",
+        "yuantu.wap.gateway.status.service",
+        new List<string>(){},
+        "网关状态|data"),
+
+    //门诊挂号预结算
+    new Tuple<string, string, List<string>, string>(
+        "门诊挂号预结算",
+        "yuantu.wap.pre.appoint.reg",
+        new List<string>(){"patientId","cardNo","cardType","regMode","regType","medDate","scheduleId","deptCode","doctCode","medAmPm","cash","ybCardNo","ybTradeType","isZj","cardHardInfo","siPatientInfo"},
+        "门诊挂号预结算结果|data"),
+
+    //门诊挂号预结算结果确认
+    new Tuple<string, string, List<string>, string>(
+        "门诊挂号预结算结果确认",
+        "yuantu.wap.pre.appoint.reg.confirm",
+        new List<string>(){"patientId","cardNo","cardType","regMode","regType","medDate","scheduleId","deptCode","doctCode","medAmPm","cash","ybCardNo","ybTradeType","isZj","insurFeeInfo","cardHardInfo","siPatientInfo"},
+        "门诊挂号预结算结果确认结果|data"),
+
+    //门诊缴费预结算
+    //new Tuple<string, string, List<string>, string>(
+        //"门诊缴费预结算",
+        //"yuantu.wap.pre.balance.bill",
+        //new List<string>(){"patientId","cardNo","cardType","cash","ybCardNo","ybTradeType","isZj","cardHardInfo","siPatientInfo","billNo"},
+        //"门诊缴费预结算结果|data"),
+
+    //门诊缴费预结算结果确认
+    new Tuple<string, string, List<string>, string>(
+        "门诊缴费预结算结果确认",
+        "yuantu.wap.op.pay.confirm",
+        new List<string>(){"patientId","cardNo","cardType","cash","ybCardNo","ybTradeType","isZj","insurFeeInfo","cardHardInfo","siPatientInfo","billNo"},
+        "门诊缴费预结算结果确认结果|data"),
+
+    //拍照录像上传
+    new Tuple<string, string, List<string>, string>(
+        "拍照录像上传",
+        "yuantu.wap.save.patient.video.log",
+        new List<string>(){
+        "fileUrl^相对路径","logType^记录类型(1充值 2挂号 3预约 4取号 5结算 6住院充值 7住院结算)",
+        "isVideo^0图片 1视频",
+        "idNo","name","cardNo","cardType",
+        "macAddr",
+        "gmtCreate^创建时间"
+        },
+        "拍照录像上传结果|data"),
+
+//先诊疗后付费
+    new Tuple<string, string, List<string>, string>(
+        "查询借款权限",
+        "yuantu.wap.query.user.loan.information",
+        new List<string>(){
+            "cardType","cardNo","searchType","patientName",
+        },
+        "借款权限详情|data"),
+    new Tuple<string, string, List<string>, string>(
+        "查询借款账单",
+        "yuantu.wap.query.user.loan.bill",
+        new List<string>(){
+            "cardType","cardNo",
+            "searchType","patientName",
+            "billNo^账单编号","startDate^开始日期","endDate^截止日期","status^账单状态","currentPage^当前页数","pageSize^每页记录数",
+        },
+        "借款账单分页|data"),
+    new Tuple<string, string, List<string>, string>(
+        "查询借款和还款流水",
+        "yuantu.wap.query.user.loan.flow",
+        new List<string>(){
+            "cardType","cardNo","searchType","patientName",
+            "billNo^账单编号","startTime^开始时间","endTime^截止时间","tradeMode^支付类型","tradeType^交易类型","currentPage^当前页数","pageSize^每页记录数",
+        },
+        "借款还款流水分页|data"),
+    new Tuple<string, string, List<string>, string>(
+        "查询还款订单状态",
+        "yuantu.wap.query.user.loan.repay.status",
+        new List<string>(){
+            "repayBillNo^账单编号",
+        },
+        "还款订单状态|data"),
+    new Tuple<string, string, List<string>, string>(
+        "借款签署协议",
+        "yuantu.wap.user.loan.sign.agreement",
+        new List<string>(){
+            "cardType","cardNo","searchType","patientName",
+        },
+        "object|data"),
+    new Tuple<string, string, List<string>, string>(
+        "用户借款消费",
+        "yuantu.wap.user.loan.consume",
+        new List<string>(){
+            "cardType","cardNo","searchType","patientName",
+            "cash^交易金额","transNo^交易流水","remark^备注",
+        },
+        "用户借款消费结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "用户借款消费冲正",
+        "yuantu.wap.user.loan.consume.flush",
+        new List<string>(){
+            "cardType","cardNo","searchType","patientName",
+            "sFlowId^平台借款流水号","transNo^交易流水","remark^备注",
+        },
+        "用户借款消费结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "用户借款还款下单",
+        "yuantu.wap.user.loan.repay.create.order",
+        new List<string>(){
+            "cardType","cardNo","searchType","patientName","transNo",
+            "billNo^账单编号","repaymentAmt^还款金额 以状态判断金额为准 部分还款时必填","status^还款状态 0 部分还款 1 全额还款 2 剩余全额还款","remark^备注",
+        },
+        "用户借款还款下单结果|data"),
+    new Tuple<string, string, List<string>, string>(
+        "用户借款还款确认",
+        "yuantu.wap.user.loan.repay.pay.order",
+        new List<string>(){
+            "repayBillNo^还款账单编号",
+            "tradeMode","tradeModeList","accountNo","cash",
+            "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo",
+            "transNo^第三方的交易流水号","payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号",
+        },
+        "用户借款还款确认结果|data"),
+
+	//凭条记录上传
+    new Tuple<string, string, List<string>, string>(
+        "凭条记录上传",
+        "yuantu.wap.upload.receipt.log",
+        new List<string>()
+        {
+            "patientId",
+            "cardNo","type","content"
+        },
+        "data"),
+
+	//凭条列表查询
+    new Tuple<string, string, List<string>, string>(
+        "凭条列表查询",
+        "yuantu.wap.query.receipt.log.list",
+        new List<string>()
+        {
+            "patientId",
+            "cardNo","type","startDate","endDate"
+        },
+        "凭条记录:data"),
+
+	//凭条补打通知
+    new Tuple<string, string, List<string>, string>(
+        "凭条补打通知",
+        "yuantu.wap.print.receipt.log",
+        new List<string>()
+        {
+            "id"
+        },
+        "data"),
+
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using YuanTu.Consts.Gateway.Base;
+
+namespace YuanTu.Consts.Gateway
+{
+    #pragma warning disable 612
+    public partial class DataHandlerEx
+    {
+        public static IDataHandler Handler{get;set;}
+<#  foreach (var t in lists) {
+        var name = t.Item1; 
+#>
+        public static res<#=name #> <#=name #>(req<#=name #> req)
+        {
+            return Handler.Query<res<#=name #>, req<#=name #>>(req);
+        }
+
+<#  } #>
+    }
+
+<#  foreach (var t in lists) {
+        string name = t.Item1;
+        string service = t.Item2;
+        var list = t.Item3;
+#>
+    
+    public class req<#=name #> : GatewayRequest
+    {
+        /// <summary>
+        /// <#= name #>
+        /// </summary>
+        public req<#=name #>()
+        {
+            service = "<#=service #>";
+            _serviceName = "<#=name #>";
+        }
+<#      foreach (var s in list) {
+            var val = s.Split('^');
+            var pName = val[0];
+            var jsonIgnore = pName.StartsWith("*");
+            if(jsonIgnore)
+                pName = pName.Trim('*');
+            var obs = pName.StartsWith("[") && pName.EndsWith("]");
+            if(obs)
+                pName = pName.Trim('[', ']');
+            if (val.Length > 1)
+            {
+#>
+        /// <summary>
+        /// <#= val[1] #>
+        /// </summary>
+<#          } #>
+<#      if (obs){ #>
+        [Obsolete]
+<#      } #>
+<#      if (jsonIgnore){ #>
+        [JsonIgnore]
+<#      } #>
+<#
+    var islst = pName.Contains(':');
+    var tpvs = pName.Split(':', '|');
+    var variable = tpvs.Length > 1 ? tpvs[1] : tpvs[0];
+    var tp = tpvs.Length > 1 ? tpvs[0] : "string";
+    var fulltp = islst ? ("List<" + tp + ">") : tp;
+
+#>
+        public <#=fulltp#> <#=variable #> { get; set; }
+<#      } #>
+<#          if(list.Count > 0) { #>
+        
+        public override Dictionary<string, string> GetParams()
+        {
+            var dic = base.GetParams();
+<#  foreach (var s in list) {
+    var k = s.Split('^')[0].Trim('[', ']','*'); 
+    var islst = k.Contains(':');
+    var tpvs = k.Split(':', '|');
+    var variable = tpvs.Length > 1 ? tpvs[1] : tpvs[0];
+    var tp = tpvs.Length > 1 ? tpvs[0] : "string";
+#>
+<#  if (tp == "string") { #>
+            dic[nameof(<#=k #>)] = <#=k #>;
+<# }
+else if (islst)
+{ #>
+            for(int i=0;i<<#=variable #>.Count;i++){
+                var ikv=Build(nameof(<#=variable #>)+$"[{i}]",<#=variable #>[i]);
+                foreach(var kv in ikv){
+                    dic[kv.Key]=kv.Value;
+                }
+            }
+<# }
+else
+{ #>
+            var ikv=Build(nameof(<#=variable #>),<#=variable #>);
+                foreach(var kv in ikv){
+                    dic[kv.Key]=kv.Value;
+                }
+<# } #>
+<# 
+} #>
+            return dic;
+        }
+
+<#          } #>
+    }
+<#  } #>
+
+<#  foreach (var t in lists) {
+        var name = t.Item1;
+        var value = t.Item4;
+#>
+
+    public class res<#= name #> : GatewayResponse
+    {
+<#      var s = value;
+        if(s.Contains(':')) { 
+            int n = s.IndexOf(':');
+#>
+        public List<<#=s.Substring(0, n) #>> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else if(s.Contains('|')) { 
+            int n = s.IndexOf('|');
+#>
+        public <#=s.Substring(0, n) #> <#=s.Substring(n + 1) #> { get; set; }
+<#      } else { #>
+        public object <#=s #> { get; set; }
+<#      }#>
+    }
+<#  } #>
+#pragma warning restore 612
+}

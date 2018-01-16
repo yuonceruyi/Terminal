@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="YuanTu.ZheJiangHospital.Component.BillPay.Views.SiHint"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.ZheJiangHospital.Component.BillPay.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="320" d:DesignWidth="480"
+             Width="480" Height="200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--<Grid Grid.Row="0" Background="#217AD3">
+            <TextBlock Text="省医保卡密码输入提示" Foreground="#FFFFFF" FontSize="24" Margin="20" />
+        </Grid>-->
+        <Grid Grid.Row="1" Background="#FFFFFF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding Card}" Height="200" Width="150" Stretch="Uniform" />
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Foreground="Red" FontSize="18" Margin="10" Text="1.操作中请勿拔卡。" />
+                <TextBlock FontSize="18" Margin="10" TextWrapping="Wrap">
+                    <Run Text="2.请在读卡器按键上输入6位密码，完成后点击" />
+                    <Run Foreground="#008F39" Text="[确认]" />
+                    <Run Text="按键。" />
+                </TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="18" Margin="10" Text="默认密码: 000000" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

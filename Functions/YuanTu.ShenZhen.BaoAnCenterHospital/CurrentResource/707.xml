@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--社保配置-->
+  <SheBao>
+    <!--是否开启社保密码输入-->
+    <OpenSheBaoPassword>0</OpenSheBaoPassword>
+    <yljgbm>H6060</yljgbm>
+    <mm></mm>
+    <czybm>02394</czybm>
+    <czyxm>吴杰林</czyxm>
+    <url>http://10.104.193.22:8080/frontgatewayyb/gateway.do</url>
+  </SheBao>
+
+  <AccountingAddress>
+    <!--交易记账地址-->
+    <jyjz>http://10.104.193.22:8080/frontgatewayserial/trade/infoInsert.do</jyjz>
+    <!--医保记账地址-->
+    <ybjz>http://10.104.193.22:8080/frontgatewayserial/trade/ybInfoInsert.do</ybjz>
+  </AccountingAddress>
+
+  <!-- 打印机设置 -->
+  <Print>
+    <!--是否关闭打印机的缺纸检测-->
+    <CloseChecked>0</CloseChecked>
+  </Print>
+
+  <!--银联相关的设置-->
+  <Pos>
+    <IP>168.33.48.198</IP>
+    <Port>9906</Port>
+    <TPDU>6000040000</TPDU>
+    <Head>603102000000</Head>
+    <TerminalId>1232B001</TerminalId>
+    <MerchantId>303440380621232</MerchantId>
+  </Pos>
+
+  <!--关于LIS打印的配置-->
+  <HuiQiaoLis>
+    <!--打印的页面倒计时时间-->
+    <TimeOut>6</TimeOut>
+    <!--程序路径，配置Lis.Client.TouchPrintReport.exe的目录-->
+    <Path>D:\hope\HopeTouchClient\</Path>
+  </HuiQiaoLis>
+
+</root>

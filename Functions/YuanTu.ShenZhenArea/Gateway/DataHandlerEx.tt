@@ -1,0 +1,144 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#  
+var lists = new List<Tuple<string,string,List<string>,string>>()
+{
+	new Tuple<string,string,List<string>,string>(
+	//医保个人基本信息
+	"医保个人基本信息查询","yuantu.wap.yb.query.patient.info",new List<string>(){"data"},"医保个人基本信息|data"),
+
+	new Tuple<string,string,List<string>,string>(
+	//医保门诊挂号
+	"医保门诊挂号","yuantu.wap.yb.save.reg",new List<string>(){"data"},"医保门诊挂号结果:data"),
+
+	new Tuple<string,string,List<string>,string>(
+	//医保门诊登记
+	"医保门诊登记","yuantu.wap.yb.save.sign.info",new List<string>(){"data"},"data"),
+
+	new Tuple<string,string,List<string>,string>(
+	//医保门诊费用
+	"医保门诊费用","yuantu.wap.yb.save.balance.bill",new List<string>(){"data"},"医保门诊费用结果|data"),
+
+	new Tuple<string,string,List<string>,string>(
+	//医保门诊退费
+	"医保门诊退费","yuantu.wap.yb.back.fee",new List<string>(){"data"},"医保门诊退费结果|data"),
+
+	new Tuple<string,string,List<string>,string>(
+	//医保门诊支付确认
+	"医保门诊支付确认","yuantu.wap.yb.pay.confirmed",new List<string>(){"data"},"data"),
+
+	new Tuple<string, string, List<string>, string>(
+	//排班信息查询，深圳区域特有
+    "排班信息查询","yuantu.wap.query.registration.schedule.info.list",new List<string>(){"regMode","regType","medAmPm","deptCode","parentDeptCode","doctCode","startDate","endDate","PatientId"},"排班信息:data"),
+
+	new Tuple<string, string, List<string>, string>(
+	//交易记账，含除医保外其他所有交易
+    "交易记账","yuantu.wap.jizhang",new List<string>(){"zhuangtai^交易状态 成功 失败","jiaoyima^交易码  PRE：预交金充值 DEP：住院押金 INV：消费","kahao^卡号","jiaoyijine^交易金额","yinlianpicihao^银联批次号","yinlianpingzhenghao^银联凭证号","zhongduanhao^终端号","yinliankaleixingID^银联卡类型ID","yinlianjiaoyiliushuihao^银联交易流水号","yinhangkahao^银行卡号","yinlianjiaoyiriqi^银联交易日期","jiaoyiriqi^交易日期","jiaoyishijian^交易时间","shoufeiID^收费ID","caozuoyuanhao^操作员号","tradeMode^自费部分的交易方式"},"string|data"),
+	
+	new Tuple<string, string, List<string>, string>(
+	//医保消费记账
+    "医保消费记账","yuantu.wap.ybjizhang",new List<string>(){"ylzh^医疗证号","name^病人姓名","danjuhao^登记单据号","feiyongheji^费用总额","jizhang^记账金额-医保报销金额","xianjin^现金-自费金额","czybm^操作员编码","czyxm^操作员姓名","jstime^结算时间"},"string|data"),
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using YuanTu.Consts.Gateway;
+using YuanTu.Consts.Gateway.Base;
+
+
+namespace YuanTu.ShenZhenArea.Gateway
+{
+    public class SZDataHandler
+    {
+		public static DataHandler szHandler=new DataHandler();
+<#    foreach (var t in lists){
+    var name = t.Item1;
+#>
+        public static res<#=name #> <#=name #>(req<#=name #> req)
+        {
+            return szHandler.Query<res<#=name #>, req<#=name #>>(req);
+        }
+
+		public static res<#=name #> <#=name #>(req<#=name #> req,Uri url)
+        {
+            return szHandler.Query<res<#=name #>, req<#=name #>>(req,url);
+        }
+<# } #>
+    }
+
+<#  foreach (var t in lists)
+{
+    string name = t.Item1;
+    string service = t.Item2;
+    var list = t.Item3;
+#>
+    
+    public class req<#=name #> : GatewayRequest
+    {
+        /// <summary>
+        /// <#= name #>
+        /// </summary>
+        public req<#=name #>()
+        {
+            service = "<#=service #>";
+            _serviceName = "<#=name #>";
+        }
+<#      foreach (var s in list){#>
+        <#        var val = s.Split('^'); #>
+
+
+<#        if (val.Length > 1){ #>
+        /// <summary>
+        /// <#= val[1] #>
+        /// </summary>
+<# } #>
+        public string <#=val[0] #> { get; set; }
+<#      } #>
+<#      if(list.Count > 0){#>
+        
+        public override Dictionary<string, string> GetParams()
+        {
+            var dic = base.GetParams();
+<#      foreach (var s in list){#>
+          dic[nameof(<#=s.Split('^')[0] #>)] = <#=s.Split('^')[0] #>;
+
+<#      } #>
+            return dic;
+        }
+
+<#}    #>
+    }
+<# } #>
+
+
+<# foreach (var t in lists)
+{
+    var name = t.Item1;
+    var value = t.Item4;
+#>
+    
+    public class res<#=name #> : GatewayResponse
+    {
+<#      var s = value;
+        if(s.Contains(':')){ 
+            int n = s.IndexOf(':');
+#>
+        public List<<#=s.Substring(0, n) #>> <#=s.Substring(n + 1) #> { get; set; }
+<#      }else if(s.Contains('|')){ 
+            int n = s.IndexOf('|');
+#>
+        public <#=s.Substring(0, n) #> <#=s.Substring(n + 1) #> { get; set; }
+<#      }else{#>
+        public string <#=s #> { get; set; }
+<#      }#>
+    }
+<# } #>
+
+}

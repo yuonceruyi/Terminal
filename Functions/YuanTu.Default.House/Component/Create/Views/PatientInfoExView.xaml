@@ -1,0 +1,248 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Component.Create.Views.PatientInfoExView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:local="clr-namespace:YuanTu.Default.House.Component.Create.Views"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.Default.House.Component.Create.ViewModels"
+                         d:DesignHeight="530"
+                         d:DesignWidth="700"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <ContentControl Width="684"
+                    Height="542"
+                    Style="{StaticResource 提示卡片}">
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Resources>
+                <SolidColorBrush x:Key="BoyBrush" Color="#7DBBF1" />
+                <SolidColorBrush x:Key="GirlBrush" Color="#FFA6ED" />
+                <SolidColorBrush x:Key="PlainBrush" Color="#FFFFFF" />
+                <Style x:Key="TextStyle" TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="FontFamily" Value="微软雅黑" />
+                    <Setter Property="FontSize" Value="23" />
+                </Style>
+                <Style x:Key="RadioButtonBoy" TargetType="{x:Type RadioButton}">
+                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                    <Setter Property="OverridesDefaultStyle" Value="true" />
+                    <Setter Property="FocusVisualStyle" Value="{DynamicResource RadioButtonFocusVisual}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type RadioButton}">
+                                <BulletDecorator Background="Transparent">
+                                    <BulletDecorator.Bullet>
+                                        <Border x:Name="Border"
+                                                Width="116"
+                                                Height="56"
+                                                BorderBrush="{StaticResource BoyBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="5">
+                                            <StackPanel HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Orientation="Horizontal">
+                                                <TextBlock x:Name="TextBlockSymbol"
+                                                           Margin="0,-5,5,0"
+                                                           FontFamily="Malgun Gothic"
+                                                           FontSize="30"
+                                                           FontWeight="Bold"
+                                                           Foreground="{StaticResource PlainBrush}"
+                                                           Style="{StaticResource TextStyle}"
+                                                           Text="♂" />
+                                                <TextBlock x:Name="TextBlock"
+                                                           Foreground="{StaticResource PlainBrush}"
+                                                           Style="{StaticResource TextStyle}"
+                                                           Text="男" />
+                                            </StackPanel>
+                                        </Border>
+                                    </BulletDecorator.Bullet>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="MouseOver" />
+                                            <VisualState x:Name="Pressed" />
+                                            <VisualState x:Name="Disabled" />
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="CheckStates">
+                                            <VisualState x:Name="Checked">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Control.Background)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BoyBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockSymbol" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PlainBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PlainBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unchecked">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Control.Background)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PlainBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockSymbol" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BoyBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BoyBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Indeterminate" />
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </BulletDecorator>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style x:Key="RadioButtonGirl" TargetType="{x:Type RadioButton}">
+                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                    <Setter Property="OverridesDefaultStyle" Value="true" />
+                    <Setter Property="FocusVisualStyle" Value="{DynamicResource RadioButtonFocusVisual}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type RadioButton}">
+                                <BulletDecorator Background="Transparent">
+                                    <BulletDecorator.Bullet>
+                                        <Border x:Name="Border"
+                                                Width="116"
+                                                Height="56"
+                                                BorderBrush="{StaticResource GirlBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="5">
+                                            <StackPanel HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Orientation="Horizontal">
+                                                <TextBlock x:Name="TextBlockSymbol"
+                                                           Margin="0,-5,5,0"
+                                                           FontFamily="Malgun Gothic"
+                                                           FontSize="30"
+                                                           FontWeight="Bold"
+                                                           Foreground="{StaticResource PlainBrush}"
+                                                           Style="{StaticResource TextStyle}"
+                                                           Text="♀" />
+                                                <TextBlock x:Name="TextBlock"
+                                                           Foreground="{StaticResource PlainBrush}"
+                                                           Style="{StaticResource TextStyle}"
+                                                           Text="女" />
+                                            </StackPanel>
+                                        </Border>
+                                    </BulletDecorator.Bullet>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="MouseOver" />
+                                            <VisualState x:Name="Pressed" />
+                                            <VisualState x:Name="Disabled" />
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="CheckStates">
+                                            <VisualState x:Name="Checked">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Control.Background)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GirlBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockSymbol" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PlainBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PlainBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unchecked">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Control.Background)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PlainBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockSymbol" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GirlBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="(Control.Foreground)">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GirlBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Indeterminate" />
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </BulletDecorator>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </StackPanel.Resources>
+            <ListBox Style="{StaticResource 提示卡片ListBox}">
+                <userControls:TitleLabel Height="60"
+                                         Margin="0,20"
+                                         ValueColumnWidth="2*">
+                    <userControls:TitleLabel.Title>
+                        <TextBlock Style="{StaticResource 提示卡片Header}" Text="儿童姓名：" />
+                    </userControls:TitleLabel.Title>
+                    <userControls:TitleLabel.Value>
+                        <Border Width="300"
+                                HorizontalAlignment="Left"
+                                BorderBrush="#717171"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                            <TextBox Width="300"
+                                     Height="50"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     BorderThickness="0"
+                                     FontFamily="微软雅黑"
+                                     FontSize="23"
+                                     IsReadOnly="True"
+                                     MaxLines="1"
+                                     Padding="4"
+                                     Text="{Binding Name}">
+                                <TextBox.InputBindings>
+                                    <MouseBinding Command="{Binding ModifyNameCommand}" MouseAction="LeftClick" />
+                                </TextBox.InputBindings>
+                            </TextBox>
+                        </Border>
+                    </userControls:TitleLabel.Value>
+                </userControls:TitleLabel>
+                <userControls:TitleLabel Height="60"
+                                         Margin="0,20"
+                                         ValueColumnWidth="2*">
+                    <userControls:TitleLabel.Title>
+                        <TextBlock Style="{StaticResource 提示卡片Header}" Text="儿童性别：" />
+                    </userControls:TitleLabel.Title>
+                    <userControls:TitleLabel.Value>
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <RadioButton IsChecked="{Binding IsBoy}" Style="{StaticResource RadioButtonBoy}" />
+                            <RadioButton Margin="20,0"
+                                         IsChecked="{Binding IsGirl}"
+                                         Style="{StaticResource RadioButtonGirl}" />
+                        </StackPanel>
+                    </userControls:TitleLabel.Value>
+                </userControls:TitleLabel>
+                <Grid Height="108" Margin="0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource 提示卡片Header}"
+                               Text="出生日期：" />
+                    <userControls:DatePicker Grid.Column="1"
+                                             Height="108"
+                                             HorizontalAlignment="Left"
+                                             SelectedDate="{Binding DateTime}" />
+                </Grid>
+            </ListBox>
+            <userControls:SimpleButton Margin="18"
+                                       Command="{Binding ConfirmCommand}"
+                                       Content="确认"
+                                       Style="{StaticResource 确认按钮}"
+                                       TagString="确认" />
+        </StackPanel>
+    </ContentControl>
+</frameworkBase:ViewsBase>

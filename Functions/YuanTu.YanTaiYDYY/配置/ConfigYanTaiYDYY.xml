@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--门诊排班查询FTP的图片地址-->
+<!--  <ImagePath>-->
+<!--    <serverIp>ftp://202.202.203.17</serverIp>-->
+<!--    <userid>client</userid>-->
+<!--    <passWord></passWord>-->
+<!--    <path>门诊部</path>-->
+<!--    <fileType>jpg</fileType>-->
+<!--  </ImagePath>-->
+  <ImagePath>
+    <serverIp>192.168.1.44</serverIp>
+    <userid></userid>
+    <passWord></passWord>
+    <path>门诊部</path>
+    <fileType>jpg</fileType>
+  </ImagePath>
+
+  <AppointSet>
+    <CanAppointToday>0</CanAppointToday>
+  </AppointSet> 
+  
+  
+</root>

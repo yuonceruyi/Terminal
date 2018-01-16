@@ -1,0 +1,48 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<# 
+Dictionary<string, List<string>> tables= new Dictionary<string, List<string>>
+{
+	{"20100:充值",new List<string>{"Chanel","AccountNo","AccountId","TradeMode","MisposSerNo","MisposDate","MisposTime","MisposTermNo","MisposIndexNo","MisposInfo","Cash","BankCardNo","OperId","DeviceInfo","TradeSerial","Rsv1","Rsv2"}},
+	{"30100:查询虚拟账户余额",new List<string>{"Chanel","AccountNo","AccountId","OperId","DeviceInfo","TradeSerial","Rsv1","Rsv2",}},
+	{"30101:查询充值退款交易明细",new List<string>{"Chanel","QBeginDay","QEndDay","QAccountNo","QAccountId","QOperid","QDeviceInfo","QTradeSerial","QTradeType","QTradeCh","QCType","OperId","DeviceInfo","TradeSerial","Rsv1","Rsv2",}},
+	{"50101:轧账停机申请",new List<string>{"OperId","DeviceInfo","TradeSerial",}},
+	{"50102:轧账开机申请",new List<string>{"OperId","DeviceInfo","TradeSerial",}},
+	{"50103:轧账对账申请",new List<string>{"BankAccount","CashCount","CashTotal","Cash100","Cash50","Cash20","Cash10","TransCount","TransTotal","RefundCount","RefundTotal","OperId","DeviceInfo","TradeSerial","FileName",}},
+	{"10100:开户",new List<string>{"Chanel","IDKind","PID","Pname","Phone","Psex","PAddress","Pbirthday","Policemark","Cardkind","Cardid","SignBankCardFlag","BankCardNo","OperId","DeviceInfo","TradeSerial","Rsv1","Rsv2"}},
+};
+
+#>
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+namespace YuanTu.ZheJiangZhongLiuHospital.ICBC
+{
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){  
+		var list=kvp.Key.Split(':');
+		string code=list[0];
+		string name=list[1];
+#>
+	[XmlType("TransInfo")]
+	public class Req<#=name #> : IReq
+	{
+		public string ClassName => "<#=name #>";
+
+		public string TransCode { get; set; } = "<#=code #>";
+
+		public string HisCode { get; set; } = "1202020001";
+
+<#  foreach (string fname in kvp.Value){
+#>
+		public string <#= fname #> { get; set; }
+<#	}#>
+	}
+
+<#}#>}
+
+<#    foreach (KeyValuePair<string, List<string>> kvp in tables){  #>
+// <#=kvp.Value.Count #>	<#=kvp.Key #>
+<#    }#>

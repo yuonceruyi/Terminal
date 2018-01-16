@@ -1,0 +1,335 @@
+﻿<UserControl x:Class="YuanTu.ChongQingArea.Component.InfoQuery.Views.Report"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.ChongQingArea.Component.InfoQuery.ViewModels"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:system1="clr-namespace:System;assembly=System"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <RichTextBox>
+            <FlowDocument x:Name="doc" PageHeight="14.8cm" PageWidth="21.0cm">
+                <FlowDocument.Resources>
+                    <Style TargetType="{x:Type Table}">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="CellSpacing" Value="1" />
+                        <Setter Property="FontSize" Value="12" />
+                    </Style>
+                    <Style TargetType="TableCell">
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="BorderBrush" Value="#000000" />
+                    </Style>
+
+                    <system:String x:Key="姓名">姓名</system:String>
+                    <system:String x:Key="性别">性别</system:String>
+                    <system:String x:Key="年龄">年龄</system:String>
+                    <system:String x:Key="标本类型">标本类型</system:String>
+                    <system:String x:Key="标本条码号">标本条码号</system:String>
+                    <system:String x:Key="科室">科室</system:String>
+                    <system:String x:Key="床号">床号</system:String>
+                    <system:String x:Key="门诊号">门诊号</system:String>
+                    <system:String x:Key="检验号">检验号</system:String>
+                    <system:String x:Key="临床诊断">临床诊断</system:String>
+                    <system:String x:Key="检验项目">检验项目</system:String>
+                    <system:String x:Key="日期">日期</system:String>
+                    <system:String x:Key="仪器">仪器</system:String>
+                    <system:String x:Key="采样时间">采样时间</system:String>
+                    <system:String x:Key="申请医师">申请医师</system:String>
+                    <system:String x:Key="报告时间">报告时间</system:String>
+                    <system:String x:Key="打印时间">打印时间</system:String>
+                    <system:String x:Key="签收时间">签收时间</system:String>
+                    <system:String x:Key="检验者">检验者</system:String>
+                    <system:String x:Key="审核者">审核者</system:String>
+                    <system:String x:Key="打印者">打印者</system:String>
+                    <system:String x:Key="备注">备注</system:String>
+                    <system:String x:Key="提示">提示</system:String>
+                </FlowDocument.Resources>
+                <Table Margin="5">
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell />
+                            <TableCell ColumnSpan="2">
+                                <Paragraph TextAlignment="Center" FontSize="18">重庆市人民医院</Paragraph>
+                                <Paragraph TextAlignment="Center" FontSize="18">重庆市临床检验中心</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Margin="0 7" FontSize="22">检验报告单</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph />
+                                <Paragraph />
+                                <Paragraph TextAlignment="Center">门诊</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+                <Table>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell ColumnSpan="3">
+                                <Paragraph>
+                                    姓名:
+                                    <Run Text="{DynamicResource 姓名}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="2">
+                                <Paragraph>
+                                    性别:
+                                    <Run Text="{DynamicResource 性别}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="3">
+                                <Paragraph>
+                                    年龄:
+                                    <Run Text="{DynamicResource 年龄}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="4">
+                                <Paragraph>
+                                    标本类型:
+                                    <Run Text="{DynamicResource 标本类型}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="4">
+                                <Paragraph>
+                                    标本条码号:
+                                    <Run Text="{DynamicResource 标本条码号}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell ColumnSpan="3">
+                                <Paragraph>
+                                    科室:
+                                    <Run Text="{DynamicResource 科室}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="2">
+                                <Paragraph>
+                                    床号:
+                                    <Run Text="{DynamicResource 床号}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="3">
+                                <Paragraph>
+                                    门诊号:
+                                    <Run Text="{DynamicResource 门诊号}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="4">
+                                <Paragraph>
+                                    检验号:
+                                    <Run Text="{DynamicResource 检验号}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="4">
+                                <Paragraph>
+                                    临床诊断:
+                                    <Run Text="{DynamicResource 临床诊断}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+                <Table BorderThickness="0 1">
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell ColumnSpan="5">
+                                <Paragraph>
+                                    检验项目:
+                                    <Run Text="{DynamicResource 检验项目}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="2">
+                                <Paragraph>
+                                    日期
+                                    <Run Text="{DynamicResource 日期}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="3">
+                                <Paragraph>
+                                    仪器:
+                                    <Run Text="{DynamicResource 仪器}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+                <Table FontSize="10">
+                    <Table.Columns>
+                        <TableColumn Width="8*" />
+                        <TableColumn Width="5*" />
+                        <TableColumn Width="3*" />
+                        <TableColumn Width="2*" />
+                        <TableColumn Width="2*" />
+                        <TableColumn Width="7*" />
+                        <TableColumn Width="4*" />
+                    </Table.Columns>
+                    <TableRowGroup x:Name="Table1Header">
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>检验项目</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>英文缩写</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>检验结果</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>标志</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>单位</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>参考范围</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>检验方法</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup x:Name="Table1RowGroup" />
+                </Table>
+                <Table>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell>
+                                <Table FontSize="10">
+                                    <Table.Columns>
+                                        <TableColumn Width="8*" />
+                                        <TableColumn Width="4*" />
+                                        <TableColumn Width="*" />
+                                        <TableColumn Width="3*" />
+                                        <TableColumn Width="7*" />
+                                    </Table.Columns>
+                                    <TableRowGroup x:Name="Table2Column1Header">
+                                        <TableRow>
+                                            <TableCell>
+                                                <Paragraph>检验项目</Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>结果</Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>单位</Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>参考范围</Paragraph>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableRowGroup>
+                                    <TableRowGroup x:Name="Table2Column1RowGroup" />
+                                </Table>
+                            </TableCell>
+                            <TableCell>
+                                <Table FontSize="10">
+                                    <Table.Columns>
+                                        <TableColumn Width="8*" />
+                                        <TableColumn Width="4*" />
+                                        <TableColumn Width="*" />
+                                        <TableColumn Width="3*" />
+                                        <TableColumn Width="7*" />
+                                    </Table.Columns>
+                                    <TableRowGroup x:Name="Table2Column2Header">
+                                        <TableRow>
+                                            <TableCell>
+                                                <Paragraph>检验项目</Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>结果</Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>单位</Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>参考范围</Paragraph>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableRowGroup>
+                                    <TableRowGroup x:Name="Table2Column2RowGroup" />
+                                </Table>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+                <Table BorderThickness="0 1">
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    采样时间:
+                                    <Run Text="{DynamicResource 采样时间}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    申请医师:
+                                    <Run Text="{DynamicResource 申请医师}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    报告时间:
+                                    <Run Text="{DynamicResource 报告时间}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    打印时间:
+                                    <Run Text="{DynamicResource 打印时间}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    签收时间:
+                                    <Run Text="{DynamicResource 签收时间}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="检验者:" BaselineAlignment="TextTop"/>
+                                    <Run Text="{DynamicResource 检验者}" />
+                                    <Image Name="JYZ" MaxWidth="60" Stretch="Fill"  MaxHeight="25" Margin="0 -3 0 0" ></Image>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Text="审核者:" BaselineAlignment="TextTop"/>
+                                    <Run Text="{DynamicResource 审核者}" />
+                                    <Image Name="SHZ" MaxWidth="60" Stretch="Fill"  MaxHeight="25" Margin="0 -3 0 0"></Image>
+
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    打印者:
+                                    <Run Text="{DynamicResource 打印者}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+                <Section>
+                    <Paragraph Margin="0">
+                        备注:
+                        <Run Text="{DynamicResource 备注}" />
+                    </Paragraph>
+                    <Paragraph Margin="0">
+                        <Run Text="{DynamicResource 提示}" />
+                    </Paragraph>
+                </Section>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</UserControl>

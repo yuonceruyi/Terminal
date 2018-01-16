@@ -1,0 +1,57 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.QDQLYY.Component.InfoQuery.Views.DocsInfoView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.QDQLYY.Component.InfoQuery.ViewModels"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         d:DataContext="{d:DesignInstance viewModels:DeptsInfoViewModel}">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="文本Ex" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="26"/>
+            </Style>
+            <Style x:Key="文本Name" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="Foreground" Value="OrangeRed" />
+            </Style>
+            <Style x:Key="简介" TargetType="TextBlock">
+                <!--<Setter Property="Foreground" Value="#f5a251" />-->
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="FontSize" Value="26"/>
+                <Setter Property="Margin" Value="10" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--<Label Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource 主题文本}" Content="{Binding Hint}" />-->
+        <ContentControl Grid.Row="1" 
+                        Width="768"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource 提示卡片}">
+            <Grid Height="680">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Height="65" Style="{StaticResource 文本Name}" Text="{Binding DocName}" Grid.Column="0" Grid.Row="0" Margin="30,10"/>
+                <TextBlock Height="65" Style="{StaticResource 文本Ex}" Text="{Binding DoctProfe}" Grid.Column="1" Grid.Row="0" Margin="10,15"/>
+                <ScrollViewer Height="600" Grid.Row="1" Grid.ColumnSpan="2">
+                    <TextBlock Text="{Binding DoctIntro}" Style="{StaticResource 简介}" LineHeight="50"  Height="auto"></TextBlock>
+                </ScrollViewer>
+            </Grid>
+        </ContentControl>
+    </Grid>
+</frameworkBase:ViewsBase>

@@ -1,0 +1,108 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>  
+<#@ import namespace="System.Collections.Generic" #>
+<# 
+Dictionary<string, List<string>> tables= new Dictionary<string, List<string>>
+{
+	{"HIS1:YIYUANPBXX_IN:30:医院排班信息查询",new List<string>{"PAIBANLX","PAIBANRQ","GUAHAOFS","GUAHAOBC","GUAHAOLB","KESHIDM","YISHENGDM","HUOQUROW"}},
+	{"HIS1:GUAHAOYSXX_IN:30:挂号医生信息",new List<string>{"GUAHAOFS","RIQI","GUAHAOBC","KESHIDM","GUAHAOLB"}},
+	{"HIS1:GUAHAOHYXX_IN:30:挂号号源信息",new List<string>{"GUAHAOFS","RIQI","GUAHAOBC","KESHIDM","YISHENGDM"}},
+	{"HIS1:MENZHENFYMX_IN:30:门诊费用明细",new List<string>{"JIUZHENKLX","JIUZHENKH","BINGRENLB","BINGRENXZ","YIBAOKLX","YIBAOKMM","YIBAOKXX","YIBAOBRXX","YILIAOLB","JIESUANLB","HISBRXX","GUAHAOID"}},
+    {"HIS1:CLINICORDERD_IN:30:预约挂号处理",new List<string>{"PATIENTID","OPERATOR","REGDEPTID","DOCTORID","ORDERDATE","CLINICTTYPE","DUTYTYPE","SEQUENCENUM","TELNO"}},
+	//{"HIS1:CLINICORDERD_IN:30:预约挂号处理",new List<string>{"PATIENTID","OPERATOR","REGDEPTID","DOCTORID","ORDERDATE","CLINICTTYPE","DUTYTYPE","SEQUENCENUM"}},
+	{"HIS1:GUAHAOYYTH_IN:30:预约退号处理",new List<string>{"JIUZHENKLX","JIUZHENKH","ZHENGJIANLX","ZHENGJIANHM","XINGMING","YUYUELY","QUHAOMM"}},
+
+   {"HIS1:CashInfo_IN:30:现金投币",new List<string>{"OperatorNo","Time","CardNo","Amount","TranSeq"}},
+   {"HIS1:ZXPOSInfo_IN:30:银联交易",new List<string>{"OperatorNo","Amount","TransSeq","CardNo","Type","time"}},
+   {"HIS1:RechargeInfo_IN:30:充值交易",new List<string>{"OperatorNo","CardNo","RechargeMethod","Amount","BankCardNo","BankTranSeq","BankDate","DealDate","TransSeq","RemainAmount"}},
+};
+#>
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+namespace YuanTu.YuHangArea.CYHIS.WebService
+{
+<#		foreach (KeyValuePair<string, List<string>> kvp in tables){  
+		var list=kvp.Key.Split(':');
+		string code=list[0];
+		string name=list[1];
+		string cname = list[3];
+		int timeout=Convert.ToInt32(list[2]);
+#>
+	public class <#=name #>:IReqBase
+	{
+		public <#=name #>(){}
+		public <#=name #>(
+<#		foreach (string fname in kvp.Value){
+		if(fname.Contains(":")){ 
+			int n=fname.IndexOf(":");
+#>
+			List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>,
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+			<#=fname.Substring(0,n) #> <#=fname.Substring(n+1)#>,
+<#      }else{#>
+			string <#= fname #>,
+<#      }}#>
+			string s=null):this()
+		{
+<#		foreach (string fname in kvp.Value){
+		if(fname.Contains(":")){ 
+			int n=fname.IndexOf(":");
+#>
+			this. <#=fname.Substring(n+1)#>= <#=fname.Substring(n+1)#>;
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+			this. <#=fname.Substring(n+1)#>=<#=fname.Substring(n+1)#>;
+<#      }else{#>
+			this. <#= fname #>=<#= fname #>;
+<#      }}#>
+		}
+
+//		public string TradeCode = "<#=code #>";
+		public BASEINFO BASEINFO;
+<#		foreach (string fname in kvp.Value){
+		if(fname.Contains(":")){ 
+			int n=fname.IndexOf(":");
+#>
+		public List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>;
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+		public <#=fname.Substring(0,n) #> <#=fname.Substring(n+1)#>;
+<#      }else{#>
+		public string <#= fname #> = "";
+<#      }}#>
+
+	   public string Serilize()
+		{
+			return Utility.Serilize(typeof(<#=name #>));
+		}
+		public override string ToString()
+		{
+			return "NAME:" + "<#=cname #>" + "\n"
+<#      foreach (string fname in kvp.Value){
+			if(fname.Contains(":")){ 
+				int n=fname.IndexOf(":");
+#>
+				+ "List<<#=fname.Substring(0,n) #>> <#=fname.Substring(n+1)#>"+"\n"
+				+ <#=fname.Substring(n+1)#>.Aggregate("",(s,one)=>s+=one.ToString())
+<#      }else if(fname.Contains("|")){ 
+			int n=fname.IndexOf("|");
+#>
+				+ "<#=fname.Substring(0,n) #>" + <#=fname.Substring(n+1)#>.ToString()+"\n"
+<#      }else{#>
+				+ "<#=fname #>:" + <#=fname #> + "\n"
+<#      }}#>            ;
+		}
+	}
+<#}#>}
+
+
+
+
+

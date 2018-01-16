@@ -1,0 +1,172 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+//字段名称^字段释义
+var list=new List<Tuple<string,string,int,string[],string[]>>
+{
+    new Tuple<string, string, int, string[], string[]>(
+		"建档",
+		"GC0202",
+		180,
+		new[]{"卡类别^1一卡通 2医保卡","姓名","性别^1男2女","居住地址","出生日期","证件号码","手机号码","卡号"},
+		new string[]{}
+	),
+	 new Tuple<string, string, int, string[], string[]>(
+		"门诊读卡",
+		"GC0101",
+		180,
+		new[]{"卡类别^1一卡通 2医保卡"},
+		new []{"姓名","性别^1男2女","证件类型","证件号码","手机号码","出生日期","居住地址","卡号"}
+	),
+	new Tuple<string, string, int, string[], string[]>(
+		"挂号取号预结算",
+		"GC0401",
+		180,
+		new[]{
+		"患者唯一标识","姓名",
+		"排班表主键","科室编号","医生工号","挂号类型","挂号时间"
+		,"医保类型",
+		"预约标记^0：正常挂号1：预约取号","预约记录主键",
+		"挂号费","诊疗费","工本费",
+		"就诊序号","挂号序号",
+		"现金结算单流水号","现金结算金额","总金额",
+		"程序名","操作科室","终端编号",
+		"值班类别","支付类别"},
+		new []{"返回信息","总金额","医保支付金额","个人现金支付金额","结算备注","医保类型"}
+	),
+	new Tuple<string, string, int, string[], string[]>(
+		"挂号取号结算",
+		"GC0402",
+		180,
+		new[]{
+		"患者唯一标识","姓名",
+		"排班表主键","科室编号","医生工号","挂号类型","挂号时间"
+		,"医保类型",
+		"预约标记^0：正常挂号1：预约取号","预约记录主键",
+		"挂号费","诊疗费","工本费",
+		"就诊序号","挂号序号",
+		"现金结算单流水号","现金结算金额","总金额",
+		"程序名","操作科室","终端编号",
+		"值班类别","支付类别"},
+		new []{"返回信息","挂号序号","就诊序号","挂号发票号","总金额","医保支付金额","个人现金支付金额","结算备注","就诊地点","全员挂号序号"}
+	),
+	new Tuple<string, string, int, string[], string[]>(
+		"挂号取号回滚",
+		"GC0501",
+		180,
+		new[]{
+		"患者唯一标识","姓名","原挂号记录序号","预约标识","预约记录序号","SB联众开发"},
+		new string[0]
+	),
+	new Tuple<string, string, int, string[], string[]>(
+		"HIS缴费预结算",
+		"GC0604",
+		180,
+		new[]{
+		"患者唯一标识","姓名","就诊序号","医保类型",
+		"处方单号^类型/费用序号, 类型/费用序号，类型分为1：表示处方2：表示费用",
+		"总费用",
+		"银行结算流水号",	"银行支付费用",
+		"程序名","操作科室","终端编号",
+		"支付类型^1：银联2：支付宝3：微信)"
+		},
+		new []{"返回信息","总金额","医保支付金额","个人现金支付金额","结算备注"}
+	),
+	new Tuple<string, string, int, string[], string[]>(
+		"HIS缴费结算",
+		"GC0605",
+		180,
+		new[]{
+		"患者唯一标识","姓名","就诊序号","医保类型",
+		"处方单号^类型/费用序号, 类型/费用序号，类型分为1：表示处方2：表示费用",
+		"总费用",
+		"银行结算流水号",	"银行支付费用",
+		"程序名","操作科室","终端编号",
+		"支付类型^1：银联2：支付宝3：微信)"
+		},
+		new []{"返回信息","发票号","取药地点","总金额","医保支付金额","个人现金支付金额","结算备注","电脑号","导引单信息"}
+	),
+	new Tuple<string, string, int, string[], string[]>(
+		"导引单",
+		"T002",
+		180,
+		new[]{
+		"患者唯一标识","姓名","处方单号"},
+		new []{"取药窗口","检验就诊处","检查就诊处"}
+	),new Tuple<string, string, int, string[], string[]>(
+		"收费加锁解锁",
+		"GC0701",
+		180,
+		new[]{
+		"患者唯一标识","姓名","处方单号","加锁标志"},
+		new []{"返回信息"}
+	),
+};
+#>
+
+
+namespace YuanTu.ShengZhouZhongYiHospital.HisNative.Models
+{
+	public static partial class HisHandleEx{
+	<# foreach (var tuple in list){ #>
+	
+		public static Res<#=tuple.Item1#> 执行<#=tuple.Item1#>(Req<#=tuple.Item1#> req){return Handler<Req<#=tuple.Item1#>,Res<#=tuple.Item1#>>(req,"<#=tuple.Item1#>",<#=tuple.Item3#>);}
+	<# } #>
+
+	}
+
+	<# foreach (var tuple in list){#>
+
+    #region <#=tuple.Item1#>[<#=tuple.Item2#>]
+	public class Req<#=tuple.Item1#>:HisReq{
+		/// <summary>
+		/// 服务编号
+		/// </summary>
+		public override string 服务编号 =>"<#=tuple.Item2#>";
+	<#foreach (var itm in tuple.Item4){
+    var spit = (itm + "^").Split('^');
+	#>
+	
+		/// <summary>
+		/// <#= spit[1] #>
+		/// </summary>
+		public string <#=spit[0]#>{get;set;}
+	<#}#>
+		
+		protected override string Build(){
+			return $"<#=tuple.Item2#>"+"|"+<#=string.Join("+\"|\"+",tuple.Item4.Select(p=>$"{p.Split('^').FirstOrDefault()}"))#>;
+		 }
+	}
+	public class Res<#=tuple.Item1#>:HisRes{
+
+	public override int ArrLen =><#=tuple.Item5.Length#>;
+	<#foreach (var itm in tuple.Item5){
+    var spit = (itm + "^").Split('^');
+	#>
+	
+		/// <summary>
+		/// <#= spit[1] #>
+		/// </summary>
+		public string <#=spit[0]#>{get;set;}
+	<#}#>
+
+		public override void Build(string[] arrs){
+			<#
+			var index = 1;
+			foreach (var itm in tuple.Item5){
+			var spit = (itm + "^").Split('^');#>
+
+				<#=spit[0]#>=arrs[<#=(index++)#>];
+			<#}#>
+
+		}
+
+	}
+	#endregion
+
+<#}#>
+}

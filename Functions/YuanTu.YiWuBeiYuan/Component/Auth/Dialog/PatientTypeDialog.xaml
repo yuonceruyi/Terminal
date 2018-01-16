@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="YuanTu.YiWuBeiYuan.Component.Auth.Dialog.PatientTypeDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+             mc:Ignorable="d" 
+             Height="400" Width="800"
+             d:DesignHeight="480" d:DesignWidth="880">
+    <Grid>
+         <DockPanel LastChildFill="True">
+            <Border DockPanel.Dock="Top"
+                Height="60"
+                        Background="#EDEDED"
+                        CornerRadius="5 5 0 0 " >
+                <TextBlock  HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="23"
+                           Foreground="#888888" Text="选择卡类型"></TextBlock>
+            </Border>
+           
+             <Grid>
+                <Border Background="#ffffff" CornerRadius="0 0 5 5 " />
+                 <StackPanel Orientation="Vertical" >
+                    <TextBlock  HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="23"
+                           Margin="0 40"
+                           Foreground="#888888">
+                        <Run Text="您的身份信息不完整，需要"></Run>
+                        <Run Text="实名"  FontSize="25" Foreground="Red" FontWeight="Bold"></Run>
+                        <Run Text="补充"></Run>
+                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="20 0">
+                        <userControls:SimpleButton 
+                                           Margin="20"
+                                           Command="{Binding InfoFixCommand}"
+                                            CommandParameter="补全信息_成人"
+                                           Content="成人"
+                                           Style="{StaticResource 取消按钮}"
+                                           TagString="补全信息_成人" />
+                        <userControls:SimpleButton 
+                                           Command="{Binding InfoFixCommand}"
+                                            CommandParameter="补全信息_监护人"
+                                           Content="监护人"
+                                           Style="{StaticResource 确定按钮}"
+                                           TagString="补全信息_监护人" />
+                    </StackPanel>
+                </StackPanel>
+                
+            </Grid>
+             
+        </DockPanel>   
+    </Grid>
+</UserControl>

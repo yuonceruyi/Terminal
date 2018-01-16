@@ -1,0 +1,517 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ output extension=".cs" #>
+<#
+    var infos = new List<ClassInfo>()
+    {new ClassInfo {Name = "Req医院排班信息", Service = "YIYUANPBXX", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "GUAHAOFS", Description = "挂号方式", Remark = "1.挂号、2.预约", }, 
+                new Property { Name = "PAIBANLX", Description = "排班类型", Remark = "1.一周、2.当天", }, 
+                new Property { Name = "PAIBANRQ", Description = "排班日期", Remark = "YYYY-MM-DD", }, 
+                new Property { Name = "GUAHAOBC", Description = "挂号班次", Remark = "0全部 1上午 2下午", }, 
+                new Property { Name = "GUAHAOLB", Description = "挂号类别", Remark = "0全部 1普通 2急诊  3专科 >3相关专家类别", }, 
+                new Property { Name = "KESHIDM", Description = "科室代码", Remark = "空，返回全部", }, 
+                new Property { Name = "YISHENGDM", Description = "医生代码", Remark = "*返回全部", }, 
+                new Property { Name = "HUOQUROW", Description = "获取条数", Remark = "空或0无效", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res医院排班信息", Service = "YIYUANPBXX", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { Name = "PAIBANLB", Description = "排班列表", Type = "List<PAIBANMX>", }, 
+            }, 
+        },
+        new ClassInfo {Name = "PAIBANMX", 
+            Properties = new List<Property> { 
+                new Property { Name = "KESHIDM", Description = "科室代码", }, 
+                new Property { Name = "KESHIMC", Description = "科室名称", }, 
+                new Property { Name = "JIUZHENDD", Description = "就诊地点", }, 
+                new Property { Name = "KESHIJS", Description = "科室介绍", }, 
+                new Property { Name = "YISHENGDM", Description = "医生代码", Remark = "普通号用*号代替", }, 
+                new Property { Name = "YISHENGXM", Description = "医生姓名", Remark = "普通号显示普通", }, 
+                new Property { Name = "YISHENGZC", Description = "医生职称", }, 
+                new Property { Name = "YISHENGTC", Description = "医生特长", }, 
+                new Property { Name = "YISHENGJS", Description = "医生介绍", }, 
+                new Property { Name = "SHANGWUHYZS", Description = "上午号源总数", Remark = "已挂人数", Type = "int", }, 
+                new Property { Name = "SHANGWUHYSYS", Description = "上午号源剩余", Remark = "剩余可挂人数", Type = "int", }, 
+                new Property { Name = "XIAWUHYZS", Description = "下午号源总数", Remark = "已挂人数", Type = "int", }, 
+                new Property { Name = "XIAWUHYSYS", Description = "下午号源剩余", Remark = "剩余可挂人数", Type = "int", }, 
+                new Property { Name = "ZHENLIAOJSF", Description = "诊疗加收费", }, 
+                new Property { Name = "ZHENLIAOF", Description = "诊疗费", }, 
+                new Property { Name = "PAIBANRQ", Description = "排班日期", Remark = "YYYY-MM-DD", }, 
+                new Property { Name = "GUAHAOBC", Description = "挂号班次", Remark = "0全部 1上午 2 下午", }, 
+                new Property { Name = "GUAHAOLB", Description = "挂号类别", Remark = "0全部 1普通 2急诊  3专科 >3相关专家类别", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req挂号医生信息", Service = "GUAHAOYSXX", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "GUAHAOFS", Description = "挂号方式", Remark = "1. 挂号、2. 预约", }, 
+                new Property { Name = "RIQI", Description = "日期", Remark = "YYYY-MM-DD", }, 
+                new Property { Name = "GUAHAOBC", Description = "挂号班次", Remark = "0全部 1上午 2 下午", }, 
+                new Property { Name = "KESHIDM", Description = "科室代码", Remark = "空，返回全部", }, 
+                new Property { Name = "GUAHAOLB", Description = "挂号类别", Remark = "0全部 1普通 2急诊  3专科 >3相关专家类别", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res挂号医生信息", Service = "GUAHAOYSXX", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { Name = "YISHENGMX", Description = "医生明细", Type = "List<YISHENGXX>", }, 
+            }, 
+        },
+        new ClassInfo {Name = "YISHENGXX", 
+            Properties = new List<Property> { 
+                new Property { Name = "YISHENGDM", Description = "医生代码", Remark = "普通号用*号代替", }, 
+                new Property { Name = "YISHENGXM", Description = "医生姓名", Remark = "普通号显示普通", }, 
+                new Property { Name = "KESHIDM", Description = "科室代码", }, 
+                new Property { Name = "KESHIMC", Description = "科室名称", }, 
+                new Property { Name = "YISHENGZC", Description = "医生职称", }, 
+                new Property { Name = "YISHENGTC", Description = "医生特长", Remark = "调整为已挂人数", }, 
+                new Property { Name = "YISHENGJS", Description = "医生介绍", Remark = "调整为剩余可挂人数", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req挂号号源信息", Service = "GUAHAOHYXX", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "GUAHAOFS", Description = "挂号方式", Remark = "1. 挂号、2. 预约", }, 
+                new Property { Name = "RIQI", Description = "日期", Remark = "YYYY-MM-DD", }, 
+                new Property { Name = "GUAHAOBC", Description = "挂号班次", Remark = "0全部 1上午 2 下午", }, 
+                new Property { Name = "KESHIDM", Description = "科室代码", }, 
+                new Property { Name = "YISHENGDM", Description = "医生代码", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res挂号号源信息", Service = "GUAHAOHYXX", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { Name = "HAOYUANMX", Description = "号源明细", Type = "List<HAOYUANXX>", }, 
+            }, 
+        },
+        new ClassInfo {Name = "HAOYUANXX", 
+            Properties = new List<Property> { 
+                new Property { Name = "RIQI", Description = "日期", }, 
+                new Property { Name = "GUAHAOBC", Description = "挂号班次", Remark = "0全部 1上午 2 下午", }, 
+                new Property { Name = "GUAHAOLB", Description = "挂号类别", Remark = "0全部 1普通 2急诊  3专科 >3相关专家类别", }, 
+                new Property { Name = "KESHIDM", Description = "科室代码", }, 
+                new Property { Name = "YISHENGDM", Description = "医生代码", }, 
+                new Property { Name = "GUAHAOXH", Description = "挂号序号", }, 
+                new Property { Name = "JIUZHENSJ", Description = "就诊时间", }, 
+                new Property { Name = "YIZHOUPBID", Description = "一周排班ID", }, 
+                new Property { Name = "DANGTIANPBID", Description = "当天排班ID", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req门诊费用明细", Service = "MENZHENFYMX", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "JIUZHENKLX", Description = "就诊卡类型", Remark = "可空", }, 
+                new Property { Name = "JIUZHENKH", Description = "就诊卡号", Remark = "非空", }, 
+                new Property { Name = "BINGRENLB", Description = "病人类别", Remark = "可空", }, 
+                new Property { Name = "BINGRENXZ", Description = "病人性质", Remark = "可空", }, 
+                new Property { Name = "YIBAOKLX", Description = "医保卡类型", Remark = "可空", }, 
+                new Property { Name = "YIBAOKH", Description = "医保卡号", Remark = "可空", }, 
+                new Property { Name = "YIBAOKMM", Description = "医保卡密码", Remark = "可空", }, 
+                new Property { Name = "YIBAOKXX", Description = "医保卡信息", Remark = "可空", }, 
+                new Property { Name = "YIBAOBRXX", Description = "医保病人信息", Remark = "可空", }, 
+                new Property { Name = "YILIAOLB", Description = "医疗类别", Remark = "可空", }, 
+                new Property { Name = "JIESUANLB", Description = "结算类别", Remark = "可空", }, 
+                new Property { Name = "HISBRXX", Description = "HIS 病人信息", Remark = "可空", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res门诊费用明细", Service = "MENZHENFYMX", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { Name = "YILIAOLB", Description = "医疗类别", }, 
+                new Property { Name = "JIBINGMX", Description = "疾病明细", Type = "List<JIBINGXX>", }, 
+                new Property { Name = "FEIYONGMXTS", Description = "费用明细条数", }, 
+                new Property { Name = "FEIYONGMX", Description = "费用明细", Type = "List<MENZHENFYXX>", }, 
+            }, 
+        },
+        new ClassInfo {Name = "JIBINGXX", 
+            Properties = new List<Property> { 
+                new Property { Name = "JIBINGDM", Description = "疾病代码", }, 
+                new Property { Name = "JIBINGICD", Description = "疾病ICD", }, 
+                new Property { Name = "JIBINGMC", Description = "疾病名称", }, 
+                new Property { Name = "JIBINGMS", Description = "疾病描述", }, 
+            }, 
+        },
+        new ClassInfo {Name = "MENZHENFYXX", 
+            Properties = new List<Property> { 
+                new Property { Name = "CHUFANGLX", Description = "处方类型", Remark = "0.医技 1.处方", }, 
+                new Property { Name = "CHUFANGXH", Description = "处方序号", }, 
+                new Property { Name = "MINGXIXH", Description = "明细序号", }, 
+                new Property { Name = "FEIYONGLX", Description = "费用类型", }, 
+                new Property { Name = "XIANGMUXH", Description = "项目序号", }, 
+                new Property { Name = "XIANGMUCDDM", Description = "项目产地代码", }, 
+                new Property { Name = "XIANGMUMC", Description = "项目名称", }, 
+                new Property { Name = "XIANGMUGL", Description = "项目归类", }, 
+                new Property { Name = "XIANGMUGLMC", Description = "项目归类名称", }, 
+                new Property { Name = "XIANGMUGG", Description = "项目规格", }, 
+                new Property { Name = "XIANGMUJX", Description = "项目剂型", }, 
+                new Property { Name = "XIANGMUDW", Description = "项目单位", }, 
+                new Property { Name = "XIANGMUCDMC", Description = "项目产地名称", }, 
+                new Property { Name = "ZHONGCAOYTS", Description = "中草药贴数", }, 
+                new Property { Name = "DANJIA", Description = "单价", }, 
+                new Property { Name = "SHULIANG", Description = "数量", }, 
+                new Property { Name = "JINE", Description = "金额", }, 
+                new Property { Name = "KAIDANKSDM", Description = "开单科室代码", }, 
+                new Property { Name = "KAIDANKSMC", Description = "开单科室名称", }, 
+                new Property { Name = "KAIDANYSDM", Description = "开单医生代码", }, 
+                new Property { Name = "KAIDANYSXM", Description = "开单医生姓名", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req预约挂号处理", Service = "CLINICORDERD", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "PATIENTID", Description = "病人ID", }, 
+                new Property { Name = "OPERATOR", Description = "操作工号", }, 
+                new Property { Name = "REGDEPTID", Description = "科室代码", }, 
+                new Property { Name = "DOCTORID", Description = "医生代码", }, 
+                new Property { Name = "ORDERDATE", Description = "预约日期", }, 
+                new Property { Name = "CLINICTTYPE", Description = "挂号类别", Remark = "0全部 1普通 2急诊  3专科 >3相关专家类别", }, 
+                new Property { Name = "DUTYTYPE", Description = "挂号班次", Remark = "1上午 2 下午", }, 
+                new Property { Name = "SEQUENCENUM", Description = "挂号序号", Remark = "传0 则HIS 分配", }, 
+                new Property { Name = "TELNO", Description = "手机号", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res预约挂号处理", Service = "CLINICORDERD", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { Name = "ORDERNUM", Description = "取号密码", }, 
+                new Property { Name = "CLINICTTIME", Description = "就诊时间", }, 
+                new Property { Name = "SEQUENCENUM", Description = "挂号序号", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req预约退号处理", Service = "GUAHAOYYTH", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "JIUZHENKLX", Description = "就诊卡类型", Remark = "可空", }, 
+                new Property { Name = "JIUZHENKH", Description = "就诊卡号", Remark = "可空", }, 
+                new Property { Name = "ZHENGJIANLX", Description = "证件类型", Remark = "可空", }, 
+                new Property { Name = "ZHENGJIANHM", Description = "证件号码", Remark = "可空", }, 
+                new Property { Name = "XINGMING", Description = "姓名", Remark = "可空", }, 
+                new Property { Name = "YUYUELY", Description = "预约来源", Remark = "可空", }, 
+                new Property { Name = "QUHAOMM", Description = "取号密码", Remark = "非空", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res预约退号处理", Service = "GUAHAOYYTH", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req档案信息处理", Service = "DANGANXXCL", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "JIUZHENKH", Description = "就诊卡号", Remark = "病人唯一标识，非空", }, 
+                new Property { Name = "XINGMING", Description = "姓名", Remark = "非空", }, 
+                new Property { Name = "LIANXIDIANHUA", Description = "联系电话", Remark = "非空", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res档案信息处理", Service = "DANGANXXCL", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req缴费结算查询", Service = "QueryFeeRecord", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "cardNo", Description = "就诊卡号", Remark = "非空", }, 
+                new Property { Name = "cardType", Description = "就诊卡类型", Remark = "可空", }, 
+                new Property { Name = "startDate", Description = "开始时间 默认取最近一周", Remark = "可空", }, 
+                new Property { Name = "endDate", Description = "结束时间 默认取最近一周", Remark = "可空", }, 
+                new Property { Name = "extend", Description = "扩展字段", Remark = "可空", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res缴费结算查询", Service = "QueryFeeRecord", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { Name = "BILLMXTS", Description = "单据明细条数", }, 
+                new Property { Name = "BILLMX", Description = "单据明细", Type = "List<billdetail>", Attribute = "[XmlArrayItem(\"billdetial\")]", }, 
+            }, 
+        },
+        new ClassInfo {Name = "billdetail", 
+            Properties = new List<Property> { 
+                new Property { Name = "billNo", Description = "单据流水", }, 
+                new Property { Name = "tradeTime", Description = "交易时间", }, 
+                new Property { Name = "receiptNo", Description = "收据(发票)号", }, 
+                new Property { Name = "billFee", Description = "单据总金额", }, 
+                new Property { Name = "billType", Description = "费用类型", }, 
+                new Property { Name = "selfFee", Description = "自费金额", }, 
+                new Property { Name = "insurFee", Description = "医保金额", }, 
+                new Property { Name = "insurFeeInfo", Description = "医保信息", }, 
+                new Property { Name = "discountFee", Description = "优惠金额", }, 
+                new Property { Name = "tradeMode", Description = "支付方式", }, 
+                new Property { Name = "operId", Description = "操作员 ", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Req补打查询", Service = "QueryReprint", Base = "Req", XmlType = "IN", 
+            Properties = new List<Property> { 
+                new Property { Name = "cardNo", Description = "就诊卡号", Remark = "非空", }, 
+                new Property { Name = "cardType", Description = "就诊卡类型", Remark = "可空", }, 
+                new Property { Name = "startDate", Description = "开始时间 默认取最近一周", Remark = "可空", }, 
+                new Property { Name = "endDate", Description = "结束时间 默认取最近一周", Remark = "可空", }, 
+                new Property { Name = "extend", Description = "扩展字段", Remark = "可空", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res补打查询", Service = "QueryReprint", Base = "Res", XmlType = "OUT", 
+            Properties = new List<Property> { 
+                new Property { Name = "BILLMXTS", Description = "单据明细条数", }, 
+                new Property { Name = "BILLMX", Description = "单据明细", Type = "List<billdetail2>", Attribute = "[XmlArrayItem(\"billdetial\")]", }, 
+            }, 
+        },
+        new ClassInfo {Name = "billdetail2", 
+            Properties = new List<Property> { 
+                new Property { Name = "Tsxx", Description = "提示信息", }, 
+                new Property { Name = "Jslx", Description = "结算类型", }, 
+                new Property { Name = "Jsrq", Description = "结算时间", }, 
+                new Property { Name = "Fphm", Description = "发票号码", }, 
+                new Property { Name = "Brxm", Description = "病人姓名", }, 
+                new Property { Name = "Zjje", Description = "总计金额", }, 
+                new Property { Name = "Ybbx", Description = "医保报销", }, 
+                new Property { Name = "Smkje", Description = "市民卡支付", }, 
+                new Property { Name = "Bnzhye", Description = "本年余额", }, 
+                new Property { Name = "Lnzhye", Description = "历年账户余额", }, 
+                new Property { Name = "Thirdcash", Description = "移动支付", }, 
+                new Property { Name = "Bzxx", Description = "备注信息", }, 
+                new Property { Name = "Qyck", Description = "取药窗口", }, 
+                new Property { Name = "Ghks", Description = "挂号科室名称", }, 
+                new Property { Name = "Ghys", Description = "医生姓名", }, 
+                new Property { Name = "Jzxh", Description = "就诊序号", }, 
+                new Property { Name = "Kswz", Description = "科室位置", }, 
+            }, 
+        },
+        new ClassInfo {Name = "ReqDll", Mode = 1, 
+            Properties = new List<Property> { 
+                new Property { Name = "卡号", Description = "识别结算病人的唯一标识", }, 
+                new Property { Name = "结算类型", Description = "00 病人信息查询建档 01 门诊挂号 02 门诊取号03 门诊收费 04 计算LIS试管费", }, 
+                new Property { Name = "调用接口ID", Description = "传入空字符串", }, 
+                new Property { Name = "调用类型", Description = "传入空字符串", }, 
+                new Property { Name = "病人类别", Description = "15、省医保55、省异地56、市异地84、市医保88、萧山医保100、健康卡  ", }, 
+                new Property { Name = "结算方式", Description = "1、预结算 2、结算", }, 
+                new Property { Name = "应付金额", Description = "预结算获取返回应付金额，结算时再次传入做校验，结算方式 = 2时必传，否则无效", }, 
+                new Property { Name = "就诊序号", Description = "指定是否是结算本次就诊费用，不传则结算所有可结算费用", }, 
+                new Property { Name = "操作工号", Description = "传入空字符串无效", }, 
+                new Property { Name = "系统序号", Description = "传入空字符串无效", }, 
+                new Property { Name = "收费类别", Description = "传入空字符串无效", }, 
+                new Property { Name = "科室代码", Description = "挂号交易时不能为空", }, 
+                new Property { Name = "医生代码", Description = "专家挂号交易时不能为空", }, 
+                new Property { Name = "诊疗费_加收", }, 
+                new Property { Name = "诊疗费", }, 
+                new Property { Name = "挂号类别", Description = "挂号交易时不能为空 1、普通门诊 2、急诊3、专家门诊", }, 
+                new Property { Name = "排班类别", Description = "挂号交易时不能为空 1、上午 2、下午", }, 
+                new Property { Name = "取号密码", Description = "取号交易时不能为空", }, 
+                new Property { Name = "挂号日期", }, 
+                new Property { Name = "支付时间", Description = "结算时间 yyyy.mm.dd hh:mm:ss" }, 
+                new Property { Name = "支付方式", Description = "25 微信 26 支付宝 27 银行卡" }, 
+                new Property { Name = "结算流水号", }, 
+                new Property { Name = "支付流水号", }, 
+                new Property { Name = "支付金额", }, 
+                new Property { Name = "设备编码", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res病人信息查询建档", Base = "DllRes", Mode = 2, 
+            Properties = new List<Property> { 
+                new Property { Name = "结算结果", Description = "00、成功01、取消结算-1、失败", }, 
+                new Property { Name = "病人姓名", }, 
+                new Property { Name = "就诊卡号", Description = "病人唯一标识", }, 
+                new Property { Name = "病人性别", Description = "1、男 2、女", }, 
+                new Property { Name = "身份证号", }, 
+                new Property { Name = "出生日期", Description = "格式（YYYY.MM.DD）", }, 
+                new Property { Name = "病人类别", Description = "15、省医保55、省异地56、市异地84、市医保88、萧山医保100、健康卡  ", }, 
+                new Property { Name = "当年账户余额", Description = "医保当年账户余额，格式（0.00）", }, 
+                new Property { Name = "历年账户余额", Description = "医保历年账户余额，格式（0.00）", }, 
+                new Property { Name = "市民卡余额", Description = "市民卡账户余额，格式（0.00）", }, 
+                new Property { Name = "联系电话", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res挂号取号", Base = "DllRes", Mode = 2, 
+            Properties = new List<Property> { 
+                new Property { Name = "结算结果", Description = "00、成功01、取消结算02、余额不足-1、失败", }, 
+                new Property { Name = "病人姓名", }, 
+                new Property { Name = "就诊卡号", Description = "病人唯一标识", }, 
+                new Property { Name = "挂号日期", Description = "格式（YYYY.MM.DD）", }, 
+                new Property { Name = "诊疗费_加收", }, 
+                new Property { Name = "诊疗费", }, 
+                new Property { Name = "医保支付", }, 
+                new Property { Name = "市民卡账户支付", }, 
+                new Property { Name = "惠民减免金额", }, 
+                new Property { Name = "记账金额", }, 
+                new Property { Name = "科室名称", }, 
+                new Property { Name = "科室位置", }, 
+                new Property { Name = "医生名称", }, 
+                new Property { Name = "挂号序号", }, 
+                new Property { Name = "就诊号码", }, 
+                new Property { Name = "候诊时间", }, 
+                new Property { Name = "移动支付", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res预结算", Base = "DllRes", Mode = 2, 
+            Properties = new List<Property> { 
+                new Property { Name = "结算结果", Description = "00、成功01、取消结算02、余额不足-1、失败", }, 
+                new Property { Name = "病人姓名", Description = "病人姓名：****", }, 
+                new Property { Name = "单据总金额", Description = "单据总金额：50", }, 
+                new Property { Name = "医保报销金额", Description = "医保报销金额：8", }, 
+                new Property { Name = "市民卡余额", Description = "市民卡余额 16", }, 
+                new Property { Name = "应付金额", Description = "应付金额：42", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res结算", Base = "DllRes", Mode = 2, 
+            Properties = new List<Property> { 
+                new Property { Name = "结算结果", Description = "00、成功01、取消结算02、余额不足-1、失败", }, 
+                new Property { Name = "病人姓名", Description = "病人姓名：****", }, 
+                new Property { Name = "成功提示信息", Description = "杭州市-<市民卡医疗支付>结算成功！", }, 
+                new Property { Name = "电脑号", Description = "电脑号：33008813", }, 
+                new Property { Name = "单据总金额", Description = "单据总金额：50", }, 
+                new Property { Name = "医保报销金额", Description = "医保报销金额：8", }, 
+                new Property { Name = "医保本年账户余额", Description = "医保本年账户余额：0", }, 
+                new Property { Name = "医保历年账户余额", Description = "医保历年账户余额：0", }, 
+                new Property { Name = "应付金额", Description = "应付金额：42", }, 
+                new Property { Name = "市民卡支付金额", Description = "市民卡支付金额：0", }, 
+                new Property { Name = "市民卡账户余额", Description = "市民卡账户余额：0", }, 
+                new Property { Name = "移动支付", }, 
+                new Property { Name = "结算日期", Description = "结算日期：2014/07/22 14:07:50", }, 
+                new Property { Name = "打印发票", Description = "如需发票请到门诊楼一层11号自助机打印", }, 
+                new Property { Name = "取药窗口", Description = "门诊二楼西药房8号窗口取药", }, 
+            }, 
+        },
+        new ClassInfo {Name = "Res计算LIS试管费", Base = "DllRes", Mode = 2, 
+            Properties = new List<Property> { 
+                new Property { Name = "结算结果", Description = "00、成功-1、失败", }, 
+                new Property { Name = "病人姓名", }, 
+                new Property { Name = "就诊卡号", Description = "病人唯一标识", }, 
+                new Property { Name = "费用明细条数", Description = "0: 无LIS试管费>0 :有LIS试管费", }, 
+                new Property { Name = "费用明细", Description = "格式使用JSON", }, 
+            }, 
+        },
+        new ClassInfo {Name = "LIS试管费费用明细", 
+            Properties = new List<Property> { 
+                new Property { Name = "XIANGMUMC", Description = "项目名称", }, 
+                new Property { Name = "XIANGMUGLMC", Description = "项目归类名称", }, 
+                new Property { Name = "DANJIA", Description = "单价", }, 
+                new Property { Name = "SHULIANG", Description = "数量", }, 
+                new Property { Name = "JINE", Description = "金额", }, 
+            }, 
+        },
+    };
+
+#>
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace YuanTu.XiaoShanZYY.HIS
+{
+<#  foreach (var info in infos) {
+#>
+<#      if (!string.IsNullOrEmpty(info.XmlType)) { #>
+    [XmlType("<#= info.Service #>_<#= info.XmlType #>")]
+<#      } #>
+    public partial class <#= info.Name #><#= string.IsNullOrEmpty(info.Base) ? string.Empty : $" : {info.Base}" #>
+    {
+<#      if (!string.IsNullOrEmpty(info.Service)) {#>
+        [XmlIgnore]
+        public override string Service => "<#= info.Service #>";
+<#      } #>
+<#      foreach (var property in info.Properties) { 
+            if (string.IsNullOrEmpty(property.Name))
+                continue;
+#>
+        ///<summary>
+        /// <#= property.Description ?? string.Empty #>
+        /// <#= property.Remark ?? string.Empty #>
+        ///</summary>
+<#          if (!string.IsNullOrEmpty(property.Attribute)) { #>
+        <#= property.Attribute #>
+<#          } #>
+<#          if (!string.IsNullOrEmpty(property.Type)) { #>
+        public <#= property.Type #> <#= property.Name #> { get; set; }
+<#          } else { #>
+        public string <#= property.Name #> { get; set; }
+<#          } #>
+<#      } #>
+<#      if (info.Mode == 1) { #>
+        public override string ToString()
+        {
+            return string.Join("#"<#
+            foreach (var property in info.Properties) { 
+                var name = property.Name;
+                if (string.IsNullOrEmpty(name))
+                    continue;
+           #>, <#= name #><#
+            } #>);
+        }
+<#      } #>
+<#      if(info.Mode == 2){ #>
+
+        public override bool Parse(string s)
+        {
+            var list = s.Split('|');
+<#          for (var i = 0; i < info.Properties.Count; i++) {
+                var name = info.Properties[i].Name;
+                if (string.IsNullOrEmpty(name))
+                    continue;
+#>
+            <#= name #> = list[<#= i #>];
+<#          } #>
+            return true;
+        }
+<#      } #>
+    }
+
+<#  } #>
+}
+<#
+    string lastReq = String.Empty;
+    foreach (var info in infos)
+    {
+        if(string.IsNullOrEmpty(info.Service))
+            continue;
+        if (info.Name.StartsWith("Req"))
+        {
+            lastReq = info.Name;
+            continue;
+        }
+        var name = info.Name.Substring(3);
+#>
+// public static Result<<#= info.Name #>> <#= name #>(<#= lastReq #> req)
+//{
+//      return HISConnection.Handle<<#= info.Name #>>(req);
+//}
+<#  } #>
+
+<#
+    int opCode = 1;
+    foreach (var info in infos)
+    {
+        if(info.Mode != 2)
+            continue;
+        var name = info.Name.Substring(3);
+#>
+//public static Result<<#= info.Name #>> <#= name #>(ReqDll req)
+//{
+//    return RunExe<<#= info.Name #>>(req, <#= opCode++ #>);
+//}
+<#  } #>
+
+<#+
+    public bool SubClass(string name, out string realName)
+    {
+        var p = name.IndexOf("｛", StringComparison.Ordinal);
+        if (p < 0)
+        {
+            realName = name;
+            return false;
+        }
+        var q = name.IndexOf("｝", StringComparison.Ordinal);
+        realName = name.Substring(p + 1, q - p - 1);
+        return true;
+    }
+
+    public class ClassInfo
+    {
+        public bool Ignore { get; set; }
+        public string Name { get; set; }
+        public string Service { get; set; }
+        public string Base { get; set; }
+        public string XmlType { get; set; }
+        public int Mode { get; set; }
+        public List<Property> Properties { get; set; }
+    }
+
+    public class Property
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Remark { get; set; }
+        public string Type { get; set; }
+        public string Attribute { get; set; }
+    }
+#>

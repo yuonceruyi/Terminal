@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <SiConfig>
+    <HospitalCode>1</HospitalCode>
+    <TransSeq>0</TransSeq>
+  </SiConfig>
+  
+  <AbcPos>
+    <IP>192.168.0.1</IP>
+    <Port>7777</Port>
+    <TerminalId>1271X811</TerminalId>
+    <MerchantId>103330153116607</MerchantId>
+    <TPDU>6000100000</TPDU>
+  </AbcPos>
+  <ZT>
+    <Port>1</Port>
+    <Baud>9600</Baud>
+  </ZT>
+  <!--<TestRefund>1</TestRefund>-->
+  
+</root>

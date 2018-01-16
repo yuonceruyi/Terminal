@@ -1,0 +1,212 @@
+﻿<Window x:Class="YuanTu.HuNanHangTianHospital.Component.InfoQuery.PrintView.BillDetailPrint"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YuanTu.HuNanHangTianHospital.Component.InfoQuery.PrintView"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+            d:DesignHeight="600"
+            d:DesignWidth="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical">
+            <Button Click="Button_Click" Content="Print" />
+            <RichTextBox>
+                <FlowDocument x:Name="doc"
+                              PageHeight="14.85cm"
+                              PageWidth="21cm">
+                    <FlowDocument.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="FontSize" Value="9pt" />
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                        <Style TargetType="{x:Type TableCell}">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="LineHeight" Value="10" />
+                            <Setter Property="Padding" Value="2,2" />
+                        </Style>
+                        <Style TargetType="{x:Type Table}">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="CellSpacing" Value="0" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Style>
+                        <system:String x:Key="病人姓名">病人姓名</system:String>
+                        <system:String x:Key="性别">性别</system:String>
+                        <system:String x:Key="年龄">年龄</system:String>
+                        <system:String x:Key="病人类别">病人类别</system:String>
+
+                        <system:String x:Key="挂号单号">挂号单号</system:String>
+                        <system:String x:Key="交易日期">交易日期</system:String>
+                        <system:String x:Key="就诊科室">就诊科室</system:String>
+                        <system:String x:Key="医生">医生</system:String>
+
+                        <system:String x:Key="打印时间">打印时间</system:String>
+                    </FlowDocument.Resources>
+                    <Table x:Name="Caption" Margin="0,0" BorderThickness="0,0,0,3">
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph FontWeight="Bold" FontFamily="宋体" FontSize="30" Margin="0,20,0,20" TextAlignment="Center" >
+                                        <Run Text="湖南航天医院门诊费用明细"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Table x:Name="Header" Margin="0,15,0,0">
+                        <Table.Resources>
+                            <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                                <Setter Property="FontSize" Value="11"/>
+                                <Setter Property="TextAlignment" Value="Left"/>
+                            </Style>
+                        </Table.Resources>
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell >
+                                    <Paragraph>
+                                        <Run Text="病人姓名: "/>
+                                        <Run Text="{DynamicResource 病人姓名}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="性    别: "/>
+                                        <Run Text="{DynamicResource 性别}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="年    龄: "/>
+                                        <Run Text="{DynamicResource 年龄}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="病人类别: "/>
+                                        <Run Text="{DynamicResource 病人类别}"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Table x:Name="ExtendHeader" Margin="0,5,0,15">
+                        <Table.Resources>
+                            <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                                <Setter Property="FontSize" Value="11"/>
+                                <Setter Property="TextAlignment" Value="Left"/>
+                            </Style>
+                        </Table.Resources>
+                        <TableRowGroup>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="挂号单号: "/>
+                                        <Run Text="{DynamicResource 挂号单号}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="交易日期: "/>
+                                        <Run Text="{DynamicResource 交易日期}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="就诊科室: "/>
+                                        <Run Text="{DynamicResource 就诊科室}"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>
+                                        <Run Text="医    生: "/>
+                                        <Run Text="{DynamicResource 医生}"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Table x:Name="Contents" Margin="0,0" BorderThickness="1,1">
+                        <Table.Resources>
+                            <Style x:Key="{x:Type TableCell}" TargetType="{x:Type TableCell}">
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="2"/>
+                            </Style>
+                            <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </Table.Resources>
+                        <Table.Columns>
+                            <TableColumn Width="20"/>
+                            <TableColumn Width="Auto"/>
+                            <TableColumn Width="60"/>
+                            <TableColumn Width="40"/>
+                            <TableColumn Width="40"/>
+                            <TableColumn Width="50"/>
+                            <TableColumn Width="60"/>
+                            <TableColumn Width="60"/>
+                            <TableColumn Width="100"/>
+                        </Table.Columns>
+                        <TableRowGroup x:Name="ContentRows">
+                            <TableRow x:Name="Summary">
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph >
+                                        <Run Text=""/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph >
+                                        <Run Text="项目名称"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph>
+                                        <Run Text="规格"/>
+                                    </Paragraph>
+                                </TableCell >
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph>
+                                        <Run Text="单位"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph>
+                                        <Run Text="数量"/>
+                                    </Paragraph>
+                                </TableCell >
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph>
+                                        <Run Text="单价"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph>
+                                        <Run Text="金额"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell BorderThickness="0,0,1,1">
+                                    <Paragraph>
+                                        <Run Text="折后"/>
+                                    </Paragraph>
+                                </TableCell>
+                                <TableCell BorderThickness="0,0,0,1">
+                                    <Paragraph>
+                                        <Run Text="收费单号"/>
+                                    </Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                    <Section x:Name="Count" Margin="20,0">
+                        <Paragraph>
+                            <!--<Run Text="{DynamicResource 打印时间}"/>-->
+                            <LineBreak/>
+                            <LineBreak/>
+                        </Paragraph>
+                    </Section>
+                </FlowDocument>
+            </RichTextBox>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

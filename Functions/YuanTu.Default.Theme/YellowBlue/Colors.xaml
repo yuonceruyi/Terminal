@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="主按钮文本颜色" Color="#493c06"></SolidColorBrush>
+    <SolidColorBrush x:Key="主按钮2文本颜色" Color="#ffffff"></SolidColorBrush>
+    
+    <Color x:Key="主按钮背景Color">#e6c314</Color>
+    <Color x:Key="主按钮背景DownColor">#bca11a</Color>
+    <Color x:Key="主按钮边框Color">#ffe376</Color>
+    <SolidColorBrush x:Key="主按钮背景Brush" Color="#e6c314" />
+    <SolidColorBrush x:Key="主按钮背景DownBrush" Color="#bca11a" />
+    <SolidColorBrush x:Key="主按钮边框Brush" Color="#ffe376" />
+    <SolidColorBrush x:Key="主按钮文本Brush" Color="#493c06" />
+
+    <Color x:Key="主按钮2背景Color">#d94040</Color>
+    <Color x:Key="主按钮2背景DownColor">#b73434</Color>
+    <Color x:Key="主按钮2边框Color">#af2727</Color>
+    <SolidColorBrush x:Key="主按钮2背景Brush" Color="#d94040" />
+    <SolidColorBrush x:Key="主按钮2背景DownBrush" Color="#b73434" />
+    <SolidColorBrush x:Key="主按钮2边框Brush" Color="#af2727" />
+    <SolidColorBrush x:Key="主按钮2文本Brush" Color="#ffffff" />
+
+</ResourceDictionary>

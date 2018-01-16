@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--社保配置-->
+  <SheBao>
+    <!--是否开启社保密码输入-->
+    <OpenSheBaoPassword>0</OpenSheBaoPassword>
+    <yljgbm>H6030</yljgbm>
+    <mm></mm>
+    <czybm>H6037</czybm>
+    <czyxm>叶峰</czyxm>
+    <url>http://172.16.202.180:8080/frontgatewayyb/gateway.do</url>
+    <!--<url>http://ngrok.yuantutech.com:43300/frontgatewayyb/gateway.do</url>-->
+  </SheBao>
+
+  <AccountingAddress>
+    <!--交易记账地址-->
+    <!--<jyjz>http://ngrok.yuantutech.com:43300/frontgatewayserial/trade/infoInsert.do</jyjz>-->
+    <jyjz>http://172.16.202.180:8080/frontgatewayserial/trade/infoInsert.do</jyjz>
+    <!--医保记账地址-->
+    <!--<ybjz>http://ngrok.yuantutech.com:29219/frontgatewayserial/trade/ybInfoInsert.do</ybjz>-->
+    <ybjz>http://172.16.202.180:8080/frontgatewayserial/trade/ybInfoInsert.do</ybjz>
+  </AccountingAddress>
+
+  <!-- 打印机设置 -->
+  <Print>
+    <!--是否关闭打印机的缺纸检测-->
+    <CloseChecked>0</CloseChecked>
+  </Print>
+
+  <!--银联相关的设置-->
+  <Pos>
+    <IP>168.33.48.35</IP>
+    <Port>7788</Port>
+    <TPDU>6000040000</TPDU>
+    <Head>603102000000</Head>
+    <TerminalId>sd000014</TerminalId>
+    <MerchantId>302440380627004</MerchantId>
+  </Pos>
+
+  <!--机器上允许挂号的时间段；默认730到1200，1330到1730；请注意格式-->
+
+  <挂号时间>
+    <上午>
+      <开始时间>730</开始时间>
+      <结束时间>1200</结束时间>
+    </上午>
+    <下午>
+      <开始时间>1330</开始时间>
+      <结束时间>2330</结束时间>
+    </下午>
+  </挂号时间>
+
+  <!--机器上允许预约取号的时间段；默认730到1200，1330到1730；请注意格式-->
+  <取号时间>
+    <上午>
+      <开始时间>730</开始时间>
+      <结束时间>1200</结束时间>
+    </上午>
+    <下午>
+      <开始时间>1330</开始时间>
+      <结束时间>2330</结束时间>
+    </下午>
+  </取号时间>
+
+  <分院机器>0</分院机器>
+</root>

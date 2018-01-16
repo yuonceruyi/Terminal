@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="open" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="open" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="open">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorld2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorld2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorld2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="funMain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmldoc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="funMainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="funMainResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld2SoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld2" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld2SoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorld2Response" />
+  </wsdl:message>
+  <wsdl:message name="funMainSoapIn">
+    <wsdl:part name="parameters" element="tns:funMain" />
+  </wsdl:message>
+  <wsdl:message name="funMainSoapOut">
+    <wsdl:part name="parameters" element="tns:funMainResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld2HttpGetIn">
+    <wsdl:part name="Name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld2HttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="funMainHttpGetIn">
+    <wsdl:part name="xmldoc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="funMainHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld2HttpPostIn">
+    <wsdl:part name="Name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld2HttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="funMainHttpPostIn">
+    <wsdl:part name="xmldoc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="funMainHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="openSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">此方法用于调用测试，调用时不需要传入参数,会返回一个固定的字符串。</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">此方法用于调用测试，调用时需要传入单个参数[&lt;b style="color:#FF0000;"&gt;Name&lt;/b&gt;]，返回接收到的参数值。例如：接收到参数值[test],中括号里面的为参数值，不包括中括号。</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorld2SoapIn" />
+      <wsdl:output message="tns:HelloWorld2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="funMain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">参数示例&lt;a href="../html/open.html" target="_blank"&gt;&lt;b style="color:#FF0000;"&gt;[查看帮助文档]&lt;/b&gt;&lt;/a&gt;</wsdl:documentation>
+      <wsdl:input message="tns:funMainSoapIn" />
+      <wsdl:output message="tns:funMainSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="openHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">此方法用于调用测试，调用时不需要传入参数,会返回一个固定的字符串。</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">此方法用于调用测试，调用时需要传入单个参数[&lt;b style="color:#FF0000;"&gt;Name&lt;/b&gt;]，返回接收到的参数值。例如：接收到参数值[test],中括号里面的为参数值，不包括中括号。</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorld2HttpGetIn" />
+      <wsdl:output message="tns:HelloWorld2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="funMain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">参数示例&lt;a href="../html/open.html" target="_blank"&gt;&lt;b style="color:#FF0000;"&gt;[查看帮助文档]&lt;/b&gt;&lt;/a&gt;</wsdl:documentation>
+      <wsdl:input message="tns:funMainHttpGetIn" />
+      <wsdl:output message="tns:funMainHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="openHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">此方法用于调用测试，调用时不需要传入参数,会返回一个固定的字符串。</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">此方法用于调用测试，调用时需要传入单个参数[&lt;b style="color:#FF0000;"&gt;Name&lt;/b&gt;]，返回接收到的参数值。例如：接收到参数值[test],中括号里面的为参数值，不包括中括号。</wsdl:documentation>
+      <wsdl:input message="tns:HelloWorld2HttpPostIn" />
+      <wsdl:output message="tns:HelloWorld2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="funMain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">参数示例&lt;a href="../html/open.html" target="_blank"&gt;&lt;b style="color:#FF0000;"&gt;[查看帮助文档]&lt;/b&gt;&lt;/a&gt;</wsdl:documentation>
+      <wsdl:input message="tns:funMainHttpPostIn" />
+      <wsdl:output message="tns:funMainHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="openSoap" type="tns:openSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="open/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld2">
+      <soap:operation soapAction="open/HelloWorld2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funMain">
+      <soap:operation soapAction="open/funMain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="openSoap12" type="tns:openSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="open/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld2">
+      <soap12:operation soapAction="open/HelloWorld2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funMain">
+      <soap12:operation soapAction="open/funMain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="openHttpGet" type="tns:openHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld2">
+      <http:operation location="/HelloWorld2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funMain">
+      <http:operation location="/funMain" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="openHttpPost" type="tns:openHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld2">
+      <http:operation location="/HelloWorld2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funMain">
+      <http:operation location="/funMain" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="open">
+    <wsdl:port name="openSoap" binding="tns:openSoap">
+      <soap:address location="http://61.175.192.169:9988/server/open.asmx" />
+    </wsdl:port>
+    <wsdl:port name="openSoap12" binding="tns:openSoap12">
+      <soap12:address location="http://61.175.192.169:9988/server/open.asmx" />
+    </wsdl:port>
+    <wsdl:port name="openHttpGet" binding="tns:openHttpGet">
+      <http:address location="http://61.175.192.169:9988/server/open.asmx" />
+    </wsdl:port>
+    <wsdl:port name="openHttpPost" binding="tns:openHttpPost">
+      <http:address location="http://61.175.192.169:9988/server/open.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

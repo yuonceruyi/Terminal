@@ -1,0 +1,173 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using YuanTu.YiWuArea.Insurance.Models.Base;
+<#
+//^表示注释 |表示对象 :表示数组
+	var list=new List<Tuple<string,int,bool,string[],string[]>>(){
+		new Tuple<string,int,bool,string[],string[]>(
+			"签到",
+			94,
+			false,
+			new[]{"操作员账号"},
+			new[]{"操作员账号","日对账流水号","签到时间"}),
+		new Tuple<string,int,bool,string[],string[]>(
+		"获取参保人员信息",
+		22,
+		false,
+		new []{"读卡方式"},
+		new []{"身份验证结果","封锁原因","开户银行"}
+		),
+		new Tuple<string,int,bool,string[],string[]>(
+			"门诊挂号预结算",
+			27,
+			true,
+			new[]{"收费类型","门诊号","疾病编号","病种审批号","疾病名称","疾病描述","本次结算单据张数","预算单据列表:单据列表","预算收费项目列表:收费项目列表","是否需要个帐支付","对账流水号"},
+			new[]{"超限提示标记","规定病种标志","结算时间","计算结果信息|计算结果信息","有误收费项目明细返回信息:有误收费项目明细返回信息","超限明细列表:超限明细列表"}),
+	new Tuple<string,int,bool,string[],string[]>(
+			"门诊挂号结算",
+			28,
+			true,
+			new[]{"收费类型","门诊号","疾病编号","病种审批号","疾病名称","疾病描述","本次结算单据张数","结算单据列表:单据列表","结算收费项目列表:收费项目列表","经办人","是否需要个帐支付","对账流水号"},
+			new[]{"超限提示标记","规定病种标志","结算时间","结算流水号","计算结果信息|计算结果信息","有误收费项目明细返回信息:有误收费项目明细返回信息","超限明细列表:超限明细列表"}),
+		
+		new Tuple<string,int,bool,string[],string[]>(
+			"门诊预结算",
+			29,
+			true,
+			new[]{"收费类型","门诊号","疾病编号","病种审批号","疾病名称","疾病描述","本次结算单据张数","预算单据列表:单据列表","预算收费项目列表:收费项目列表","是否需要个帐支付","对账流水号"},
+			new[]{"超限提示标记","规定病种标志","结算时间","计算结果信息|计算结果信息","有误收费项目明细返回信息:有误收费项目明细返回信息","超限明细列表:超限明细列表"}),
+		new Tuple<string,int,bool,string[],string[]>(
+			"门诊结算",
+			30,
+			true,
+			new[]{"收费类型","门诊号","疾病编号","病种审批号","疾病名称","疾病描述","本次结算单据张数","结算单据列表:单据列表","结算收费项目列表:收费项目列表","经办人","是否需要个帐支付","对账流水号"},
+			new[]{"超限提示标记","规定病种标志","结算时间","结算流水号","计算结果信息|计算结果信息","有误收费项目明细返回信息:有误收费项目明细返回信息","超限明细列表:超限明细列表"}),
+	    new Tuple<string,int,bool,string[],string[]>(
+	        "住院预结算",
+	        34,
+	        false,
+	        new[]{"结算类型","转诊转院申请单编号","住院号","住院登记交易号","本次结算明细条数","是否需要个帐支付"},
+	        new[]{"住院结算交易交流水号","结算日期","计算结果信息|计算结果信息","超限列表结构体:超限列表结构体"}),
+	    new Tuple<string,int,bool,string[],string[]>(
+	        "出院结算",
+	        36,
+	        true,
+	        new[]{"结算类型","转诊转院申请单编号","住院号","住院登记交易号","本次结算明细条数","是否需要个帐支付","对账流水号"},
+	        new[]{"住院结算交易交流水号","结算日期","计算结果信息|计算结果信息","超限列表结构体:超限列表结构体"}),
+	    new Tuple<string,int,bool,string[],string[]>(
+	        "住院信息变动",
+	        38,
+	        false,
+	        new[]{"住院号","住院登记交易号","出院日期","病人床号","诊断医生姓名","诊断描述","疾病编号","疾病名称","科室名称","科室编号","出院原因","变动类型"},
+	        new[]{"交易状态","错误信息","写医保卡结果","扣银行卡结果","写卡后IC卡数据"}),
+		new Tuple<string,int,bool,string[],string[]>(
+			"交易确认",
+			49,
+			false,
+			new[]{"交易类型","医保交易流水号","HIS事务结果","附加信息","是否需要诊间结算"},
+			new[]{"交易流水号","诊间结算流水号"}),
+		new Tuple<string,int,bool,string[],string[]>(
+			"单价限额自负比列获取",
+			58,
+			false,
+			new[]{"类别标志","项目编号","医疗人员类别","特殊病标志","医院等级","医疗类别","单复方标志","限制类标志","疾病编码","交易时间"},
+			new[]{"自负比列","进口类自负比例"}),
+		new Tuple<string,int,bool,string[],string[]>(
+			"批量获取自负比例",
+			71,
+			false,
+			new[]{"医保待遇","自负比例项目列表:项目列表"},
+			new[]{"自负比例列表:自负比例列表"}),
+	    new Tuple<string,int,bool,string[],string[]>(
+	        "住院分娩结算",
+	        73,
+	        false,
+	        new[]{"准生证号码","出生证号码","婴儿出生日期","分娩种类","住院总费用"},
+	        new[]{"报销金额"}),
+		new Tuple<string,int,bool,string[],string[]>(
+			"病种登记信息下载",
+			74,
+			false,
+			new[]{"病种类别","病种证书号"},
+			new[]{"登记信息列表:登记信息列表"}),
+		new Tuple<string,int,bool,string[],string[]>(
+			"无卡退费",
+			82,
+			true,
+			new[]{"要作废的结算交易号","经办人","对账流水号"},
+			new[]{"是否重复退费","退费交易流水号","退费结算日期","计算结果信息|计算结果信息"}),
+
+	};
+	var k = (Func<string,Tuple<string,string>>) ((s) => { 
+		var arr=s.Split(new[]{'|',':'});
+		if(arr.Length>1){
+			if(s.Contains(':')){
+			return new Tuple<string,string>("ItemList<"+arr[0]+">",arr[1]);
+			}else if(s.Contains('|')){
+			return new Tuple<string,string>(arr[0],arr[1]);
+			}
+		}
+		return new Tuple<string,string>("string",s);
+	 });
+#>
+
+
+namespace YuanTu.YiWuArea.Insurance.Models{
+
+	public static partial class SipayHandler{
+<#foreach(var item in list){#>
+		public static Res<#=item.Item1#> 调用<#=item.Item1#>(Req<#=item.Item1#> req){return Handler<Req<#=item.Item1#>, Res<#=item.Item1#>>(req,<#=item.Item2#>);}
+<#}#>
+	}
+
+<#foreach(var item in list){#>
+	public class Req<#=item.Item1#>:InsuranceRequestBase
+	{
+		public override string TradeName=>"<#=item.Item1#>";
+		public override string Ic信息 { get;set;}
+<#foreach(var qingqiuItem in item.Item4){var rest=k(qingqiuItem); #>
+		public <#=rest.Item1#> <#=rest.Item2#>{get;set;}
+<#}#>
+
+
+		public override string DataFormat(){
+<#if(item.Item3){#>
+			对账流水号=对账流水号??SipayHandler.SiToken;
+<#}#>
+<#var str=string.Join("~",item.Item4.Select(p=>("{"+k(p).Item2)+"}"));#>
+			return $"<#=str.ToString()#>";
+		}
+	}
+<#}#>
+
+<#foreach(var item in list){#>
+	public class Res<#=item.Item1#>:InsuranceResponseBase
+	{
+		
+<#foreach(var qingqiuItem in item.Item5){if(string.IsNullOrWhiteSpace(qingqiuItem)){continue;} var rest=k(qingqiuItem); #>
+		public <#=rest.Item1#> <#=rest.Item2#>{get;set;}
+<#}#>
+
+
+		public override void DataFormat(string[] arr){
+<#var idx=5; 
+foreach(var it in item.Item5.Where(p=>!string.IsNullOrWhiteSpace(p))){
+	var rest=k(it);#>
+			<#=rest.Item2#>=InternalTools.GetValueBack(<#=rest.Item2#>,arr[<#=idx++#>]);
+<#}#>
+		}
+	}
+<#}#>
+
+
+}

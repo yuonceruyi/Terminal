@@ -1,0 +1,225 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+//采用英文: 表示数组 |表示对象
+// ^解释当前字段的含义
+//* 表示该字段不在日志中输出
+//[]表示当前字段已废弃
+var dictionary = new Dictionary<string,List<string>>()
+{
+{"病人信息",new List<string>(){"patientId","platformId","name","sex","birthday","idNo","cardNo","guardianNo","address","phone","patientType","accountNo","accBalance","seqNo","cardType","licensePlateNo"}},
+{"建档信息",new List<string>(){"[cardNo]","securityNo","patientid","patientCard","platformId","accBalance^建档后余额"}},
+{"领卡信息",new List<string>(){"patientId","platformId","name","nation","sex","birthday","idNo","cardNo","cardStatus","guardianNo","address","phone","patientType","accBalance","operId","flowId"}},
+{"病人基本信息修改信息",new List<string>(){"success",}},
+{"病人类别信息",new List<string>(){"patientTypeId","patientTypeName"}},
+{"补卡信息",new List<string>(){"patientCard^卡面号","cardNo^卡内号","cardStatus^卡状态","cardType^卡类型","platformId^平台ID"}},
+{"补卡结果",new List<string>(){"success"}},
+
+{"就诊情况记录",new List<string>(){"tradeTime","deptName","doctName","info","billNo",}},
+{"缴费概要信息",new List<string>()
+{
+    "billNo","billDate","billType","billFee",
+    "deptCode","deptName","doctCode","doctName",
+    "billGroupNo","extendBalanceInfo",
+    "缴费明细信息:billItem",
+}},
+{"已缴费概要信息",new List<string>()
+{
+    "billNo","billType","billFee",
+    "deptCode","deptName","doctCode","doctName",
+    "billGroupNo","extendBalanceInfo",
+    "tradeTime","tradeMode",
+    "receiptNo","selfFee","insurFee","insurFeeInfo","discountFee","operId",
+    "结算记录:billItem",
+}},
+{"缴费明细信息",new List<string>()
+{
+    "billNo","billDate","billType","billFee","billSeq",
+    "deptCode","deptName","doctCode","doctName","hosFeeNo","diseaseCode",
+    "itemNo","productCode","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice","itemCode","execDeptName","ybInfo"
+}},
+{"预结算结果",new List<string>(){"selfFee","insurFee","insurFeeInfo","payAccount","billFee","balBillNo"}},
+{"结算结果",new List<string>(){"patientId","selfFee","insurFeeInfo","insurFee","payAccount","receiptNo","takeMedWin","hasMoreFee","testCode","transNo^交易流水号","缴费明细信息:billItem",}},
+//{"结算明细信息",new List<string>(){"billDate","billFee","itemNo","productCode","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice",}},
+{"结算记录",new List<string>(){"tradeTime","receiptNo","billFee","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice","cost","billType"}},
+{"充值结果",new List<string>(){"orderNo^订单号","cash^余额","sFlowId^交易流水号"}},
+{"充值记录",new List<string>(){"tradeMode","accountNo","cash","receiptNo","tradeTime","operId","optType^交易类型(消费、充值)","tradeType"}},
+{"充值同步his结果",new List<string>(){"success",}},
+{"指纹信息上传结果",new List<string>(){"success",}},
+{"预约挂号同步his结果",new List<string>(){"success",}},
+{"交易记录同步his结果",new List<string>(){"success",}},           
+{"账户余额",new List<string>(){"receiptNo","cash",}},
+{"预缴金消费结果",new List<string>(){"orderId^订单Id","sFlowId^流水号","cash^消费后余额"}},
+{"预缴金消费冲正结果",new List<string>(){"logNo^流水号","cash^金额"}},
+{"排班科室信息",new List<string>(){"deptCode","deptName","parentDeptCode","parentDeptName","simplePy","fullPy","deptIntro","预约挂号配置列表:configList"}},
+{"预约挂号配置列表",new List<string>(){"regType^挂号类别","regTypeName^挂号类别名称","regMode^挂号方式"}},
+{"排班信息",new List<string>(){"medDate","deptCode","deptName","parentDeptCode","parentDeptName","doctCode","doctName","doctTech","medAmPm","regfee","treatfee","regAmount","scheduleId","restnum","hosRegType^医院的挂号类别","regMode","regType","subRegType^挂号子类别1: 主任医师 , 2: 副主任医师"}},
+{"号源明细",new List<string>(){"appoNo","medBegtime","medEndtime","restNum"}},
+{"预约挂号预处理结果",new List<string>(){"regFee","treatFee","regAmount"}},
+{"挂号锁号结果",new List<string>(){"lockId^锁号ID","appointMode^预约收费模式,预约收费使用,0：不收费1：收费2：用户可选收费",}},
+{"挂号结果",new List<string>(){"orderNo","patientId","deptName","parentDeptName","doctName","regFee","treatFee","regAmount","medDate","address","appoNo","selfFee","insurFee","insurFeeInfo","visitNo","transNo^扣费的交易流水号","receiptNo^发票号","regFlowId^HIS挂号产生的流水号"}},
+{"取号结果",new List<string>(){"deptName","doctName","regFee","treatFee","regAmount","medDate","address","appoNo","selfFee","insurFee","insurFeeInfo","visitNo","transNo^扣费的交易流水号","receiptNo^发票号"}},
+{"挂号预约记录",new List<string>(){
+    "regNo","appoNo^序号","scheduleId",
+    "tradeTime","medDate","medTime","medAmPm",
+    "hospCode","hospName","deptName","doctName","doctTech",
+    "address","appoFrom",
+    "regFee","treatFee","regAmount",
+    "status^1预约成功 2取号成功 3取消成功 4已过期",
+    "orderNo^取号密码","doctCode","deptCode","payStatus^支付状态","lockId^锁号ID",
+}},
+{"取消预约结果",new List<string>(){"success"}},
+{"挂号解锁结果",new List<string>(){"success"}},
+{"住院患者信息",new List<string>(){
+    "status^住院状态","createDate^入院时间","outDate^出院时间","patientHosId^住院号","area^病区","bedNo^床号","deptName^科室","visiteId^住院次数",
+    "name^姓名","sex^性别","birthday^生日","idNo^身份证号","cardNo^诊疗卡号","guardianNo^监护人身份证号","address^家庭地址","phone^联系电话",
+    "patientType^病人类别","accountNo^交易账户号","hosAccBalanceCount^住院预缴金余额凭证数量","IsArrearage^欠款标志","[patientId]",
+    "accBalance^住院预缴金余额","patientAccBalance^门诊预缴金余额","cost^累计自负费用","balance^余款","securityBalance^担保金",
+    }},
+{"住院患者费用明细",new List<string>(){"tradeTime","productCode","itemName","itemSpecs","itemLiquid","itemUnits","itemQty","itemPrice","cost","visited","ratio","deptName",}},
+{"住院充值结果",new List<string>(){"receiptNo","cash","visitId",}},
+{"住院充值记录",new List<string>(){"receiptNo","tradeMode","tradeTime","cash","visitId","operId","payerName^操作人姓名"}},
+
+{"检查病人是否能自助机结算结果",new List<string>(){"status","checkMsg","patientTypeId","ybInfo"}},
+{"病人出院记录",new List<string>(){"isPayFee^是否欠费","cash^金额","auditDoct^审核医生","auditDoctName^审核医生姓名","backFeeCardNo^退费卡号","backFeePatientName^退费患者姓名"}},
+{"自助出院预结算结果",new List<string>(){"selfAmount","insuranceAmount","hosAccBalance"}},
+{"自助出院结算结果",new List<string>(){"Operator^收款员","cash^合计金额","deptName^科室","inDate^入院时间","InvoiceNo^票据号"}},
+{"床位信息",new List<string>(){"wardCode^病区编码","wardName^病区名称","totalBedNum^总床位数","leftBedNum^剩余床位数",}},
+
+{"出院结算次数",new List<string>(){"startDate^开始日期","billDate^单据日期","patientHosId^住院号","patientName^患者姓名","patientType^病人类型","receiptNo^结算发票号","printTimes^打印次数","isBalanceRecord^是否有未结算记录","createDate^本次住院时间","outDate^本次出院时间","isMidwayBalance^是否是中途结算",}},
+{"出院结算明细",new List<string>(){"startDate^开始日期","billDate^单据日期","patientHosId^住院号","patientName^患者姓名","patientType^病人类型","printTimes^打印次数","出院结算项目:billItem"}},
+{"出院结算项目",new List<string>(){"itemName^项目名称","itemSpecs^项目规格","itemUnits^项目单位","itemQty^项目数量","itemPrice^项目单价","allCommonMoney^全额统筹","ratio^自费比例","commonMoney^统筹金额","selfMoney^自付金额","allSelfMoney^全额自付","cost^总计金额","itemsTypeCode^项目医保分类编码","itemsTypeName^项目医保分类名称",}},
+{"出院结算打印结果",new List<string>(){"success"}},
+
+{"虚拟账户开通结果",new List<string>(){"accountNo","accountId",}},
+
+{"检验基本信息",new List<string>(){"reportId","patientId","patientName","age","sex","cardNo","inhospId","examType","checkPart","checkDoc","sendTime","resultTime","auditTime^检验报告单审核日期","printTimes","remark","inspectDoctor^送检医生","检验项目:examItem","auditDoc^核对医生","examResult^临床诊断","sampleType^标本种类","receiveTime","receiveDoct", "bedNo","barCode","checkNum","itemName","date","machineNum","sendDept","itemType","resultTip"}},
+{"打印检验结果",new List<string>(){"success"}},
+{"检验项目",new List<string>(){"itemName","itemRealValue","itemRefRange","itemMark","itemUnits^单位","quaResult^定性结果","itemAbbr^项目名称缩写"}},
+
+{"检查结果",new List<string>(){"reportId","patientId","cardNo","patientName","rechkDt","rechkUserName","lastPrintDt","reportDt","printCount","exprintCount","unprintFlag","unprintReason",}},
+{"影像诊断结果",new List<string>{"cardNo^卡号","inspecDoctCode^送检医生工号","inspecDoctName^送检医生姓名","inspecTime^送检时间","checkDate^检查日期","auditDoctCode^审核医生工号","auditDoctName^审核医生姓名","checkStatus^检查状态","checkDesc^检查描述","checkResult^检查结果","auditDate^审核日期","checkNo^检查号码","patientNo^病案号","wardName^病区名称","wardBed^病区床号","sex^病人性别","age^病人年龄","inspecDeptName^送检科室名称","name^姓名","checkItem^检查项目","idNo^身份证号码","diagnosis^检查诊断","suggestion^检查建议","reportTime^报告时间",}},
+{"医生信息",new List<string>(){"doctCode","doctName","doctProfe","doctIntro","doctSpec","sex","deptCode","deptName","doctLevel"}},
+{"科室信息",new List<string>(){"deptCode","deptName","deptIntro","address","phone","deptType",}},
+{"药品项目信息",new List<string>(){"medicineCode^药品编码","medicineName^药品名称","specifications^规格","price^价格","packagingUnit^包装单位","miniUnit^最小单位","priceUnit^计价单位","producer^生产厂家","type^类型","medicalRatio^医保报销比例",}},
+{"收费项目信息",new List<string>(){"itemCode^项目编码","itemName^项目名称","specifications^规格","price^价格","priceUnit^计价单位","producer^生产厂家","type^类型","medicalRatio^医保报销比例"}},
+{"医生介绍",new List<string>(){"doctCode^医生代码","doctName^医生姓名","doctPY^科室名称的全拼","doctSimplePY^科室名称的简拼","sex^性别","doctLogo^医生头像短路径","doctLevel^医生级别","doctProfe^医生职称","doctSpec^医生特长","doctIntro^医生介绍","corpCode^医院id在排班系统中的编号","deptCode^科室代码","deptName^科室名称","doctPhoneNum^医生电话","doctPictureIntranetUrl^医生头像全路径"}},
+
+
+
+{"订单扫码",new List<string>{"outTradeNo^用户平台支付流水","qrCode^二维码串"}},
+{"取消订单",new List<string>{"outTradeNo^用户平台支付流水","outRefundNo^用户平台退款单号","fee^退款金额"}},
+{"订单状态",new List<string>{
+    "outTradeNo^用户平台支付流水",
+    "fee^退款金额",
+    "status^101:处理中 200:支付成功 201:支付失败 400:失效订单 500:退款成功 501:退款失败",
+    "paymentTime^支付时间",
+    "outRefundNo",
+    "statusDes^状态文本",
+    "outPayNo^第三方订单号",
+    "buyerAccount^支付账户",
+}},
+{"状态上传结果",new List<string>(){"success"}},
+{"医保科室信息",new List<string>(){"HisDeptCode^HIS科室编码"," HisDeptName^HIS科室名称","SiDeptCode^医保科室编码","SiDeptName^医保科室名称"}},
+{"医保结算信息",new List<string>{"selfMoney^自费金额","commonMoney^统筹支付","accountMoney^账户支付","lastBalance^医保余额","hospitalMoney^医院支付"}},
+
+{"网关状态",new List<string>(){"appo^排班系统状态true脱机状态false联机状态","platform^结算平台状态true脱机状态false联机状态",}},
+
+{"门诊挂号预结算结果",new List<string>(){"insurFeeInfo",}},
+{"门诊挂号预结算结果确认结果",new List<string>(){"patientId","deptName","parentDeptName","doctName","regFee","treatFee","regAmount","medDate","insurFeeInfo","selfFee","insurFee","transNo"}},         
+//{"门诊缴费预结算结果",new List<string>(){"insurFeeInfo"}},
+{"门诊缴费预结算结果确认结果",new List<string>(){"selfFee","insurFee","insurFeeInfo","transNo"}},
+
+{"签到结果",new List<string>{"currentDate^UTC当前时间","success^是否成功"}},
+{"信息上报结果",new List<string>{"success^是否成功"}},
+{"清钱箱上报结果",new List<string>{"success^是否成功"}},
+{"拍照录像上传结果",new List<string>{"success^是否成功"}},
+{"支付信息",new List<string>{
+    "tradeMode","accountNo","cash",
+    "posTransNo","bankTransNo","bankDate","bankTime","bankSettlementTime","bankCardNo","posIndexNo","sellerAccountNo",
+    "transNo^第三方的交易流水号","payAccountNo^付款人账号，WX、ZFB不可空","outTradeNo^远图平台流水号",}},
+
+//先诊疗后付费
+{"借款权限详情",new List<string>{
+   "loanAuthority^用户借款权限","loanAuthorityDesc^用户借款权限 描述","creditsAmt^信用额度","loanedAmt^已借款金额","remainingAmt^剩余额度","overdueDays^逾期天数","hospLoanAuthority^医院借款权限","hospLoanAuthorityDesc^医院借款权限描述","hospRemainingAmt^医院借款剩余额度","signStatus^签约状态","signStatusDesc^签约状态描述","agreement^签约协议",
+   }},
+{"借款账单分页",new List<string>{
+   "currentPage^当前页码","pageSize^每页记录数","totalRecordNum^总记录数","借款账单详情:billItem^账单列表",
+   }},
+{"借款账单详情",new List<string>{
+   "billNo^账单编号","hospCode^医院编号","hospName^医院名称","billDate^账单日期","billFee^账单金额","repaymentAmt^还款金额","status^账单状态","statusDesc^账单状态描述","allowPayType^允许的还款方式","allowPayTypeDesc^还款方式描述",
+   }},
+{"借款还款流水分页",new List<string>{
+   "currentPage^当前页码","pageSize^每页记录数","totalRecordNum^总记录数","借款还款流水详情:billItem^账单列表",
+   }},
+{"借款还款流水详情",new List<string>{
+   "sFlowId^平台流水号","cash^交易金额","tradeTime^交易时间","tradeType^交易类型","tradeMode^支付类型","remark^备注",
+   }},
+{"还款订单状态",new List<string>{
+   "billNo^账单编号","billTime^账单时间","repaymentAmt^还款金额","cash^总还款金额","overdueDays^逾期天数","overdueStatus^逾期状态 0 未逾期 1逾期","overdueStatusDesc^逾期状态描述","status^账单还款状态 0 部分还款 1 全额还款 2 剩余全额还款","statusDesc^账单状态描述","billStatus^还款订单状态 0 下单 1 完成","billStatusDesc^还款订单状态描述",
+   }},
+{"用户借款消费结果",new List<string>{
+   "sFlowId^平台流水号","transNo^交易流水","creditsAmt^信用额度","loanedAmt^已借款金额","userRemainingAmt^剩余额度","overdueDays^逾期天数",
+   }},
+{"用户借款还款下单结果",new List<string>{
+   "repayBillNo^还款账单编号","repaymentAmt^还款金额","cash^总还款金额","overdueDays^逾期天数","overdueStatus^逾期状态 0 未逾期 1逾期","status^账单还款状态 0 部分还款 1 全额还款 2 剩余全额还款","statusDesc^账单状态描述",
+   }},
+{"用户借款还款确认结果",new List<string>{
+   "sFlowId^平台还款流水号","transNo^交易流水号","billNo^借款账单编号","creditsAmt^信用额度","loanedAmt^已借款金额","remainingAmt^剩余额度","overdueDays^逾期天数",
+   }},
+
+{"凭条记录",new List<string>{"id","cardNo","patientId","type","content","isPrint","gmtCreate"}},
+};
+#>
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using YuanTu.Consts.Gateway.Base;
+
+namespace YuanTu.Consts.Gateway
+{
+    #pragma warning disable 612
+<# foreach (var kvp in dictionary) { #>
+    public partial class <#= kvp.Key #> : GatewayDataBase
+    {
+<#      foreach (var m in kvp.Value) {
+            var list = m.Split('^');
+            var name = list[0];
+            var jsonIgnore = name.StartsWith("*");
+            name = name.Trim('*');
+            var obs = name.StartsWith("[") && name.EndsWith("]");
+            name = name.Trim('[', ']');
+            var s = name;
+#>
+<#          if (list.Length > 1) { #>
+        /// <summary>
+        /// <#= list[1] #>
+        /// </summary>
+<#          } #>
+<#          if (obs){ #>
+        [Obsolete]
+<#          } #>
+<#          if (jsonIgnore){ #>
+        [JsonIgnore]
+<#          } #>
+<#          if(s.Contains(':')){ 
+                int n = s.IndexOf(':');
+#>
+        public List<<#= s.Substring(0, n) #>> <#= s.Substring(n + 1) #> { get; set; }
+<#          }else if(s.Contains('|')) { 
+                int n = s.IndexOf('|');
+#>
+        public <#= s.Substring(0, n) #> <#= s.Substring(n + 1) #> { get; set; }
+<#          } else { #>
+        public string <#= s #> { get; set; }
+<#          } #>
+<#      } #>
+    }
+
+<#  } #>
+#pragma warning restore 612
+}

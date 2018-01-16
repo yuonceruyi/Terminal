@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="YuanTu.Default.Part.ViewModels.AdminSub.GridUnlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.Default.Part.ViewModels.AdminSub"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <Grid x:Name="Bd">
+        <Grid x:Name="GridCc"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.33*" />
+                <RowDefinition Height="0.33*" />
+                <RowDefinition Height="0.33*" />
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="local:BorderCheck">
+                    <Setter Property="Radius" Value="70" />
+                </Style>
+            </Grid.Resources>
+            <local:BorderCheck Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="1" />
+            <local:BorderCheck Grid.Row="0"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="2" />
+            <local:BorderCheck Grid.Row="0"
+                               Grid.Column="2"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="3" />
+            <local:BorderCheck Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="4" />
+            <local:BorderCheck Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="5" />
+            <local:BorderCheck Grid.Row="1"
+                               Grid.Column="2"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="6" />
+            <local:BorderCheck Grid.Row="2"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="7" />
+            <local:BorderCheck Grid.Row="2"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="8" />
+            <local:BorderCheck Grid.Row="2"
+                               Grid.Column="2"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Tag="9" />
+        </Grid>
+    </Grid>
+</UserControl>

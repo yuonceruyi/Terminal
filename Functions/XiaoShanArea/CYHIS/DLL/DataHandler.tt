@@ -1,0 +1,50 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<# 
+var list = new List<string>
+{
+	"1:查询建档",
+	"2:挂号取号",
+	"3:缴费预结算",
+	"4:缴费结算",
+	"5:签退"
+};
+#>
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text;
+using System.Runtime.InteropServices;
+
+namespace YuanTu.XiaoShanArea.CYHIS.DLL
+{
+	public static partial class DataHandler
+	{
+<#	foreach (string s in list){  
+		var l = s.Split(':');
+		string code = l[0];
+		string name = l[1];
+#>
+		public static bool <#=name #>(Req<#=name #> req,out <#=name #>_OUT res,int operation = <#=code #>)
+		{
+		      string recv;
+			  var ret = RunExe(req.Serilize(),out recv,operation);
+			  if(ret == 0)
+			  {
+			     res = <#=name #>_OUT.Deserilize(recv);
+		      }
+			 else
+			 {
+			   res = null;
+			   //throw new Exception("错误："+ ret);
+			 }
+			 
+			return res != null;
+		}
+<#	}#>
+	}
+}

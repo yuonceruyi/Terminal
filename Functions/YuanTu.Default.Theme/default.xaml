@@ -1,0 +1,86 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Default/Common.xaml" />
+        <ResourceDictionary Source="Default/Converters.xaml" />
+        <ResourceDictionary Source="Default/Navigation.xaml" />
+        <ResourceDictionary Source="Default/Buttons.xaml" />
+        <ResourceDictionary Source="Default/Keys.xaml" />
+        <ResourceDictionary Source="Default/TopBottom.xaml" />
+        <ResourceDictionary Source="Default/InfoMatrix.xaml" />
+        <ResourceDictionary Source="Default/DatePicker.xaml" />
+        <ResourceDictionary Source="Default/InfoCard.xaml" />
+        <ResourceDictionary Source="Default/PageDataGrid.xaml" />
+        <ResourceDictionary Source="Default/ViewTemplates.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Visibility x:Key="主页VersionVisibility">Visible</Visibility>
+    <!--  主页卡片  -->
+    <Style x:Key="主页TilePanel" TargetType="{x:Type userControls:TilePanel}">
+        <!--<Setter Property="ItemWidth" Value="205" />
+        <Setter Property="ItemHeight" Value="240" />
+        <Setter Property="ItemRowCount" Value="4" />
+        <Setter Property="ItemMargin" Value="40" />-->
+        <Setter Property="Gap" Value="80,40"></Setter>
+        <Setter Property="Margin" Value="40,0"></Setter>
+        <Setter Property="ItemVerticalAlignment" Value="Center"></Setter>
+    </Style>
+    <Style x:Key="主页卡片标题" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource 卡片标题颜色}" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="主页卡片" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="205" />
+        <Setter Property="Height" Value="240" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border IsEnabled="{TemplateBinding Control.IsEnabled}" Style="{StaticResource 卡片边框}"
+                            ClipToBounds="True">
+                        <ContentPresenter>
+                            <ContentPresenter.Content>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="8*" />
+                                        <RowDefinition Height="3*" />
+                                    </Grid.RowDefinitions>
+                                    <Image Width="130"
+                                           Height="130"
+                                           Source="{Binding ImageSource}" />
+                                    <!--即将上线logo-->
+                                    <Border Grid.Row="0"
+                                            Margin="-30"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Width="150"
+                                            Height="30"
+                                            Background="#aaaaaa"
+                                            RenderTransformOrigin="0.5,0.5"
+                                            Visibility="{TemplateBinding Control.IsEnabled, Converter={StaticResource ResourceKey=BooleanToVisibilityConverter},ConverterParameter=param}">
+                                        <Border.LayoutTransform>
+                                            <RotateTransform Angle="45"></RotateTransform>
+                                        </Border.LayoutTransform>
+                                        <TextBlock Text="{Binding DisableText}"
+                                                   Foreground="#ffffff"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="16" />
+                                    </Border>
+                                    <Viewbox Grid.Row="1"
+                                             Height="33"
+                                             Margin="20 0">
+                                        <TextBlock Style="{StaticResource 主页卡片标题}"
+                                                   Text="{TemplateBinding ContentControl.Content}" />
+                                    </Viewbox>
+                                </Grid>
+                            </ContentPresenter.Content>
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

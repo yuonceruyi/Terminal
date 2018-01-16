@@ -1,0 +1,436 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="..\Default\Converters.xaml" />
+        <ResourceDictionary Source="Common.xaml" />
+        <ResourceDictionary Source="Buttons.xaml" />
+        <ResourceDictionary Source="InfoCard.xaml" />
+        <ResourceDictionary Source="InfoMatrix.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="提示高亮颜色" Color="#f8d200" />
+    <Style x:Key="提示StackPanel" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="20" />
+    </Style>
+
+    <DataTemplate x:Key="Confirm">
+        <StackPanel>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="{Binding ViewTitle}" />
+                </TextBlock>
+            </StackPanel>
+            <Grid>
+                <ContentControl>
+                    <ContentControl.Style>
+                        <Style BasedOn="{StaticResource 提示卡片}" TargetType="ContentControl">
+                            <Setter Property="Width" Value="925" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding NoPay}" Value="True">
+                                    <Setter Property="Width" Value="725" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                    <StackPanel>
+                        <Grid Margin="20">
+                            <Grid.Resources>
+                                <Style x:Key="BaseStyle" TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontSize" Value="23" />
+                                    <Setter Property="Height" Value="60" />
+                                </Style>
+                                <Style x:Key="Title"
+                                       BasedOn="{StaticResource BaseStyle}"
+                                       TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#a7a7a7" />
+                                    <Setter Property="TextAlignment" Value="Right" />
+                                </Style>
+                                <Style x:Key="Content"
+                                       BasedOn="{StaticResource BaseStyle}"
+                                       TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#717171" />
+                                    <Setter Property="TextAlignment" Value="Left" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Special}" Value="True">
+                                            <Setter Property="Foreground" Value="#f5a251" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                                <Style TargetType="ItemsControl">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ItemsControl">
+                                                <ItemsPresenter />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+
+                                <ItemContainerTemplate x:Key="ContainerTemplate">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                   Style="{StaticResource Title}"
+                                                   Text="{Binding Title}" />
+                                        <TextBlock Grid.Column="1"
+                                                   Style="{StaticResource Content}"
+                                                   Text="{Binding Content}" />
+                                    </Grid>
+                                </ItemContainerTemplate>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <ItemsControl Grid.Column="0"
+                                          ItemsSource="{Binding LeftList}"
+                                          ItemTemplate="{StaticResource ContainerTemplate}" />
+                            <ItemsControl Grid.Column="1"
+                                          ItemsSource="{Binding RightList}"
+                                          ItemTemplate="{StaticResource ContainerTemplate}" />
+                            <ItemsControl Grid.Column="0"
+                                          Grid.ColumnSpan="2"
+                                          ItemsSource="{Binding MidList}"
+                                          ItemTemplate="{StaticResource ContainerTemplate}" />
+                        </Grid>
+                        <userControls:SimpleButton Margin="10"
+                                                   Command="{Binding ConfirmCommand}"
+                                                   Content="{Binding ButtonContent}"
+                                                   Style="{StaticResource 确定按钮}"
+                                                   TagString="{Binding ButtonContent}"
+                                                   Visibility="{Binding NoPay,
+                                                                    Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    </StackPanel>
+                </ContentControl>
+            </Grid>
+            <userControls:InfoMatrix Height="220" Margin="0 22"
+                                     RowCount="2"
+                                     ColumnCount="4"
+                                     ItemsSource="{Binding PayOut}"
+                                     PageControlVisible="Collapsed"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}"
+                                     Visibility="{Binding NoPay,
+                                                      Converter={StaticResource BooleanToVisibilityConverter},
+                                                      ConverterParameter=true}" />
+            <userControls:SimpleButton Margin="14"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource 图文卡片}"
+                                       Command="{Binding QuickRechargeCommand}"
+                                       Content="{Binding QuickRechargeContent}"
+                                       TagString="{Binding QuickRechargeContent}"
+                                       Visibility="{Binding CanQuickRecharge, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Auth.Choice">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择确认个人信息方式" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1" Margin="80 0"
+                                     RowCount="3" ColumnCount="2"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}"
+                                     ItemsSource="{Binding Data}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Auth.SelectType">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="请选择发卡对象" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1" Margin="80 0"
+                                     RowCount="3" ColumnCount="2"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Register.Date">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择预约日期" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="4" ColumnCount="4"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Register.RegTypes">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择门诊类型" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="4" ColumnCount="4"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Register.Depts">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择科室" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="4" ColumnCount="4"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Register.Doctor">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择医生" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="3" ColumnCount="2"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Register.Schedule">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择排班" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="4" ColumnCount="4"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Register.Source">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择号源" />
+                </TextBlock>
+            </StackPanel>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="4" ColumnCount="4"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BillPay.BillRecord">
+        <StackPanel>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择缴费记录" />
+                </TextBlock>
+            </StackPanel>
+            <Grid Margin="30 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.RowSpan="2" Grid.Row="0" CornerRadius="6" Background="#FFFFFF" Margin="0 104 0 0" />
+                <Border Grid.RowSpan="2" Grid.Row="0" CornerRadius="6 6 0 0" Background="#dcdfe2" Margin="0 104 0 0"
+                        Height="50" VerticalAlignment="Top" />
+                <userControls:PageDataGrid Grid.Row="0"
+                                           BillCount="{Binding BillCount}"
+                                           CurrentData="{Binding SelectData}"
+                                           DetialRowCount="5"
+                                           ItemSource="{Binding Collection}"
+                                           TotalAmount="{Binding TotalAmount}">
+                    <userControls:PageDataGrid.SummaryInfo>
+                        <TextBlock Margin="0 10"
+                                   VerticalAlignment="Center"
+                                   FontSize="18"
+                                   Foreground="#717171"
+                                   TextAlignment="Center">
+                            <Run>您总共有</Run>
+                            <TextBlock Foreground="#7ab6ea" Text="{Binding BillCount}" />
+                            <Run>总计金额</Run>
+                            <TextBlock Foreground="#f5a556" Text="{Binding TotalAmount}" />
+                        </TextBlock>
+                    </userControls:PageDataGrid.SummaryInfo>
+                    <userControls:PageDataGrid.Columns>
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding billType}"
+                                            Header="项目类型" />
+                        <DataGridTextColumn Width="20*"
+                                            Binding="{Binding itemName}"
+                                            Header="名称" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding itemPrice, Converter={StaticResource AmountConverter}}"
+                                            Header="单价" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding itemQty}"
+                                            Header="数量" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding billFee, Converter={StaticResource AmountConverter}}"
+                                            Foreground="#f5a556"
+                                            Header="金额" />
+                    </userControls:PageDataGrid.Columns>
+                </userControls:PageDataGrid>
+                <userControls:SimpleButton Grid.Row="1"
+                                           Margin="20"
+                                           Command="{Binding Command}"
+                                           Style="{StaticResource 确定按钮}"
+                                           Content="我要缴费"
+                                           TagString="我要缴费"
+                                           Visibility="{Binding CanPay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="InfoQuery.DateTime">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="上下滑动下方时间轴" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="设置时段" />
+                </TextBlock>
+            </StackPanel>
+            <ContentControl Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource 提示卡片}">
+                <StackPanel Margin="110 0">
+                    <TextBlock Margin="12" FontSize="22" HorizontalAlignment="Center" Foreground="#0174c4" Text="开始时间" />
+                    <Border Background="#e1e1e1" CornerRadius="5" HorizontalAlignment="Center">
+                        <StackPanel>
+                            <userControls:DatePicker Height="140" Margin="20" SelectedDate="{Binding DateTimeStart}" />
+                        </StackPanel>
+                    </Border>
+                    <TextBlock Margin="12" FontSize="22" HorizontalAlignment="Center" Foreground="#b00000" Text="结束时间" />
+                    <Border Background="#e1e1e1" CornerRadius="5" HorizontalAlignment="Center">
+                        <StackPanel>
+                            <userControls:DatePicker Height="140" Margin="20" SelectedDate="{Binding DateTimeEnd}" />
+                        </StackPanel>
+                    </Border>
+
+                    <userControls:SimpleButton Margin="20" Content="确定" TagString="确定"
+                                               Command="{Binding ConfirmCommand}"
+                                               Style="{StaticResource 确定按钮}" />
+                </StackPanel>
+            </ContentControl>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="InfoQuery.PayCostRecord">
+        <StackPanel>
+            <StackPanel Style="{StaticResource 提示StackPanel}">
+                <ContentControl Template="{StaticResource !}" />
+                <TextBlock Style="{StaticResource !提示}">
+                    <Run Text="请" /><Run Text="点击下方卡片" Foreground="{StaticResource 提示高亮颜色}" /><Run Text="选择缴费记录" />
+                </TextBlock>
+            </StackPanel>
+            <Grid Margin="30 10">
+                <Border CornerRadius="6" Background="#FFFFFF" Margin="0 104 0 0" />
+                <Border CornerRadius="6 6 0 0" Background="#dcdfe2" Margin="0 104 0 0"
+                        Height="50" VerticalAlignment="Top" />
+                <userControls:PageDataGrid BillCount="{Binding BillCount}"
+                                           CurrentData="{Binding SelectData}"
+                                           DetialRowCount="5"
+                                           ItemSource="{Binding Collection}"
+                                           TotalAmount="{Binding TotalAmount}">
+                    <userControls:PageDataGrid.SummaryInfo>
+                        <TextBlock Margin="0 10"
+                                   VerticalAlignment="Center"
+                                   FontSize="18"
+                                   Foreground="#717171"
+                                   TextAlignment="Center">
+                            <Run>您总共有</Run>
+                            <TextBlock Foreground="#7ab6ea" Text="{Binding BillCount}" />
+                            <Run>总计金额</Run>
+                            <TextBlock Foreground="#f5a556" Text="{Binding TotalAmount}" />
+                        </TextBlock>
+                    </userControls:PageDataGrid.SummaryInfo>
+                    <userControls:PageDataGrid.Columns>
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding billType}"
+                                            Header="项目类型" />
+                        <DataGridTextColumn Width="20*"
+                                            Binding="{Binding itemName}"
+                                            Header="名称" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding itemPrice, Converter={StaticResource AmountConverter}}"
+                                            Header="单价" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding itemQty}"
+                                            Header="数量" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding billFee, Converter={StaticResource AmountConverter}}"
+                                            Foreground="#f5a556"
+                                            Header="金额" />
+                    </userControls:PageDataGrid.Columns>
+                </userControls:PageDataGrid>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

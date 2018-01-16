@@ -1,0 +1,136 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+var tables= new Dictionary<string, List<string>>
+{
+    {"1000:初始化: ",new List<string>{}},
+    {"1010:检验卡是否插入: ",new List<string>{}},
+    {"1003:读接触卡号:|",new List<string>{"卡号识别码","卡类别","卡号","身份证号","姓名","性别"}},
+    {"1004:读接触非接卡号:|",new List<string>{"卡识别码","卡类型","卡号","身份证号","姓名","性别","保留1","保留2","保留3","保留4","PSAM卡终端机编号"}},
+    {"1005:读证卡卡号:|",new List<string>{"卡识别码","卡类型","卡号","身份证号","姓名","性别","保留1","保留2","保留3","保留4","PSAM卡终端机编号"}},   
+    //{"9904:密码回显:#",new List<string>{"首位标志","密码个数","密码值"}},//当用户输入确认后，返回0#0016#+16位加密密码（16进制）
+    {"9902:获取密码分次: ",new List<string>{"密码"}},//8字节
+    {"9903:获取密码分次十六进制: ",new List<string>{"密码"}},//16字节
+    {"9901:读十进制卡号: ",new List<string>{"卡号"}},
+    {"1001:读非接触卡号: ",new List<string>{"卡号"}},
+};
+
+var tables2 = new Dictionary<string,List<string>>
+{
+    {"6215:签到: ",new List<string>{}},
+    {"6225:签退: ",new List<string>{}},
+    {"7020:健康卡信息查询:#",new List<string>{"返回金额","卡面号","智慧医疗开通","姓名","身份证","手机号码","地址"}},
+    {"81025:可扣查询_JKK:#",new List<string>{"返回金额","卡面号","智慧医疗开通","姓名","身份证","手机号码","地址"}},
+    {"81025:可扣查询_SMK:#",new List<string>{"返回金额","卡面号","智慧医疗开通"}},
+    {"57005:市民卡账户开通:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","市民卡卡面号","账户类型2","交易日期","交易时间","交易参考号","批次号",}},
+    {"57005:账户医疗开通:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","市民卡卡面号","账户类型2","交易日期","交易时间","交易参考号","批次号",}},
+    {"57005:智慧医疗开通:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","市民卡卡面号","账户类型2","交易日期","交易时间","交易参考号","批次号",}},
+    {"57005:儿童医疗开通:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","市民卡卡面号","账户类型2","交易日期","交易时间","交易参考号","批次号",}},
+    {"7010:市民卡账户充值:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","物理卡号","交易日期","交易时间","交易参考号","批次号","凭证号","金额","卡面号凹码","卡号","账户余额","小票余额打印限额"}},
+    {"81105:消费:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","物理卡号","交易日期","交易时间","交易参考号","批次号","凭证号","金额","卡面凹码","卡号","账户余额","小票余额打印限额"}},
+    {"1325:密码修改或重置:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","市民卡卡面号","交易日期","交易时间","交易参考号","批次号","POS机流水号"}},
+    {"81325:密码修改或重置分次:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","市民卡卡面号","交易日期","交易时间","交易参考号","批次号","POS机流水号"}},
+    {"91325:密码修改或重置分次十六进制:#",new List<string>{"商户编号","终端编号","账户类型","交易类型","市民卡卡面号","交易日期","交易时间","交易参考号","批次号","POS机流水号"}},
+    {"91025:余额查询密码外入版:#",new List<string>{"金额","卡面号"}},
+    {"9904:密码回显:#",new List<string>{"首位标志","密码个数","密码值"}},//当用户输入确认后，返回0#0016#+16位加密密码（16进制）
+};
+
+#>
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text;
+
+namespace YuanTu.XiaoShanZYY.CitizenCard
+{
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){
+        var list=kvp.Key.Split(':');
+        string code=list[0];
+        string name=list[1];
+        string flag = list[2];
+        
+#>  
+    public class Res<#=name #> : IResBase
+    {
+        public string Service => "<#=name #>";
+
+        public string 交易码 { get; set; } = "<#=code #>";
+<#      foreach (string fname in kvp.Value){#>
+        public string <#= fname #> { get; set; }
+<#      }#>
+
+        public string Serilize()
+        {
+            return string.Join("<#=flag #>", new string[]{
+<#       foreach (string fname in kvp.Value) { #>
+                <#=fname #>,
+<#      } #>
+            });
+        }
+        
+        public bool Parse(string text)
+        {
+            var list = text.Split('<#=flag #>');
+<#      int i = 0;
+        foreach (string fname in kvp.Value) {
+#>
+            <#= fname #> = list[<#=i #>];
+<#          i++;
+        }
+#>
+            return true;
+        }
+    }
+<# } #>
+
+<#  foreach (var kvp in tables2) {
+        var list=kvp.Key.Split(':');
+        string code2=list[0];
+        string name2=list[1];
+        string flag2 = list[2];
+        
+#>  
+    public class Res<#=name2 #> : IResBase
+    {
+        public string Service => "<#=name2 #>";
+
+        public string 交易码 { get; set; } = "<#=code2 #>";
+        public string 应答码 { get; set; }
+<#      foreach (string fname in kvp.Value) { #>
+        public string <#= fname #> { get; set; }
+<#      }#>
+
+        public string Serilize()
+        {
+            return String.Join("<#=flag2 #>", new string[]{
+<#      foreach (string fname in kvp.Value) { #>
+                   <#=fname #>,
+<#      }#>
+            });
+        }
+
+        public bool Parse(string text)
+        {
+            if (!text.Contains("<#=flag2 #>"))
+            {
+                应答码 = text;
+                return true;
+            }
+            var list = text.Split('<#=flag2 #>');
+            应答码 = list[0];
+<#      int i = 1;
+        foreach (string fname in kvp.Value) {
+#>
+            <#= fname #> = list[<#=i #>];
+<#    i++;}#>
+            return true;
+        }
+    }
+<#}#>
+}
+
+

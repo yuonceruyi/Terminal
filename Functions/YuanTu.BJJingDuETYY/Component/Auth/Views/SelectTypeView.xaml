@@ -1,0 +1,26 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.BJJingDuETYY.Component.Auth.Views.SelectTypeView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d"
+                         d:DesignHeight="750" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" Style="{StaticResource 主题文本}">请选择发卡对象</Label>
+        <userControls:InfoMatrix Grid.Row="1" 
+                                 RowCount="6" ColumnCount="4"
+                                 ItemsSource="{Binding Data}"
+                                 ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        <TextBlock Visibility="Hidden" FontSize="40" TextAlignment="Center" Foreground="Red" FontWeight="Bold" FontFamily="黑体" Margin="10,290,-10,375" Grid.Row="1">儿童如果有本人身份证号，请点击本人办卡</TextBlock>
+        
+    </Grid>
+</frameworkBase:ViewsBase>

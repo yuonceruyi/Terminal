@@ -1,0 +1,22 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.Component.Advertisement.Views.CarouselView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.Default.Component.Advertisement.Views"
+             xmlns:viewModels="clr-namespace:YuanTu.Default.Component.Advertisement.ViewModels"
+             xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:CarouselViewModel}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Background="Black">
+        <Image Source="{Binding BackgroundUri}" Stretch="Uniform" 
+               Visibility="{Binding VideoMode, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=1}"/>
+        <userControls:VideoPlayer x:Name="VideoPlayer" 
+                                  VideoPlayerState="{Binding VideoPlayerState}" Uri="{Binding VideoUri}" Volume="{Binding Volume}" AspectRatio=""
+                                  Visibility="{Binding VideoMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+    </Grid>
+</frameworkBase:ViewsBase>

@@ -1,0 +1,49 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Component.Views.PrintView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+
+        <ContentControl 
+                        Margin="0,80,0,0" 
+                        Width="684"
+                        Style="{StaticResource 提示卡片}">
+        <StackPanel>
+            <StackPanel  Orientation="Vertical"
+                         Background="#e7f5fd">
+                <Image 
+                       HorizontalAlignment="Center"
+                       Source="{Binding Source}"
+                       Stretch="None" />
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="28"
+                           Foreground="#717171"
+                           Text="{Binding TypeMsg}" />
+                <!--<Rectangle Height="1" Fill="#EDEDED" />-->
+                <TextBlock Margin="0,20"
+                           FontSize="20"
+                           Foreground="#f35b34"
+                           Text="{Binding TipMsg}"
+                           TextAlignment="Center"
+                           TextWrapping="WrapWithOverflow" />
+
+            </StackPanel>
+            <userControls:SimpleButton Command="{Binding ConfirmCommand}"
+                                           Content="确认"
+                                           Style="{StaticResource 确认按钮}"
+                                           TagString="确认" 
+                                           Margin="0,10,0,20"
+                                           />
+        </StackPanel>
+           
+    </ContentControl>
+
+</frameworkBase:ViewsBase>

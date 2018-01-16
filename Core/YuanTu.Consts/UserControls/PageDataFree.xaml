@@ -1,0 +1,256 @@
+﻿<UserControl x:Class="YuanTu.Consts.UserControls.PageDataFree"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:YuanTu.Consts.UserControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="840"
+             Loaded="PageDataFree_OnLoaded"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local:SamePageConverter x:Key="SamePageConverter" />
+            <Color x:Key="分组翻页1">#dadbdd</Color>
+            <Color x:Key="分组翻页2">#e4e4e4</Color>
+            <SolidColorBrush x:Key="分组翻页按钮文本颜色">#717171</SolidColorBrush>
+            <Style x:Key="分组翻页按钮文本" TargetType="{x:Type TextBlock}">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Foreground" Value="{StaticResource 分组翻页按钮文本颜色}" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            <LinearGradientBrush x:Key="分组翻页颜色" StartPoint="0,0" EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="{StaticResource 分组翻页1}" />
+                    <GradientStop Offset="0.4" Color="{StaticResource 分组翻页2}" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <Style x:Key="分组翻页按钮边框" TargetType="{x:Type Border}">
+                <Setter Property="Background" Value="{StaticResource 分组翻页颜色}" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].Color">
+                                <ColorAnimation Duration="0:0:0.2"
+                                                From="{StaticResource 分组翻页1}"
+                                                To="{StaticResource 分组翻页2}" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].Color">
+                                <ColorAnimation Duration="0:0:0.2"
+                                                From="{StaticResource 分组翻页2}"
+                                                To="{StaticResource 分组翻页1}" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].Color">
+                                <ColorAnimation Duration="0:0:0.2"
+                                                From="{StaticResource 分组翻页2}"
+                                                To="{StaticResource 分组翻页1}" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].Color">
+                                <ColorAnimation Duration="0:0:0.2"
+                                                From="{StaticResource 分组翻页1}"
+                                                To="{StaticResource 分组翻页2}" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="CatalogPageBtn" TargetType="Button">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Height" Value="42" />
+                <Setter Property="Width" Value="90" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Style="{StaticResource 分组翻页按钮边框}">
+                                <TextBlock Margin="8"
+                                           Style="{StaticResource 分组翻页按钮文本}"
+                                           Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                         AncestorType={x:Type Button}},
+                                                          Path=Content}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Color x:Key="分组未选中">#ffffff</Color>
+            <Color x:Key="分组选中">#7ab6ea</Color>
+            <Color x:Key="分组边框">#c5c6c8</Color>
+            <Color x:Key="分组未选中前景">#717171</Color>
+            <Color x:Key="分组选中前景">#ffffff</Color>
+
+            <ControlTemplate x:Key="UnSelect" TargetType="{x:Type Button}">
+                <Border>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource 分组未选中}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource 分组边框}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="BorderThickness" Value="1" />
+                        </Style>
+                    </Border.Style>
+                    <TextBlock Margin="2" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Content}">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource 分组未选中前景}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="18" />
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Border>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="Select" TargetType="{x:Type Button}">
+                <Border>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{StaticResource 分组选中}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Style>
+                    </Border.Style>
+                    <TextBlock Margin="2" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Content}">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource 分组选中前景}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                                <Setter Property="FontSize" Value="18" />
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Border>
+            </ControlTemplate>
+
+            <Style x:Key="CatalogBtn" TargetType="Button">
+                <Setter Property="Width" Value="190" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Template" Value="{StaticResource UnSelect}" />
+                <Style.Triggers>
+                    <DataTrigger>
+                        <DataTrigger.Binding>
+                            <MultiBinding Converter="{StaticResource SamePageConverter}">
+                                <Binding Path="CurrentData" RelativeSource="{RelativeSource FindAncestor, AncestorType=local:PageDataFree}" />
+                                <Binding />
+                            </MultiBinding>
+                        </DataTrigger.Binding>
+                        <DataTrigger.Value>true</DataTrigger.Value>
+                        <Setter Property="Template" Value="{StaticResource Select}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <local:SimpleButton x:Name="ButtonSummaryPreview"
+                                Grid.Column="0"
+                                Click="ButtonSummaryPreview_Click"
+                                Content="前一组"
+                                Style="{StaticResource CatalogPageBtn}"
+                                TagString="前一组" />
+            <ItemsControl x:Name="CatalogList"
+                          Grid.Column="1"
+                          Margin="11 0"
+                          Background="Transparent">
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="FrameworkElement.Margin" Value="7 0" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="0"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:SimpleButton Click="ButtonCatalog_OnClick"
+                                            Content="{Binding CatalogContent}"
+                                            Style="{StaticResource CatalogBtn}"
+                                            TagString="{Binding CatalogContent}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <local:SimpleButton x:Name="ButtonSummaryNext"
+                                Grid.Column="2"
+                                Click="ButtonSummaryNext_Click"
+                                Content="后一组"
+                                Style="{StaticResource CatalogPageBtn}"
+                                TagString="后一组" />
+        </Grid>
+        <ContentControl x:Name="SummaryDetail" Grid.Row="1" />
+        <StackPanel 
+            Grid.Row="2"
+            Height="355">
+            <Grid x:Name="DetailGrid"
+                  Height="355">
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="3" Margin="0 16 0 0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <local:SimpleButton x:Name="ButtonDetailPreview"
+                                    Click="ButtonDetailPreview_Click"
+                                    Style="{StaticResource 上一页按钮}"
+                                    TagString="上一页" />
+                <TextBlock x:Name="LblPage"
+                           Width="75"
+                           VerticalAlignment="Center"
+                           Foreground="#717171"
+                           TextAlignment="Center">
+                    1/4
+                </TextBlock>
+                <local:SimpleButton x:Name="ButtonDetailNext"
+                                    Click="ButtonDetailNext_Click"
+                                    Style="{StaticResource 下一页按钮}"
+                                    TagString="下一页" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

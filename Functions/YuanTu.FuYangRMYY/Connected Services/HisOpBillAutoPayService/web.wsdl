@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay">
+      <s:element name="AutoOPBillCharge">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AutoOPBillChargeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="AutoOPBillChargeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdmByCardNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdmByCardNoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetAdmByCardNoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdmByCardNoH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAdmByCardNoHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetAdmByCardNoHResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBillDetailByAdm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBillDetailByAdmResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetBillDetailByAdmResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBillInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBillInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetBillInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBillInfoH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBillInfoHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetBillInfoHResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="GetPatientInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBankTradeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBankTradeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="InsertBankTradeInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBankTradeInfoS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertBankTradeInfoSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="InsertBankTradeInfoSResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OPAutoDailyFoot">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OPAutoDailyFootResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="OPAutoDailyFootResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestStream">
+        <s:complexType>
+          <s:sequence />
+        </s:complexType>
+      </s:element>
+      <s:element name="TestStreamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="TestStreamResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AutoOPBillChargeSoapIn">
+    <wsdl:part name="parameters" element="s0:AutoOPBillCharge" />
+  </wsdl:message>
+  <wsdl:message name="AutoOPBillChargeSoapOut">
+    <wsdl:part name="parameters" element="s0:AutoOPBillChargeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAdmByCardNoSoapIn">
+    <wsdl:part name="parameters" element="s0:GetAdmByCardNo" />
+  </wsdl:message>
+  <wsdl:message name="GetAdmByCardNoSoapOut">
+    <wsdl:part name="parameters" element="s0:GetAdmByCardNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAdmByCardNoHSoapIn">
+    <wsdl:part name="parameters" element="s0:GetAdmByCardNoH" />
+  </wsdl:message>
+  <wsdl:message name="GetAdmByCardNoHSoapOut">
+    <wsdl:part name="parameters" element="s0:GetAdmByCardNoHResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBillDetailByAdmSoapIn">
+    <wsdl:part name="parameters" element="s0:GetBillDetailByAdm" />
+  </wsdl:message>
+  <wsdl:message name="GetBillDetailByAdmSoapOut">
+    <wsdl:part name="parameters" element="s0:GetBillDetailByAdmResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBillInfoSoapIn">
+    <wsdl:part name="parameters" element="s0:GetBillInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetBillInfoSoapOut">
+    <wsdl:part name="parameters" element="s0:GetBillInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBillInfoHSoapIn">
+    <wsdl:part name="parameters" element="s0:GetBillInfoH" />
+  </wsdl:message>
+  <wsdl:message name="GetBillInfoHSoapOut">
+    <wsdl:part name="parameters" element="s0:GetBillInfoHResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientInfoSoapIn">
+    <wsdl:part name="parameters" element="s0:GetPatientInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientInfoSoapOut">
+    <wsdl:part name="parameters" element="s0:GetPatientInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBankTradeInfoSoapIn">
+    <wsdl:part name="parameters" element="s0:InsertBankTradeInfo" />
+  </wsdl:message>
+  <wsdl:message name="InsertBankTradeInfoSoapOut">
+    <wsdl:part name="parameters" element="s0:InsertBankTradeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBankTradeInfoSSoapIn">
+    <wsdl:part name="parameters" element="s0:InsertBankTradeInfoS" />
+  </wsdl:message>
+  <wsdl:message name="InsertBankTradeInfoSSoapOut">
+    <wsdl:part name="parameters" element="s0:InsertBankTradeInfoSResponse" />
+  </wsdl:message>
+  <wsdl:message name="OPAutoDailyFootSoapIn">
+    <wsdl:part name="parameters" element="s0:OPAutoDailyFoot" />
+  </wsdl:message>
+  <wsdl:message name="OPAutoDailyFootSoapOut">
+    <wsdl:part name="parameters" element="s0:OPAutoDailyFootResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestStreamSoapIn">
+    <wsdl:part name="parameters" element="s0:TestStream" />
+  </wsdl:message>
+  <wsdl:message name="TestStreamSoapOut">
+    <wsdl:part name="parameters" element="s0:TestStreamResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DHCOPBillAutoPaySOAPSoap">
+    <wsdl:operation name="AutoOPBillCharge">
+      <wsdl:input message="s0:AutoOPBillChargeSoapIn" />
+      <wsdl:output message="s0:AutoOPBillChargeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdmByCardNo">
+      <wsdl:input message="s0:GetAdmByCardNoSoapIn" />
+      <wsdl:output message="s0:GetAdmByCardNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdmByCardNoH">
+      <wsdl:input message="s0:GetAdmByCardNoHSoapIn" />
+      <wsdl:output message="s0:GetAdmByCardNoHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillDetailByAdm">
+      <wsdl:input message="s0:GetBillDetailByAdmSoapIn" />
+      <wsdl:output message="s0:GetBillDetailByAdmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillInfo">
+      <wsdl:input message="s0:GetBillInfoSoapIn" />
+      <wsdl:output message="s0:GetBillInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillInfoH">
+      <wsdl:input message="s0:GetBillInfoHSoapIn" />
+      <wsdl:output message="s0:GetBillInfoHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientInfo">
+      <wsdl:input message="s0:GetPatientInfoSoapIn" />
+      <wsdl:output message="s0:GetPatientInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBankTradeInfo">
+      <wsdl:input message="s0:InsertBankTradeInfoSoapIn" />
+      <wsdl:output message="s0:InsertBankTradeInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBankTradeInfoS">
+      <wsdl:input message="s0:InsertBankTradeInfoSSoapIn" />
+      <wsdl:output message="s0:InsertBankTradeInfoSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OPAutoDailyFoot">
+      <wsdl:input message="s0:OPAutoDailyFootSoapIn" />
+      <wsdl:output message="s0:OPAutoDailyFootSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestStream">
+      <wsdl:input message="s0:TestStreamSoapIn" />
+      <wsdl:output message="s0:TestStreamSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DHCOPBillAutoPaySOAPSoap" type="s0:DHCOPBillAutoPaySOAPSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AutoOPBillCharge">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.AutoOPBillCharge" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdmByCardNo">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.GetAdmByCardNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdmByCardNoH">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.GetAdmByCardNoH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillDetailByAdm">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.GetBillDetailByAdm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillInfo">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.GetBillInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillInfoH">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.GetBillInfoH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientInfo">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.GetPatientInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBankTradeInfo">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.InsertBankTradeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBankTradeInfoS">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.InsertBankTradeInfoS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OPAutoDailyFoot">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.OPAutoDailyFoot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestStream">
+      <soap:operation soapAction="http://www.dhcc.com.cn/DHC/OPBILL/AutoPay/web.DHCOPBillAutoPaySOAP.TestStream" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DHCOPBillAutoPaySOAP">
+    <wsdl:port name="DHCOPBillAutoPaySOAPSoap" binding="s0:DHCOPBillAutoPaySOAPSoap">
+      <soap:address location="http://172.100.100.188/dthealth/web/web.DHCOPBillAutoPaySOAP.cls" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

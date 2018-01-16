@@ -1,0 +1,61 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Part.Views.TopBarView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:prism="http://prismlibrary.com/"
+                         d:DesignHeight="110"
+                         d:DesignWidth="1280"
+                         prism:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+
+
+    <Grid Background="Transparent">
+        <DockPanel>
+            <Rectangle 
+                DockPanel.Dock="Bottom"
+                Height="1" Width="1166" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Fill="#01b2db"></Rectangle>
+        </DockPanel>
+        <StackPanel 
+            Orientation="Horizontal" Margin="64 25 0 17">
+            <Image  
+                Width="440"
+                Height="68"
+                Source="{Binding MainLogo}"
+                Stretch="Uniform"
+                HorizontalAlignment="Left">
+                
+            </Image>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    
+                    >
+            <TextBlock Style="{StaticResource 右上角日期}"
+                       VerticalAlignment="Center"
+                       Text="{Binding DateNow}"
+                       >
+
+            </TextBlock>
+            <TextBlock Style="{StaticResource 右上角时间}"
+                       Margin="31,0,58,0"
+                       VerticalAlignment="Center"
+                       Text="{Binding TimeNow}"
+                       >
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding SuperDoubleClick}" MouseAction="LeftDoubleClick" />
+                </TextBlock.InputBindings>
+
+            </TextBlock>
+            
+        </StackPanel>
+        
+        
+       
+        
+    </Grid>
+</frameworkBase:ViewsBase>

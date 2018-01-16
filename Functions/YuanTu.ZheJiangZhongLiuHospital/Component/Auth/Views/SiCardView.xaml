@@ -1,0 +1,56 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.ZheJiangZhongLiuHospital.Component.Auth.Views.SiCardView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <Grid>
+        <ContentControl Width="684"
+                        Height="542"
+                        Style="{StaticResource 提示卡片}">
+            <StackPanel Margin="10" Orientation="Vertical">
+                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
+                    <Viewbox Width="350"
+                             Height="350"
+                             Margin="1">
+                        <Canvas  Width="600" Height="600">
+                            <MediaElement Canvas.Left="0"
+                                          Canvas.Top="0"
+                                          Name="MediaElement"
+                                          Width="600"
+                                          Height="600"
+                                          ClipToBounds="True"
+                                          Source="{Binding GifUrl}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MediaEnded">
+                                        <i:InvokeCommandAction Command="{Binding MediaEndedCommand}" CommandParameter="{Binding ElementName=MediaElement}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </MediaElement>
+                        </Canvas>
+                    </Viewbox>
+                    <Label Margin="10"
+                           HorizontalAlignment="Center"
+                           FontSize="28"
+                           Foreground="#717171">
+                        请按提示插卡,插卡完毕点击确定
+                    </Label>
+                    <userControls:SimpleButton Margin="208,0"
+                                               HorizontalAlignment="Center"
+                                               Command="{Binding ConfirmCommand}"
+                                               Content="确定"
+                                               Style="{StaticResource 确定按钮}"
+                                               TagString="确定" />
+                </StackPanel>
+            </StackPanel>
+        </ContentControl>
+    </Grid>
+</frameworkBase:ViewsBase>
+

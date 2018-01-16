@@ -1,0 +1,18 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.ShengZhouZhongYiHospital.Component.InfoQuery.Views.DoctorInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YuanTu.ShengZhouZhongYiHospital.Component.InfoQuery.Views"
+             xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:mvvm="http://prismlibrary.com/"
+             mc:Ignorable="d"
+             d:DesignHeight="750" d:DesignWidth="900">
+    <StackPanel >
+        <StackPanel Margin="50" Background="White" MinHeight="650">
+            <TextBlock FontSize="50" Foreground="Chocolate" Margin="10,5" Text="{Binding IntroduceTitle}"></TextBlock>
+            <TextBlock FontSize="30" xml:space="preserve" Margin="10" Text="{Binding IntroduceContent}" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+    </StackPanel>
+</frameworkBase:ViewsBase>

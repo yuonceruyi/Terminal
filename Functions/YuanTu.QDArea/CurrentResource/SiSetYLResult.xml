@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ROWDATA>
+  <ROW>
+    <ERRCODE>01</ERRCODE>
+    <ERRMESSINFO>查发卡行</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>02</ERRCODE>
+    <ERRMESSINFO>查发卡行的特殊条件</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>03</ERRCODE>
+    <ERRMESSINFO>无效商户</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>04</ERRCODE>
+    <ERRMESSINFO>没收卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>05</ERRCODE>
+    <ERRMESSINFO>不予承兑</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>06</ERRCODE>
+    <ERRMESSINFO>出错</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>07</ERRCODE>
+    <ERRMESSINFO>特殊条件下没收卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>09</ERRCODE>
+    <ERRMESSINFO>请求正在处理中</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>12</ERRCODE>
+    <ERRMESSINFO>无效交易</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>13</ERRCODE>
+    <ERRMESSINFO>无效金额</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>14</ERRCODE>
+    <ERRMESSINFO>无效卡号</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>15</ERRCODE>
+    <ERRMESSINFO>无此发卡行</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>19</ERRCODE>
+    <ERRMESSINFO>重新送入交易</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>20</ERRCODE>
+    <ERRMESSINFO>无效应答</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>21</ERRCODE>
+    <ERRMESSINFO>不做任何处理</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>22</ERRCODE>
+    <ERRMESSINFO>怀疑操作有误</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>23</ERRCODE>
+    <ERRMESSINFO>不可接受的交易费</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>25</ERRCODE>
+    <ERRMESSINFO>未能找到文件上记录</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>30</ERRCODE>
+    <ERRMESSINFO>格式错误</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>31</ERRCODE>
+    <ERRMESSINFO>银联不支持的银行</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>33</ERRCODE>
+    <ERRMESSINFO>过期的卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>34</ERRCODE>
+    <ERRMESSINFO>有作弊嫌疑</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>35</ERRCODE>
+    <ERRMESSINFO>受卡方与安全保密部门联系</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>36</ERRCODE>
+    <ERRMESSINFO>受限制的卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>37</ERRCODE>
+    <ERRMESSINFO>受卡方呼受理方安全保密部门(没收卡)</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>38</ERRCODE>
+    <ERRMESSINFO>超过允许的PIN试输入</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>39</ERRCODE>
+    <ERRMESSINFO>无此信用卡帐户</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>40</ERRCODE>
+    <ERRMESSINFO>请求的功能尚不支持</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>41</ERRCODE>
+    <ERRMESSINFO>丢失卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>42</ERRCODE>
+    <ERRMESSINFO>无此帐户</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>43</ERRCODE>
+    <ERRMESSINFO>被窃卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>44</ERRCODE>
+    <ERRMESSINFO>无此投资帐户</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>51</ERRCODE>
+    <ERRMESSINFO>无足够的存款</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>52</ERRCODE>
+    <ERRMESSINFO>无此支票账户</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>53</ERRCODE>
+    <ERRMESSINFO>无此储蓄卡账户</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>54</ERRCODE>
+    <ERRMESSINFO>过期的卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>55</ERRCODE>
+    <ERRMESSINFO>不正确的PIN</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>56</ERRCODE>
+    <ERRMESSINFO>无此卡记录</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>57</ERRCODE>
+    <ERRMESSINFO>不允许持卡人进行的交易</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>58</ERRCODE>
+    <ERRMESSINFO>不允许终端进行的交易</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>59</ERRCODE>
+    <ERRMESSINFO>有作弊嫌疑</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>60</ERRCODE>
+    <ERRMESSINFO>受卡方与安全保密部门联系</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>61</ERRCODE>
+    <ERRMESSINFO>超出取款金额限制</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>62</ERRCODE>
+    <ERRMESSINFO>受限制的卡</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>63</ERRCODE>
+    <ERRMESSINFO>违反安全保密规定</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>64</ERRCODE>
+    <ERRMESSINFO>原始金额不正确</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>65</ERRCODE>
+    <ERRMESSINFO>超出取款次数限制</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>66</ERRCODE>
+    <ERRMESSINFO>受卡方呼受理方安全保密部门</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>67</ERRCODE>
+    <ERRMESSINFO>捕捉（没收卡）</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>68</ERRCODE>
+    <ERRMESSINFO>收到的回答太迟</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>75</ERRCODE>
+    <ERRMESSINFO>允许的输入PIN次数超限</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>77</ERRCODE>
+    <ERRMESSINFO>需要向网络中心签到</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>79</ERRCODE>
+    <ERRMESSINFO>脱机交易对帐不平</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>90</ERRCODE>
+    <ERRMESSINFO>日期切换正在处理</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>91</ERRCODE>
+    <ERRMESSINFO>发卡行或银联不能操作</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>92</ERRCODE>
+    <ERRMESSINFO>金融机构或中间网络设施找不到或无法达到</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>93</ERRCODE>
+    <ERRMESSINFO>交易违法、不能完成</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>94</ERRCODE>
+    <ERRMESSINFO>重复交易</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>95</ERRCODE>
+    <ERRMESSINFO>调节控制错</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>96</ERRCODE>
+    <ERRMESSINFO>系统异常、失效</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>97</ERRCODE>
+    <ERRMESSINFO>POS终端号找不到</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>98</ERRCODE>
+    <ERRMESSINFO>银联收不到发卡行应答</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>99</ERRCODE>
+    <ERRMESSINFO>PIN格式错</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX000</ERRCODE>
+    <ERRMESSINFO>异常错误</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX001</ERRCODE>
+    <ERRMESSINFO>参数错误</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX002</ERRCODE>
+    <ERRMESSINFO>社保卡为空</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX003</ERRCODE>
+    <ERRMESSINFO>订单重复支付</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX004</ERRCODE>
+    <ERRMESSINFO>医院未开通交易</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX005</ERRCODE>
+    <ERRMESSINFO>该订单交易状态错误，无法进行退款</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX006</ERRCODE>
+    <ERRMESSINFO>退款批次号不对应，无法进行退款</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX007</ERRCODE>
+    <ERRMESSINFO>该订单正在进行退款操作</ERRMESSINFO>
+  </ROW>
+
+  <ROW>
+    <ERRCODE>ZX008</ERRCODE>
+    <ERRMESSINFO>退款金额大于可退款金额，无法进行退款</ERRMESSINFO>
+  </ROW>
+</ROWDATA>

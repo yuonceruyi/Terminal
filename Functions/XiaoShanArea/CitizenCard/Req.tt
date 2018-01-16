@@ -1,0 +1,97 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Text" #>  
+<#@ import namespace="System.Collections.Generic" #>
+<# 
+var tables= new Dictionary<string, List<string>>
+{
+	{"1000:初始化:30",new List<string>{}},
+    {"6215:签到:30",new List<string>{}},
+    {"6225:签退:30",new List<string>{}},
+	{"1010:检验卡是否插入:30",new List<string>{}},
+    {"1001:读非接触卡号:30",new List<string>{}},
+    {"1003:读接触卡号:30",new List<string>{}},
+    {"1004:读接触非接卡号:30",new List<string>{}},
+	{"1005:读证卡卡号:30",new List<string>{}},
+	{"81025:可扣查询_JKK:30",new List<string>{"卡类型","卡号"}},
+	{"81025:可扣查询_SMK:30",new List<string>{"卡类型","卡号"}},
+	{"7020:健康卡信息查询:30",new List<string>{"标志位","后面信息长度","卡号",}},
+	{"57005:市民卡账户开通:30",new List<string>{"标志位","非接卡号","手机号","操作员号","发卡标志","姓名","身份证号","代理人姓名_20","代理人身份证号码_18","家庭住址_60"}},
+    {"57005:智慧医疗开通:30",new List<string>{"标志位","手机号","账户开通","网上支付","短信提醒","智慧医院","身份证号","交易密码"}},
+	{"57005:账户医疗开通:30",new List<string>{"标志位","手机号","账户开通","网上支付","短信提醒","智慧医院","身份证号"}},
+	{"57005:儿童医疗开通:30",new List<string>{"标志位","手机号","身份证号","外卡号","芯片号"}},
+    {"7010:市民卡账户充值:30",new List<string>{"渠道","银行卡号","银行卡流水","卡类型","卡号"}},
+	{"81105:消费:30",new List<string>{"社保卡芯片号_32"}},
+    {"9904:密码回显:30",new List<string>{"卡号"}},//10进制卡号 
+    {"9901:读十进制卡号:30",new List<string>{}} ,
+    {"9902:获取密码分次:30",new List<string>{}},
+    {"9903:获取密码分次十六进制:30",new List<string>{}},
+    {"1325:密码修改或重置:30",new List<string>{"修改类型","修改对象","姓名","身份证号码"}},
+    {"81325:密码修改或重置分次:30",new List<string>{"修改类型","修改对象","姓名","身份证号码","原密码","新密码"}},
+    {"91325:密码修改或重置分次十六进制:30",new List<string>{"修改类型","修改对象","姓名","身份证号码","原密码","新密码"}},
+	{"91025:余额查询密码外入版:30",new List<string>{"密码"}},
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace YuanTu.YuHangArea.CitizenCard
+{
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){  
+		var list=kvp.Key.Split(':');
+		string code=list[0];
+		string name=list[1];
+		int timeout=Convert.ToInt32(list[2]);
+#>
+	public class Req<#=name #>:IReqBase
+	{
+	    public string serviceName { get; set; }
+        public decimal transCode { get; set; }
+        public decimal amount { get; set; }
+	    public Req<#=name #>()
+		{
+		  serviceName =  "<#=name #>";
+		  transCode =  <#=code #>;
+		}
+	    <#		foreach (string fname in kvp.Value){#>
+		public string <#= fname #>;
+<#      }#>
+
+		public override string ToString()
+		{
+			var sb = new StringBuilder();
+			sb.Append("serviceName:"+ serviceName + "\n");
+			sb.Append("transCode:" + transCode + "\n");
+<#      foreach (string fname in kvp.Value){#>
+			sb.Append("<#=fname #>:" + <#=fname #> + "\n");
+<#      }#>            return sb.ToString();
+		}
+
+	    public string Serilize()
+		{
+			var list = new List<string>
+			{
+        <#      foreach (string fname in kvp.Value){#>
+	    <#= fname #>,
+		<#      }#>    };
+			return string.Join("",list.ToArray());
+		}
+
+		public static Req<#=name #> Deserilize(string text)
+		{
+			var list = text.Split(' ');
+			return new Req<#=name #>
+			{
+<#	int i = 1;
+	foreach (string fname in kvp.Value){#>
+				<#= fname #> = list[<#=i #>],
+<#	i++;}#>
+			};
+		}
+    }
+<#}#>}
+

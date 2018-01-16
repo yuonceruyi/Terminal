@@ -1,0 +1,22 @@
+﻿<ResourceDictionary x:Class="YuanTu.ShengZhouZhongYiHospital.Component.Views.RegTypesCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YuanTu.ShengZhouZhongYiHospital.Component.Views"
+             xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+             mc:Ignorable="d" >
+    <DataTemplate x:Key="Register.RegTypes">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Style="{StaticResource 主题文本}">请触摸下方卡片选择门诊类型</Label>
+            <userControls:InfoMatrix Grid.Row="1"
+                                     RowCount="4" ColumnCount="3"
+                                     ItemsSource="{Binding Data}"
+                                     ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

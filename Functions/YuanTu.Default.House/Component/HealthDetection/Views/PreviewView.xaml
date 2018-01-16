@@ -1,0 +1,149 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Component.HealthDetection.Views.PreviewView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:consts="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:prism="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:converters="clr-namespace:YuanTu.Default.House.Converters"
+                         xmlns:system="clr-namespace:System;assembly=mscorlib"
+                         prism:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <StackPanel>
+        <RichTextBox HorizontalAlignment="Center" VerticalAlignment="Center" Height="517" Width="1166">
+            <FlowDocument x:Name="doc" PageHeight="14.8cm" PageWidth="21cm">
+                <FlowDocument.Resources>
+                    <Style TargetType="{x:Type TableCell}">
+                        <Setter Property="BorderBrush" Value="#d6d7d9" />
+                    </Style>
+                    <Style TargetType="{x:Type Table}">
+                        <Setter Property="BorderBrush" Value="#d6d7d9" />
+                    </Style>
+                    <system:String x:Key="标题">健康体检报告单</system:String>
+
+                    <system:String x:Key="姓名">姓名</system:String>
+                    <system:String x:Key="性别">性别</system:String>
+                    <system:String x:Key="卡号">卡号</system:String>
+                    <system:String x:Key="年龄">年龄</system:String>
+                    <system:String x:Key="手机号码">手机号码</system:String>
+                    <system:String x:Key="时间">时间</system:String>
+
+                    <system:String x:Key="身高体重">身高体重</system:String>
+                    <system:String x:Key="体脂">体脂</system:String>
+                    <system:String x:Key="血压">血压</system:String>
+                    <system:String x:Key="血氧">血氧</system:String>
+
+                </FlowDocument.Resources>
+                <Table x:Name="Title">
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph FontFamily="MicrosoftYaHei" FontSize="36.6" TextAlignment="Center">
+                                    <Run Text="{StaticResource 标题}"/>
+                                </Paragraph>
+
+                            </TableCell>
+                        </TableRow>
+
+                    </TableRowGroup>
+                </Table>
+
+                <Table x:Name="Header" BorderThickness="1,1,1,0" >
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell ColumnSpan="25" BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    姓名:
+                                    <Run Text="{DynamicResource 姓名}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="25" BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    性别:
+                                    <Run Text="{DynamicResource 性别}" />
+                                </Paragraph>
+                            </TableCell>
+
+                            <TableCell ColumnSpan="20" BorderThickness="0,0,0,1">
+                                <Paragraph >
+                                    卡号:
+                                    <Run Text="{DynamicResource 卡号}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell ColumnSpan="25" BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    年龄:
+                                    <Run Text="{DynamicResource 年龄}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="25"  BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    手机号码:
+                                    <Run Text="{DynamicResource 手机号码}" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="20"  BorderThickness="0,0,0,1">
+                                <Paragraph>
+                                    时间:
+                                    <Run Text="{DynamicResource 时间}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell ColumnSpan="10"  BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    身高体重
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="20"  BorderThickness="0,0,0,1">
+                                <Paragraph>
+                                    <Run Text="{DynamicResource 身高体重}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell ColumnSpan="10"  BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    体脂
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="20"  BorderThickness="0,0,0,1">
+                                <Paragraph>
+                                    <Run Text="{DynamicResource 体脂}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell ColumnSpan="10"  BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    血压
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="20"  BorderThickness="0,0,0,1">
+                                <Paragraph>
+                                    <Run Text="{DynamicResource 血压}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell ColumnSpan="10"  BorderThickness="0,0,1,1">
+                                <Paragraph>
+                                    血氧
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="20"  BorderThickness="0,0,0,1">
+                                <Paragraph>
+                                    <Run Text="{DynamicResource 血氧}" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </FlowDocument>
+        </RichTextBox>
+    </StackPanel>
+</frameworkBase:ViewsBase>

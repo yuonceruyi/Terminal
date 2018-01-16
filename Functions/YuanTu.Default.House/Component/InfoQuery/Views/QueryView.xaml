@@ -1,0 +1,16 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Component.InfoQuery.Views.QueryView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:consts="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:prism="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:converters="clr-namespace:YuanTu.Default.House.Converters"
+                         prism:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+
+    <userControls:InfoMatrix  RowCount="2" ColumnCount="3" Margin="0,90,0,70"
+            ItemsSource="{Binding Data}" ItemTemplateSelector="{StaticResource InfoItemDataTemplateSelector}" />
+</frameworkBase:ViewsBase>

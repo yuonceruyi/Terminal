@@ -1,0 +1,47 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.House.Component.Register.Views.ChoiceHospitalView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:prism="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.Default.House.Component.Register.ViewModels"
+                         mc:Ignorable="d"
+                         d:DesignHeight="768" d:DesignWidth="1280"
+                         d:DataContext="{d:DesignInstance viewModels:ChoiceHospitalViewModel}"
+                         prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <StackPanel>
+        <TextBlock
+            Margin="63,78,0,0"
+            Style="{StaticResource 提示语}"
+            Text="请选择医院"
+            HorizontalAlignment="Left">
+        </TextBlock>
+        <ItemsControl
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Background="Transparent"
+            BorderThickness="0"
+            Padding="0"
+            ItemsSource="{Binding Data}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <userControls:TilePanel LayoutRule="[C,1],[C,1,1],[C1,1,1],[C,1,1 C,1,1],[C,1,1,1 C,1,1],[C,1,1,1 C,1,1,1]" Gap="10 10" ItemVerticalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <userControls:SimpleButton Height="238" Width="300"
+                                               Command="{Binding Path=DataContext.Command, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type frameworkBase:ViewsBase}}}"
+                                               CommandParameter="{Binding}"
+                                               Content="{Binding Name}"
+                                               Style="{StaticResource 选择医院按钮}"
+                                               TagString="{Binding Name}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</frameworkBase:ViewsBase>

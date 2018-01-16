@@ -1,0 +1,66 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+//采用英文: 表示数组 |表示对象
+// ^解释当前字段的含义
+//* 表示该字段不在日志中输出
+//[]表示当前字段已废弃
+var dictionary = new Dictionary<string,List<string>>()
+{
+{"预检科室信息",new List<string>(){"departName^科室编码"," departCode^科室名称","departType^科室类别,1:标识急诊类,2:标识非急诊类","departStatus^是否有效，1：有效，2：无效"}},
+{"预检挂号类别信息",new List<string>(){"registrationTypeName^挂号类别编码"," registrationTypeCode^挂号类别名称","registrationTypeStatus^是否有效，1：有效，2：无效"}},
+{"预检记录信息",new List<string>(){"departCode^科室编码"," departName^科室名称","status^预检状态，1：已预检，2：已取消","operteDate^操作时间","createDate^创建时间","patientId^门诊号/病历号,患者医院唯一ID"}},
+};
+#>
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using YuanTu.Consts.Gateway.Base;
+
+namespace YuanTu.Consts.Triage
+{
+    #pragma warning disable 612
+<# foreach (var kvp in dictionary) { #>
+    public partial class <#= kvp.Key #> : GatewayDataBase
+    {
+<#      foreach (var m in kvp.Value) {
+            var list = m.Split('^');
+            var name = list[0];
+            var jsonIgnore = name.StartsWith("*");
+            name = name.Trim('*');
+            var obs = name.StartsWith("[") && name.EndsWith("]");
+            name = name.Trim('[', ']');
+            var s = name;
+#>
+<#          if (list.Length > 1) { #>
+        /// <summary>
+        /// <#= list[1] #>
+        /// </summary>
+<#          } #>
+<#          if (obs){ #>
+        [Obsolete]
+<#          } #>
+<#          if (jsonIgnore){ #>
+        [JsonIgnore]
+<#          } #>
+<#          if(s.Contains(':')){ 
+                int n = s.IndexOf(':');
+#>
+        public List<<#= s.Substring(0, n) #>> <#= s.Substring(n + 1) #> { get; set; }
+<#          }else if(s.Contains('|')) { 
+                int n = s.IndexOf('|');
+#>
+        public <#= s.Substring(0, n) #> <#= s.Substring(n + 1) #> { get; set; }
+<#          } else { #>
+        public string <#= s #> { get; set; }
+<#          } #>
+<#      } #>
+    }
+
+<#  } #>
+#pragma warning restore 612
+}

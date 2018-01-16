@@ -1,0 +1,92 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.YiWuBeiYuan.Component.InfoQuery.Views.DiagReportView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:converters="clr-namespace:YuanTu.YiWuBeiYuan.Converters"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <frameworkBase:ViewsBase.Resources>
+       <ResourceDictionary>
+            <converters:DiagReoprtItemResultToBooleanConverter x:Key="DiagReoprtItemResultToBooleanConverter"></converters:DiagReoprtItemResultToBooleanConverter>
+       </ResourceDictionary>
+    </frameworkBase:ViewsBase.Resources>
+    <StackPanel Width="896">
+        <Label Style="{DynamicResource 主题文本}">请触摸下方卡片查看检验报告信息</Label>
+        <Border Background="#ffffff" CornerRadius="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <userControls:PageDataGrid Grid.Row="0"
+                                           Margin="30 20"
+                                           BillCount="{Binding BillCount}"
+                                           CurrentData="{Binding SelectData}"
+                                           DetialRowCount="5"
+                                           ItemSource="{Binding Collection}">
+                    <userControls:PageDataGrid.SummaryInfo>
+                        <TextBlock VerticalAlignment="Center"
+                                   FontSize="18"
+                                   Foreground="#717171"
+                                   TextAlignment="Center">
+                            您总共有
+                            <TextBlock Foreground="#7ab6ea" Text="{Binding BillCount}" />
+                            报告单
+                        </TextBlock>
+                    </userControls:PageDataGrid.SummaryInfo>
+
+                    <userControls:PageDataGrid.Columns>
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding itemName}"
+                                            Header="项目名称" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding itemRealValue}"
+                                            Header="检验项目值" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding itemRefRange}"
+                                            Header="参考区间" />
+                        <DataGridTextColumn Width="10*"
+                                            Binding="{Binding quaResult}"
+                                            Header="结果" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Height" Value="60" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="#717171" />
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridCell">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding quaResult,Converter={StaticResource DiagReoprtItemResultToBooleanConverter}}" Value="False">
+                                            <Setter Property="Foreground" Value="Red"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                    </userControls:PageDataGrid.Columns>
+                </userControls:PageDataGrid>
+
+                <userControls:SimpleButton Grid.Row="1"
+                                           Margin="20"
+                                           Command="{Binding ConfirmCommand}"
+                                           Content="我要打印"
+                                           Style="{DynamicResource 确定按钮}"
+                                           TagString="我要打印" />
+            </Grid>
+        </Border>
+    </StackPanel>
+</frameworkBase:ViewsBase>

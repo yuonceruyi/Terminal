@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+    <Tips>
+        <examType>分子生物学</examType>
+        <TipsValue>本报告仅对所测标本负责。如有疑问请向本实验室咨询，电话:63516483，内线:6426</TipsValue>
+    </Tips>
+    <Tips>
+        <examType>临检</examType>
+        <TipsValue>本报告仅对所测标本负责。如有疑问请向本实验室咨询，电话:63502956，内线:6534</TipsValue>=
+</Tips>
+    <Tips>
+        <examType>门诊检验</examType>
+        <TipsValue>本报告仅对所测标本负责。标本保存3天，如有疑问请向本实验室咨询，电话:63504402，内线:6557</TipsValue>=
+</Tips>
+    <Tips>
+        <examType>免疫学</examType>
+        <TipsValue>本报告仅对所测标本负责。如有疑问请向本实验室咨询，电话:63516483，内线:6424</TipsValue>=
+</Tips>
+    <Tips>
+        <examType>生化</examType>
+        <TipsValue>本报告仅对所测标本负责。标本保存3天，如有疑问请向本实验室咨询，电话:63510942，内线:6421</TipsValue>
+    </Tips>
+    <Tips>
+        <examType>微生物</examType>
+        <TipsValue>本报告仅对所测标本负责。如有疑问请向本实验室咨询，电话:63514758，内线:6425</TipsValue>
+    </Tips>
+    <Tips>
+        <examType>血库</examType>
+        <TipsValue>本报告仅对所测标本负责。如有疑问请向本实验室咨询，电话:63514568，内线:6422</TipsValue>
+    </Tips>
+    <Tips>
+        <examType>过敏试验</examType>
+        <TipsValue>本报告仅对所测标本负责。如有疑问请向本实验室咨询，电话:63511055</TipsValue>
+    </Tips>
+    <Tips>
+        <examType>核医学</examType>
+        <TipsValue>本报告仅对所测标本负责。如有疑问请向本实验室咨询，电话:63513080，内线:6442</TipsValue>
+    </Tips>
+</Root>

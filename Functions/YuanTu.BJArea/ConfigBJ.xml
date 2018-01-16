@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+    <Lis>
+        <Path>E:\远图\项目相关文档\京都儿童\labwork\LIS\ssreport.exe</Path>
+        <TipsPath>E:\远图\项目相关文档\京都儿童\labwork\LIS\tips.txt</TipsPath>
+    </Lis>
+    <PatientInfo>
+        <Relation>父亲|母亲|祖父|祖母|外祖父|外祖母|其他</Relation>
+        <Education>学前|小学|初中|高中</Education>
+        <Religion>无|有</Religion>
+        <Nation>汉族|少数民资|其他</Nation>
+    </PatientInfo>
+	<!--现金充值自动关闭-->
+	<StopRecharge>
+		<Enabled>1</Enabled>
+		<Time>16:30</Time>
+	</StopRecharge>
+
+	<!--挂号停诊时间(不限急诊)-->
+	<StopReg>
+		<Enabled>0</Enabled>
+		<BeginTime>12:00</BeginTime>
+		<EndTime>13:00</EndTime>
+	</StopReg>
+	<!--急诊停诊时间-->
+	<StopEmergency>
+		<Enabled>1</Enabled>
+		<BeginTime>7:00</BeginTime>
+		<EndTime>13:00</EndTime>
+	</StopEmergency>
+	<!--指定挂号科室、预约不受限制.多科室|分割-->
+	<!--<RegDept>
+		<Enabled>1</Enabled>
+		<Dept>0019</Dept>
+	</RegDept>-->
+	<!--手工输入身份证号，无此参数默认开启-->
+	<InputIdNo>1</InputIdNo>
+
+	<!--是否启用A6桥接华大-->
+	<A6_HuaDa>1</A6_HuaDa>
+	
+	<!--A6桥接华大版另一个A6端口配置-->
+	<Act_A6_2>
+        <Port>9</Port>
+        <Baud>9600</Baud>
+    </Act_A6_2>
+	
+	<!--是否启用预检分诊-->
+	<IsTriager>0</IsTriager>
+	
+  <!--签到服务地址-->
+  <SignInUrl>http://192.168.10.68:8081/queue/api/</SignInUrl>
+</root>

@@ -1,0 +1,77 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.QDQLYY.Component.InfoQuery.Views.DeptsInfoView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:viewModels="clr-namespace:YuanTu.QDQLYY.Component.InfoQuery.ViewModels"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         d:DataContext="{d:DesignInstance viewModels:DeptsInfoViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Style="{StaticResource 主题文本}" Content="{Binding DeptName}" />
+        
+        <ContentControl Grid.Row="1"
+                        MinWidth="684"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource 提示卡片}">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style x:Key="提示项目Ex"
+                           BasedOn="{StaticResource 提示项目}"
+                           TargetType="userControls:TitleTextBlock">
+                        <Setter Property="ValueColumnWidth" Value="2*" />
+                    </Style>
+                    <Style x:Key="简介" TargetType="TextBlock">
+                        <!--<Setter Property="Foreground" Value="#f5a251" />-->
+                        <Setter Property="FontSize" Value="26"/>
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                        <Setter Property="Margin" Value="10" />
+                    </Style>
+                </StackPanel.Resources>
+                <!--<ListBox Style="{StaticResource 提示卡片ListBox}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition Height="1" />
+                                            </Grid.RowDefinitions>
+                                            <ContentPresenter Grid.Row="0" />
+                                            <Rectangle Grid.Row="1" Style="{StaticResource 提示卡片Rect}" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <userControls:TitleTextBlock Title="科室名称："
+                                                 Height="66"
+                                                 Style="{StaticResource 提示项目Ex}"
+                                                 Value="{Binding DeptName}" />
+                    
+                </ListBox>-->
+                <ScrollViewer Height="580" >
+                    <TextBlock Text="{Binding DeptIntro}" LineHeight="50" Style="{StaticResource 简介}" Height="auto"></TextBlock>
+                </ScrollViewer>
+                <userControls:SimpleButton Margin="20"
+                                           Command="{Binding JumpCommand}"
+                                           Content="查看专家"
+                                           Style="{StaticResource 确定按钮}"
+                                           TagString="查看专家" 
+                                           Visibility="{Binding HasDoc, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </StackPanel>
+        </ContentControl>
+    </Grid>
+</frameworkBase:ViewsBase>

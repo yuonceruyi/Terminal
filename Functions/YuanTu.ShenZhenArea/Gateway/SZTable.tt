@@ -1,0 +1,79 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+    var dictionary = new Dictionary<string,List<string>>()
+    {
+	    {"医保个人基本信息查询",new List<string>(){"yljgbm","ylzh","mm","czybm","czyxm"}},
+        {"医保个人基本信息",new List<string>(){"YLZH","DNH","JHR1DNH","JHR2DNH","SFZH","JHR1SFZH","JHR2SFZH","XM","JHR1XM","JHR2XM","XB","CSSJ","NL","TSRQ","DWBM","DWMC","JYZT","CBLX","JFLY","GLSD","YLFLAG","TCFLAG","LXFLAG","SYFLAG","GSFLAG","SEFLAG","ACCOUNT","NY","LXCBYS","JBZGXE","JBYYJE","JBKYYE","BCZGXE","BCYYJE","BCKYYE","BZZFXE","BZZFYYJE","BZZFKYYE","BDSK","BDJSYY","NDBGXE","NDBGYY","NDBGKY"}},
+
+        {"病人信息",new List<string>(){"patientId","platformId","name","sex","birthday","idNo","cardNo","guardianNo","address","phone","patientType","accountNo","accBalance",}},
+	    		
+		{"医保个人绑定信息查询",new List<string>(){"yljgbm","ylzh","mm","czybm","czyxm"}},
+		{"医保个人绑定信息",new List<string>(){"YLZH","DNH","XM","BDSK","BDJSYY","NDBGXE","NDBGYY","NDBGKY"}},
+		
+		{"医保门诊挂号",new List<string>(){"yljgbm","ylzh","mm","czybm","czyxm","医保门诊挂号登记|mzghdj"}},
+		{"医保门诊挂号登记",new List<string>(){"bRLX","mZLSH","kSBM","kSMC_str","gHLB","gHF","zJZJ","gHHJ","sSJ","zSJ"}},
+        {"医保门诊挂号结果",new List<string>(){"ZFXM","JE"}},
+
+		{"医保门诊登记",new List<string>(){"yljgbm","czybm","czyxm","门诊登记|mzdj"}},
+		{"门诊登记",new List<string>(){"mZLSH","mZLB","tBLB","tJLB","zD","zDSM_str","cFZS","ySBM","ySXM_str","ySDH"}},
+
+		{"医保门诊费用",new List<string>(){"yljgbm","czybm","czyxm","mzlsh","djh","门诊费用:mzfydetail"}},
+
+		{"门诊费用",new List<string>(){"nO","yLJGNBBM","tYBM","jSXM","mC_str","gG_str","dW_str","dJ","sL","hJJE"}},
+		{"医保门诊费用结果",new List<string>(){"门诊结算结果:theMZJS","门诊支付:theMZZF","门诊支付结果|theMZZFJG"}},
+		{"门诊结算结果",new List<string>(){"JSXM","JE"}},
+		{"门诊支付",new List<string>(){"ZFXM","JE"}},
+		{"门诊支付结果",new List<string>(){"YLJGBM","YLJGMC","MZLSH","DJH","YLZH","DNH","XM","JE","XJHJ","JZHJ"}},
+
+		{"医保门诊退费",new List<string>(){"yljgbm","czybm","czyxm","mzlsh","djh","djh2","门诊费用:theMZFY"}},
+		{"医保门诊退费结果",new List<string>(){"门诊结算结果:theMZJS","门诊支付:theMZZF","门诊支付结果|theMZZFJG"}},
+        {"医保门诊支付确认",new List<string>(){"yljgbm","czybm","czyxm","mzlsh","djh","ssj","zsj"}},
+		{"挂号扩展信息",new List<string>(){"医保挂号信息|gh"}},
+		{"结算扩展信息",new List<string>(){"regId","医保挂号信息|gh","医保结算信息|js"}},
+		{"医保挂号信息",new List<string>(){"INADMAdmDr","INADMInsuId","INADMCardNo ","INADMPatType","INADMCompany","INADMAccount","INADMAdmSeriNo","INADMActiveFlag","INADMAdmDate","INADMAdmTime","INADMAdmType","INADMDeptDesc","INADMInsuType","INADMUserDr","INADMXString1","INADMXString5"}},
+		{"医保结算信息",new List<string>(){"INPAY_bcbxf0","INPAY_djlsh0","INPAY_grzfe0","INPAY_id0000","INPAY_jjzfe0","INPAY_sUserDr","INPAY_ming0","INPAY_zhzfe0","INPAY_zyksmc","INPAY_zylsh0","INPAY_InsuPay3","INPAY_InsuPay4","INPAY_Zstr08","INPAY_Zstr09","theMZJS","theMZZF"}},
+		{"医保扩展信息",new List<string>()
+		{"ybinfoexp","ybinfo","regId","deptCode","deptName"}},
+
+		{"结算记录",new List<string>(){"tradeTime","receiptNo","billFee","itemName","itemSpecs","billType","itemLiquid","itemUnits","itemQty","itemPrice","cost",}}
+	};
+#>
+using System.Collections.Generic;
+namespace YuanTu.ShenZhenArea.Gateway
+{
+<# foreach (var kvp in dictionary){ #>
+    
+    public partial class <#=kvp.Key#>
+    {
+<#      foreach (var m in kvp.Value)
+{
+		var tmp = m.Split('^');
+		var s = tmp[0];
+#>
+<#        if (tmp.Length > 1){ #>
+        /// <summary>
+        /// <#= tmp[1] #>
+        /// </summary>
+<# } #>
+
+<#
+        if(s.Contains(':')){ 
+			int n = s.IndexOf(':');
+#>
+		public List<<#=s.Substring(0, n) #>> <#=s.Substring(n + 1) #> { get; set; }
+<#      }else if(s.Contains('|')){ 
+			int n = s.IndexOf('|');
+#>
+		public <#=s.Substring(0, n) #> <#=s.Substring(n + 1) #> { get; set; }
+<#      }else{#>
+		public string <#=s #> { get; set; }
+<#      }#>
+<#      } #>
+    }
+<# } #>
+}

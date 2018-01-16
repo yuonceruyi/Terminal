@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{748DB0EA-4EB8-4C90-9CC4-08331AAAE6B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YuanTu.PanYu.House</RootNamespace>
+    <AssemblyName>YuanTu.PanYu.House</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.2.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Unity.6.2.0\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CardReader\ACT_A6_V2.cs" />
+    <Compile Include="CardReader\CardService.cs" />
+    <Compile Include="CardReader\HuaDaReaderHelper.cs" />
+    <Compile Include="CardReader\HuaDa\Common.cs" />
+    <Compile Include="CardReader\HuaDa\CPU.cs" />
+    <Compile Include="CardReader\HuaDa\Enum.cs" />
+    <Compile Include="CardReader\HuaDa\M1.cs" />
+    <Compile Include="CardReader\HuaDa\Mag.cs" />
+    <Compile Include="CardReader\IACT_A6_V2.cs" />
+    <Compile Include="Component\Register\ViewModels\ChoiceHospitalViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\DeptsViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\DoctorViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\RegTypesViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\ScheduleViewModel.cs" />
+    <Compile Include="Component\Register\ViewModels\SourceViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Component\Auth\ViewModels\PatientInfoViewModel.cs" />
+    <Compile Include="Extension.cs" />
+    <Compile Include="PanYuGateway\Base\req.cs" />
+    <Compile Include="PanYuGateway\Base\res.cs" />
+    <Compile Include="PanYuGateway\Base\wrapper.cs" />
+    <Compile Include="PanYuGateway\DataHandler.cs" />
+    <Compile Include="PanYuGateway\DataHandlerEx.cs">
+      <DependentUpon>DataHandlerEx.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="PanYuGateway\Enums.cs" />
+    <Compile Include="PanYuGateway\RSA.cs" />
+    <Compile Include="PanYuGateway\Tables.cs">
+      <DependentUpon>Tables.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="PanYuService\HisService.cs" />
+    <Compile Include="PanYuService\InnerConfig.cs" />
+    <Compile Include="PanYuService\MscService.cs" />
+    <Compile Include="PanYuService\ServiceBase.cs" />
+    <Compile Include="PatientModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\YuanTu.PanYu.House\Images\House\发卡出口_House.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.PanYu.House\Images\House\登录示例2_House.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.PanYu.House\Images\House\登录示例_House.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.PanYu.House\Images\House\中医院_House.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.PanYu.House\Images\House\中心医院_House.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.PanYu.House\Images\House\何贤纪念_House.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\YuanTu.PanYu.House\Images\House\MainLogo_House.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CurrentResource\PanYuHouse\PanYuHouseConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="PanYuGateway\DataHandlerEx.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataHandlerEx.cs</LastGenOutput>
+    </Content>
+    <Content Include="PanYuGateway\Tables.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tables.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\YuanTu.Consts\YuanTu.Consts.csproj">
+      <Project>{2d55167c-d5d1-42b3-9e61-4a413fac957a}</Project>
+      <Name>YuanTu.Consts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YuanTu.Core\YuanTu.Core.csproj">
+      <Project>{ab393f77-c15f-43c8-ac02-c9686a79b668}</Project>
+      <Name>YuanTu.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\YuanTu.Devices\YuanTu.Devices.csproj">
+      <Project>{650eb36a-029e-43a8-8656-3e6fb8e3f277}</Project>
+      <Name>YuanTu.Devices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuanTu.Default.House\YuanTu.Default.House.csproj">
+      <Project>{46267525-7d7d-46dc-b941-c5399f85cdd0}</Project>
+      <Name>YuanTu.Default.House</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

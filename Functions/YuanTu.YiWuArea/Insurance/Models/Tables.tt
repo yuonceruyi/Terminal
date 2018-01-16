@@ -1,0 +1,57 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using YuanTu.YiWuArea.Insurance.Models.Base;
+
+<#
+	var list=new Dictionary<string,string[]>{
+		{"预算单据列表",new[]{"单据号","门诊号","处方号码","就诊日期","收费类型","科室代码","科室名称","开方医师身份证号","疾病编号","疾病名称","疾病描述","非医保项目总额","收费明细条数"}},
+		{"预算收费项目列表",new[]{"单据号码","药品诊疗类型","项目医院编号","项目医院端名称","医院端规格","医院端剂型","单复方标志","单价","数量","单位","项目总金额","自付比例","进口类自负比例","项目包装数量","项目最小包装单位","每天次数","每次用量","用量天数","疾病编码","项目贴数"}},
+
+		{"结算单据列表",new[]{"单据号","门诊号","处方号码","就诊日期","收费类型","科室代码","科室名称","医生姓名","疾病编号","疾病名称","疾病描述","非医保项目总额","收费明细条数"}},
+		{"结算收费项目列表",new[]{"单据号码","药品诊疗类型","项目医院编号","项目医院端名称","医院端规格","医院端剂型","单复方标志","单价","数量","单位","项目总金额","自付比例","进口类自负比例","项目包装数量","项目最小包装单位","每天次数","每次用量","用量天数","疾病编码","项目贴数"}},
+
+
+		{"计算结果信息",new[]{"费用总额","自费总额_非医保","自理总额_目录内自负比例部分","统筹基金支付","往年帐户支付","当年帐户支付","大额救助支付","公务员城镇职工补助支付","专项基金支付","劳模基金支付","民政补助支付","个人现金支付","转院自负","起付线","合计报销金额","特殊治疗","特殊治疗自负","乙类药品","乙类药品自负","床位费","床位费自负","自费药品","其他自负","合计自负","报销基数","起伏标准比例","转院自负比例","医保年度","大病救助支付","家庭账户支付"}},
+		{"有误收费项目明细返回信息",new[]{"药品诊疗类型","医院项目编码","正确的自负比例","正确的进口类自负比例","正确的自负金额","不可报原因代码","不可报原因说明"}},
+		{"超限明细列表",new[]{"药品诊疗类型","医院项目编码","超限数量","超限自负金额","合计自负金额","超限原因代码","超限原因说明"}},
+		{"超限列表结构体",new []{"明细序号","超限数量","超限自负金额","合计自负金额 ","超限原因代码","超限原因说明"}},
+		{"自负比例项目列表",new[]{"医嘱明细序号","药品诊疗类型","医保编码","医嘱时间","限制类标志"}},
+		{"自负比例列表",new[]{"医嘱明细序号","自负比列","进口类自负比例"}},
+		{"登记信息列表",new []{"病种类别","病种证书号","特殊病代码","特殊病名称","并发症代码","并发症名称","有效开始日期","有效结束日期","备注"}},
+	};
+#>
+
+namespace YuanTu.YiWuArea.Insurance.Models{
+
+<#foreach(var item in list){#>
+	public class <#=item.Key#>:ItemBase{
+		public override int ItemCount=><#=item.Value.Length#>;
+<#foreach(var r in item.Value){#>
+		public string <#=r#>{get;set;}
+<#}#>
+		public override string FormatData(){
+<#
+var str=string.Join("%%",item.Value.Select(p=>"{"+p+"}"));
+#>
+			return $"<#=str#>";
+		}
+		public override void Descirbe(string[] arr)
+	    {
+<#var idx=0;
+foreach(var r in item.Value){#>
+			<#=r#>=arr[<#=idx++#>];
+<#}#>
+	    }
+	}
+<#}#>
+}

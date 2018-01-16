@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="YuanTu.Consts.UserControls.ScrollPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="This"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             ClipToBounds="True"
+             PreviewMouseDown="OnPreviewMouseDown"
+             PreviewMouseMove="OnPreviewMouseMove"
+             PreviewMouseUp="OnPreviewMouseUp"
+             PreviewMouseWheel="OnPreviewMouseWheel"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Border Style="{DynamicResource BackBorder}">
+        <Canvas x:Name="Canvas" Width="{Binding ActualWidth, ElementName=ItemsPanel}">
+            <ListBox x:Name="ItemsPanel"
+                     Canvas.Top="0"
+                     ItemTemplate="{Binding ItemTemplate, ElementName=This}"
+                     ItemsSource="{Binding Values, ElementName=This}"
+                     SelectionChanged="ListBox_OnSelectionChanged"
+                     SelectionMode="Single">
+                <ListBox.Template>
+                    <ControlTemplate TargetType="ListBox">
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </Canvas>
+    </Border>
+</UserControl>

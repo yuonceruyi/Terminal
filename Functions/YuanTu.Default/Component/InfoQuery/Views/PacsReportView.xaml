@@ -1,0 +1,50 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.Default.Component.InfoQuery.Views.PacsReportView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:Converters="clr-namespace:YuanTu.Core.Converters;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <frameworkBase:ViewsBase.Resources>
+        <Converters:GridLengthConverter x:Key="GridLengthConverter" />
+    </frameworkBase:ViewsBase.Resources>
+
+    <StackPanel Width="896">
+        <Label Style="{DynamicResource 主题文本}">请触摸下方卡片查看检验报告信息</Label>
+        <Border Background="#ffffff" CornerRadius="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <userControls:PageDataFree Grid.Row="0"
+                                           Margin="30 20"
+                                           GridRowHeight="{Binding RowHeight,
+                                                      Converter={StaticResource GridLengthConverter}}"
+                                           GridColumnWidth="{Binding ColumnWidth,
+                                                      Converter={StaticResource GridLengthConverter}}"
+                                           CurrentData="{Binding SelectData}"
+                                           ItemSource="{Binding Collection}">
+
+                    <userControls:PageDataFree.SummaryInfo>
+                        <TextBlock VerticalAlignment="Center"
+                                   FontSize="18"
+                                   Foreground="#717171"
+                                   TextAlignment="Center">
+                            您总共有
+                            <TextBlock Foreground="#7ab6ea" Text="{Binding BillCount}" />
+                            报告单
+                        </TextBlock>
+                    </userControls:PageDataFree.SummaryInfo>
+                </userControls:PageDataFree>
+            </Grid>
+        </Border>
+    </StackPanel>
+</frameworkBase:ViewsBase>

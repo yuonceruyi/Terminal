@@ -1,0 +1,21 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.VirtualHospital.Component.Biometric.Views.FingerPrintView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:local="clr-namespace:YuanTu.VirtualHospital.Component.Biometric.Views"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d"
+                         d:DesignHeight="300" d:DesignWidth="300">
+    <ContentControl Style="{StaticResource 提示卡片}">
+        <StackPanel>
+            <Grid Margin="30 10" Width="600" Height="400">
+                <Image Source="{Binding BackUri}" Stretch="Uniform" />
+            </Grid>
+            <TextBlock HorizontalAlignment="Center" Margin="30"
+                       FontSize="32" Foreground="Red" Text="{Binding TipContent}" />
+        </StackPanel>
+    </ContentControl>
+</frameworkBase:ViewsBase>

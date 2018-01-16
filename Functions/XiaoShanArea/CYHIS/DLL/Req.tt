@@ -1,0 +1,63 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<# 
+var tables= new Dictionary<string, List<string>>
+{
+    {"1:查询建档",new List<string>{"卡号","结算类型","调用接口ID","调用类型","病人类别","结算方式","应付金额","就诊序号","操作工号","系统序号","收费类别","科室代码","医生代码","诊疗费加收","诊疗费","挂号类别","排班类别","取号密码","挂号日期"}},
+	{"2:挂号取号",new List<string>{"卡号","结算类型","调用接口ID","调用类型","病人类别","结算方式","应付金额","就诊序号","操作工号","系统序号","收费类别","科室代码","医生代码","诊疗费加收","诊疗费","挂号类别","排班类别","取号密码","挂号日期"}},
+   	{"3:缴费预结算",new List<string>{"卡号","结算类型","调用接口ID","调用类型","病人类别","结算方式","应付金额","就诊序号","操作工号","系统序号","收费类别","科室代码","医生代码","诊疗费加收","诊疗费","挂号类别","排班类别","取号密码","挂号日期"}},
+	{"4:缴费结算",new List<string>{"卡号","结算类型","调用接口ID","调用类型","病人类别","结算方式","应付金额","就诊序号","操作工号","系统序号","收费类别","科室代码","医生代码","诊疗费加收","诊疗费","挂号类别","排班类别","取号密码","挂号日期"}},
+    {"5:签退",new List<string>{"卡号","结算类型","调用接口ID","调用类型","病人类别","结算方式","应付金额","就诊序号","操作工号","系统序号","收费类别","科室代码","医生代码","诊疗费加收","诊疗费","挂号类别","排班类别","取号密码","挂号日期"}},
+};
+#>
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+
+namespace YuanTu.XiaoShanArea.CYHIS.DLL
+{
+<#  foreach (KeyValuePair<string, List<string>> kvp in tables){  
+		var list=kvp.Key.Split(':');
+		string code=list[0];
+		string name=list[1];
+#>
+	public class Req<#=name #>:IReqBase
+	{
+		private string myName =  "<#=name #>";
+<#		foreach (string fname in kvp.Value){#>
+		public string <#= fname #>;
+<#      }#>
+
+		public override string ToString()
+		{
+			var sb = new StringBuilder();
+			sb.Append("NAME:"+ myName + "\n");
+<#      foreach (string fname in kvp.Value){#>
+			sb.Append("<#=fname #>:" + <#=fname #> + "\n");
+<#      }#>            return sb.ToString();
+		}
+
+		public string GetMyName()
+		{
+			return myName;
+		}
+
+		public string Serilize()
+		{
+			var list = new string[]
+			{
+<#      foreach (string fname in kvp.Value){#>
+				<#= fname #>,
+<#      }#>
+			};			
+			return string.Join("#",list);
+		}
+	}
+
+<#}#>
+}

@@ -1,0 +1,152 @@
+﻿<frameworkBase:ViewsBase x:Class="YuanTu.ChongQingArea.Component.Auth.Views.InPatientNoView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:Converters="clr-namespace:YuanTu.Core.Converters;assembly=YuanTu.Core"
+                         xmlns:UserControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:mvvm="http://prismlibrary.com/"
+                         d:DesignHeight="750"
+                         d:DesignWidth="900"
+                         mvvm:ViewModelLocator.AutoWireViewModel="True"
+                         mc:Ignorable="d">
+    <frameworkBase:ViewsBase.Resources>
+        <!--  功能按钮  -->
+        <SolidColorBrush x:Key="按钮文本颜色">#ffffff</SolidColorBrush>
+        <Style x:Key="按钮文本" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Foreground" Value="{StaticResource 按钮文本颜色}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Color x:Key="确定按钮颜色1">#76b4e9</Color>
+        <Color x:Key="确定按钮颜色2">#67a7de</Color>
+        <LinearGradientBrush x:Key="确定按钮颜色" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="{StaticResource 确定按钮颜色1}" />
+            <GradientStop Offset="1" Color="{StaticResource 确定按钮颜色2}" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="确定按钮失效颜色">#a8a8a8</SolidColorBrush>
+        <Style x:Key="确定按钮边框" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{StaticResource 确定按钮颜色}" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].Color">
+                            <ColorAnimation Duration="0:0:0.2"
+                                            From="{StaticResource 确定按钮颜色1}"
+                                            To="{StaticResource 确定按钮颜色2}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].Color">
+                            <ColorAnimation Duration="0:0:0.2"
+                                            From="{StaticResource 确定按钮颜色2}"
+                                            To="{StaticResource 确定按钮颜色1}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].Color">
+                            <ColorAnimation Duration="0:0:0.2"
+                                            From="{StaticResource 确定按钮颜色2}"
+                                            To="{StaticResource 确定按钮颜色1}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].Color">
+                            <ColorAnimation Duration="0:0:0.2"
+                                            From="{StaticResource 确定按钮颜色1}"
+                                            To="{StaticResource 确定按钮颜色2}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource 确定按钮失效颜色}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="确定按钮" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="228" />
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Style="{StaticResource 确定按钮边框}">
+                            <TextBlock Margin="8"
+                                       Style="{StaticResource 按钮文本}"
+                                       Text="{Binding Content,
+                                                      RelativeSource={RelativeSource AncestorType={x:Type Button},
+                                                                                     Mode=FindAncestor}}" />
+                            <!--  {TemplateBinding ContentControl.Content}  -->
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="提示卡片Base" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="23" />
+        </Style>
+        <Style x:Key="提示卡片Content"
+               BasedOn="{StaticResource 提示卡片Base}"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="#717171" />
+            <Setter Property="TextAlignment" Value="Left" />
+        </Style>
+        <Converters:IDNoFormatConverter x:Key="IDNoFormatConverter" />
+        <Style x:Key="提示卡片Header"
+               BasedOn="{StaticResource 提示卡片Base}"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="#a7a7a7" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+
+    </frameworkBase:ViewsBase.Resources>
+    <Grid>
+        <ContentControl Width="684"
+                        Margin="0"
+                        Style="{DynamicResource 提示卡片}">
+            <StackPanel Margin="0" Orientation="Vertical">
+                <UserControls:TitleLabel Width="360"
+                                         Height="60"
+                                         Margin="10"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top"
+                                         ValueColumnWidth="2*">
+                    <UserControls:TitleLabel.Title>
+                        <TextBlock Style="{StaticResource 提示卡片Header}" Text="住院号：" />
+                    </UserControls:TitleLabel.Title>
+                    <UserControls:TitleLabel.Value>
+                        <Border BorderBrush="#717171"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                            <TextBlock VerticalAlignment="Center"
+                                     FontSize="23"
+                                     Text="{Binding InPatientNo}" />
+                        </Border>
+                    </UserControls:TitleLabel.Value>
+                </UserControls:TitleLabel>
+                <UserControls:KeyPanel x:Name="keyPanel"
+                                       Margin="10"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       IDMode="Clear"
+                                       MaxLength="13"
+                                       Text="{Binding InPatientNo,
+                                                      Mode=TwoWay}" />
+                <Button Margin="20"
+                        HorizontalAlignment="Center"
+                        Command="{Binding ConfirmCommand}"
+                        Content="确定"
+                        Style="{StaticResource 确定按钮}" />
+            </StackPanel>
+        </ContentControl>
+
+    </Grid>
+</frameworkBase:ViewsBase>
+

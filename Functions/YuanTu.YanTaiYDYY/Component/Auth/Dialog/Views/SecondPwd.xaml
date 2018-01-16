@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="YuanTu.YanTaiYDYY.Component.Auth.Dialog.Views.SecondPwd"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Converters="clr-namespace:YuanTu.Core.Converters;assembly=YuanTu.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts"
+             xmlns:frameworkBase="clr-namespace:YuanTu.Core.FrameworkBase;assembly=YuanTu.Core"
+             xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             d:DesignHeight="880"
+             d:DesignWidth="880"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Converters:PasswordConverter x:Key="PasswordConverter" />
+        <system:String x:Key="PwdLengths">6</system:String>
+    </UserControl.Resources>
+
+    <Grid Visibility="{Binding ShowSecondPwd, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <StackPanel VerticalAlignment="Center">
+            <Grid Width="684">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="5*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        Height="60"
+                        Background="#EDEDED"
+                        CornerRadius="5 5 0 0 " />
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="23"
+                           Foreground="#888888"
+                           Text="{Binding Pwd2Tips}" />
+
+                <Border Grid.Row="1"
+                        Grid.RowSpan="6"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Background="#ffffff"
+                        CornerRadius="0 0 5 5 " />
+                <Rectangle Grid.Row="2"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Fill="#EDEDED" />
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           Margin="20"
+                           Style="{StaticResource 提示卡片Header}"
+                           Text="卡密码二次确认：" />
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           Style="{StaticResource 提示卡片Content}"
+                           Text="{Binding NewPwd2,
+                                          Converter={StaticResource PasswordConverter},
+                                          ConverterParameter=●}" />
+                <Rectangle Grid.Row="4"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Fill="#EDEDED" />
+
+                <ContentControl Grid.Row="5"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2">
+                    <userControls:KeyPanel Name="keyPanel"
+                                           Margin="10"
+                                           MaxLength="6"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding NewPwd2,
+                                                          Mode=TwoWay}" />
+                </ContentControl>
+                <userControls:SimpleButton Grid.Row="6"
+                                           Grid.Column="0"
+                                           Margin="20"
+                                           Command="{Binding SecondPwdCancelCommand}"
+                                           Content="取消"
+                                           Style="{StaticResource 取消按钮}"
+                                           TagString="设置卡密码:取消" />
+                <userControls:SimpleButton Grid.Row="6"
+                                           Grid.Column="1"
+                                           Command="{Binding SecondPwdConfirmCommand}"
+                                           Content="确定"
+                                           Style="{StaticResource 确定按钮}"
+                                           TagString="设置卡密码:确定" />
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,255 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:models="clr-namespace:YuanTu.Core.Models;assembly=YuanTu.Core"
+                    xmlns:userControls="clr-namespace:YuanTu.Consts.UserControls;assembly=YuanTu.Consts">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Default/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <DataTemplate x:Key="倒计时_正文" />
+    <DataTemplate x:Key="倒计时_全局">
+        <Grid Margin="0 22 90 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding FormCount, Mode=OneWay, Converter={StaticResource NotNullConverter}}"
+                                     Value="true">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border Background="#C0C8D0" CornerRadius="4" Width="87" Height="38">
+                <TextBlock Foreground="#252525" FontSize="22"
+                           VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Run Text="{Binding FormCount, Mode=OneWay}" FontWeight="Bold"/>
+                    <Run Text="秒" />
+                </TextBlock>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <Color x:Key="主页返回按钮颜色1">#e6c314</Color>
+    <Color x:Key="主页返回按钮颜色2">#BC9F0E</Color>
+    <Style x:Key="主页返回按钮文本" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Foreground" Value="#493c06" />
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+    <Style x:Key="主页返回按钮边框" TargetType="{x:Type Border}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource 主页返回按钮颜色1}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="BorderBrush" Value="#ffe376" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                            <ColorAnimation Duration="0:0:0.2"
+                                            To="{StaticResource 主页返回按钮颜色2}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                            <ColorAnimation Duration="0:0:0.2"
+                                            To="{StaticResource 主页返回按钮颜色1}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#B9B4B4" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="主页返回按钮边框2" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="#e6c314" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1" ScaleY="1" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard Duration="0:0:0.2">
+                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="{StaticResource 主页返回按钮颜色2}" />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleX)"
+                                To="0.8" />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleY)"
+                                To="0.8" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard Duration="0:0:0.2">
+                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="{StaticResource 主页返回按钮颜色1}" />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleX)"
+                                To="1" />
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleY)"
+                                To="1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#B9B4B4" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="主页返回按钮" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="120" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border IsEnabled="{TemplateBinding Control.IsEnabled}" Style="{StaticResource 主页返回按钮边框2}">
+                        <Border Style="{StaticResource 主页返回按钮边框}">
+                            <ContentPresenter />
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- 顶栏底栏 -->
+    <DataTemplate x:Key="TopBarTemplate" DataType="models:TopBottomModel">
+        <Grid Background="#fbfaf8">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Image Source="{Binding MainLogo}" Margin="30 10" Width="280" Height="58" Stretch="Uniform"/>
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding MainTitle}"
+                               Foreground="#464646" FontSize="20" FontWeight="DemiBold"
+                               TextAlignment="Left" VerticalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Text="{Binding WorkVersion}"
+                               Foreground="#464646" FontSize="14" FontWeight="DemiBold"
+                               TextAlignment="Left" VerticalAlignment="Center" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="20 0" Grid.Row="0" Text="{Binding NotificMessage}"
+                               Foreground="#464646" FontSize="22" FontWeight="DemiBold"
+                               TextAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+
+            <ItemsControl ItemsSource="{Binding InfoItems}" HorizontalAlignment="Right" VerticalAlignment="Center"
+                          Margin="20 0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:InfoItem">
+                        <Grid Margin="20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="{Binding Icon}" Width="20" Height="24" Stretch="Uniform"
+                                       Margin="0 0 10 0" />
+                                <TextBlock
+                                    Text="{Binding Title}"
+                                    Foreground="#464646" FontSize="18" />
+                            </StackPanel>
+                            <TextBlock Grid.Row="1"
+                                       Text="{Binding Value}"
+                                       Foreground="#000000" FontSize="22" FontWeight="Bold"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="BottomBarTemplate" DataType="models:TopBottomModel">
+        <Grid>
+            <Border Background="#011c33" Opacity="0.5" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="15 0"
+                        Visibility="{Binding ShowSystemButtons, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <userControls:SimpleButton
+                    Command="{Binding SystemButtonCommand}"
+                    CommandParameter="主页"
+                    TagString="主页按钮"
+                    Style="{StaticResource 主页返回按钮}"
+                    Visibility="{Binding HomeEnable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Width="23" Height="21" Source="{Binding HomeUri}" />
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource 主页返回按钮文本}" Text="主页" />
+                    </StackPanel>
+                </userControls:SimpleButton>
+                <userControls:SimpleButton
+                    Command="{Binding SystemButtonCommand}"
+                    CommandParameter="返回"
+                    TagString="返回按钮"
+                    Style="{StaticResource 主页返回按钮}"
+                    Visibility="{Binding BackEnable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Width="23" Height="21" Source="{Binding BackUri}" />
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource 主页返回按钮文本}" Text="返回" />
+                    </StackPanel>
+                </userControls:SimpleButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <ItemsControl Margin="10 0 0 0"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding LogoGroup}">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Image Margin="0 0 20 0"
+                                   Source="{Binding}"
+                                   Stretch="None" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Rectangle Width="2" Height="85" Fill="#4179c3" />
+                <StackPanel Margin="20 0" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Now, StringFormat={}{0:HH:mm}}" Foreground="#FFFFFF" FontSize="36"
+                               FontWeight="Bold" HorizontalAlignment="Center" >
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding SuperDoubleClick}" MouseAction="LeftDoubleClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                    <TextBlock Text="{Binding Now, StringFormat={}{0:yyyy年MM月dd日}}" Foreground="#FFFFFF" FontSize="18"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

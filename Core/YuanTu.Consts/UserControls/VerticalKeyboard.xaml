@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="YuanTu.Consts.UserControls.VerticalKeyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:YuanTu.Consts.UserControls"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <system:Double x:Key="BtnWidth">50</system:Double>
+            <system:Double x:Key="BtnHeight">50</system:Double>
+            <Thickness x:Key="BtnMargin">1 1 0 0</Thickness>
+            
+            <Style x:Key="键盘按钮" TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="{StaticResource BtnWidth}" />
+                <Setter Property="Height" Value="{StaticResource BtnHeight}" />
+                <Setter Property="Margin" Value="{StaticResource BtnMargin}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Style="{StaticResource 键盘按钮边框}">
+                                <TextBlock Margin="2" Style="{StaticResource 键盘按钮文本}">
+                                    <ContentPresenter />
+                                </TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+          <ItemsControl x:Name="ItemCtl">
+             <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:SimpleButton 
+                        Style="{StaticResource 键盘按钮}"
+                        Content="{Binding}"
+                        Tag="{Binding}"
+                        Click="ButtonBase_OnClick"
+                        CanMultiClick="True"
+                        ></local:SimpleButton>
+                </DataTemplate>
+             </ItemsControl.ItemTemplate>
+              <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" ItemWidth="{StaticResource BtnWidth}" ItemHeight="{StaticResource BtnHeight}"></WrapPanel>
+                  </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+          </ItemsControl>  
+    </Grid>
+</UserControl>
